@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="python中的工厂模式 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  人们会渐渐爱上那些使他们丧失思考能力的工业技术.——《美丽新世界》
+
+  我的博客
+  Pyhton中的工厂模式（factory pattern）
+
+">
+    
+    <meta property="article:published_time" content="2018-05-25T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="笔记">
+    
+    <meta property="article:tag" content="python">
+    
+    <meta property="article:tag" content="OOP">
+    
+    <meta property="article:tag" content="设计模式">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2018/05/25/python%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>python中的工厂模式 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2018/05/25/python%E4%B8%AD%E7%9A%84%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/zhuozhaoalley.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        position: relative;
+        background-image: url('/img/zhuozhaoalley.jpg')
+    }
+
+    {
+    %
+    if
+    page
+    .
+    header-mask
+    %
+    }
+    header.intro-header .header-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+    background:
+
+    rgba
+    (
+    0
+    ,
+    0
+    ,
+    0
+    ,
+    {
+    {
+        page . header-mask
+    }
+    }
+    )
+    ;
+    }
+    {
+    %
+    endif
+    %
+    }
+</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#笔记" title="笔记">笔记</a>
+                        
+                        <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#OOP" title="OOP">OOP</a>
+                        
+                        <a class="tag" href="/tags/#设计模式" title="设计模式">设计模式</a>
+                        
+                    </div>
+                    <h1>python中的工厂模式</h1>
+                    
+                    
+                    <h2 class="subheading">初窥设计模式</h2>
+                    
+                    <span class="meta">Posted by UlyC on May 25, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>人们会渐渐爱上那些使他们丧失思考能力的工业技术.——《美丽新世界》</p>
+
+  <p><a href="https://ulyc.github.io/">我的博客</a></p>
+  <h2 id="pyhton中的工厂模式factory-pattern">Pyhton中的工厂模式（factory pattern）</h2>
+</blockquote>
+
+<p>工厂模式是说调用方通过调用一个简单函数就可以创建不同的<strong>对象</strong>，这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。一般包括：</p>
+
+<ol>
+  <li>简单工厂（Simple Factory）</li>
+  <li>工厂方法(factory method)</li>
+  <li>抽象工厂(abstract factory)</li>
+</ol>
+
+<h3 id="1简单工厂">1.简单工厂</h3>
+<p>简单工厂（Simple Factory）模式，又称静态工厂方法模式（Static Factory Method Pattern）它属于类创建型模式。在简单工厂模式中，可以根据自变量的不同返回不同类的实例。<br />
+简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。
+与策略模式类似，都是通过<strong>多态</strong>来实现不同子类的选取。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def create_animal(name):
+    if name == 'dog':
+        return Dog()
+    elif name == 'cat':
+        return Cat()
+
+animal = create_animal('dog')
+animal.eat('some food')
+</code></pre></div></div>
+
+<h3 id="简单工厂模式的优缺点">简单工厂模式的优缺点</h3>
+<p>优点：
+（1）工厂类含有必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的责任，而仅仅“消费”产品；简单工厂模式通过这种做法实现了对责任的分割，它提供了专门的工厂类用于创建对象。</p>
+
+<p>（2）客户端无需知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以减少使用者的记忆量。</p>
+
+<p>（3）通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。</p>
+
+<p>缺点：
+（1）由于工厂类集中了所有产品创建逻辑，一旦不能正常工作，整个系统都要受到影响。</p>
+
+<p>（2）使用简单工厂模式将会增加系统中类的个数，在一定程序上增加了系统的复杂度和理解难度。</p>
+
+<p>（3）系统扩展困难，一旦添加新产品就不得不修改工厂逻辑，在产品类型较多时，有可能造成工厂逻辑过于复杂，不利于系统的扩展和维护。</p>
+
+<p>（4）简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。</p>
+
+<h3 id="2-工厂方法">2. 工厂方法</h3>
+<p>工厂方法模式 又称多态性工厂（Polymorphic Factory）模式或虚拟构造子（Virtual Constructor）模式。 虽然又叫多态性工厂，但工厂方法并不是严格意义上的多态。</p>
+
+<p>是指定义一个可以根据输入参数的不同返回不同<strong>对象</strong>的函数。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class JSONParser:
+    def parse(self, raw_data):
+        return json.loads(raw_data)
+
+
+class XMLParser:
+    def parse(self, raw_data):
+        return xml2dict(raw_data)
+
+
+def new_parser(type, **kwargs):
+    if type == 'json':
+        return JSONParser()
+    elif type == 'xml':
+        return XMLParser()
+
+
+parser = new_parser('json')
+with open('hello.json') as fp:
+    data = parser.parse(fp.read())
+print(data)
+</code></pre></div></div>
+
+<h4 id="工厂方法模式的优缺点">工厂方法模式的优缺点</h4>
+<ol>
+  <li>优点：</li>
+</ol>
+
+<p>（1）隐藏了何种具体产品类被实例化这一细节，用户只需要关心所需产品对应的工厂，无需关心创建细节，甚至无需知道具体产品类的类名。</p>
+
+<p>（2）工厂角色和产品角色的多态性设计，让工厂自主确定创建何种产品对象，如何创建的细节封装在具体工厂内部。</p>
+
+<p>（3）在系统加入新产品时，无需修改抽象工厂和抽象产品所提供的接口，无需修改客户端，也无需修改其他的具体工厂和具体产品，只要加一个具体产品以及和一个它对应的具体工厂就可以。完全符合开闭原则。</p>
+
+<ol>
+  <li>缺点</li>
+</ol>
+
+<p>（1）添加新产品时，需要编写新的具体产品类，而且还要提高与之对应的具体工厂类，类的个数成对增加。增大了复杂度，带来额外开销。</p>
+
+<p>（2）考虑到可扩展性，需要引入抽象层，增加系统的实现难度</p>
+
+<h3 id="3抽象工厂">3.抽象工厂</h3>
+<p>一系列的工厂方法组合在一起实现了一个抽象工厂。</p>
+
+<p>工厂方法适合对象种类较少的情况，如果有多种不同类型对象需要创建，使用抽象工厂模式。以实现一个游戏的例子说明，在一个抽象工厂类里实现多个关联对象的创建：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Frog:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+    def interact_with(self, obstacle):
+        """ 不同类型玩家遇到的障碍不同 """
+        print('{} the Frog encounters {} and {}!'.format(
+            self, obstacle, obstacle.action()))
+
+
+class Bug:
+    def __str__(self):
+        return 'a bug'
+
+    def action(self):
+        return 'eats it'
+
+
+class FrogWorld:
+    def __init__(self, name):
+        print(self)
+        self.player_name = name
+
+    def __str__(self):
+        return '\n\n\t----Frog World -----'
+
+    def make_character(self):
+        return Frog(self.player_name)
+
+    def make_obstacle(self):
+        return Bug()
+
+
+class Wizard:
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+    def interact_with(self, obstacle):
+        print('{} the Wizard battles against {} and {}!'.format(
+            self, obstacle, obstacle.action()))
+
+
+class Ork:
+    def __str__(self):
+        return 'an evil ork'
+
+    def action(self):
+        return 'kill it'
+
+
+class WizardWorld:
+    def __init__(self, name):
+        print(self)
+        self.player_name = name
+
+    def __str__(self):
+        return '\n\n\t------ Wizard World -------'
+
+    def make_character(self):
+        return Wizard(self.player_name)
+
+    def make_obstacle(self):
+        return Ork()
+
+
+class GameEnvironment:
+    """ 抽象工厂，根据不同的玩家类型创建不同的角色和障碍 (游戏环境)
+    这里可以根据年龄判断，成年人返回『巫师』游戏，小孩返回『青蛙过河』游戏"""
+    def __init__(self, factory):
+        self.hero = factory.make_character()
+        self.obstacle = factory.make_obstacle()
+
+    def play(self):
+        self.hero.interact_with(self.obstacle)
+</code></pre></div></div>
+
+<h4 id="抽象工厂模式的优缺点">抽象工厂模式的优缺点</h4>
+<p>优点：
+（1） 隔离了具体类的生成，使得用户不需要知道什么被创建了。
+（2） 当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</p>
+
+<p>缺点：
+（1）添加新的产品对像时，难以扩展抽象工厂以便生产新种类的产品。</p>
+
+<p>参考链接：</p>
+<ol>
+  <li><a href="http://www.runoob.com/design-pattern/factory-pattern.html">设计模式-工厂模式</a></li>
+  <li><a href="https://mozillazg.com/2016/08/python-factory-pattern.html">Python 设计模式: 工厂模式(factory pattern)</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/31700225">用 Python 实现设计模式</a></li>
+  <li><a href="https://www.jianshu.com/p/bf8341c75304">java中的工厂模式</a></li>
+  <li><a href="http://www.isware.cn/python-design-pattern/01-simple-factory/">Python设计模式 - 简单工厂模式</a></li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/05/15/pyhton%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/"
+                           data-toggle="tooltip" data-placement="top" title="python中的多态">
+                            Previous<br>
+                            <span>python中的多态</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/06/10/python%E5%A4%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%B8%80%E4%BA%9Bbug%E6%95%B4%E7%90%86/" data-toggle="tooltip"
+                           data-placement="top" title="python多任务的一些bug整理">
+                            Next<br>
+                            <span>python多任务的一些bug整理</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

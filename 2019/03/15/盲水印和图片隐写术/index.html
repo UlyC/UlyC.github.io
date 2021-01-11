@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="盲水印和图片隐写术 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  The shadow is within.
+​                                                              —— 劫  《 英雄联盟》
+
+">
+    
+    <meta property="article:published_time" content="2019-03-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="盲水印">
+    
+    <meta property="article:tag" content="隐写术">
+    
+    <meta property="article:tag" content="python">
+    
+    <meta property="article:tag" content="傅里叶变换">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2019/03/15/%E7%9B%B2%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>盲水印和图片隐写术 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2019/03/15/%E7%9B%B2%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/iron-man.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        position: relative;
+        background-image: url('/img/iron-man.jpg')
+    }
+
+    {
+    %
+    if
+    page
+    .
+    header-mask
+    %
+    }
+    header.intro-header .header-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+    background:
+
+    rgba
+    (
+    0
+    ,
+    0
+    ,
+    0
+    ,
+    {
+    {
+        page . header-mask
+    }
+    }
+    )
+    ;
+    }
+    {
+    %
+    endif
+    %
+    }
+</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#盲水印" title="盲水印">盲水印</a>
+                        
+                        <a class="tag" href="/tags/#隐写术" title="隐写术">隐写术</a>
+                        
+                        <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#傅里叶变换" title="傅里叶变换">傅里叶变换</a>
+                        
+                    </div>
+                    <h1>盲水印和图片隐写术</h1>
+                    
+                    
+                    <h2 class="subheading">内部分享 整理</h2>
+                    
+                    <span class="meta">Posted by UlyC on March 15, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>The shadow is within.
+​                                                              —— 劫  《 英雄联盟》</p>
+</blockquote>
+
+<h1 id="盲水印和图片隐写术">盲水印和图片隐写术</h1>
+
+<h2 id="盲水印">盲水印</h2>
+
+<h3 id="一演示">一、演示</h3>
+
+<p>首先看 这是一张女朋友</p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd152cce839e.jpg" alt="" /></p>
+
+<h5 id="解码水印">解码水印</h5>
+
+<p>接下来我们输入一行神奇的命令:</p>
+
+<p><code class="language-plaintext highlighter-rouge">python bwm.py --action decode --origin Demo.jpg --im ../Gakki.jpg --result res.jpg</code></p>
+
+<p>可以得到这样的一张图:</p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd15424887d7.jpg" alt="" /></p>
+
+<p>以后谁再跟你抢女朋友就可以这样声明版权了嘿嘿.</p>
+
+<p>(脚本和原图都在最后的附录里, 有兴趣的朋友只需要将上面的图片保存为<code class="language-plaintext highlighter-rouge">Demo.jpg</code>,附录里的原图保存为<code class="language-plaintext highlighter-rouge">Gakki.jpg</code>, 就可以解码出上面的信息)</p>
+
+<h5 id="加密水印">加密水印</h5>
+
+<p>通过今天的方法你可以将信息放入任意图片,来达到加密信息的目的.</p>
+
+<p>附录里的脚本, 加密用法:</p>
+
+<p><code class="language-plaintext highlighter-rouge">python bwm.py --action encode --origin Gakki.jpg --im wm1.png --result Demo.jpg --alpha 2</code></p>
+
+<h3 id="二用途">二、用途</h3>
+
+<p>上面 的水印就叫做<strong>盲水印</strong>，隐藏式的水印是以数字数据的方式加入音频、图片或影片中，但在一般的状况下无法被看见。隐藏式水印的重要应用之一是保护版权，期望能借此避免或阻止数字媒体未经授权的复制和拷贝。</p>
+
+<h5 id="1不同人加相同水印">1.不同人加相同水印</h5>
+
+<p>声明版权</p>
+
+<p><strong>应用案例</strong>：</p>
+
+<ul>
+  <li>某些画师、摄影师、设计师会在其作品中加入水印。</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13年左右有位自称是“超写实主义”的画家，声称自己纯手工画的画写实程度可以超过摄影机，并开办培训班敛财。
+
+后被一位加了盲水印的摄影师戳穿，原来其“画作”都是直接将照片用ps处理成手绘质感的图。
+</code></pre></div></div>
+
+<ul>
+  <li>淘宝防盗图功能</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>淘宝卖家图会被淘宝自动打上水印，如果有别的卖家存图作为自己的图上传会被检测出。
+</code></pre></div></div>
+
+<h5 id="2不同人加不同水印">2.不同人加不同水印</h5>
+
+<p>将某份保密数字资料发送给不同人时，可加上不同标识，如果资料被复制、传播可根据解码出的唯一标识来追究责任人。</p>
+
+<p><strong>应用案例</strong>：</p>
+
+<ul>
+  <li>
+    <p>电影刚刚公映时，每个影院，影厅的 电影底片里都会加入不同的不可见水印， 如果电影流出，就可追究相关影院责任。</p>
+  </li>
+  <li>
+    <p>阿里，华为等公司内部论坛、平台会在HTML页面中加入足够数量 及不被发现的唯一标识。当有内部敏感信息通过截图等方式流出，也可追踪到个人。</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>比如著名的“阿里月饼门”。
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd150482c379.png" alt="1551441624605" /></p>
+
+<h3 id="三原理">三、原理</h3>
+
+<h4 id="原理图">原理图</h4>
+
+<p><img src="https://pic4.zhimg.com/80/v2-bbecf64a76b3dbfc4539e38e46ad8223_hd.jpg" alt="" /></p>
+
+<h4 id="傅里叶变换">傅里叶变换</h4>
+
+<ul>
+  <li>简单复习下傅里叶变换</li>
+</ul>
+
+<p>傅里叶变换简单地说就是将信号在<strong>时域</strong>或<strong>空域</strong>的函数转变到<strong>频域</strong>表示，在和工程学中有许多应用。因其基本思想首先由法国学者约瑟夫·傅里叶系统地提出。</p>
+
+<ul>
+  <li>再理解下时域和频域</li>
+</ul>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif" alt="" /></p>
+
+<p><img src="https://pic2.zhimg.com/40cf849e55ed95732a60b52d4019d609_b.jpg" alt="" /></p>
+
+<p>那么，傅里叶变换有什么用呢，</p>
+
+<ul>
+  <li>
+    <p>先在纸上画一个sin（x），不一定标准，意思差不多就行。不是很难吧。</p>
+  </li>
+  <li>
+    <p>好，接下去画一个sin（3x）+sin（5x）的图形。这个就很难能画得出来。</p>
+  </li>
+</ul>
+
+<p>现在把sin（3x）+sin（5x）的曲线给你，只看图是看不出这整个曲线的方程式是怎样的，现在需要将把sin（5x）从图里拿出去，看看剩下的是什么。这基本是不可能做到的。</p>
+
+<p>但是在频域呢？则简单的很，无非就是几条竖线而已。</p>
+
+<p>这是最简单的一种用法，其他复杂用法不在此赘述。</p>
+
+<h4 id="频谱图">频谱图</h4>
+
+<p>一维信号的变换理解之后，那么图像的频谱图长什么样呢。</p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd15151a620d.png" alt="" /></p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd1515137a38.png" alt="" /></p>
+
+<p>图片中明亮的部分就是低频（平缓）部分，暗点的是高频（突变交界）部分。一般为了展示会把频谱图低频的部分移到中心。频谱图上的点跟原图不存在一一对应关系，频谱图的每一点都来自于全部的图像（类似于时域曲线的点，和频域图的点）。</p>
+
+<p>这样可能还不够直观，接下来看这张图。</p>
+
+<p><img src="https://i.loli.net/2020/04/07/j3kg4ApHQZFr9DB.jpg" alt="bg2017121301.jpg" /></p>
+
+<p>这是一张400x400的图，共有16 万个像素点。</p>
+
+<p>我们平时怎么来表示一张图片呢，首先是在笛卡尔坐标系中用x,y来定位某一确定的点。那么，我们怎么来描述这个点呢？</p>
+
+<p>我们知道，所有的色彩都是由三原色组成。生活中经常说的红、黄、蓝（青），其实是一种消减型的三原色，光学中的三原色是红、绿、蓝，也就是R、G、B。</p>
+
+<p>通常我们用来描述图像点的方法就是RGB的值，其实图像处理中用的是<strong>灰度</strong>（Gray scale）来表示图片，但是为了便于理解，下面用的是RGB演示 。</p>
+
+<p><img src="https://i.loli.net/2020/04/07/Pmu1irgj8SVFHRd.png" alt="CORB-RGB.png" /></p>
+
+<p>上图是截取了某一行RGB的值做成的曲线图，可以看到，每条曲线都在不停的上下波动，且波动的频率是相同的。有些区域的波动比较小，有些区域突然出现了大幅波动。</p>
+
+<p>对比一下图像就能发现，曲线波动较大的地方，也是图像出现突变的地方。</p>
+
+<p><strong>图像的频谱可以理解为将一维的频谱绕着纵轴旋转一圈，形成一个3维的数学函数图（原图中心对称、镜像对称才可以这样干，其他类似），x、y轴代表两个方向的频率，z轴代表该频率的幅值，只不过频谱图像是一个2维图，所以用亮度来表示幅值了。</strong></p>
+
+<p><strong>二维傅里叶变换的物理意义是将图像的灰度分布函数变换为图像的频率分布函数。</strong></p>
+
+<h4 id="盲水印的特性">盲水印的特性</h4>
+
+<p>鲁棒性一般要能抗（压缩 、裁剪、涂画，旋转）。</p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd1512b85caa.png" alt="特性" /></p>
+
+<ol>
+  <li>
+    <p><strong>隐蔽性</strong></p>
+
+    <p>由于不希望被察觉、不希望干扰用户体验、不希望被模仿等等原因，我们的水印不可见，也就是隐匿性。</p>
+  </li>
+  <li>
+    <p><strong>不易移除性</strong></p>
+
+    <p>不易移除性跟鲁棒性有些相似， 不同的是：</p>
+
+    <p>鲁棒性更加强调的是数字资源在传播过程中不要被<strong>不自觉</strong>地干扰和破坏。</p>
+
+    <p>不易移除性是在别有用心者察觉了盲水印的存在后，不被他们<strong>自觉</strong>地移除或者破坏。</p>
+  </li>
+  <li>
+    <p><strong>强健性</strong></p>
+
+    <p>强健性通常也被称作鲁棒性，来自于其英文名称（Robustness）的音译。</p>
+
+    <p>简单地说就是耐操性。</p>
+
+    <p>需要说明的一点是，鲁棒性和隐蔽性通常不可兼得。</p>
+  </li>
+  <li>
+    <p><strong>明确性</strong></p>
+
+    <p>没什么可说的，就是盲水印需要表示出明确的信息。</p>
+  </li>
+</ol>
+
+<h3 id="四引申">四、引申</h3>
+
+<h4 id="图种">图种</h4>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd155d0c9ad4.jpg" alt="相貌平平" /></p>
+
+<p>例如这是一张相貌平平的图片, 你可以保存下来,将后缀改为”rar”或者直接用解压工具打开,就可以看到神秘福利.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>ू･ω･` )</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>制作方法也很简单,在win下 入以下命令就可以做一张”图种”了.</p>
+
+<p><code class="language-plaintext highlighter-rouge">copy /b A.jpg + B.zip C.jpg</code></p>
+
+<p>大约十年以前，图种被广泛上传到论坛等地用来传播资源。后来由于许多网站在上传图片时会判断图片结尾标识，其之后的全部丢弃，慢慢不再有人使用。(<a href="https://sm.ms/">https://sm.ms/</a>这个图床还是很给力的, 经测试还是可以解析种子)</p>
+
+<h4 id="隐藏文件">隐藏文件</h4>
+
+<p>图片可以跟种子文件结合，当然也可以和其他文件结合。</p>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd1511028c06.png" alt="" /></p>
+
+<p>其实隐藏文件和盲水印都属于<strong>图片隐写术</strong>。</p>
+
+<h2 id="图片隐写术">图片隐写术</h2>
+
+<p><a href="https://zh.wikipedia.org/wiki/%E9%9A%90%E5%86%99%E6%9C%AF">隐写术</a>（Steganography）也是数字水印的一种应用，双方可利用隐藏在数字信号中的信息进行沟通。</p>
+
+<p>数字照片中的注释数据能记录照片拍摄的时间、使用的<a href="https://zh.wikipedia.org/wiki/%E5%85%89%E5%9C%88">光圈</a>和<a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%96%80">快门</a>，甚至是相机的厂牌等信息，这也是数字水印的应用之一。</p>
+
+<p>某些文件格式可以包含这些称为“metadata”的额外信息。</p>
+
+<h3 id="用途">用途</h3>
+
+<h4 id="规避敏感词过滤">规避敏感词过滤</h4>
+
+<p>​	所谓的“敏感词过滤”，常翻墙的同学，应该都很熟悉了。用图片来隐藏信息，可以规避GFW的敏感词过滤。</p>
+
+<h4 id="规避肉眼审查">规避肉眼审查</h4>
+
+<p>​	国内的很多网站，对于上传的图片，都会进行人工审查。如果能通过技术手段把信息隐藏在图片中，而图片本身又看不出什么异样，人工审核就看不出来。</p>
+
+<h4 id="传递加密信息">传递加密信息</h4>
+
+<p>​	不希望被别人看到的资料、信息等。</p>
+
+<h3 id="常见方法">常见方法</h3>
+
+<p><img src="https://i.loli.net/2019/05/07/5cd1509c7c296.png" alt="" /></p>
+
+<h3 id="原理">原理</h3>
+
+<h4 id="内容覆盖法">内容覆盖法</h4>
+
+<p>通常来说，图片文件都有包含2部分：文件头和数据区。</p>
+
+<p>而“内容覆盖法”，就是把要隐藏的文件，直接【覆盖】到图片文件的【数据区】的【尾部】。</p>
+
+<p>比方说，某图片有 100KB，其中文件头占 1KB，那么，数据区就是 99KB。也就是说，最多只能隐藏 99KB 的文件。</p>
+
+<p>切记：<strong>覆盖的时候，千万不可破坏文件头</strong>。文件头一旦破坏，这个图片文件就不再是一个合法的图片文件了。
+　　</p>
+
+<p>使用这种方法，对图片文件的格式，是有讲究的——最好用【24位色的 BMP 格式】。</p>
+
+<ul>
+  <li>
+    <p>BMP 格式本身比较简单，数据区随便覆盖，问题不大；</p>
+  </li>
+  <li>
+    <p>24位色的 BMP 相对其它的格式 BMP，文件尺寸更大，可以隐藏更多内容。</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">def</span> <span class="nf">embed</span><span class="p">(</span><span class="n">container_file</span><span class="p">,</span> <span class="n">data_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">)</span> <span class="p">:</span>
+    <span class="s">"""代码没有严格计算 BMP 的文件头尺寸，只是大致预留了 1024 字节"""</span>
+    
+    <span class="n">container</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">container_file</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_file</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">+</span><span class="mi">1024</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Not enough space to save "</span> <span class="o">+</span> <span class="n">data_file</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">container</span><span class="p">[</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">container</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="s">"__main__"</span> <span class="o">==</span> <span class="n">__name__</span> <span class="p">:</span>
+    <span class="k">try</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">:</span>
+            <span class="n">embed</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Usage:</span><span class="se">\n</span><span class="s">%s container data output"</span> <span class="o">%</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">err</span> <span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="lsb最低有效位">LSB最低有效位</h4>
+
+<p>很多商业软件使用的原理都是这个方法。</p>
+
+<p><img src="https://segmentfault.com/img/bVbgeGl?w=241&amp;h=216" alt="" /></p>
+
+<p>例如在PNG图片的储存中，每个颜色会有8bit，LSB（<strong>Least Significant Bit</strong>）隐写就是修改了像数中的最低的1bit，在人眼看来是看不出来区别的，也把信息隐藏起来了。（每个像数可以携带3bit的信息。）</p>
+
+<p><img src="https://segmentfault.com/img/bVbgeGw?w=842&amp;h=323" alt="" /></p>
+
+<p>譬如我们想把’A’隐藏进来的话，如下图，就可以把A转成16进制的0x61再转成二进制的01100001，再修改为红色通道的最低位为这些二进制串。</p>
+
+<p><img src="https://pic3.zhimg.com/80/v2-4946ce476b4c106e0de3265cedaec43e_hd.jpg" alt="img" /></p>
+
+<h3 id="最后">最后</h3>
+
+<ol>
+  <li>
+    <p>附上前面演示代码的实现:</p>
+
+    <p>(参考了几个git hub上的项目,不过鲁棒性都不太好)</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># coding=utf-8
+</span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span>
+   
+<span class="n">ALPHA</span> <span class="o">=</span> <span class="mi">5</span>
+   
+<span class="k">class</span> <span class="nc">BlindWaterMark</span><span class="p">():</span>
+    <span class="s">"""盲水印加解密，无频移简单版"""</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--action'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'action'</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--origin'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'ori'</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--img'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'img'</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--result'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'res'</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--alpha'</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s">'alpha'</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">ALPHA</span><span class="p">)</span>
+   
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ori_path</span><span class="p">,</span> <span class="n">wm_path</span><span class="p">,</span> <span class="n">res_path</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">ori_path</span><span class="p">)</span>
+        <span class="n">img_f</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">fft</span><span class="p">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>  <span class="c1"># 2维离散傅里叶变换
+</span>   
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">shape</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+        <span class="n">watermark</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">wm_path</span><span class="p">)</span>
+        <span class="n">wm_height</span><span class="p">,</span> <span class="n">wm_width</span> <span class="o">=</span> <span class="n">watermark</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">watermark</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+   
+        <span class="c1"># 水印随机编码
+</span>        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="n">height</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>   <span class="c1"># 随机数解码时可控
+</span>        <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+           
+        <span class="c1"># 按目标图片大小 对水印图进行对称
+</span>        <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">img</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># 根据图片形状，生成0填充的矩阵
+</span>   
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wm_height</span> <span class="ow">and</span> <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">wm_width</span><span class="p">:</span>
+                    <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">watermark</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                    <span class="n">tmp</span><span class="p">[</span><span class="n">height</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">][</span><span class="n">width</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+   
+        <span class="n">res_f</span> <span class="o">=</span> <span class="n">img_f</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">tmp</span>  <span class="c1"># 原图频域值  +  水印频域值
+</span>        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">fft</span><span class="p">.</span><span class="n">ifft2</span><span class="p">(</span><span class="n">res_f</span><span class="p">)</span>      <span class="c1"># 傅里叶逆变换
+</span>        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">real</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>  <span class="c1"># 转换为实数
+</span>   
+        <span class="n">cv2</span><span class="p">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">res_path</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">),</span> <span class="mi">100</span><span class="p">])</span>
+   
+   
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ori_path</span><span class="p">,</span> <span class="n">img_path</span><span class="p">,</span> <span class="n">res_path</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+        <span class="n">ori</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">ori_path</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+   
+        <span class="n">ori_f</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">fft</span><span class="p">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">ori</span><span class="p">)</span>
+        <span class="n">img_f</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">fft</span><span class="p">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+   
+        <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">ori</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ori</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">watermark</span> <span class="o">=</span> <span class="p">(</span><span class="n">ori_f</span> <span class="o">-</span> <span class="n">img_f</span><span class="p">)</span> <span class="o">/</span> <span class="n">alpha</span>
+   
+        <span class="n">watermark</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">real</span><span class="p">(</span><span class="n">watermark</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">watermark</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+   
+        <span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="n">height</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>
+   
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+   
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">watermark</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">height</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">width</span> <span class="o">-</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+   
+        <span class="n">cv2</span><span class="p">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">res_path</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="p">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">),</span> <span class="mi">100</span><span class="p">])</span>
+   
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">action</span>
+        <span class="n">ori</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">ori</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">img</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">options</span><span class="p">.</span><span class="n">res</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">options</span><span class="p">.</span><span class="n">alpha</span><span class="p">)</span>
+   
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">ori</span><span class="p">):</span>
+            <span class="n">parser</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">"image %s does not exist."</span> <span class="o">%</span> <span class="n">ori</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+            <span class="n">parser</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="s">"watermark %s does not exist."</span> <span class="o">%</span> <span class="n">img</span><span class="p">)</span>
+   
+        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s">"encode"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">ori</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s">"decode"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">ori</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+   
+   
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">bwm</span> <span class="o">=</span> <span class="n">BlindWaterMark</span><span class="p">()</span>
+    <span class="n">bwm</span><span class="p">.</span><span class="n">run</span><span class="p">()</span>
+   
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>2.隐写术是一门很深、应用很广泛的学问，这里讲的很泛，权当做抛砖引玉。图片隐写术只是其中一种，有兴趣的同学可以看下面这本书。</p>
+
+<p>​	<img src="https://i.loli.net/2019/05/07/5cd1506ce8aac.png" alt="1551625636929" /></p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/01/28/%E5%89%8D%E7%AB%AFReact%E7%AC%94%E8%AE%B0/"
+                           data-toggle="tooltip" data-placement="top" title="前端React笔记">
+                            Previous<br>
+                            <span>前端React笔记</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/06/06/19%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4GO%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-toggle="tooltip"
+                           data-placement="top" title="19年上半年Go语言使用笔记">
+                            Next<br>
+                            <span>19年上半年Go语言使用笔记</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="win10下使用WSL 2 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  win 10是最好的linux发行版！
+
+  ​												——  佚名
+
+">
+    
+    <meta property="article:published_time" content="2019-11-25T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="wsl2">
+    
+    <meta property="article:tag" content="kali">
+    
+    <meta property="article:tag" content="wsl">
+    
+    <meta property="article:tag" content="pycharm">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>win10下使用WSL 2 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/MainPic-connecting-with-Kali.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        position: relative;
+        background-image: url('/img/MainPic-connecting-with-Kali.jpg')
+    }
+
+    {
+    %
+    if
+    page
+    .
+    header-mask
+    %
+    }
+    header.intro-header .header-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+    background:
+
+    rgba
+    (
+    0
+    ,
+    0
+    ,
+    0
+    ,
+    {
+    {
+        page . header-mask
+    }
+    }
+    )
+    ;
+    }
+    {
+    %
+    endif
+    %
+    }
+</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#wsl2" title="wsl2">wsl2</a>
+                        
+                        <a class="tag" href="/tags/#kali" title="kali">kali</a>
+                        
+                        <a class="tag" href="/tags/#wsl" title="wsl">wsl</a>
+                        
+                        <a class="tag" href="/tags/#pycharm" title="pycharm">pycharm</a>
+                        
+                    </div>
+                    <h1>win10下使用WSL 2</h1>
+                    
+                    
+                    <h2 class="subheading">阿伟死了</h2>
+                    
+                    <span class="meta">Posted by UlyC on November 25, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>win 10是最好的linux发行版！</p>
+
+  <p>​												——  佚名</p>
+</blockquote>
+
+<h1 id="win10下使用wsl-2">win10下使用WSL 2</h1>
+
+<h2 id="准备工作">准备工作</h2>
+
+<p>之前有介绍过使用wsl 1版本做开发的方法， <a href="https://ulyc.github.io/2018/12/16/win10%E4%BD%BF%E7%94%A8pyhcarm%E9%85%8D%E5%90%88WSL%E5%BC%80%E5%8F%91python/">win10配合Ubuntu子系统打造舒适Python开发环境</a>。</p>
+
+<p>然后需要确认自己系统的版本是否高于18917。</p>
+
+<p>这里的坑在于18917版本我使用的时候还未正式推送更新，导致试了许多办法都没能启用WSL2，后来我是加入了Windows 预览体验计划之后才获得高于此版本的更新。</p>
+
+<p><img src="https://i.loli.net/2019/11/25/OLBlxyrAcgvU9am.png" alt="win预览计划.png" /></p>
+
+<h2 id="安装wsl2">安装wsl2</h2>
+
+<p>要安装并开始使用 WSL 2，请完成以下步骤：</p>
+
+<ul>
+  <li>启用“ <em>虚拟机平台(Virtual Machine Platform)</em>”可选组件</li>
+  <li>使用命令行设置要由 WSL 2 支持的发行版</li>
+  <li>验证你的发行版使用的 WSL 版本</li>
+</ul>
+
+<p>请注意，你需要运行 Windows 10 build 18917 或更高版本才能使用 WSL 2，并且你需要安装 WSL（可以在<a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/install-win10">此处</a>找到相关说明）。</p>
+
+<h3 id="启用虚拟机平台可选组件">启用“虚拟机平台”可选组件</h3>
+
+<p>以管理员身份打开 PowerShell 并运行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enable-WindowsOptionalFeature <span class="nt">-Online</span> <span class="nt">-FeatureName</span> VirtualMachinePlatform
+</code></pre></div></div>
+
+<p>启用这些更改后，你需要重新启动计算机。</p>
+
+<h3 id="使用命令行设置要由-wsl-2-支持的发行版">使用命令行设置要由 WSL 2 支持的发行版</h3>
+
+<p>在 PowerShell 中运行：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--set-version</span> &lt;Distro&gt; 2
+</code></pre></div></div>
+
+<p>并确保将 <code class="language-plaintext highlighter-rouge">&lt;Distro&gt;</code> 替换为发行版的实际名称。 （你可以使用以下命令找到它们：<code class="language-plaintext highlighter-rouge">wsl -l</code>）。 你也可以通过运行与上面相同的命令随时更改回 WSL 1，但将“<code class="language-plaintext highlighter-rouge">2</code>”替换为“<code class="language-plaintext highlighter-rouge">1</code>”。</p>
+
+<p>此外，如果你想使 WSL 2 成为默认架构，可以使用以下命令执行此操作：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--set-default-version</span> 2
+</code></pre></div></div>
+
+<p>这将使你安装的任何新发行版初始化为 WSL 2 发行版。</p>
+
+<h3 id="完成验证发行版使用的-wsl-版本">完成验证发行版使用的 WSL 版本</h3>
+
+<p>要验证每个发行版使用的 WSL 版本，请使用以下命令：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl <span class="nt">--list</span> <span class="nt">--verbose</span>
+<span class="c"># 或者</span>
+wsl <span class="nt">-l</span> <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>你在上面选择的发行版现在应该在“version”列下显示“2”。 现在完成了，你随时可以开始使用你的 WSL 2 发行版了。</p>
+
+<h2 id="wsl-2-的体验变化">WSL 2 的体验变化</h2>
+
+<p>首次开始使用 WSL 时，你会注意到一些用户体验变化。以下是此预览中两个最重要的变化。</p>
+
+<h3 id="将-linux-文件放在-linux-根文件系统中">将 Linux 文件放在 Linux 根文件系统中</h3>
+
+<p>确保将 Linux 应用程序中经常访问的文件放在 Linux 根文件系统中，以享受文件性能优势。过去微软一直强调在使用 WSL 1 时将文件放入 C 盘，但 WSL 2 中的情况并非如此。要享受 WSL 2 中更快的文件系统访问权限，这些文件必须放在 Linux 根文件系统里面。而且现在 Windows 应用程序可以访问 Linux 根文件系统（如文件资源管理器！尝试在 Linux 发行版的主目录中运行：<code class="language-plaintext highlighter-rouge">explorer.exe .</code> 看看会发生什么），这将使这种转换变得更加容易。（之前文章说过在wsl 1中可以访问win中的文件，而在win中访问不到wsl中的文件。）</p>
+
+<h3 id="在初始构建中使用动态-ip-地址访问-linux-网络应用程序">在初始构建中使用动态 IP 地址访问 Linux 网络应用程序</h3>
+
+<p>WSL 2 做了架构的巨大变更，使用了虚拟化技术，并仍在努力改进网络支持。由于 WSL 2 现在运行在虚拟机中，因此你从 Windows 访问 Linux 网络应用程序需要使用该 VM 的 IP 地址，反之亦然，你需要 Windows 主机的 IP 地址才能从 Linux 中访问 Windows 网络应用程序。 WSL 2 的目标是尽可能使用 <code class="language-plaintext highlighter-rouge">localhost</code> 访问网络应用程序！可以在<a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes%23accessing-network-applications">文档中</a>找到有关如何执行此操作的完整详细信息和步骤。</p>
+
+<p>（此特性已更新，详见下面更新的章节）</p>
+
+<h3 id="新的-wsl-命令">新的 WSL 命令</h3>
+
+<p>WSL 添加了一些新命令选项来帮助控制和查看 WSL 版本和发行版。</p>
+
+<p>除了上面提到的 <code class="language-plaintext highlighter-rouge">--set-version</code> 和 <code class="language-plaintext highlighter-rouge">--set-default-version</code> 之外，还有：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">wsl --shutdown</code>
+立即终止所有正在运行的发行版和 WSL 2 轻量级实用程序虚拟机。
+一般来说，支持 WSL 2 发行版的虚拟机是由 WSL 来管理的，因此会在需要时将其打开并在不需要时将其关闭。但也可能存在你希望手动关闭它的情况，此命令允许你通过终止所有发行版并关闭 WSL 2 虚拟机来执行此操作。</li>
+  <li><code class="language-plaintext highlighter-rouge">wsl --list --quiet</code>
+仅列出发行版名称。此命令对于脚本编写很有用，因为它只会输出你已安装的发行版的名称，而不显示其他信息，如默认发行版、版本等。</li>
+  <li><code class="language-plaintext highlighter-rouge">wsl --list --verbose</code>
+显示有关所有发行版的详细信息。此命令列出每个发行版的名称，发行版所处的状态以及正在运行的版本。默认发行版标以星号。</li>
+</ul>
+
+<h2 id="一些更新">一些更新</h2>
+
+<h3 id="win-18945-支持通过localhost访问wsl2容器">win 18945: 支持通过localhost访问WSL2容器</h3>
+
+<p>windows 18945之前的WSL2版本，如果我们在其中运行了一个网络服务，例如启动一个WEB服务。想在 Win10 宿主机中访问这个WEB服务，我们先要通过 ip a 或 ifconfig 命令查看其IP地址才能访问，而且更崩溃的是每次重启后再运行WSL2容器，其IP地址和网关会重新分配。</p>
+
+<p><img src="https://img-blog.csdnimg.cn/2019080302040619.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwODA5Mg==,size_16,color_FFFFFF,t_70" alt="[](" /></p>
+
+<p>这确实是件很麻烦的事情，为此有开发者特意用golang开发了一个windows服务，让用户快捷的获取到WSL2的IP。</p>
+
+<p>本次更新改进了这个问题，我们在WIN10中能够直接通过localhost 访问到WSL2中的服务，并且WLS2中的网络服务也能绑定到 0.0.0.0 上。</p>
+
+<p><img src="https://i.loli.net/2019/11/25/DHe63NibfBrLICK.png" alt="wsl2文档.png" /></p>
+
+<p>例如：WSL2 容器内启动web服务器，使用python http.server模块启动一个WEB服务
+python3 -m http.server，默认端口8000
+然后在win10中的web浏览器中访问 http://localhost:8000/</p>
+
+<p><img src="https://img-blog.csdnimg.cn/2019080301494940.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwODA5Mg==,size_16,color_FFFFFF,t_70" alt="" /></p>
+
+<p>要了解有关用户体验更改的更多信息，请参阅文档：<a href="https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes">WSL 1 和 WSL 2 之间的用户体验变化</a>。</p>
+
+<h3 id="win-190281-可在pycharm201902版本使用-wsl2">win 19028.1: 可在Pycharm2019.02版本使用 wsl2</h3>
+
+<p>在此版本之前，Pycharm2019.02中解释器选择wsl，若wsl版本为wsl2则程序会直接卡死。</p>
+
+<p>现在则可以选择wsl2中的python作为解释器。</p>
+
+<p>要解决卡死问题，又不想升级系统的话 ，可以使用<strong>Pycharm2019.03</strong>版本，此版本兼容了wsl2，虽然还未正式发行。</p>
+
+<h2 id="本人使用中发现-wsl存在的bug">本人使用中发现 wsl存在的bug</h2>
+
+<h3 id="navicat-不能通过localhost直接访问容器内的mysql">navicat 不能通过localhost直接访问容器内的mysql</h3>
+
+<p><img src="https://img-blog.csdnimg.cn/20190803014317151.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDAwODA5Mg==,size_16,color_FFFFFF,t_70" alt="" /></p>
+
+<p>github也有用户反馈了这个问题，官方确认是BUG并正在修复中。</p>
+
+<p>目前可以使用ssh隧道连接。</p>
+
+<h3 id="git-status更新不及时">git status更新不及时</h3>
+
+<p><img src="https://i.loli.net/2019/11/25/tY6kP258bho7Rwc.png" alt="wsl2bug.png" /></p>
+
+<p>这个问题从wsl 1就存在，github很多人提过这个issue,官方还未修复。</p>
+
+<h2 id="wsl其他技巧">wsl其他技巧</h2>
+
+<h3 id="ssh连接wsl">ssh连接wsl</h3>
+
+<p>打开配置文件:</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo vim /etc/ssh/sshd_config</code>
+写入:</p>
+
+<pre><code class="language-yanl">Port 2222   				#设置ssh的端口号, 由于22在windows中有别的用处, 尽量不修改系统的端口号
+PermitRootLogin yes  		 # 可以root远程登录
+PasswordAuthentication yes     # 密码验证登录
+AllowUsers sky 				# 远程登录时的用户名
+</code></pre>
+
+<p>重启服务:</p>
+
+<p><code class="language-plaintext highlighter-rouge"> sudo service ssh --full-restart</code>
+这个时候你自己电脑上就可以通过ssh连接wsl了, 但是想要在其他的计算机上访问, 就需要系统开放端口了。</p>
+
+<p>防火墙-&gt;高级设置-&gt;入站规则-&gt;新建规则</p>
+
+<p><img src="https://img-blog.csdn.net/20180928162108931?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xjdXdi/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" /></p>
+
+<p>端口-&gt;下一步</p>
+
+<p>选择tcp  特定本地端口 2222</p>
+
+<p><img src="https://img-blog.csdn.net/20180928162242346?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xjdXdi/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" /></p>
+
+<p>允许连接, 默认都选上, 下一步填个名字。</p>
+
+<p>如果你使用的是wsl 1版本到这一步就可以在其他电脑ssh连接了。</p>
+
+<p>因为wsl2 ip与宿主机ip并不相同，此时还需要在win中添加下端口转发的规则。</p>
+
+<p>使用管理员权限打开Powershell，输入：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netsh interface portproxy add v4tov4 <span class="nv">listenport</span><span class="o">=</span>2222 <span class="nv">listenaddress</span><span class="o">=</span>0.0.0.0 <span class="nv">connectport</span><span class="o">=</span>2222 <span class="nv">connectaddress</span><span class="o">=</span><span class="k">${</span><span class="nv">wsl</span><span class="p">.ip</span><span class="k">}</span>
+</code></pre></div></div>
+
+<h3 id="wsl使用完整-桌面版kali">wsl使用完整 桌面版kali</h3>
+
+<p><img src="https://i.loli.net/2019/11/25/PfASbVBvnz6wayG.png" alt="kalipng.png" /></p>
+
+<h4 id="升级为完整版">升级为完整版</h4>
+
+<p>Microsoft Store中直接安装的wsl版kali是阉割版，基本上你想用的软件全都没有，所以需要安装完整版。</p>
+
+<p>进入wsl 依次输入:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get update
+apt-get upgrade
+apt-get <span class="nb">install </span>kali-linux-full
+</code></pre></div></div>
+
+<p>等待直至结束即可。</p>
+
+<h4 id="为wsl安装桌面">为wsl安装桌面</h4>
+
+<p>这一步是最骚的，wsl 1和2都支持开桌面版，比开个VM爽多了。</p>
+
+<ol>
+  <li>
+    <p>安装 xfce4 和中文支持</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get install xfce4 fonts-noto-cjk
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Windows 上安装 VcXsrv
+见<a href="https://sourceforge.net/projects/vcxsrv/">这里</a></p>
+  </li>
+  <li>
+    <p>配置输出 
+在 <code class="language-plaintext highlighter-rouge">~/.zshrc</code>(如果用的是原生 bash 就用<code class="language-plaintext highlighter-rouge">~/.bashrc</code>) 中添加</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>启动桌面</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>startxfce4
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>启动后遇到问题, 可以用以下脚本解决</p>
+
+<blockquote>
+  <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-rf</span> ~/.config/xfce4rm <span class="nt">-rf</span> ~/.cache/sessions
+</code></pre></div>  </div>
+</blockquote>
+
+<h2 id="参考链接">参考链接</h2>
+
+<p>[1]. <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes">官方文档：User Experience Changes Between WSL 1 and WSL 2</a></p>
+
+<p>[2]. <a href="https://zhuanlan.zhihu.com/p/69121280">在 Windows 中运行 Linux：WSL 2 使用入门</a></p>
+
+<p>[3]. <a href="https://blog.csdn.net/lcuwb/article/details/82885920">设置WSL可远程连接</a></p>
+
+<p>[4]. <a href="https://blog.csdn.net/weixin_44008092/article/details/98254833">WSL2跟踪 - 18945: 通过localhost直接访问 WSL2 容器中的服务</a></p>
+
+<p>[5]. <a href="https://htharoldht.com/kali-under-wsl/">WSL 下的 kali</a></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/01/%E5%88%9D%E7%AA%A5CORB/"
+                           data-toggle="tooltip" data-placement="top" title="初窥CORB">
+                            Previous<br>
+                            <span>初窥CORB</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/" data-toggle="tooltip"
+                           data-placement="top" title="常见RFID卡片介绍、破解思路 及 Proxmark3简介">
+                            Next<br>
+                            <span>常见RFID卡片介绍、破解思路 及 Proxmark3简介</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

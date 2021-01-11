@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="没那么浅地谈谈HTTP与HTTPS【三】 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  未济，亨。小狐汔济，濡其尾，无攸利。——《易》
+
+">
+    
+    <meta property="article:published_time" content="2018-10-09T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="http">
+    
+    <meta property="article:tag" content="https">
+    
+    <meta property="article:tag" content="密钥协商">
+    
+    <meta property="article:tag" content="密钥管理">
+    
+    <meta property="article:tag" content="网络安全">
+    
+    <meta property="article:tag" content="TSL握手">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2018/10/09/%E6%B2%A1%E9%82%A3%E4%B9%88%E6%B5%85%E5%9C%B0%E8%B0%88%E8%B0%88HTTP%E4%B8%8EHTTPS-%E4%B8%89/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>没那么浅地谈谈HTTP与HTTPS【三】 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2018/10/09/%E6%B2%A1%E9%82%A3%E4%B9%88%E6%B5%85%E5%9C%B0%E8%B0%88%E8%B0%88HTTP%E4%B8%8EHTTPS-%E4%B8%89/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/dofresh-downtheriver-halfsize.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        position: relative;
+        background-image: url('/img/dofresh-downtheriver-halfsize.jpg')
+    }
+
+    {
+    %
+    if
+    page
+    .
+    header-mask
+    %
+    }
+    header.intro-header .header-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+    background:
+
+    rgba
+    (
+    0
+    ,
+    0
+    ,
+    0
+    ,
+    {
+    {
+        page . header-mask
+    }
+    }
+    )
+    ;
+    }
+    {
+    %
+    endif
+    %
+    }
+</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#http" title="http">http</a>
+                        
+                        <a class="tag" href="/tags/#https" title="https">https</a>
+                        
+                        <a class="tag" href="/tags/#密钥协商" title="密钥协商">密钥协商</a>
+                        
+                        <a class="tag" href="/tags/#密钥管理" title="密钥管理">密钥管理</a>
+                        
+                        <a class="tag" href="/tags/#网络安全" title="网络安全">网络安全</a>
+                        
+                        <a class="tag" href="/tags/#TSL握手" title="TSL握手">TSL握手</a>
+                        
+                    </div>
+                    <h1>没那么浅地谈谈HTTP与HTTPS【三】</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by UlyC on October 9, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>未济，亨。小狐汔济，濡其尾，无攸利。——《易》</p>
+</blockquote>
+
+<h2 id="六密钥管理">六、密钥管理</h2>
+
+<p>当不再担心身份会被冒充、篡改之后，我们再来详细谈谈网络通信中对于加密算法的密钥管理。</p>
+
+<p>在密钥被签发后，密钥管理一般有三个步骤：<strong>交换</strong>、<strong>存储</strong>和<strong>使用</strong>。其中最重要也是最难的点在于<strong>密钥交换</strong>。</p>
+
+<h3 id="密钥交换"><a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E9%92%A5%E4%BA%A4%E6%8D%A2">密钥交换</a></h3>
+
+<p>进行安全通信之前，各用户间需要确立加密程序的细节，尤其是密钥。在对称密钥加密系统，各用户间需要确立共同使用的单一密钥，此步骤即密钥交换。</p>
+
+<p>前面章节已经提过，交换对称密钥必须透过另一安全的通信管道进行；否则，如果以明文形式在网络发送，将使窃听者能够立即得知密钥以及据其加密的数据。以前，交换密称密钥是非常麻烦的，可能需要使<a href="https://zh.wikipedia.org/wiki/%E5%A4%96%E4%BA%A4%E9%82%AE%E8%A2%8B">外交邮袋</a>等安全渠道。</p>
+
+<p>公开密钥加密的出现大大减轻了交换对称密钥的困难，公钥可以公开（透过不安全、可被窃听的渠道）发送，用以加密明文。不过，公钥加密在<a href="https://zh.wikipedia.org/wiki/%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E6%80%A7%E7%90%86%E8%AB%96">在计算上相当复杂</a>，性能欠佳、远远不比对称加密。</p>
+
+<p>因此，在一般实际情况下，往往通过公钥加密来<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%AE%89%E5%85%A8%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90%E5%99%A8">随机</a><a href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B">创建临时的对称秘钥</a>，亦即<a href="https://zh.wikipedia.org/wiki/%E5%B0%8D%E8%A9%B1%E9%8D%B5">对话键</a>，然后才通过对称加密来传输大量、主体的数据。（也叫混合加密算法）</p>
+
+<h4 id="密钥交换协商机制的几种类型">密钥交换/协商机制的几种类型</h4>
+
+<h5 id="1依靠非对称加密算法">1.<strong>依靠非对称加密算法</strong></h5>
+
+<ul>
+  <li>
+    <p>原理：</p>
+
+    <p>拿到公钥的一方先生成随机的会话密钥，然后利用公钥加密它；再把加密结果发给对方，对方用私钥解密；于是双方都得到了会话密钥。</p>
+  </li>
+  <li>
+    <p>举例：</p>
+
+    <p><a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)">RSA</a></p>
+  </li>
+</ul>
+
+<h5 id="2-依靠专门的密钥交换算法">2. <strong>依靠专门的密钥交换算法</strong></h5>
+
+<ul>
+  <li>
+    <p>原理：</p>
+
+    <p>这个原理比较复杂，一两句话说不清楚，待会儿聊到 DH 的那个章节会详谈。</p>
+  </li>
+  <li>
+    <p>举例：</p>
+
+    <p><a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange">DH 算法</a>及其变种（<a href="https://zh.wikipedia.org/wiki/%E6%A9%A2%E5%9C%93%E6%9B%B2%E7%B7%9A%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E9%87%91%E9%91%B0%E4%BA%A4%E6%8F%9B">ECDH算法</a>）</p>
+  </li>
+</ul>
+
+<h5 id="3-依靠通讯双方事先已经共享的秘密">3. <strong>依靠通讯双方事先已经共享的“秘密”</strong></h5>
+
+<ul>
+  <li>
+    <p>原理：</p>
+
+    <p>既然双方已经有共享的秘密（这个“秘密”可能已经是一个密钥，也可能只是某个密码/password），只需要根据某种生成算法，就可以让双方产生相同的密钥（并且密钥长度可以任意指定）</p>
+  </li>
+  <li>
+    <p>举例：</p>
+
+    <p><a href="https://en.wikipedia.org/wiki/Pre-shared_key">PSK</a> 和 <a href="https://en.wikipedia.org/wiki/Secure_Remote_Password_protocol">SRP</a></p>
+  </li>
+</ul>
+
+<h4 id="基于-rsa-的密钥协商">基于 RSA 的密钥协商</h4>
+
+<h5 id="概述">概述</h5>
+
+<p>这大概是 SSL 最古老的密钥协商方式——早期的 SSLv2 只支持一种密钥协商机制，就是它。<a href="https://ulyc.github.io/2018/09/21/%E6%B2%A1%E9%82%A3%E4%B9%88%E6%B5%85%E5%9C%B0%E8%B0%88%E8%B0%88HTTP%E4%B8%8EHTTPS-%E4%BA%8C/">（前一篇）</a>介绍身份认证重要性的时候，也是拿 RSA 来演示。</p>
+
+<p>RSA 是一种【非】对称加密算法。特点是：加密和解密用使用【不同的】密钥。</p>
+
+<p>并且“非对称加密算法”既可以用来做“加密/解密”，还可以用来做“数字签名”。</p>
+
+<h5 id="密钥协商的步骤">密钥协商的步骤</h5>
+
+<blockquote>
+  <ol>
+    <li>客户端连上服务端</li>
+    <li>服务端发送 CA 证书给客户端</li>
+    <li>客户端验证该证书的可靠性</li>
+    <li>客户端从 CA 证书中取出公钥</li>
+    <li>客户端生成一个随机密钥 k，并用这个公钥加密得到 k’</li>
+    <li>客户端把 k’ 发送给服务端</li>
+    <li>服务端收到 k’ 后用自己的私钥解密得到 k</li>
+    <li>此时双方都得到了密钥 k，协商完成</li>
+  </ol>
+</blockquote>
+
+<h5 id="如何防范偷窥嗅探">如何防范偷窥（嗅探）</h5>
+
+<ul>
+  <li>
+    <p>攻击方式1</p>
+
+    <blockquote>
+      <p>攻击者虽然可以监视网络流量并拿到公钥，但是【无法】通过公钥推算出私钥（这点由 RSA 算法保证）</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>攻击方式2</p>
+
+    <blockquote>
+      <p>攻击者虽然可以监视网络流量并拿到 k’，但是攻击者没有私钥，【无法解密】 k’，因此也就无法得到 k</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="如何防范篡改假冒身份">如何防范篡改（假冒身份）</h5>
+
+<ul>
+  <li>
+    <p>攻击方式1</p>
+
+    <blockquote>
+      <p>如果攻击者在第2步篡改数据，伪造了证书，那么客户端在第3步会发现（这点由证书体系保证）</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>攻击方式2</p>
+
+    <blockquote>
+      <p>如果攻击者在第6步篡改数据，伪造了k’，那么服务端收到假的k’之后，解密会失败（这点由 RSA 算法保证）。服务端就知道被攻击了。</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="基于-dh-的密钥协商">基于 DH 的密钥协商</h4>
+
+<h5 id="概述-1">概述</h5>
+
+<p>DH 算法又称“Diffie–Hellman 算法”。这是两位数学牛人的名称，他们创立了这个算法。该算法用来实现【安全的】“密钥交换”。它可以做到——“通讯双方在完全没有对方任何预先信息的条件下通过不安全信道创建起一个密钥”。这句话比较绕口，通俗地说，可以归结为两个优点：</p>
+<blockquote>
+  <ol>
+    <li>通讯双方事先【不】需要有共享的秘密。</li>
+    <li>用该算法协商密码，即使协商过程中被别人全程偷窥（比如“网络嗅探”），偷窥者也【无法】知道协商得出的密钥是啥。</li>
+  </ol>
+
+</blockquote>
+
+<p>但是 DH 算法本身也有缺点——它不支持认证。</p>
+
+<p>也就是说：它虽然可以对抗“<strong>偷窥</strong>”，却无法对抗“<strong>篡改</strong>”，自然也就无法对抗“中间人攻击/MITM”（前一篇已经强调过——缺乏身份认证，【必定会】遭到“中间人攻击/MITM”）。</p>
+
+<p>为了避免遭遇 MITM 攻击，DH 需要与其它签名算法（比如 RSA、DSA、ECDSA）配合——靠签名算法帮忙来进行身份认证。当 DH 与 RSA 配合使用，称之为“DH-RSA”，与 DSA 配合则称为“DH-DSA”，以此类推。</p>
+
+<p>反之，如果 DH 【没有】配合某种签名算法，则称为“DH-ANON”（ANON 是“anonymous”（匿名）的简写）。此时会遭遇“中间人攻击/MITM”。</p>
+
+<p>关于该算法具体数学原理，可以参见<a href="https://zh.wikipedia.org/wiki/%E8%BF%AA%E8%8F%B2-%E8%B5%AB%E7%88%BE%E6%9B%BC%E5%AF%86%E9%91%B0%E4%BA%A4%E6%8F%9B">迪菲-赫尔曼密钥交换</a>。</p>
+
+<h5 id="密钥协商的步骤-1">密钥协商的步骤</h5>
+
+<blockquote>
+  <ol>
+    <li>客户端先连上服务端</li>
+    <li>服务端生成一个随机数 s 作为自己的私钥，然后根据算法参数计算出公钥 S（算法参数通常是固定的）</li>
+    <li>服务端使用某种签名算法把“算法参数（模数p，基数g）和服务端公钥S”作为一个整体进行签名</li>
+    <li>服务端把“算法参数（模数p，基数g）、服务端公钥S、签名”发送给客户端</li>
+    <li>客户端收到后验证签名是否有效</li>
+    <li>客户端生成一个随机数 c 作为自己的私钥，然后根据算法参数计算出公钥 C</li>
+    <li>客户端把 C 发送给服务端</li>
+    <li>客户端和服务端（根据上述 DH 算法）各自计算出 k 作为会话密钥</li>
+  </ol>
+
+</blockquote>
+
+<h5 id="如何防范偷窥嗅探-1">如何防范偷窥（嗅探）</h5>
+
+<p>嗅探者可以通过监视网络传输，得到算法参数（模数p，基数g）以及双方的公钥，但是【无法】推算出双方的私钥，也【无法】推算出会话密钥（这是由 DH 算法在数学上保证的）</p>
+
+<h5 id="如何防范篡改假冒身份-1">如何防范篡改（假冒身份）</h5>
+
+<ul>
+  <li>
+    <p>攻击方式1</p>
+
+    <blockquote>
+      <p>攻击者可以第4步篡改数据（修改算法参数或服务端公钥）。但因为这些信息已经进行过数字签名。篡改之后会被客户端发现。</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>攻击方式2</p>
+
+    <blockquote>
+      <p>攻击者可以在第7步篡改客户端公钥。这步没有签名，服务端收到数据后不会发现被篡改。但是，攻击者篡改之后会导致“服务端与客户端生成的会话密钥【不一致】”。在后续的通讯步骤中会发现这点，并导致通讯终止。</p>
+
+      <p>（协议初始化/握手阶段的末尾，双方都会向对方发送一段“验证性的密文”，这段密文用各自的会话密钥进行【对称】加密，如果双方的会话密钥不一致，这一步就会失败，进而导致握手失败，连接终止）</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h4 id="基于-psk-的密钥协商">基于 PSK 的密钥协商</h4>
+
+<h5 id="概述-2">概述</h5>
+
+<p>PSK 是“Pre-Shared Key”的缩写。顾名思义，就是【预先】让通讯双方共享一些密钥（通常是【对称加密】的密钥）。所谓的【预先】，就是说，这些密钥在 TLS 连接尚未建立之前，就已经部署在通讯双方的系统内了。</p>
+
+<p>这种算法用的不多，它的好处是：</p>
+
+<blockquote>
+  <ol>
+    <li>不需要依赖公钥体系，不需要部属 CA 证书。</li>
+    <li>不需要涉及非对称加密，TLS 协议握手（初始化）时的性能好于前述的 RSA 和 DH。
+  更多介绍可以参见维基百科，链接在“<a href="https://en.wikipedia.org/wiki/Pre-shared_key">这里</a>”。</li>
+  </ol>
+
+</blockquote>
+
+<h5 id="密钥协商的步骤-2">密钥协商的步骤</h5>
+
+<p>（由于 PSK 用的不多，下面只简单介绍一下步骤，让大伙儿明白其原理）</p>
+
+<blockquote>
+  <ul>
+    <li>
+      <p>在通讯【之前】，通讯双方已经预先部署了若干个共享的密钥。</p>
+    </li>
+    <li>为了标识多个密钥，给每一个密钥定义一个唯一的 ID</li>
+    <li>协商的过程很简单：客户端把自己选好的密钥的 ID 告诉服务端。</li>
+    <li>如果服务端在自己的密钥池子中找到这个 ID，就用对应的密钥与客户端通讯；否则就报错并中断连接。</li>
+  </ul>
+</blockquote>
+
+<h5 id="如何防范偷窥嗅探-2">如何防范偷窥（嗅探）</h5>
+
+<p>使用这种算法，在协商密钥的过程中交换的是密钥的标识（ID）而【不是】密钥本身。
+就算攻击者监视了全过程，也无法知晓密钥是什么。</p>
+
+<h5 id="如何防范篡改假冒身份-2">如何防范篡改（假冒身份）</h5>
+
+<p>PSK 可以单独使用，也可以搭配签名算法一起使用。</p>
+
+<ul>
+  <li>
+    <p>　　对于单独使用：</p>
+
+    <blockquote>
+      <p>如果攻击者篡改了协商过程中传送的密钥 ID，要么服务端发现 ID 无效（协商失败），要么服务端得到的 ID 与客户端不一致，在后续的通讯步骤中也会发现，并导致通讯终止。</p>
+
+      <p>（协议初始化/握手阶段的末尾，双方都会向对方发送一段“验证性的密文”，这段密文用各自的会话密钥进行【对称】加密，如果双方的会话密钥不一致，这一步就会失败，进而导致握手失败，连接终止）</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>　　对于搭配签名算法</p>
+
+    <blockquote>
+      <p>如果攻击者篡改了协商过程中传送的密钥 ID，验证签名会失败</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h5 id="补充说明">补充说明</h5>
+
+<p>PSK 与 RSA 具有某种相似性——既可以用来搞“<strong>密钥协商</strong>”，也可以用来搞“<strong>身份认证</strong>”。
+所以，PSK 可以跟 DH（及其变种）进行组合。例如：DHE-PSK、ECDHE-PSK</p>
+
+<h4 id="基于-srp-的密钥协商">基于 SRP 的密钥协商</h4>
+
+<h5 id="概述-3">概述</h5>
+
+<p>SRP 是“Secure Remote Password”的缩写。</p>
+
+<p>这个算法有点类似于刚才提到的 PSK——只不过 client/server 双方共享的是比较人性化的密码（password）而不是密钥（key）。该算法采用了一些机制（盐/salt、随机数）来防范“嗅探/sniffer”或“字典猜解攻击”或“重放攻击”。</p>
+
+<p>这个算法应该用得很少——OpenSSL 直到2012年才开始支持该算法。所以这里就不展开了，有兴趣的同学可以去看 <a href="https://tools.ietf.org/html/rfc2945">RFC2945</a> 的协议描述</p>
+
+<h3 id="密钥存储">密钥存储</h3>
+
+<p>对称加密使用的单一密钥会被收发双方存储，公开密钥加密的私钥由于还有<a href="https://zh.wikipedia.org/wiki/%E6%95%B8%E4%BD%8D%E7%B0%BD%E7%AB%A0">数字签名</a>的功能，所以都必须安全存储，以保障通信安全。业界已发展出各种各样的技术来保障密钥得到妥善存储，包括定期或不定的系统检测是否有入侵之虞、对存储媒体或服务器提供高强度的物理防护及监控。</p>
+
+<p>最常见的是加密应用程序负责管理用户的密钥，使用密钥时则需要输入认别用户的访问密码。对于认证机构，一旦私钥外泄，将可能导致整个<a href="https://zh.wikipedia.org/wiki/%E4%BF%A1%E4%BB%BB%E9%8F%88">信任链</a>被摧毁，影响广及众多客户，所以认证机构会使用<a href="https://zh.wikipedia.org/wiki/%E7%A1%AC%E9%AB%94%E5%AE%89%E5%85%A8%E6%A8%A1%E7%B5%84">硬件安全模块</a>，有些存储私钥的计算机甚至平时不会连线，只在固定的调度下，经过一系列严谨的行政程序重重把关，才会取出私钥为客户签名证书。</p>
+
+<p>在信任链设计中，绝大部分的<a href="https://zh.wikipedia.org/wiki/%E6%A0%B9%E8%AF%81%E4%B9%A6">根证书</a>都不会直接为客户签名，而是先签名一个（或多个）中继证书，再由中继证书为客户签名，这可以加强控管能力及控制一旦签名私钥被泄时的损失。</p>
+
+<h3 id="密钥使用">密钥使用</h3>
+
+<p>密钥的有效期限是一个重要问题，一个密钥应该在产生后多久被汰换呢？</p>
+
+<p>密钥汰换之后，旧有的密钥就无法再解密新产生的密文，丧失对窃听者的价值，这会增加了攻击者所需要投入的气力，所以密钥应该经常替换。</p>
+
+<p>同时，这也可以减低信息一旦被破解（<em>一般是回溯性破解【注1】</em>）时的损失：因为窃听者可能在破解密钥之前一直存储截取到的加密消息，等待成功破解密钥的一刻。所以密钥更换得越频密，窃听者可解读的消息就越少。</p>
+
+<p>在过去，如果可靠的密钥交换程序非常困难或者仅仅间歇可行，对称密钥会被长期使用。</p>
+
+<p>但在理想情况下，对称密钥应该在每次交换消息或会话时转换（<em>完美正向加密【注2】</em>），使得如果某一密钥被泄（例如，被盗窃，密码分析或社会工程化）时，只有单一消息或会话被解读。</p>
+
+<p>基于公开密钥加密的特性，一对公钥和私钥的有效期一般会长于对称加密所使用的单一密钥，尤其是需要认证机构签核的<a href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E5%AD%90%E8%AD%89%E6%9B%B8">电子证书</a>，当中涉及行政及部署成本，所以可能是三个月至一、两年不等，考虑的因素包括配合加密算法的<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E9%92%A5%E9%95%BF%E5%BA%A6">密钥长度</a>、存储私钥的强度、一旦外泄可能引致的风险、更换程序对运行中的服务的影响、以及运行成本。</p>
+
+<h2 id="七tsl握手">七、TSL握手</h2>
+
+<p>有了前面的基础知识，这章我们就来讨论下TSL完整的实现过程。</p>
+
+<p>TSL建立连接要经过四次握手， 握手过程又分为：</p>
+
+<ol>
+  <li>单向验证：就是server端将证书发送给客户端，客户端验证server端证书的合法性等。例如百度、新浪、google等普通的https网站。</li>
+  <li>双向验证：不仅客户端会验证server端的合法性，同时server端也会验证客户端的合法性。例如银行网银登陆，支付宝登陆交易等。</li>
+</ol>
+
+<p>下面只讨论单向验证的情况：</p>
+
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201402/bg2014020502.png" alt="TLS握手" /></p>
+
+<h3 id="第一步客户端发出请求clienthello">第一步：<strong>客户端发出请求（ClientHello）</strong></h3>
+
+<p>首先，客户端（通常是浏览器）先向服务器发出加密通信的请求，这被叫做ClientHello请求。</p>
+
+<p>在这一步，客户端主要向服务器提供以下信息。</p>
+
+<blockquote>
+  <p>（1） 支持的协议版本，比如TLS 1.0版。</p>
+
+  <p>（2） 一个客户端生成的随机数，稍后用于生成”对话密钥”。</p>
+
+  <p>（3） 支持的加密方法，比如RSA公钥加密。</p>
+
+  <p>（4） 支持的压缩方法。</p>
+</blockquote>
+
+<p>这里需要注意的是，客户端发送的信息之中不包括服务器的域名。也就是说，理论上服务器只能包含一个网站，否则会分不清应该向客户端提供哪一个网站的数字证书。这就是为什么通常一台服务器只能有一张数字证书的原因。</p>
+
+<p>对于虚拟主机的用户来说，这当然很不方便。2006年，TLS协议加入了一个<a href="http://tools.ietf.org/html/rfc4366">Server Name Indication扩展</a>，允许客户端向服务器提供它所请求的域名。</p>
+
+<h3 id="第二步服务器回应severhello">第二步：<strong>服务器回应（SeverHello）</strong></h3>
+
+<p>服务器收到客户端请求后，向客户端发出回应，这叫做SeverHello。服务器的回应包含以下内容。</p>
+
+<blockquote>
+  <p>（1） 确认使用的加密通信协议版本，比如TLS 1.0版本。如果浏览器与服务器支持的版本不一致，服务器关闭加密通信。</p>
+
+  <p>（2） 一个服务器生成的随机数，稍后用于生成”对话密钥”。</p>
+
+  <p>（3） 确认使用的加密方法，比如RSA公钥加密。</p>
+
+  <p>（4） 服务器证书。</p>
+</blockquote>
+
+<p>除了上面这些信息，如果服务器需要确认客户端的身份，就会再包含一项请求，要求客户端提供”客户端证书”。比如，金融机构往往只允许认证客户连入自己的网络，就会向正式客户提供USB密钥，里面就包含了一张客户端证书。</p>
+
+<h3 id="第三步客户端回应">第三步：客户端回应</h3>
+
+<p>客户端收到服务器回应以后，首先验证服务器证书。如果证书不是可信机构颁布、或者证书中的域名与实际域名不一致、或者证书已经过期，就会向访问者显示一个警告，由其选择是否还要继续通信。</p>
+
+<p>如果证书没有问题，客户端就会从证书中取出服务器的公钥。然后，向服务器发送下面三项信息。</p>
+
+<blockquote>
+  <p>（1） 一个随机数。该随机数用服务器公钥加密，防止被窃听。</p>
+
+  <p>（2） 编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</p>
+
+  <p>（3） 客户端握手结束通知，表示客户端的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供服务器校验。</p>
+</blockquote>
+
+<p>上面第一项的随机数，是整个握手阶段出现的第三个随机数，又称”pre-master key”。有了它以后，客户端和服务器就同时有了三个随机数，接着双方就用事先商定的加密方法，各自生成本次会话所用的同一把”会话密钥”。</p>
+
+<p>至于为什么一定要用三个随机数，来生成”会话密钥”，<a href="http://blog.csdn.net/dog250/article/details/5717162">dog250</a>解释得很好：</p>
+
+<blockquote>
+  <p>“不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于SSL协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。</p>
+
+  <p>对于RSA密钥交换算法来说，pre-master-key本身就是一个随机数，再加上hello消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。</p>
+
+  <p>pre master的存在在于SSL协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么pre master secret就有可能被猜出来，那么仅适用pre master secret作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上pre master secret三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。”</p>
+</blockquote>
+
+<p>此外，如果前一步，服务器要求客户端证书，客户端会在这一步发送证书及相关信息。</p>
+
+<h3 id="第四步-服务器的最后回应">第四步： 服务器的最后回应</h3>
+
+<p>服务器收到客户端的第三个随机数pre-master key之后，计算生成本次会话所用的”会话密钥”。然后，向客户端最后发送下面信息。</p>
+
+<blockquote>
+  <p>（1）编码改变通知，表示随后的信息都将用双方商定的加密方法和密钥发送。</p>
+
+  <p>（2）服务器握手结束通知，表示服务器的握手阶段已经结束。这一项同时也是前面发送的所有内容的hash值，用来供客户端校验。</p>
+</blockquote>
+
+<p>至此，整个握手阶段全部结束。接下来，客户端与服务器进入加密通信，就完全是使用普通的HTTP协议，只不过用”会话密钥”加密内容。</p>
+
+<h3 id="握手过程拟人化说明">握手过程拟人化说明</h3>
+
+<blockquote>
+  <p>A：我想和你安全的通话，我这里的对称加密算法有DES,RC5,    密钥交换算法有RSA和DH，    摘要算法有MD5和SHA。</p>
+</blockquote>
+
+<blockquote>
+  <p>B：我们用DES－RSA－SHA这对组合好了。
+这是我的证书，里面有我的名字和公钥，你拿去验证一下我的身份（把证书发给A）。
+目前没有别的可说的了。</p>
+</blockquote>
+
+<blockquote>
+  <p>A：（查看证书上B的名字是否无误，并通过手头早已有的CA的证书验证了B的证书的真实性，如果其中一项有误，发出警告并断开连接，这一步保证了B的公钥的真实性）</p>
+
+  <p>（产生一份秘密消息，这份秘密消息处理后将用作加密密钥，加密初始化向量（IV）和hmac的密钥。将这份秘密消息-协议中称为per_master_secret-用B的公钥加密，封装成称作ClientKeyExchange的消息。由于用了B的公钥，保证了第三方无法窃听）</p>
+
+  <p>我生成了一份秘密消息，并用你的公钥加密了，给你（把ClientKeyExchange发给B）
+注意，下面我就要用加密的办法给你发消息了！</p>
+
+  <p>（将秘密消息进行处理，生成加密密钥，加密初始化向量和hmac的密钥）
+[<strong>我说完了</strong>]</p>
+</blockquote>
+
+<blockquote>
+  <p>B：（用自己的私钥将ClientKeyExchange中的秘密消息解密出来，然后将秘密消息进行处理，生成加密密钥，加密初始化向量和hmac的密钥，这时双方已经安全的协商出一套加密办法了）
+注意，我也要开始用加密的办法给你发消息了！
+[<strong>我说完了</strong>]</p>
+</blockquote>
+
+<h2 id="八其他">八、其他</h2>
+
+<h3 id="http与https区别小结">HTTP与HTTPS区别小结：</h3>
+
+<blockquote>
+  <ol>
+    <li>HTTP 的URL 以http:// 开头，而HTTPS 的URL 以https:// 开头</li>
+    <li>HTTP 是不安全的，而 HTTPS 是安全的</li>
+    <li>HTTP 标准端口是80 ，而 HTTPS 的标准端口是443</li>
+    <li>在OSI 网络模型中，HTTP工作于应用层，而HTTPS 工作在传输层</li>
+    <li>HTTP 无加密，而HTTPS 对传输的数据进行加密</li>
+    <li>HTTP无需证书，而HTTPS 需要<a href="https://link.jianshu.com?t=https://www.baidu.com/s?wd=CA%E6%9C%BA%E6%9E%84&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9nHKhnAP9ryDsnWbLPWfz0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPjfdPWTsrjf">CA机构</a>颁发的<a href="https://link.jianshu.com?t=https://www.baidu.com/s?wd=SSL%E8%AF%81%E4%B9%A6&amp;tn=44039180_cpr&amp;fenlei=mv6quAkxTZn0IZRqIHckPjm4nH00T1d9nHKhnAP9ryDsnWbLPWfz0ZwV5Hcvrjm3rH6sPfKWUMw85HfYnjn4nH6sgvPsT6KdThsqpZwYTjCEQLGCpyw9Uz4Bmy-bIi4WUvYETgN-TLwGUv3EPjfdPWTsrjf">SSL证书</a></li>
+  </ol>
+
+</blockquote>
+
+<h3 id="握手过程优化">握手过程优化</h3>
+
+<p>对于HTTP，为了避免每次请求都要经过tcp三次握手，使用了<strong>长连接</strong>技术进行优化。</p>
+
+<p>而对于HTTPS，如果每次重连都要重新TSL握手也是比较消耗性能和费时的，大致有几个优化方向：</p>
+
+<blockquote>
+  <ol>
+    <li>Session id及session ticket的复用，缩减证书交换时间，减少可能的计算以及RTT时间 。</li>
+    <li>选取相对来说计算量较小且安全的算法 。</li>
+  </ol>
+</blockquote>
+
+<p>在此不再详细展开，有兴趣的可以参考<a href="https://imququ.com/post/optimize-tls-handshake.html">TLS 握手优化详解</a>。</p>
+
+<h2 id="参考链接">参考链接：</h2>
+
+<ol>
+  <li><a href="https://www.jianshu.com/p/41f7ae43e37b">浅谈HTTPS（SSL/TLS）原理</a></li>
+  <li><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">SSL/TLS协议运行机制的概述</a></li>
+  <li><a href="http://outofmemory.cn/wiki/how-to-enable-https-for-your-server">HTTPS证书生成原理和部署细节</a></li>
+  <li><a href="https://program-think.blogspot.com/2014/11/https-ssl-tls-0.html">扫盲 HTTPS 和 SSL/TLS 协议系列</a></li>
+  <li><a href="https://program-think.blogspot.com/2010/02/introduce-digital-certificate-and-ca.html">数字证书及 CA 的扫盲介绍</a></li>
+  <li><a href="https://tools.ietf.org/html/rfc5246"> RFC:The Transport Layer Security (TLS) Protocol    Version 1.2</a></li>
+  <li><a href="https://blog.csdn.net/hherima/article/details/52469488">HTTPS协议详解(三)：PKI 体系</a></li>
+  <li>《HTTP权威指南》 <em>人民邮电出版社 2012</em></li>
+</ol>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/09/21/%E6%B2%A1%E9%82%A3%E4%B9%88%E6%B5%85%E5%9C%B0%E8%B0%88%E8%B0%88HTTP%E4%B8%8EHTTPS-%E4%BA%8C/"
+                           data-toggle="tooltip" data-placement="top" title="没那么浅地谈谈HTTP与HTTPS【二】">
+                            Previous<br>
+                            <span>没那么浅地谈谈HTTP与HTTPS【二】</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/10/16/python%E4%B8%AD%E7%9A%84%E5%85%83%E7%B1%BB%E5%92%8C%E5%85%83%E7%BC%96%E7%A8%8B/" data-toggle="tooltip"
+                           data-placement="top" title="元类和元编程">
+                            Next<br>
+                            <span>元类和元编程</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

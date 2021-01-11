@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/ulyc404
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://ulyc.github.io
+  * I am ulyc404 (https://keybase.io/ulyc404) on keybase.
+  * I have a public key ASDwJPFdOFOdWKBrB_QDv9z34E9vdi8ZTrgMAsZ3r-Sgwgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120f024f15d38539d58a06b07f403bfdcf7e04f6f762f194eb80c02c677afe4a0c20a",
+      "host": "keybase.io",
+      "kid": "0120f024f15d38539d58a06b07f403bfdcf7e04f6f762f194eb80c02c677afe4a0c20a",
+      "uid": "5fefb8daa08c7eb86a5b60d9fa552419",
+      "username": "ulyc404"
+    },
+    "merkle_root": {
+      "ctime": 1608696192,
+      "hash": "8fe634bd6599bc54207536302ea3799537bf845e47b3a1dd83f04bae4eb7f19d54f18dc4a01a3467cd50734c8f10995ea669a309840388b820ebce3984921c66",
+      "hash_meta": "dfa9b4580052096b941aea1bcc66b4da2d42a4fa8bc179928bf85e353eeb3804",
+      "seqno": 18483102
+    },
+    "service": {
+      "entropy": "fLXpIxZxR4AQeT5uPdKB4lXS",
+      "hostname": "ulyc.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.5.0"
+  },
+  "ctime": 1608696251,
+  "expire_in": 504576000,
+  "prev": "3f81bfca8a715dd514fe77cd10253afd71266a566b7afaec6e0b391540f8bfa8",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg8CTxXThTnVigawf0A7/c9+BPb3YvGU64DALGd6/koMIKp3BheWxvYWTESpcCBsQgP4G/yopxXdUU/nfNECU6/XEmalZrevrsbgs5FUD4v6jEIMeFm+8QtnzeIq07aS8Hwul1hltFvtKwvIxbAk6xFxmiAgHCo3NpZ8RAV9gYstNmjcyCmyKz8IbeLPuLWwwMq7cqBxZcFNhjCe9yprX46svPDgrAbaF8ygY6LSNe6Psg3VUGzbiZXaZBDKhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIJ6ikzFUHg1axbKKM+iDYXo7gsjWQH7cEKK6omhcbEQOo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ulyc404
+
+==================================================================

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="常见RFID卡片介绍、破解思路 及 Proxmark3简介 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  我们大多数人至少都要工作三十年，这三十年里还会有很多东西要学。所以不用太在意之前学了什么，更重要的是看你还能学会什么。无论之前学过什么，将来都要再学新东西。无论之前学的是什么，将来也都会有用。艺无止境，功不唐捐。
+
+  ​												——  tombkeeper
+
+">
+    
+    <meta property="article:published_time" content="2020-01-18T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Proxmark3">
+    
+    <meta property="article:tag" content="RFID">
+    
+    <meta property="article:tag" content="安全">
+    
+    <meta property="article:tag" content="IC卡">
+    
+    <meta property="article:tag" content="滚动码">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>常见RFID卡片介绍、破解思路 及 Proxmark3简介 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/cards.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header {
+        position: relative;
+        background-image: url('/img/cards.png')
+    }
+
+    {
+    %
+    if
+    page
+    .
+    header-mask
+    %
+    }
+    header.intro-header .header-mask {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+    background:
+
+    rgba
+    (
+    0
+    ,
+    0
+    ,
+    0
+    ,
+    {
+    {
+        page . header-mask
+    }
+    }
+    )
+    ;
+    }
+    {
+    %
+    endif
+    %
+    }
+</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Proxmark3" title="Proxmark3">Proxmark3</a>
+                        
+                        <a class="tag" href="/tags/#RFID" title="RFID">RFID</a>
+                        
+                        <a class="tag" href="/tags/#安全" title="安全">安全</a>
+                        
+                        <a class="tag" href="/tags/#IC卡" title="IC卡">IC卡</a>
+                        
+                        <a class="tag" href="/tags/#滚动码" title="滚动码">滚动码</a>
+                        
+                    </div>
+                    <h1>常见RFID卡片介绍、破解思路 及 Proxmark3简介</h1>
+                    
+                    
+                    <h2 class="subheading"></h2>
+                    
+                    <span class="meta">Posted by UlyC on January 18, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>我们大多数人至少都要工作三十年，这三十年里还会有很多东西要学。所以不用太在意之前学了什么，更重要的是看你还能学会什么。无论之前学过什么，将来都要再学新东西。无论之前学的是什么，将来也都会有用。艺无止境，功不唐捐。</p>
+
+  <p>​												——  tombkeeper</p>
+</blockquote>
+
+<h1 id="常见rfid卡片介绍破解思路-及-proxmark3简介">常见RFID卡片介绍、破解思路 及 Proxmark3简介</h1>
+
+<h2 id="rfid卡片">RFID卡片</h2>
+
+<h3 id="前言">前言</h3>
+
+<p>这篇只是最近学习RFID技术的一个笔记，请勿用于非法用途。</p>
+
+<h3 id="简介">简介</h3>
+
+<p><strong>射频识别</strong>（英语：<strong>R</strong>adio <strong>F</strong>requency <strong>ID</strong>entification，<a href="https://zh.wikipedia.org/wiki/縮寫">缩写</a>：<strong>RFID</strong>）是一种<a href="https://zh.wikipedia.org/wiki/無線">无线</a><a href="https://zh.wikipedia.org/wiki/通信技术">通信技术</a>，可以通过<a href="https://zh.wikipedia.org/wiki/无线电">无线电</a>信号识别特定目标并读写相关数据，而无需识别系统与特定目标之间建立<a href="https://zh.wikipedia.org/wiki/机械">机械</a>或者<a href="https://zh.wikipedia.org/wiki/光学">光学</a>接触。</p>
+
+<p>常用的ETC，门禁卡，手机的NFC功能，二代身份证，电子护照，动物识别标签等都是应用了RFID技术。</p>
+
+<h3 id="常见卡片分类">常见卡片分类</h3>
+
+<p><img src="https://i.loli.net/2020/01/19/s6higpLEYqaITHF.png" alt="RFID卡.png" /></p>
+
+<p>介绍各种IC卡片的文章浩如烟海，不过大部分只介绍了低频的id卡以及符合ISO-14443A 标准的mifare系列卡。</p>
+
+<p>因为搬家之后，坑爹物业只给一张门禁卡，于是Nerd之血熊熊燃烧, 花了几百大洋买了个Proxmark3，当然要好好研究下RFID技术啦，也不会仅止步于常见几种卡片的探索。</p>
+
+<p>其实只看上面的脑图基本上就对RFID各种卡有个大致印象了，下面是对一些好玩的卡的详细介绍，无耐心可跳过。</p>
+
+<h4 id="低频">低频</h4>
+
+<h5 id="id卡">ID卡</h5>
+
+<p>ID卡是我们的俗称，内部芯片的全名叫做EM4100或EM41XX ，频率是125kHz。每张卡出厂就有独一无二的ID号，不可改写。没有任何加密，只要知道卡号就可以模拟。</p>
+
+<p>特殊的还有250K、375K、500K频率的ID卡，原版proxmark3不支持这种卡的读写，祖国魔改版有些支持。</p>
+
+<h5 id="t5577卡">T5577卡</h5>
+
+<p>T5577 卡是一种可以写入数据可以加密的低频卡。最特别之处是，写入ID号可以变身成为ID卡，写入HID号可以变身HID卡，写入Indala卡号，可以变身Indala卡。</p>
+
+<p>T5577一共有8个块，每个块只能存8位数。第0块是用来设置卡片类型和调制方式的，决定了卡片是ID卡还是HID卡，如果随意修改会导致读不到卡。最后一个块，在没有加密时是数据区，加密后，其数据就变成了密码。</p>
+
+<p>国内这卡主要是用来模拟ID卡用的。</p>
+
+<h4 id="高频--14443a">高频 -14443A</h4>
+
+<h5 id="m1-s50卡">M1 S50卡</h5>
+
+<p>目前最常见的高频卡，也是我们口中俗称的IC卡。M1卡科储存的数据大小为8k，分为16个扇区，每个扇区分4个块，每个块为16个字节，以块为存取单位。<strong>每个扇区都有独立的一组密码及访问控制</strong>，每张卡有唯一的一个32位的序列号。每个扇区的0,1,2块为数据块，用来存储数据，第3块为控制块，包括了密A、存取控制、密码B
+每张卡的第0扇区的第0块用来春芳厂商代码，不可更改。</p>
+
+<p><img src="https://i.loli.net/2020/01/19/bJXGlaW1oeEi2IC.png" alt="M1卡数据结构.png" /></p>
+
+<p>中间4字节控制字是管理密码权限，用来设置A密码和B密码的功能。默认不修改的时候，可以用A密码读写所有数据。A密码不可读出，B密码可以用A密码读出。<strong>密码不一定可以读取，由控制字决定。</strong></p>
+
+<p>这个卡又分 <strong>非加密卡</strong> 、<strong>半加密卡</strong> 和  <strong>全加密卡</strong>。</p>
+
+<p>非加密卡中所有扇区的KEYA和KEYB数值都是默认值FFFFFFFFFFFF。</p>
+
+<p>而加密卡中，其中有扇区的KEYA和KEYB不等于FFFFFFFFFFFF，部分扇区加密的卡称半加密卡，所有扇区都加密的卡称全加密卡。</p>
+
+<h5 id="m1-uid卡">M1 UID卡</h5>
+
+<p>全称l Mifare UID Chinese magic card（中国魔术卡），简称UID卡。</p>
+
+<p>M1 UID卡是针对M1 S50卡特制的变种卡，用起来和M1 S50完全一样，只是多了一个功能，就是0扇区块的数据可以随意修改。因此UID号也可以随意修改，厂家信息也可以随意修改。UID卡修改0扇区0块数据是靠指令进入工厂模式，可以直接对全卡任何数据编辑，不需要密码即可读写卡，同时不怕写坏卡，即使写错0块，写坏扇区控制字，也可以随时修复回来，不影响后续使用。</p>
+
+<h5 id="cuid卡">CUID卡</h5>
+
+<p>CUID卡是针对UID卡做的优化。CUID卡可以重复修改0块，但是它和UID卡的区别是，UID卡是通过<strong>指令</strong>修改0块，CUID使用的是常规密码验证的方法写0块（写错了之后重写需要清卡），其他扇区和标准M1卡相同。缺点是，还是有可能会被检测出来，而且如果不小心写错了UID号的校验位导致无法读卡，没办法修复只能报废。</p>
+
+<h5 id="fuid卡">FUID卡</h5>
+
+<p>FUID卡是针对UID卡做的优化。新的读卡系统，通过检测卡片对特殊指令的回应，可以检测出UID卡，因此可以来拒绝UID卡的访问，来达到屏蔽复制卡的功能。<strong>FUID可以修改0块，但只可以修改一次</strong>，写错也没办法更改，也不能重复利用。修改后和M1卡完全一样，很难被屏蔽检测。</p>
+
+<h5 id="cfuid卡">CFUID卡</h5>
+
+<p>​		鉴于FUID卡写错的成本太高，又发展出了这种卡。 CFUID卡 0扇区固化前可随意修改（相当于UID卡），固化（锁卡）后就跟M1卡完全一样。</p>
+
+<h5 id="侦测卡">侦测卡：</h5>
+
+<p>可用122等设备写入id号然后用来读取并记录设备发出的密码信息，用于侦测密码，但其功能鸡肋，前有pm3离线侦测，后有变色龙模拟加侦测，现在基本淘汰。</p>
+
+<h5 id="emv卡">EMV卡</h5>
+
+<p>EMV规范是由Europay、Mastercard、Visa三大信用卡国际组织联合制定的IC（智能）卡金融支付应用标准，非接触传输协议方面也是遵循的14443A标注，是一种<strong>CPU芯片卡</strong>。</p>
+
+<p>目前基于EMV卡的非接触式支付的实现有三个：VISA的payWave，MasterCard的PayPass以及银联的闪付QuickPass。目前从外观来看，银联发行的卡面有芯片的IC卡均支持闪付，部分银行支持VISA的payWave。</p>
+
+<h4 id="高频--14443b">高频 -14443B</h4>
+
+<p>跟ISO 14443 -Type A 标准 的不同主要在于<strong>载波的调制深度及位的编码方式</strong>。TYPE A采用<strong>开关键控(On-Off keying)</strong>的<strong>Manchester编码</strong>，TYPE B采用<strong>NRZ-L</strong>的<strong>BPSK编码</strong>。</p>
+
+<p>TYPE B与TYPE A相比，具有<strong>传输能量不中断、速率更高、抗干扰能力强</strong>的优点。RFID的核心是防冲突技术，这也是和接触式IC卡的主要区别。ISO14443-3规定了TYPEA和TYPE B的防冲突机制。二者防冲突机制的原理不同，前者是<strong>基于位冲突检测协议</strong>，而TYPE B<strong>通信系列命令序列完成防冲突。</strong></p>
+
+<p>目前的二代身份证，社保卡，护照都是基于此标准，研究这个标准最初是为了能读出身份证信息或者护照，其中曲折下一篇文章再说。</p>
+
+<p>Proxmark3的14b部分有对 ST  Microelectronics  公司的 SRI512卡 和SRIX4K卡 的特别支持。</p>
+
+<h4 id="nfc标签">NFC标签</h4>
+
+<p>目前有五种，分别基于14a, 14b，Felica ，ISO/IEC 15693  标准, 详见上面脑图。</p>
+
+<h3 id="高频卡-低频卡区分方法">高频卡 低频卡区分方法</h3>
+
+<p>直接淘宝复制来的，比较直观：</p>
+
+<p><img src="https://i.loli.net/2020/01/17/u7YA5XFp6n32NaG.png" alt="1.png" /></p>
+
+<p><img src="https://i.loli.net/2020/01/17/vZHQc7OAV86ow4I.png" alt="2.png" /></p>
+
+<h3 id="门禁卡破解思路">门禁卡破解思路</h3>
+
+<p>ID卡使用手持机或者proxmark3等设备直接读出卡号即可模拟，最是无脑，CPU卡建议直接放弃。</p>
+
+<p>所以这里的门禁卡单质 Mafira系列。</p>
+
+<h4 id="ic卡加密方式">IC卡加密方式</h4>
+
+<p>要知道怎么破解，先要知道他们是怎么加密。</p>
+
+<p>目前常见的加密方式有这几种：</p>
+
+<p><img src="https://i.loli.net/2020/01/19/EOH7jDdGq2buLIQ.png" alt="IC卡加密方式.png" /></p>
+
+<h5 id="1固定加密校验码">1.固定加密（校验码）：</h5>
+
+<p>彼时来自东方的神秘技术 ：中国魔术卡 尚未降世，就算复制出来原卡数据，每张IC的ID也是不一样的，厂家只需要校验UID跟校验位匹配不匹配就可以防复制卡了。</p>
+
+<p>这种只需要UID卡复制其UID以及校验位即可完美破解。</p>
+
+<h5 id="2一卡一密">2.一卡一密：</h5>
+
+<p>这种加密方式只是把校验码，改成了密码。刷卡机读卡是根据卡号算出这张卡独一无二的密码，然后再用密码访问/修改金额 。</p>
+
+<p>运用UID卡复制，也可简单解决。</p>
+
+<h5 id="3全加密">3.全加密：</h5>
+
+<p>即IC卡16扇区均加入密码，一般是一个卡商用同一密码，密码破解可通过 侦测卡或pm3离线侦测，密码已知后，写入普通卡或UID卡，即可实现复制。</p>
+
+<p>后来又出现了一种 一卡一密+ 全加密的卡，不过在PM3及UID卡面前不过是土鸡瓦狗而已。</p>
+
+<h5 id="4动态码加密">4.动态码加密：</h5>
+
+<p>每次刷卡后，卡内数据都会变化。</p>
+
+<p>这种比较麻烦，可以分几种情况：</p>
+
+<ol>
+  <li>有些系统比较简单，每次刷新后某个数据加一，或者加固定数字，这种很容易<strong>发现规律</strong>和破解。</li>
+  <li>有些卡数据刷新后没有什么规律，明显用了某种算法，这种有能力的可以多刷几次，尝试<strong>逆向算法</strong>，不过难度比较大，</li>
+  <li>通过更改控制位或者修改卡内某些地方的数据来<strong>压制卡内数据的滚动</strong>，这是利用了早期某些厂家的读头不会校验计算后的数据是否写入成功的漏洞。</li>
+  <li>一些系统识别到卡里数据是从未滚动过的初始值后，就不会再做任何校验，认为这是张新卡。这种只要记录下初始数据，复制卡每次刷卡后 <strong>重置数据</strong>即可。 (刚了解到还有一种GTU卡（gtu、guid、gid、gpu，处女卡）, 可以锁定滚动码，让读卡器写卡失败卡)</li>
+  <li>一些系统识别到卡里数据是初始值后，还会进行校验，这时候我们可以使用同厂家同型号同版本的发卡器，通过修改发卡器发卡规则使得规则与物业的发卡规则相同来<strong>发卡</strong>。但是破解发卡规则同样很难，同时梯控厂家也不会向个人单独销售配套发卡器。</li>
+  <li>社工大法：通过保洁阿姨、保安大哥或者特别的技法获取 <strong>全通卡</strong>，就是给内部员工用的“万能钥匙”，这种卡一般不做加密，搞到之后复制一张基本就OK了。</li>
+</ol>
+
+<p><strong>注意事项</strong>：复制卡不确定是否是滚动码时， 复制后第一次刷卡原则上请刷原卡，不然数据滚动之后，原卡可能作废  。 卡与原卡仅一张有效</p>
+
+<h5 id="5防复制加密">5.防复制加密：</h5>
+
+<p>用UID卡复制成功以后去现场刷卡没任何反应 或 就可以使用一次以后就给设备破环了拷贝卡的问题。</p>
+
+<p>也存在几种情况，目前最常用的：</p>
+
+<ol>
+  <li>校验magic指令，UID卡会响应magic指令，所以防火墙只要发现有magic指令的响应直接ban掉改卡，于是CUID卡应运而生。</li>
+  <li>防火墙尝试修改卡的0扇区，修改成功则说明是CUID卡，ban掉。 这种用FUID或者CFUID复制即可。</li>
+</ol>
+
+<h5 id="6复合卡加密">6.复合卡加密：</h5>
+
+<p>利用ID或IC设备复制成功以后就可以开启其中一个地方，其他地方不可以同时开启。一般是IC+ID的结构，需要同时复制高频低频两个芯片。</p>
+
+<h5 id="7cpu芯片加密">7.CPU芯片加密：</h5>
+
+<p>这种分析数据时全是零， 可能目标卡是CPU卡模拟的M1卡 或是 修改了控制位的数据把卡号隐藏起来。  这种可以最多可以做到复制UID，模拟刷个门禁啥的，涉及金额的就别想了。</p>
+
+<h4 id="一般流程">一般流程</h4>
+
+<p>流程图如下：</p>
+
+<p><img src="https://i.loli.net/2020/01/19/dofNYZOny3p2gXa.png" alt="image.png" /></p>
+
+<h2 id="proxmark3">Proxmark3</h2>
+
+<h3 id="前言-1">前言</h3>
+
+<p>之前想买个proxmark3 玩，但是发现淘宝卖家基本都是自吹自擂，对自己是PM3哪个版本都遮遮掩掩，语焉不详。 谷歌到的中文资料也比较少，大多是互相复制粘贴的资料，没人仔细介绍过PM3都有哪些版本，于是有了写这篇的动力，希望能使新手对proxmark3有个直观了解。</p>
+
+<h3 id="简介-1">简介</h3>
+
+<p>Proxmark3是由<em>Jonathan Westhues</em>为了他的硕士论文设计开发的开源硬件，其主要用途是实现RFID卡片 的嗅探、读取破解以及克隆等等操作。</p>
+
+<p>提到RFID， 就不得不提Proxmark3，PM3 属于这个领域的大杀器，基本相当于kali之于安全，node之于前端。它可以嗅探、模拟以及读取多种不同种类型的RFID，同时它还有一个<a href="http://www.proxmark.org/forum/index.php">官方社区</a>，这里有不少同样的爱好者在里面学习交流。</p>
+
+<p>Proxmark，确切来说是prox（接近的），mark（标签），翻译过来的意思就是“不用接触，靠近就能刷的卡片”。</p>
+
+<h3 id="版本">版本</h3>
+
+<h4 id="proxmark2">Proxmark2</h4>
+
+<p>Proxmark是没有1的 ，Proxmark3  前身是Proxmark2。</p>
+
+<p>Proxmark2版本是因为<em>Jonathan Wesrhues</em>    为了复制Verichip才应运而生的。   而Proxmark2的前身就是一个便携式的Verichips，该硬件可以读取并且重放Verichip的ID，如果利用天线去靠近Verichip，那样子设备就可以永远的保留ID在芯片里面，实际上Jonathan Westhues只是采用逆向工程把Verichip的频率和调制模式进行捕抓，从而进行回放操作。</p>
+
+<h4 id="proxmark3-原版">Proxmark3 原版</h4>
+
+<p><img src="https://proxmark.com/user/pages/03.proxmark-3-hardware/05.proxmark-3/PM3-Trans.png" alt="img" /></p>
+
+<p>原型机，长这样，开源硬件，电路板github有，已经过时了，不是商业产品，不卖。</p>
+
+<p>其他版本都是基于此版的原理做的改板。</p>
+
+<h4 id="proxmark3-rdv2">Proxmark3 RDV2</h4>
+
+<p>这个版本算是Proxmark3第一次商业化的版本，研发团队是<em>Elechouse</em>（深圳一家硬件厂商） 。 RDV2  即是 Revision Two（重制版2 )。</p>
+
+<p>Proxmark3 RDV2  修改和更新了Proxmark3所有主要的硬件组件，包括微控制器，FPGA和闪存。</p>
+
+<p>但是，最重要的变化是天线的设计和实现。 Proxmark 3的笨重，笨拙和未调谐的天线已替换为紧凑的，预先调谐的HF和LF天线，使用标准的SMA接口代替以前使用的USB-Hirose电缆。</p>
+
+<p>这个版本预装了可拆的低频和高频天线，也是首个“ALL-IN-ONE”的版本。但是天线性能存在已知问题，并且会被继电器故障影响。</p>
+
+<p>有些论坛说的血贵的就是这个版本，之前貌似上千，现在五六百左右吧。</p>
+
+<h5 id="技术规格">技术规格</h5>
+
+<ul>
+  <li><strong>CPU</strong> AT91SAM7S512</li>
+  <li><strong>Storage</strong> 512Kb SPI flash</li>
+  <li><strong>Interface</strong>  4x mode LEDs, 1x button.</li>
+  <li><strong>Battery</strong>  独立外接电源</li>
+  <li><strong>天线</strong>
+    <ul>
+      <li><strong>LF</strong>  预装，可拆</li>
+      <li><strong>HF</strong> 预装，可拆</li>
+    </ul>
+  </li>
+</ul>
+
+<p>一般来说长这样：<img src="https://i.loli.net/2020/01/19/SU73KOvpHDoxtEW.png" alt="rdv2.png" /></p>
+
+<h4 id="proxmark3-easy">Proxmark3 EASY</h4>
+
+<p>同样是 <em>Elechouse</em>团队的作品，是Proxmark3 RDV2 的阉割版，主要为了迎合中国市场在某宝卖的。</p>
+
+<p>基本上某宝卖的都是基于这个版本或Proxmark3 RDV2  的魔改版。</p>
+
+<p>比RDV2阉割了CPU、内存,还有外接电池。</p>
+
+<h5 id="技术规格-1">技术规格</h5>
+
+<ul>
+  <li><strong>CPU</strong> AT91SAM7S256</li>
+  <li><strong>Storage</strong> 256Kb SPI flash</li>
+  <li><strong>Interface</strong> 4x mode LEDs, 1x button.</li>
+  <li><strong>天线</strong>
+    <ul>
+      <li><strong>LF</strong>  需自行组装</li>
+      <li><strong>HF</strong>  一体，不可拆</li>
+    </ul>
+  </li>
+</ul>
+
+<p>长这样：</p>
+
+<p><img src="https://proxmark.com/user/pages/03.proxmark-3-hardware/04.proxmark-3-easy/PM3-Easy-Trans.png" alt="Proxmark3 EASY" /></p>
+
+<h4 id="proxmark-3-evo">Proxmark 3 EVO</h4>
+
+<p>Proxmark 3 EVO(Evolution，进化版)，是<strong>Elechouse</strong> 开发的最后一个Proxmark 3版本，更加的小型化，用了ABS 的材质，加了点灯，适配了安卓平台。</p>
+
+<h5 id="技术规格-2">技术规格</h5>
+
+<ul>
+  <li><strong>CPU</strong> AT91SAM7S512</li>
+  <li><strong>Storage</strong> External 2MBits / 512Kb SPI flash</li>
+  <li><strong>Interface</strong> 1x RGB LED, 1x button.</li>
+  <li><strong>电源</strong>   外接独立电池</li>
+  <li>天线
+    <ul>
+      <li><strong>LF</strong> 预装，一体</li>
+      <li><strong>HF</strong> 预装，一体</li>
+    </ul>
+  </li>
+</ul>
+
+<p>这个版本国内见的不多，优化也有限，长这样：</p>
+
+<p><img src="https://proxmark.com/user/pages/03.proxmark-3-hardware/02.proxmark-3-evo/PM3-Evo-Trans.png" alt="Proxmark 3 EVO" /></p>
+
+<h4 id="proxmark3-rdv4">Proxmark3 RDV4</h4>
+
+<p>Proxmark3 RDV4是目前Proxmark3 平台 最新的版本，由 <em>RRG</em>团队开发，就是开官方论坛和固件很受欢迎的<em>iceman</em> 所在的团队 。 不过价格比较贵，基础版要一千五左右，所有外设买齐得好几千，需要海淘。</p>
+
+<h5 id="版本特色">版本特色</h5>
+
+<ul>
+  <li>更小的体积 54 x 87 x 10mm （EVO是60 x 90 x 12mm）</li>
+  <li>支持了 SIM/Smart 卡的嗅探和读取</li>
+  <li>可扩展框架：
+    <ul>
+      <li>可热插拔的中长距离天线</li>
+      <li>增加了 蓝牙 和 wifi 模式</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="技术规格-3">技术规格</h5>
+
+<ul>
+  <li><strong>CPU</strong> SAM7S512</li>
+  <li><strong>Storage</strong> External 2MBits / 256Kb SPI flash</li>
+  <li><strong>Interface</strong> 4x power LEDs, 4x mode LEDs, 1x button.</li>
+  <li>天线
+    <ul>
+      <li><strong>LF</strong> (125KHz): 70mm @ 65V</li>
+      <li><strong>HF</strong> (13.56MHz): 88mm @ 44V</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://www.wasyoung.com/wp-content/uploads/2019/11/2019120105235280.jpg" alt="" /></p>
+
+<h4 id="proxmark3-各种祖国版">Proxmark3 各种祖国版</h4>
+
+<p>商家鼓吹什么3.0、4.0、5.0，终极 版本，其实各种版本基本都是Proxmark3  RDV2 或者easy 魔改的，选购时关注下cpu版本和内存 线圈和做工即可。</p>
+
+<p>不过有时候会看到各种颜色，颜色只是印刷电路板用的阻焊剂（阻焊漆）不一样，油墨颜色不一样，不会影响实际功能和质量。</p>
+
+<p>常见的电路板颜色有绿色、红色、蓝色、黑色。详细信息可以自行百度。原来的pm3是黑色的，看上去高端一些。现在新出了蓝色的，没别的原因，就是为了降低成本。虽然不影响质量，但是绿色、红色、蓝色的油墨用得比较多，量大价格就低。</p>
+
+<p>不要听一些商家瞎吹做了什么升级，保证元器件没有任何改动。商家鼓吹蓝色是升级款，只是为了掩盖他的真实原因是为了降低成本，外加一波营销。</p>
+
+<p>我买的是苏州龙达出的一款所谓“<strong>终极版</strong>”，<img src="http://www.ldpm3.com/picture/front.png" alt="" /></p>
+
+<p>说是最新自主研发5.0系统，其实就是RDV2的魔改版，他家利用隔板的空间，集成了变色龙，还在隔板上装了显示屏、按钮，类似手持机的功能，可以不开电脑复制ID卡。</p>
+
+<p>特色是中文GUI客户端一直在优化，适合小白使用。</p>
+
+<h4 id="变色龙-mini-chameleonmini">变色龙 Mini ,ChameleonMini</h4>
+
+<p>在网购PM3时，经常可以看到有PM3变色龙一体机卖，当时询问js ,他们也是语焉不详 。所以这里再单独介绍下变色龙是个啥。</p>
+
+<p>变色龙 <a href="https://github.com/emsec/ChameleonMini">ChameleonMini</a> 是一款可编程的 NFC 安全分析工具的开源硬件项目，可模拟各种ic卡、侦测密码，可同时储存六组卡片数据随时可以手动切换，体积跟普通卡差不多方便携带。</p>
+
+<p>ChameleonMini 常见的有两个版本 <strong>ChameleonMini Rev.E</strong> 与 <strong>ChameleonMini Rev.G</strong> 其中 Rev.G 是最新升级的版本，自带电池供电。</p>
+
+<p>说白了，变色龙就是一张先进的侦测卡，不具备读写功能，需要配合其他读写设备使用。 PM3的现场嗅探功能其实比较弱，集成了变色龙之后就补齐了这个短板。</p>
+
+<h3 id="使用">使用</h3>
+
+<p>中文GUI主要是对43a的IC卡和 低频ID做的支持，对其他协议的卡片都没有支持。</p>
+
+<p>熟悉基本操作之后，想要探索PM3的魅力还是推荐使用 命令行， 命令行教程汉化可以看RadioWar的wiki <a href="http://wiki.radiowar.org/Proxmark3%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C">RadioWar:Proxmark3命令帮助</a>，其他教程也非常的多，可以自行查找。</p>
+
+<p>打开方法是进入软件安装目录：</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">/prommark3.exe</span><span class="w">   </span><span class="nx">com4</span><span class="w">   </span><span class="c"># com号会变，根据自己实际情况调整</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="参考链接">参考链接</h2>
+
+<p>[1]. <a href="https://proxmark.com/proxmark-3-hardware">Porxmark 官网</a></p>
+
+<p>[2]. <a href="https://4hou.win/wordpress/?paged=13&amp;cat=17">智能卡破解入门二三事</a></p>
+
+<p>[3]. <a href="https://lzy-wi.github.io/2018/07/26/proxmark3/">Proxmark3 Easy破解门禁卡学习过程</a></p>
+
+<p>[4]. <a href="https://cloud.tencent.com/developer/article/1043152">低成本安全硬件 RFID on PN532</a></p>
+
+<p>[5]. <a href="[http://read.pudn.com/downloads121/ebook/513161/%E5%90%84%E4%BA%A7%E5%93%81.pdf](http://read.pudn.com/downloads121/ebook/513161/各产品.pdf)">非接触IC卡主要产品简介</a></p>
+
+<p>[6]. <a href="http://www.card1688.com/smart_card/STMicroelectronics_chip_card.html">STMicroelectronics 芯片卡</a></p>
+
+<p>[7]. <a href="https://wenku.baidu.com/view/597156eee009581b6bd9eb3e.html">iCLASS说明文件</a></p>
+
+<p>[8].<a href="http://www.nfchome.org/nfc-forum-type1-type2-type3-type4.html">[NFC Forum标签平台四种标签类型详细介绍]</a></p>
+
+<p>[9]. <a href="https://www.cnblogs.com/sky-heaven/p/4704895.html">初识CPU卡、SAM卡/CPU卡简介、SAM卡简介 【转】</a></p>
+
+<p>[10]. <a href="https://zhuanlan.zhihu.com/p/81384126">手把手教 如何模拟IC加密卡</a></p>
+
+<p>[11]. <a href="https://www.guhei.net/post/jb1108">IC卡加密解密方式</a></p>
+
+<p>[12].<a href="http://rdcqii.hundsun.com/portal/article/642.mhtml">除了支付/刷卡还能干嘛？三分钟教你玩转RFID</a></p>
+
+<p>[13].<a href="https://www.freebuf.com/vuls/192356.html">使用HackCube-Special分析滚动码信号</a></p>
+
+<p>[14]. <a href="https://www.wasyoung.com/2019/11/30/337/">Proxmark3（PM3）硬件简单拆解与介绍</a></p>
+
+<p>[15].<a href="https://www.wasyoung.com/2019/11/30/337/">梯控、IC卡滚动码防复制原理和破解</a></p>
+
+<p>[16]. <a href="http://www.ickezhan.com/bbs/forum.php?mod=viewthread&amp;tid=41">简单讨论滚动码技术</a></p>
+
+<p>[17]. <a href="http://wiki.radiowar.org/Proxmark3%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C">RadioWar:Proxmark3命令帮助</a></p>
+
+<p>[18]. <a href="https://www.cert.org.cn/upload/cncertcc06/0330/ct1/5.060330-YuYang-ThreatsFromAir.pdf">来自空中的威胁</a></p>
+
+<p>[19]. 《非接触IC卡原理与应用》[电子工业出版社 2006-09-01]</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/"
+                           data-toggle="tooltip" data-placement="top" title="win10下使用WSL 2">
+                            Previous<br>
+                            <span>win10下使用WSL 2</span>
+                        </a>
+                    </li>
+                    
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>
