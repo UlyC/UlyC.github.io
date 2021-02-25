@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="2021年，用更现代的方法使用PGP（上） - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.
+
+  ​																												—— Bruce Schneier《应用密码学》
+
+">
+    
+    <meta property="article:published_time" content="2021-01-13T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="PGP">
+    
+    <meta property="article:tag" content="gpg">
+    
+    <meta property="article:tag" content="子密钥">
+    
+    <meta property="article:tag" content="非对称加密">
+    
+    <meta property="article:tag" content="安全">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2021/01/13/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8A/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>2021年，用更现代的方法使用PGP（上） - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2021/01/13/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8A/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=PGP" title="PGP">PGP</a>
+                        
+                        <a class="tag" href="/archive/?tag=gpg" title="gpg">gpg</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%90%E5%AF%86%E9%92%A5" title="子密钥">子密钥</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86" title="非对称加密">非对称加密</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AE%89%E5%85%A8" title="安全">安全</a>
+                        
+                    </div>
+                    <h1>2021年，用更现代的方法使用PGP（上）</h1>
+                    
+                    <h2 class="subheading">PGP基础</h2>
+                    <span class="meta">Posted by UlyC on January 13, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.</p>
+
+  <p>​																												—— Bruce Schneier《应用密码学》</p>
+</blockquote>
+
+<h1 id="2021年用更现代的方法使用pgp上">2021年，用更现代的方法使用PGP（上）</h1>
+
+<h2 id="一pgp简介">一、PGP简介</h2>
+
+<h3 id="是什么">是什么？</h3>
+
+<p>PGP 全称是 Pretty Good Privacy，是一个被设计用来加密信息，保护隐私的<strong>软件</strong>。现在提到“PGP”， 基本上是说 <a href="#PGP、OpenPGP、GnuPG 和 gpg">OpenPGP  标准</a>。</p>
+
+<h3 id="能干嘛">能干嘛？</h3>
+
+<h4 id="能用来加密和签名信息--并让你显得很geek">能用来加密和签名信息  <del>并让你显得很Geek</del></h4>
+
+<p>记录片《<a href="https://www.imdb.com/title/tt4044364/">第四公民</a>》中 Edward Snowden 就是使用 PGP 与女记者 Laura Poitras 之间收发邮件的，以下来自电影截图：</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210113194002027.png" alt="image-20210113194002027" /></p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210113194014209.png" alt="image-20210113194014209" /></p>
+
+<p>PGP能保证 一条信息是你相信的人发的，除了你俩之外别人无法解密，  而且这条消息在传送时中间没有经过任何哪怕是一个标点一个字节的修改。</p>
+
+<h4 id="能用来让你的git-commit-log更加好看-验证git-commiter身份">能用来<del>让你的Git Commit Log更加好看</del> 验证Git Commiter身份</h4>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609409350928.png" alt="1609409350928" /></p>
+
+<p>Github判定提交者只是依靠Git 客户端设置的user.name 和 user.email 来判定身份，而不会去验证真实性，也就是说你可以在你的仓库提交记录中伪造任何人的提交记录。</p>
+
+<p><img src="https://cdn.spencer.felinae98.cn/blog/2020/08/200830_155124.png" alt="" /></p>
+
+<p>具体危害可参见<a href="https://blog.spencerwoo.com/2020/08/wait-this-is-not-my-commit/">震惊！竟然有人在 GitHub 上冒充我的身份！      </a></p>
+
+<h4 id="能用来放在博客简介里作为身份的象征-增加联系你的安全方式">能用来<del>放在博客简介里作为身份的象征</del> 增加联系你的安全方式</h4>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609410812279.png" alt="1609410812279" /></p>
+
+<h4 id="用来代替ssh">用来代替SSH</h4>
+
+<p>涌有了自己pgp key之后，就可以用 gpg-agent 来代替 OpenSSH Agent来进行 SSH操作了。不过替换了之后并不会增加SSH的安全性，额， 折腾精神不死嘛。</p>
+
+<p>硬要说好处的话，大概就可以更方便地使用Yubikey(一种硬件加密智能卡)来SSH。</p>
+
+<h4 id="用来">用来…</h4>
+
+<p>如果有其他好玩的用法，欢迎评论或邮件告诉我。</p>
+
+<h3 id="为什么安全">为什么安全？</h3>
+
+<p>PGP目前支持的算法</p>
+
+<ul>
+  <li>非对称算法: RSA, ELG, DSA, ECDH, ECDSA, EDDSA</li>
+  <li>对称算法: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,
+        CAMELLIA128, CAMELLIA192, CAMELLIA256</li>
+  <li>哈希算法: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224</li>
+  <li>压缩算法: Uncompressed, ZIP, ZLIB, BZIP2</li>
+</ul>
+
+<p>除非量子计算机落地，目前来说2048位的RSA加密是不可破解的。</p>
+
+<h3 id="pgpopenpgpgnupg-和-gpg">PGP、OpenPGP、GnuPG 和 gpg</h3>
+
+<p>我们需要知道PGP、OpenPGP、GnuPG 和 gpg 之间的不同：</p>
+
+<ul>
+  <li>PGP （“Pretty Good Privacy”） 是最初商业软件的名字</li>
+  <li>OpenPGP 是与最初 PGP 工具兼容的 IETF 标准</li>
+  <li>GnuPG （“Gnu Privacy Guard”）是实现了 OpenPGP 标准的自由软件</li>
+  <li>GnuPG 的命令行工具称为 “gpg”</li>
+</ul>
+
+<p>OpenPGP 是在 PGP 基础上定义的开放标准，使得 PGP 技术可以由任何公司和个人实现，而不需要缴纳许可费用。<a href="http%3A//www.ietf.org/rfc/rfc4880.txt">标准草案</a>指出 OpenPGP 提供的是数据完整性服务，赋予用户查看、检验、生成和写入加密信息、秘钥和签名的能力。 OpenPGP 通过加密、数字签名、压缩和 Radix-64 转换来实现这些功能。</p>
+
+<p>GnuPG 是 OpenPGP 协议的一种完备的实现，除了按照 OpenPGP 协议提供数据加解密和签名服务之外，它还提供了完整的秘钥管理功能，并实现了协议中许多可选的加密或压缩算法。</p>
+
+<p>今天，“PGP”这个词几乎被普遍用来表示开放的 OpenPGP  标准，而不是最初的商业软件，因此“PGP”和“OpenPGP”是可以互换的。</p>
+
+<p>“GnuPG”和“gpg”这两个词应该仅在提及工具时使用，而不用于它们产生的输出或它们实现的  OpenPGP 功能。举例：</p>
+
+<ul>
+  <li>PGP（而非 GnuPG 或 GPG）密钥</li>
+  <li>PGP（而非 GnuPG 或 GPG）签名</li>
+  <li>PGP（而非 GnuPG 或 GPG）公钥服务器</li>
+</ul>
+
+<h3 id="历史">历史</h3>
+
+<p>以下来自wiki:</p>
+
+<p><a href="https://zh.wikipedia.org/wiki/菲利普·齊默曼">菲利普·齐默曼</a>（Philip R. Zimmermann）在1991年创造了第一个版本的PGP，其名称“Pretty Good Privacy”的灵感来自于一个名为“Ralph’s Pretty Good Grocery”的杂货店——电台主播<a href="https://zh.wikipedia.org/w/index.php?title=Garrison_Keillor&amp;action=edit&amp;redlink=1">Garrison Keillor</a>虚构出来的一个名为<a href="https://zh.wikipedia.org/w/index.php?title=Lake_Wobegon&amp;action=edit&amp;redlink=1">Lake Wobegon</a>的城市的一个杂货店。</p>
+
+<p>软件第一个版本包含一个齐默曼自己设计的<a href="https://zh.wikipedia.org/wiki/对称密钥算法">对称密钥算法</a>，与<a href="https://zh.wikipedia.org/wiki/周六夜現場">周六夜现场</a>的一个小品<a href="https://zh.wikipedia.org/w/index.php?title=BassOmatic&amp;action=edit&amp;redlink=1">BassOmatic</a>同名。作为一个老牌的<a href="https://zh.wikipedia.org/w/index.php?title=反核能活跃分子&amp;action=edit&amp;redlink=1">反核能活跃分子</a>，齐默曼为了让所有有相似倾向的人们可以安全的使用BBS并且安全存储消息和文件而创造了PGP加密。在非商业用途上是不需要授权的，无须任何费用，并且在所有的发行中附带了完整的<a href="https://zh.wikipedia.org/wiki/源代码">源代码</a>。</p>
+
+<p>在2001年6月5号发表的一篇标题为”PGP 10周年” [<a href="https://zh.wikipedia.org/wiki/PGP#cite_note-2">2]</a>的文章中，齐默曼描述了他最初开发PGP时的情景：</p>
+
+<blockquote>
+  <p>1991年的某天，我把PGP的第一版发给我几个朋友，以便上传到互联网。我最先发给Allan Hoeltje，他把这个程序发到了Peacenet，一个针对草根政治组织–特别是“和平运动”–的ISP。当时全球政治活跃分子都能访问到Peacenet。然后我又把它上传给了Kelly Goen，他接着就把源码转发到了一个专门分发源代码的Usenet新闻组。基于我的请求，他把该Usenet权限改为了“仅限美国”。Kelly还把PGP传到了（美国）国内很多BBS上面。我记不太清刚开始在网上贴是6月5号还是6号。 说出来吓人，1991年的时候，我对Usenet新闻组确是知之甚少。我并不知道那个“仅限美国”的标签只是个“建议”作用，基本上对贴子的传播（范围）毫无影响。当时，我以为这个标签会控制这个帖子的传播范围。当时我不知道如何在新闻组发贴，甚至不明白新闻组究竟是什么。</p>
+</blockquote>
+
+<p>PGP在<a href="https://zh.wikipedia.org/wiki/互联网">互联网</a>上传播开来，并且在这个世界上获得了非常多的拥护者。PGP用户和支持者也包括在极权主义国家持不同政见的人们（一些给齐默曼的感人信件被发表了，其中一些在美国国会之前被包括到证据中）。在世界其它地方的<a href="https://zh.wikipedia.org/w/index.php?title=公民自由意志主义&amp;action=edit&amp;redlink=1">公民自由意志主义</a>支持者（参考齐默曼在各个听政会上发表的证据），以及“自由通讯”激进主义分子，他们称他们自己为<a href="https://zh.wikipedia.org/w/index.php?title=加密爱好者&amp;action=edit&amp;redlink=1">加密爱好者</a>，进行宣传和分发。</p>
+
+<h2 id="二gpg快速开始">二、gpg快速开始</h2>
+
+<h3 id="准备工作">准备工作</h3>
+
+<p>建议你先参照后面教程，在随便一台机器上练习。  等熟练操作之后，再阅读  <a href="#三、安全使用">安全使用</a> 生成你真正主要使用的PGP密钥对 ：</p>
+
+<h3 id="安装">安装</h3>
+
+<h4 id="mac">🍎Mac:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>gpg
+</code></pre></div></div>
+
+<h4 id="linux">🐧Linux:</h4>
+
+<p>各发行版一般都会默认安装GnuPG。</p>
+
+<h4 id="windows">🏁Windows:</h4>
+
+<p><a href="https://www.gnupg.org/download/">下载地址</a></p>
+
+<h4 id="openbsd">🌐OpenBSD:</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pkg_add gnupg
+</code></pre></div></div>
+
+<h3 id="生成">生成</h3>
+
+<h4 id="生成主密钥">生成主密钥</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># step 0 </span>
+gpg <span class="nt">--full-gen-key</span>
+<span class="c"># 这里不推荐使用的 `gpg --gen-key`</span>
+
+
+<span class="c"># step 1</span>
+gpg <span class="o">(</span>GnuPG<span class="o">)</span> 2.2.20<span class="p">;</span> Copyright <span class="o">(</span>C<span class="o">)</span> 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please <span class="k">select </span>what kind of key you want:
+   <span class="o">(</span>1<span class="o">)</span> RSA and RSA <span class="o">(</span>default<span class="o">)</span>
+   <span class="o">(</span>2<span class="o">)</span> DSA and Elgamal
+   <span class="o">(</span>3<span class="o">)</span> DSA <span class="o">(</span>sign only<span class="o">)</span>
+   <span class="o">(</span>4<span class="o">)</span> RSA <span class="o">(</span>sign only<span class="o">)</span>
+  <span class="o">(</span>14<span class="o">)</span> Existing key from card
+Your selection?
+<span class="c">#  默认就可以</span>
+
+
+<span class="c"># step 2</span>
+RSA keys may be between 1024 and 4096 bits long.
+What keysize <span class="k">do </span>you want? <span class="o">(</span>3072<span class="o">)</span>
+
+<span class="c"># 此处输入你希望的密钥长度， RSA的不应低于2048 bits，当然输入的数字越大越安全，相应的，加解密的速度也会更慢</span>
+
+<span class="c"># step 3</span>
+Please specify how long the key should be valid.
+         0 <span class="o">=</span> key does not expire
+      &lt;n&gt;  <span class="o">=</span> key expires <span class="k">in </span>n days
+      &lt;n&gt;w <span class="o">=</span> key expires <span class="k">in </span>n weeks
+      &lt;n&gt;m <span class="o">=</span> key expires <span class="k">in </span>n months
+      &lt;n&gt;y <span class="o">=</span> key expires <span class="k">in </span>n years
+Key is valid <span class="k">for</span>? <span class="o">(</span>0<span class="o">)</span>  2y
+
+<span class="c"># 默认可以选0 ，即永不过期， 这里我选了2y，  因为到期之前随时可以更改你的过期时间，以确保你对此密钥仍拥有控制权</span>
+
+<span class="c"># step 4</span>
+Key expires at Wed 11 Jan 2023 05:50:53 PM CST
+Is this correct? <span class="o">(</span>y/N<span class="o">)</span> y
+
+<span class="c">#确定</span>
+
+<span class="c"># step 5</span>
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name:  linus   <span class="c"># 这里名字可以是网名，可以是任意名字，如果你注重隐私就不要输入自己真名了 </span>
+Email address: linus@outlook.com  
+Comment:     <span class="c"># 备注可以留空</span>
+
+<span class="c"># 注意了： 这里的邮箱， 如果你不打算使用PGP为你的Git记录认证， 这里其实是可以随便输入的，不需要是你的邮箱， 甚至不需要是一个真实存在的邮箱，只要接受你信息的人知道就行。隐私泄漏问题很严重，你一旦设置了，并且发布到公钥服务器，就永远删不掉了 😅</span>
+
+
+<span class="c"># step 6</span>
+You selected this USER-ID:
+    <span class="s2">"linus &lt;linust@outlook.com&gt;"</span>
+
+Change <span class="o">(</span>N<span class="o">)</span>ame, <span class="o">(</span>C<span class="o">)</span>omment, <span class="o">(</span>E<span class="o">)</span>mail or <span class="o">(</span>O<span class="o">)</span>kay/<span class="o">(</span>Q<span class="o">)</span>uit? o
+
+<span class="c"># 确认无误后输入 o</span>
+
+<span class="c"># step 7</span>
+┌──────────────────────────────────────────────────────┐
+│ Please enter the passphrase to                       											  │
+│ protect your new key                                                           │ 
+│                                                      │
+│ Passphrase: ________________________________________ 														 │
+│                                                      │
+│       &lt;OK&gt;                              &lt;Cancel&gt;     │
+└──────────────────────────────────────────────────────┘
+
+<span class="c"># 输入一个复杂的密码 并确认</span>
+
+<span class="c"># step 8</span>
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action <span class="o">(</span><span class="nb">type </span>on the keyboard, move the mouse, utilize the
+disks<span class="o">)</span> during the prime generation<span class="p">;</span> this gives the random number
+generator a better chance to gain enough entropy.
+
+<span class="c"># 随机移动你的鼠标，越随机你的密钥越安全</span>
+
+<span class="c"># step 9 大功告成</span>
+                 
+gpg: key 99F583599B7E31F1 marked as ultimately trusted
+gpg: revocation certificate stored as <span class="s1">'/root/.gnupg/openpgp-revocs.d/705358AB85366CAB05C0220F99F583599B7E31F1.rev'</span>
+public and secret key created and signed.
+
+pub   rsa3072 2021-01-11 <span class="o">[</span>SC]
+      705358AB85366CAB05C0220F99F583599B7E31F1			 <span class="c"># 你的 key id</span>
+uid                      linus &lt;linus@outlook.com&gt;
+sub   rsa3072 2021-01-11 <span class="o">[</span>E] 		 <span class="c"># 这个是自动生成的用于加密的子密钥，E代表Encrypt 加密</span>
+
+
+</code></pre></div></div>
+
+<p>以下是常见缩写释义：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A    =&gt;    Authentication
+C    =&gt;    Certify
+E    =&gt;    Encrypt
+S    =&gt;    Sign
+?    =&gt;    Unknown capability
+sec  =&gt;    Secret Key
+ssb  =&gt;    Secret SuBkey
+pub  =&gt;    Public Key
+sub  =&gt;    Public Subkey
+</code></pre></div></div>
+
+<h4 id="生成子密钥">生成子密钥</h4>
+
+<p>你日常使用应该使用子密钥，主密钥除了签发新的子密钥不要使用。</p>
+
+<p>建议为不同环境，不同用途都单独生成子密钥，互不干扰。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># step 0</span>
+gpg <span class="nt">--edit-key</span> linus <span class="c"># 或者key id  </span>
+
+<span class="c"># step 1  进入gpg交互界面	</span>
+gpg <span class="o">(</span>GnuPG<span class="o">)</span> 2.2.20<span class="p">;</span> Copyright <span class="o">(</span>C<span class="o">)</span> 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+<span class="o">[</span>ultimate] <span class="o">(</span>1<span class="o">)</span><span class="nb">.</span> linus &lt;linus@outlook.com&gt;C
+
+<span class="c"># step 2  </span>
+gpg&gt;   addkey
+Please <span class="k">select </span>what kind of key you want:
+   <span class="o">(</span>3<span class="o">)</span> DSA <span class="o">(</span>sign only<span class="o">)</span>
+   <span class="o">(</span>4<span class="o">)</span> RSA <span class="o">(</span>sign only<span class="o">)</span>
+   <span class="o">(</span>5<span class="o">)</span> Elgamal <span class="o">(</span>encrypt only<span class="o">)</span>
+   <span class="o">(</span>6<span class="o">)</span> RSA <span class="o">(</span>encrypt only<span class="o">)</span>
+  <span class="o">(</span>14<span class="o">)</span> Existing key from card
+Your selection? 4   
+<span class="c"># 根据你的用途选择， 这里生成一个只用于签名的子密钥（sign only）</span>
+
+<span class="c">#  后面的选择和主密钥生成的大同小异，按提示操作即可</span>
+
+<span class="c"># 生成完毕后</span>
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+ssb  rsa3072/FDB960B857D397F6
+     created: 2021-01-11  expires: never       usage: S
+<span class="o">[</span>ultimate] <span class="o">(</span>1<span class="o">)</span><span class="nb">.</span> linus &lt;linus@outlook.com&gt;
+
+<span class="c">#  last step</span>
+gpg&gt;  save  <span class="c">#  记得save， 直接退出的话什么也没有</span>
+</code></pre></div></div>
+
+<h4 id="生成撤销证书">生成撤销证书</h4>
+
+<p>假如你忘了主密钥的密码，或者丢失了对主密钥的控制权（丢失，被夺取），如果没有撤销凭证的话， 除了一个个通知你的朋友们没有任何办法 证明你不再使用这个密钥，这简直是灾难。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># step 0</span>
+gpg <span class="nt">--gen-revoke</span> <span class="nt">-ao</span>   revoke.pgp   linus <span class="c"># uid 或者key id</span>
+
+<span class="c"># step 1</span>
+sec  rsa3072/99F583599B7E31F1 2021-01-11 linus &lt;linus@outlook.com&gt;
+
+Create a revocation certificate <span class="k">for </span>this key? <span class="o">(</span>y/N<span class="o">)</span> y
+Please <span class="k">select </span>the reason <span class="k">for </span>the revocation:
+  0 <span class="o">=</span> No reason specified
+  1 <span class="o">=</span> Key has been compromised
+  2 <span class="o">=</span> Key is superseded
+  3 <span class="o">=</span> Key is no longer used
+  Q <span class="o">=</span> Cancel
+<span class="o">(</span>Probably you want to <span class="k">select </span>1 here<span class="o">)</span> 3
+
+<span class="c"># 按提示走完流程就可以</span>
+
+</code></pre></div></div>
+
+<p>生成的<code class="language-plaintext highlighter-rouge">revoke.pgp</code>就是撤销凭证， 有了这个撤销凭证，你可以在没有密码的情况下使一个公钥失效，所以一定要妥善保存，而且最好比主密钥多一份。</p>
+
+<h3 id="列出密钥">列出密钥</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 列出所有公钥、子公钥</span>
+gpg <span class="nt">--list-keys</span> 
+<span class="c"># 列出所有密钥、子密钥</span>
+gpg <span class="nt">--list-secret-keys</span> 
+
+<span class="c"># 简化命令</span>
+gpg <span class="nt">-k</span> 
+gpg <span class="nt">-K</span>  
+
+
+<span class="c"># 输出 </span>
+sec   rsa3072 2021-01-11 <span class="o">[</span>SC]
+      705358AB85366CAB05C0220F99F583599B7E31F1
+uid           <span class="o">[</span>ultimate] linus &lt;linus@outlook.com&gt;
+ssb   rsa3072 2021-01-11 <span class="o">[</span>E]
+ssb   rsa3072 2021-01-11 <span class="o">[</span>S]
+</code></pre></div></div>
+
+<p>这样并没有列出子密钥的id, 而且没有打印出指纹信息， 是不安全的。所以在你查看密钥时应该</p>
+
+<ul>
+  <li>加上 <code class="language-plaintext highlighter-rouge">--keyid-format long</code>输出长ID</li>
+  <li>加上 <code class="language-plaintext highlighter-rouge">--fingerprint</code> 输出指纹信息</li>
+</ul>
+
+<p>比如</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gpg <span class="nt">--fingerprint</span> <span class="nt">-K</span> <span class="nt">--keyid-format</span> long
+ 
+ <span class="c"># 输出</span>
+sec   rsa3072/0x99F583599B7E31F1 2021-01-11 <span class="o">[</span>SC]		<span class="c"># 长ID</span>
+      Key fingerprint <span class="o">=</span> 7053 58AB 8536 6CAB 05C0  220F 99F5 8359 9B7E 31F1 <span class="c">#指纹信息</span>
+uid                   <span class="o">[</span>ultimate] linus &lt;linus@outlook.com&gt;
+ssb   rsa3072/0x6FE9C71CFED44076 2021-01-11 <span class="o">[</span>E]            <span class="c"># 斜杠后面的就是子密钥ID</span>
+ssb   rsa3072/0xFDB960B857D397F6 2021-01-11 <span class="o">[</span>S]
+</code></pre></div></div>
+
+<h3 id="安全设置">安全设置</h3>
+
+<p>每次都打 <code class="language-plaintext highlighter-rouge">--keyid-format long</code>和<code class="language-plaintext highlighter-rouge">--fingerprint</code> 很烦对不对， 编辑配置gpg文件, <code class="language-plaintext highlighter-rouge">vim  ~/.gnupg/gpg.conf</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ~/.gnupg/gpg.conf</span>
+
+keyid-format 0xlong
+with-fingerprint
+</code></pre></div></div>
+
+<h3 id="备份">备份</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg <span class="nt">-ao</span> public-key.txt <span class="nt">--export</span> linus   <span class="c"># 导出公钥</span>
+
+<span class="c"># 注意这里最后 要带上“!”， 不然会导出全部子密钥， 感谢@Dallas Lu 指正 </span>
+gpg  <span class="nt">-ao</span> secret-key <span class="nt">--export-secret-key</span> 99F583599B7E31F1! 			<span class="c"># 导出主私钥，建议secret-key 替换为你的加密设备备份文件的路径，直接导入到设备中</span>
+gpg  <span class="nt">-ao</span> sign-subkey <span class="nt">--export-secret-subkeys</span> FDB960B857D397F6!   	 <span class="c">#导出有[S]标识、签名用子私钥</span>
+gpg  <span class="nt">-ao</span> encrypt-subkey <span class="nt">--export-secret-subkeys</span> 6FE9C71CFED44076!    <span class="c">#导出有[E]标识、加密用子私钥 ,这里的ID替换为你的子密钥ID</span>
+
+
+<span class="c"># 别忘了同时将你刚刚生成的撤销凭证也备份起来</span>
+</code></pre></div></div>
+
+<h3 id="删除">删除</h3>
+
+<p>备份完后，要将本机的密钥清除干净，首先删除：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+gpg <span class="nt">--delete-secret-keys</span> linus  <span class="c"># 删除私钥，  UID 也可以替换成子密钥ID, 主密钥Key ID</span>
+gpg <span class="nt">--delete-keys</span> linus		 <span class="c"># 删除公钥</span>
+
+<span class="c"># 如果想全部删除推荐直接删文件夹,即删除 $HOME/.gnupg</span>
+
+</code></pre></div></div>
+
+<p>由于gpg生成的私钥会在你的磁盘上使用明文储存，所以一个单独的 <code class="language-plaintext highlighter-rouge">rm</code> 或者右键删除 并不能彻底删除掉，可以使用 wipe 工具。如果你使用的是 SSD 且没有 启用全盘加密，是没法彻底删除的。</p>
+
+<p>特别推荐使用 <a href="https://tails.boum.org/">Tails (boum.org)</a>发行版来生成主要使用的密钥， 系统自带pgp和paper key 等工具, 可以确保全程断网操作, 同时此系统重启会擦除所有内容，还免去了擦除密钥的麻烦。</p>
+
+<h3 id="导入">导入</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#从文件导入</span>
+gpg <span class="nt">--import</span> <span class="o">[</span>密钥文件]   <span class="c"># 刚刚备份的子密钥文件， 或者其他人的公钥</span>
+
+<span class="c"># 暂不推荐从公钥服务器导入，具体用法会在公钥服务器一章介绍</span>
+<span class="c"># 这里先推荐 练习导入自己的子密钥</span>
+
+
+ <span class="c"># 输出</span>
+sec#   rsa3072/0x99F583599B7E31F1 2021-01-11 <span class="o">[</span>SC]		 <span class="c"># sec 后面带有 # 号说明主密钥未导入，是安全的</span>
+      Key fingerprint <span class="o">=</span> 7053 58AB 8536 6CAB 05C0  220F 99F5 8359 9B7E 31F1 <span class="c">#指纹信息</span>
+uid                   <span class="o">[</span>unknown] linus &lt;linus@outlook.com&gt;
+ssb <span class="c">#    rsa3072/0x6FE9C71CFED44076 2021-01-11 [E]           # 带有 # 号说明该子密钥已导入</span>
+
+</code></pre></div></div>
+
+<h3 id="签名和验证">签名和验证</h3>
+
+<p>这里只讲 如何签名和验证 他人文件，  为他人公钥签名和验证 放在公钥的发布和交换一章讲解。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一种方式，生成二进制签名文件</span>
+
+gpg <span class="nt">--sign</span> input.txt  <span class="c"># 当然也可以加上--output参数</span>
+
+<span class="c"># 第二种方式，生成ASCII格式签名</span>
+gpg <span class="nt">--clearsign</span> input.txt
+
+<span class="c"># 第三种，签名和原文本分开（前两种的签名文件中包含了所有原文本，所以体积会比较大）</span>
+gpg <span class="nt">--armor</span> <span class="nt">--detach-sign</span> input.txt  <span class="c">#不加armor生成会二进制</span>
+
+
+
+<span class="c">#  验证签名文件</span>
+gpg <span class="nt">--verify</span> demo.txt.asc demo.txt
+</code></pre></div></div>
+
+<h3 id="加解密">加解密</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 加密：</span>
+
+<span class="c"># recipient指定接收者的公钥ID</span>
+gpg <span class="nt">--recipient</span> <span class="o">{</span>keyid/uid<span class="o">}</span> <span class="nt">--output</span> encrypt.txt <span class="nt">--encrypt</span> input.txt
+<span class="c"># 也可以按喜好加上--armor选项等</span>
+
+<span class="c"># 我更喜欢用 </span>
+gpg  <span class="nt">-se</span>  <span class="nt">-o</span>  encrypt.txt  <span class="nt">-r</span>  <span class="o">{</span>keyid/uid<span class="o">}</span>   input.txt  
+<span class="c"># s代表签名  e代表加密</span>
+<span class="c"># o是 将结果 输出到文件  encrypt.txt</span>
+<span class="c"># r后面跟 接收者的 uid或者 key id， 接收者的公钥必须已经导入过</span>
+<span class="c"># input.txt 是你要加密的文件</span>
+
+
+<span class="c"># 解密：</span>
+gpg <span class="nt">--decrypt</span> encrypt.txt <span class="nt">--output</span> decrypt.txt
+<span class="c"># 也可以</span>
+gpg <span class="nt">-d</span> encrypt.txt   <span class="c"># 输出到终端 直接查看</span>
+
+</code></pre></div></div>
+
+<h3 id="发布-与-交换">发布 与 交换</h3>
+
+<p>公钥的交换是所有非对称加密算法的脆弱点，所谓现代的使用方式，主要体现在密钥的交换和发布上面， 之后会单独来探讨。</p>
+
+<p><strong>阅读并理解本系列之前请不要发布你的公钥到公钥服务器</strong>。</p>
+
+<h3 id="撤销">撤销</h3>
+
+<p>由于PGP没有提供任何将吊销信息通知其他用户的方式，他不能保证没人会使用撤销了的已经变得不安全的密钥。</p>
+
+<p>你丢失的私钥仍然可以被攻击者使用，并用来解密那些没有更新你的公钥的人发送的加密消息。  revoke 子密钥并更新公钥后，若有人用老的公钥加密信息，虽然你仍然可以解密，但是攻击者同样可以，这时候是极度不安全的。</p>
+
+<p>例如：如果A的私人密钥被盗，她将发出一个密钥撤销证书（key revocation certificate），但是由于这个密钥的分发是非正式的且将费大量的时间和口舌，故不能保证密钥环中每一个有A公开密钥的用户都能收到。由于A必须用她的私人密钥签名撤消的证书，所以如果A同时丢失了私人密钥，她就不能撤销密钥。密钥的撤销问题被认为是整个系统最薄弱的环节。</p>
+
+<p>所以在你将密钥撤销后，请将撤销后的公钥发布到你一贯公布公钥的地方， 并尽可能通知其他人。</p>
+
+<h4 id="撤销主密钥">撤销主密钥</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg <span class="nt">--import</span> gpg-linus.asc                                               <span class="c"># 在一台新的电脑上导入你的公钥</span>
+gpg: key 99F583599B7E31F1: <span class="s2">"linus &lt;linus@outlook.com&gt;"</span> not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+
+
+
+gpg <span class="nt">--import</span> revoke                                                       <span class="c"># 导入你备份的撤销凭证，直接会导致密钥不可用</span>
+
+
+
+gpg: key 99F583599B7E31F1: <span class="s2">"linus &lt;linus@outlook.com&gt;"</span> revocation certificate imported
+gpg: Total number processed: 1
+gpg:    new key revocations: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   1  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: depth: 1  valid:   1  signed:   0  trust: 1-, 0q, 0n, 0m, 0f, 0u
+gpg: next trustdb check due at 2021-09-29
+
+
+
+gpg <span class="nt">-k</span>																	<span class="c"># 查看密钥，已经revoke</span>
+
+
+pub   rsa3072 2021-01-11 <span class="o">[</span>SC] <span class="o">[</span>revoked: 2021-01-11]
+      705358AB85366CAB05C0220F99F583599B7E31F1
+uid           <span class="o">[</span> revoked] linus &lt;linus@outlook.com&gt;
+</code></pre></div></div>
+
+<h4 id="撤销子密钥">撤销子密钥</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg <span class="nt">--edit-key</span> linus  
+  
+gpg <span class="o">&gt;</span>   list  <span class="c"># 列出你所有的子密钥</span>
+gpg <span class="o">&gt;</span>   key  <span class="o">{</span>n<span class="o">}</span>  <span class="c"># 选择你要销毁的子密钥的 序号</span>
+gpg <span class="o">&gt;</span>   revkey
+gpg <span class="o">&gt;</span>   save    <span class="c"># 退出前一定要save, 不然所有更改不会生效</span>
+
+</code></pre></div></div>
+
+<h2 id="未完待续">未完待续</h2>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/"
+                           data-toggle="tooltip" data-placement="top" title="常见RFID卡片介绍、破解思路 及 Proxmark3简介">
+                            Previous<br>
+                            <span>常见RFID卡片介绍、破解思路 及 Proxmark3简介</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/01/18/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%AD/" data-toggle="tooltip"
+                           data-placement="top" title="2021年，用更现代的方法使用PGP（中）">
+                            Next<br>
+                            <span>2021年，用更现代的方法使用PGP（中）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <script src="https://utteranc.es/client.js"
+                        repo='UlyC/UlyC.github.io'
+                        issue-term="title"
+                        label="comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+                
+                <!--utterances end  -->
+
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xdcf32409f0976589">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2021
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>
