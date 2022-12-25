@@ -1,0 +1,2999 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UlyC</title>
+    <description>我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！</description>
+    <link>https://UlyC.github.io/</link>
+    <atom:link href="https://UlyC.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 25 Dec 2022 07:39:58 +0000</pubDate>
+    <lastBuildDate>Sun, 25 Dec 2022 07:39:58 +0000</lastBuildDate>
+    <generator>Jekyll v4.2.1</generator>
+    
+      <item>
+        <title>「译」PGP的问题（下）</title>
+        <description>&lt;h1 id=&quot;译pgp的问题下-答案&quot;&gt;「译」PGP的问题（下）– 答案&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://latacora.micro.blog/2019/07/16/the-pgp-problem.html&quot;&gt;原文链接&lt;/a&gt; ，原作者为 Latacora，一个国外安全团队。&lt;/p&gt;
+
+&lt;h2 id=&quot;答案&quot;&gt;答案&lt;/h2&gt;
+
+&lt;p&gt;说服人们停止使用PGP的挑战之一是没有一种东西可以取代它，也不应该有。&lt;/p&gt;
+
+&lt;p&gt;你应该用什么来取代它，取决于你要做什么。&lt;/p&gt;
+
+&lt;h3 id=&quot;与人交流&quot;&gt;与人交流&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;译注： 我不太认同作者这部分的观点，Signal并不是什么更好的选择（WhatsApp更不是 。
+首先你能期待一个必须要手机号才能使用的软件给你什么安全？ （cue一下Telegram  。&lt;br /&gt;
+更多不推荐的理由，可以参考sourcehut创始人 Drew DeVault的文章 &lt;a href=&quot;https://drewdevault.com/2018/08/08/Signal.html&quot;&gt;I don’t trust Signal&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用Signal。或者Wire，或者WhatsApp，或者其他基于Signal协议的安全通信软件。&lt;/p&gt;
+
+&lt;p&gt;现代安全即时通讯是围绕着信息传递而建立的。它们使用保护隐私的认证握手、可拒绝的信息、在每个信息交换中重新加密的加密棘轮，当然还有现代的加密原语。&lt;/p&gt;
+
+&lt;p&gt;即时通讯软件的使用非常简单，而且不需要为密钥和子密钥而大费周章。&lt;/p&gt;
+
+&lt;p&gt;如果你使用Signal，你会得到更多：你会得到一个对将私人元数据保存在服务器上如此偏执的系统，它对Giphy搜索进行隧道化处理以避免流量分析攻击，而且直到最近还不支持用户配置文件。&lt;/p&gt;
+
+&lt;h3 id=&quot;加密电子邮件&quot;&gt;加密电子邮件&lt;/h3&gt;
+
+&lt;p&gt;不。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://news.ycombinator.com/item?id=16088386&quot;&gt;电子邮件不安全&lt;/a&gt;。即使使用 PGP，它也是默认明文，这意味着即使您做对了所有事情，您邮寄的某个完全可信的人，做完全合理的事情，总是会将您加密消息的引用明文抄送给其他人（我们不知道没有看到这种情况发生的 PGP 电子邮件用户）。PGP 电子邮件是转发不安全的。包括主题（字面意思是消息内容）在内的电子邮件元数据始终是纯文本的。&lt;/p&gt;
+
+&lt;p&gt;如果您需要其他理由，&lt;a href=&quot;https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-poddebniak.pdf&quot;&gt;请阅读 Efail 论文&lt;/a&gt;。&lt;a href=&quot;https://web.archive.org/web/20181225214730/https://flaked.sockpuppet.org/2018/05/16/a-unified-timeline.html&quot;&gt;对Efail的披露处理不当&lt;/a&gt;的 GnuPG 社区对这项研究进行了大量讨论，但它被 Usenix Security（顶级学术软件安全活动之一）和 Black Hat USA（顶级行业软件安全活动）承认，是过去 5 年中最好的加密攻击之一，是对 PGP 生态系统的毁灭性指控。
+正如您将从论文中看到的那样，S/MIME 并不好。&lt;/p&gt;
+
+&lt;p&gt;这不可能被修复。要制作真正安全的电子邮件，你必须在电子邮件上建立另一种协议的隧道  （您仍然会承受流量分析攻击）。都这样了，又何必去伪装呢？&lt;/p&gt;
+
+&lt;p&gt;加密电子邮件是自寻祸患。&lt;/p&gt;
+
+&lt;p&gt;向有风险的用户推荐电子邮件加密是一种不当行为。
+任何告诉您通过 PGP 加密的电子邮件进行通信是安全的人都将他们奇怪的偏好置于您的安全之上。&lt;/p&gt;
+
+&lt;h3 id=&quot;发送文件&quot;&gt;发送文件&lt;/h3&gt;
+
+&lt;p&gt;使用&lt;a href=&quot;https://github.com/magic-wormhole/magic-wormhole&quot;&gt;Magic Wormhole&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;虫洞客户端使用一次性密码验证密钥交换 (PAKE) 将文件加密给收件人。&lt;/p&gt;
+
+&lt;p&gt;这很容易（至少对于Nerd们来说）、安全且有趣：我们还没有把虫洞介绍过给任何没有像我们一样立即开始欣喜地使用虫洞的人。&lt;/p&gt;
+
+&lt;p&gt;有人马上发布了 Go 或 Rust 实现的 Magic Wormhole 的 Windows 安装程序， 它太棒了，我不允许还有人没装！&lt;/p&gt;
+
+&lt;p&gt;如果您与律师而不是与技术人员合作，Signal 在保护文件传输方面做得非常好。
+在您的安全页面上放置一个 Signal 账户以接收错误赏金报告，而不是 PGP 密钥。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;译注，Magic Wormhole是一个命令行的文件传输工具。
+推荐一个web版的，更易用一些的文件传输工具，名字也很像，叫 &lt;a href=&quot;https://wormhole.app/&quot;&gt;Wormhole&lt;/a&gt;，&lt;a href=&quot;https://github.com/SocketDev/wormhole-crypto&quot;&gt;源码&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;加密备份&quot;&gt;加密备份&lt;/h3&gt;
+
+&lt;p&gt;使用 Tarsnap。&lt;a href=&quot;https://www.tarsnap.com/design.html&quot;&gt;Colin 可以告诉您有关 Tarsnap 如何优化以保护备份的所有信息&lt;/a&gt;。
+或者说真的，使用许多其他人使用的任何其他加密备份工具；
+它们不会像 Tarsnap 那样棒，但它们肯定都会比 PGP 做得更好。&lt;/p&gt;
+
+&lt;p&gt;需要离线备份？使用加密的磁盘image；它们内置于现代 Windows、Linux 和 macOS 中。
+&lt;a href=&quot;https://sockpuppet.org/blog/2014/04/30/you-dont-want-xts/&quot;&gt;全盘加密不是很好&lt;/a&gt;，但它适用于这个用例，而且比 PGP 更容易、更安全。&lt;/p&gt;
+
+&lt;h3 id=&quot;签署包&quot;&gt;签署包&lt;/h3&gt;
+
+&lt;p&gt;使用 Signify/Minisign。&lt;a href=&quot;https://www.openbsd.org/papers/bsdcan-signify.html&quot;&gt;ed Unangst 会告诉你一切&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;这是 OpenBSD 用来对包进行签名的东西。它非常简单并使用现代签名。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jedisct1.github.io/minisign/&quot;&gt;Minisign&lt;/a&gt; ，ibsodium 的专家Frank Denis写的 ，为 Windows 和 macOS 带来了相同的设计；Go、Rust、Python、Javascript 和 .NET 都有相关的包；它甚至与 Signify 兼容。&lt;/p&gt;
+
+&lt;h3 id=&quot;加密app的数据&quot;&gt;加密App的数据&lt;/h3&gt;
+
+&lt;p&gt;用&lt;a href=&quot;https://github.com/jedisct1/libsodium&quot;&gt;libsodium&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;它可以在任何地方构建，具有设计为难以误用的界面，并且您不必掏出一个二进制文件来使用它。&lt;/p&gt;
+
+&lt;h3 id=&quot;加密文件&quot;&gt;加密文件&lt;/h3&gt;
+
+&lt;p&gt;这确实是个问题。&lt;/p&gt;
+
+&lt;p&gt;如果你&lt;strong&gt;不是&lt;/strong&gt;在做备份，也&lt;strong&gt;不是&lt;/strong&gt;在为长期存储而离线存档，也&lt;strong&gt;不是&lt;/strong&gt;为了安全地将文件发送给别人而加密，也&lt;strong&gt;不是&lt;/strong&gt;为了完成工作而挂载/卸载的虚拟驱动器。&lt;/p&gt;
+
+&lt;p&gt;那么现在没有一个好的工具可以做到这一点。Filippo Valsorda 正在研究这些用例的&lt;a href=&quot;https://docs.google.com/document/d/11yHom20CrsuX8KQJXBBw04s80Unjv8zCg_A7sPAX_9Y/view&quot;&gt;Age&lt;/a&gt;，我对此非常乐观，但它还没有完成。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;更新，2020 年 2 月&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Filippo的&lt;a href=&quot;https://age-encryption.org&quot;&gt;age&lt;/a&gt;已经公布。
+这是一个可靠的设计，在 Go 和 Rust 中具有简单、易于审计的实现。&lt;/p&gt;
+
+&lt;p&gt;您可以为每个主流平台构建二进制文件。&lt;/p&gt;
+
+&lt;p&gt;age当然比 PGP 年轻得多。但我会用我口袋里的所有钱来和你所有的钱打赌，在Age发现新的漏洞之前，PGP这个庞然大物就会被发现（新的漏洞）。看age的了！&lt;/p&gt;
+
+&lt;p&gt;希望大家能明白这是一个相当狭隘的用例。
+我们从事软件安全工作并处理敏感数据，包括Bug Bounty报告（另一个超级常见的“我们需要 PGP！”用例），但我们几乎永远都不用碰 PGP！&lt;/p&gt;
+
+&lt;h2 id=&quot;译后注&quot;&gt;译后注&lt;/h2&gt;
+
+&lt;p&gt;在今天，PGP俨然已经成为一种亚文化，很多独立博客作者，安全研究员，键政人都愿意在自己的个人资料里附上自己的PGP指纹。&lt;/p&gt;
+
+&lt;p&gt;它作为密码学的象征， 对于开源和自由运动与集权抗争的象征意义，已经大于它的实际作用。&lt;/p&gt;
+
+&lt;p&gt;复杂的用法并不会减损它的魅力，忽视诸多安全问题而给人虚假的安全感才是最致命的。（&lt;del&gt;虽然99%的人只是用来装逼，不会也找不到人去用&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;我的建议就是，咱继续用它装逼就好，如果做高风险的事还是别用它了😂&lt;/p&gt;
+
+&lt;p&gt;像原作者说的那样，用专业的工具去做专业的事。&lt;/p&gt;
+
+&lt;p&gt;前面说过我并不推荐作者强推的Signal，并给出了一些理由。那我们应该用什么呢？&lt;/p&gt;
+
+&lt;p&gt;一个很好的替代品是&lt;a href=&quot;https://matrix.org/&quot;&gt;Matrix&lt;/a&gt;，一个「去中心化」的「端到端加密」的即时通讯软件。&lt;/p&gt;
+
+&lt;p&gt;「去中心化」意味着很难被墙，「端到端加密」意味着安全。&lt;/p&gt;
+
+&lt;p&gt;想必你也不会想去教八十岁的奶奶使用OMEMO XMPP，或者给朋友推荐一圈某
+T字头全宇宙最好的聊天软体结果因为需要翻墙没人愿意折腾，最后就自己和自己安全地聊天吧。&lt;/p&gt;
+
+&lt;p&gt;如果你也不想妥协继续使用微信，用Matrix！&lt;/p&gt;
+</description>
+        <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2022/09/07/tr-pgp-problem-2/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2022/09/07/tr-pgp-problem-2/</guid>
+        
+        <category>Blog</category>
+        
+        <category>PGP</category>
+        
+        <category>密码学</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>「译」PGP的问题（上）</title>
+        <description>&lt;h1 id=&quot;译pgp的问题上-问题&quot;&gt;「译」PGP的问题（上）– 问题&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://latacora.micro.blog/2019/07/16/the-pgp-problem.html&quot;&gt;原文链接&lt;/a&gt; ，原作者为 Latacora，一个国外安全团队。&lt;/p&gt;
+
+&lt;p&gt;几十年来（一点不夸张地），&lt;a href=&quot;https://blog.cryptographyengineering.com/2014/08/13/whats-matter-with-pgp/&quot;&gt;密码学工程师们一直为PGG的缺陷 &lt;/a&gt;  困扰得拽头发。&lt;/p&gt;
+
+&lt;p&gt;当其他领域的工程师得知这个消息时, 他们会感到震惊 。啥？ PGP不行?
+那为啥人们总是告诉我用PGP?&lt;/p&gt;
+
+&lt;p&gt;答案是他们不应该告诉你， 因为PGP就是不行， 需要被淘汰。&lt;/p&gt;
+
+&lt;p&gt;正如你将要看到的，PGP有非常多的问题。&lt;/p&gt;
+
+&lt;p&gt;幸运的是， 如果你并不是病态地好奇， 它有一个简单的元问题：它是20世纪90年代设计的，在严肃的现代密码学诞生之前。&lt;/p&gt;
+
+&lt;p&gt;（如今）没有一个合格的密码工程师会设计一个像今天的PGP一样的系统， 也不会容忍它在其他设计中的大部分缺陷。&lt;/p&gt;
+
+&lt;p&gt;严肃的密码学家们在很大程度上已经放弃了PGP， 并不再花时间为它发表论文(&lt;a href=&quot;https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-poddebniak.pdf&quot;&gt;有一个明显的例外&lt;/a&gt;)。&lt;/p&gt;
+
+&lt;p&gt;由于这个原因，PGP中被充分理解的问题已经有十多年没有得到解决了。&lt;/p&gt;
+
+&lt;p&gt;有两点要注意:：
+第一，  我们这篇文章是为工程师写的， 不是为律师和活动家写的。&lt;/p&gt;
+
+&lt;p&gt;第二， “PGP “可以指一堆东西，从OpenPGP标准到GnuPG的参考实现。&lt;strong&gt;我们用 “PGP “这个词来涵盖所有这些东西&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;问题&quot;&gt;问题&lt;/h2&gt;
+&lt;h3 id=&quot;荒谬的复杂性&quot;&gt;荒谬的复杂性&lt;/h3&gt;
+
+&lt;p&gt;由于一些我们这些未来人都不理解的原因，  PGP有一个基于数据包的结构。&lt;/p&gt;
+
+&lt;p&gt;PGP 信息（包含在“.asc”文件中）是类型化数据包的存档。
+根据您使用的是“新”还是“旧”格式的数据包，&lt;a href=&quot;https://tools.ietf.org/html/rfc4880#page-13&quot;&gt;至少有 8 种不同的方法&lt;/a&gt;可以对数据包的长度进行编码。&lt;/p&gt;
+
+&lt;p&gt;新格式的数据包长度是可变的，如 BER（尝试编写 PGP 实现，您可能会希望 ASN.1 的sweet release）。包可以有子包。某些数据包有重叠的变体。&lt;/p&gt;
+
+&lt;p&gt;最近发生的公钥服务器攻击是因为 GnuPG在解析密钥时&lt;a href=&quot;https://threadreaderapp.com/thread/1147162583969009664.html&quot;&gt;意外出现指数级增长&lt;/a&gt;，这也是遵循这种发癫的格式。&lt;/p&gt;
+
+&lt;p&gt;以上只是编码的问题。&lt;/p&gt;
+
+&lt;p&gt;实际用起来的时候，系统并不会更简单： 有主密钥和子密钥，密钥ID、公钥服务器和密钥签名，只有签名的和只有加密的，多个 “密钥环”，撤销证书，三种不同的压缩格式。&lt;/p&gt;
+
+&lt;p&gt;这些还都是在我们谈到智能卡支持之前。&lt;/p&gt;
+
+&lt;h3 id=&quot;瑞士军刀式的设计&quot;&gt;瑞士军刀式的设计&lt;/h3&gt;
+
+&lt;p&gt;如果你被困在森林里里，我不清楚，需要修理你的牛仔裤袖口，如果你的多功能刀有一把剪刀，那就很方便了。但是，没有一个做正经工作的人经常使用他们的多功能刀的剪刀。&lt;/p&gt;
+
+&lt;p&gt;一把瑞士军刀能做一堆事情，但都做得很差：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;PGP在签名方面做得很平庸&lt;/li&gt;
+  &lt;li&gt;在用密码加密方面做得相对较差&lt;/li&gt;
+  &lt;li&gt;在用公钥加密方面做得相当糟糕&lt;/li&gt;
+  &lt;li&gt;PGP并不是一个安全传输文件的好方&lt;/li&gt;
+  &lt;li&gt;它是一个笨拙的签名包的方式&lt;/li&gt;
+  &lt;li&gt;它在保护备份方面不是很好&lt;/li&gt;
+  &lt;li&gt;它是一种完全危险的安全信息交流方式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;回到 PGP 起源的 MC Hammer 时代，“加密”只是“一件”特殊的事：
+有一个工具用来（单纯地）发送文件，或只是备份一个目录，又用另外的工具来加密和签名文件。&lt;/p&gt;
+
+&lt;p&gt;而现代密码学不是这样运行的， （不同加密算法）有其专门的目的。
+例如，安全地传递消息也需要加密，一种不同于安全备份或包签名的加密。&lt;/p&gt;
+
+&lt;h3 id=&quot;陷入兼容旧版的泥潭&quot;&gt;陷入兼容旧版的泥潭&lt;/h3&gt;
+
+&lt;p&gt;PGP 早于现代密码学；比Hanson的专辑还要久远的年代。&lt;/p&gt;
+
+&lt;p&gt;如果幸运的话，您的本地 GnuPG 默认为 2048 位 RSA、CFB 中的 64 位块 CAST5 密码和 OpenPGP MDC 校验和（稍后会详细介绍）。&lt;/p&gt;
+
+&lt;p&gt;如果您使用密码而不是公钥进行加密，OpenPGP 协议会指定了PGP 的 S2K 密码 KDF。委婉地说，这些不是密码工程师为现代系统选择的原语。&lt;/p&gt;
+
+&lt;p&gt;自从 Steve Urkel 在 ABC 的 TGIF 节目中出现以来，我们学到了很多：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;你应该验证你的密文（并避免 CFB 模式）将是一个明显的例子。&lt;/li&gt;
+  &lt;li&gt;64 位分组密码并不好，我们可以做很多比 RSA 更好的事。&lt;/li&gt;
+  &lt;li&gt;混合压缩和加密是危险的，而且 KDF 应该是时间和内存困难的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;无论 OpenPGP RFC 怎么说，如果您使用 PGP，您可能不会做任何这些事情，也无法预测何时会做。&lt;/p&gt;
+
+&lt;p&gt;以 AEAD 密码为例：Rust 语言的 Sequoia PGP 默认为 AES-EAX AEAD 模式，这很好，没有人可以阅读这些消息。
+而因为大多数 PGP 安装者并不知道 EAX 模式是什么，这就不太好了。&lt;/p&gt;
+
+&lt;p&gt;每个众所周知的坏密码系统最终都会产生一个支持曲线或 AEAD 的 RFC 扩展，以便其支持者可以在留言板上声称他们支持现代密码学。&lt;/p&gt;
+
+&lt;p&gt;RFC 无关紧要：只有安装PGP的这些基本盘才重要。&lt;/p&gt;
+
+&lt;p&gt;我们已经搞了认证加密这一套20 年了，PGP 已经足够成熟了，它都能自己去超市给我买酒了。（抱歉&lt;/p&gt;
+
+&lt;p&gt;您可以选择兼容 1990 年代的旧版本，也可以选择拥有健全的密码学。
+&lt;strong&gt;但你并不能同时拥有&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;令人讨厌的用户体验&quot;&gt;令人讨厌的用户体验&lt;/h3&gt;
+
+&lt;p&gt;我们不能说得比 Ted Unangst 更好了：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;几年前进行了一项 PGP 可用性研究，其中一组技术人员被安置在一个有计算机的房间里，并要求设置 PGP。
+两个小时后，这些人没了，消失了，杳无音讯&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果您想要自己的经验数据来支持这一点，您可以进行以下实验：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;找到一位移民律师，并与他们讨论让 Signal 在他们的手机上工作的过程&lt;/li&gt;
+  &lt;li&gt;你可能不会马上体验到它的美味&lt;/li&gt;
+  &lt;li&gt;现在尝试（把Signal换成） PGP 来做这件事&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;长期的密钥&quot;&gt;长期的密钥&lt;/h3&gt;
+&lt;p&gt;PGP 请求用户保留与他们的身份相关联的几乎永久的根密钥。&lt;/p&gt;
+
+&lt;p&gt;它通过使 密钥生成和交换变得烦人、“密钥签署Party” , 以及创建一个 “信任网”（Web Of Trust）, 使密钥依赖于其他密钥 ，来做到这一点。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://words.filippo.io/giving-up-on-long-term-pgp/&quot;&gt;长期密钥几乎从来都不是您想要的&lt;/a&gt;。如果您持续地使用密钥，它最终都会泄漏。&lt;/p&gt;
+
+&lt;p&gt;您希望妥协的爆炸半径尽可能小，而且同样重要的是，你不希望用户在对他们目前的密钥的安全有任何担心的情况下, 对启用新密钥的想法有任何犹豫。&lt;/p&gt;
+
+&lt;p&gt;PGP 氛围组马上就会回复：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“这就是为什么你要把密钥放在 Yubikey里~”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;大致上来说，全世界没有人使用昂贵的 Yubikey 来做这个，而且你也别期待未来会发生。 （我们连U2F的推广都进行不动，而且这些密钥是一次性的）。&lt;/p&gt;
+
+&lt;p&gt;我们不能仅仅为了让 Unix 书呆子对他们的玩具感觉更好，而接受糟糕的密码系统。&lt;/p&gt;
+
+&lt;h3 id=&quot;身份验证的崩溃&quot;&gt;身份验证的崩溃&lt;/h3&gt;
+
+&lt;p&gt;更多关于 PGP 的古老原语：早在 2000 年，OpenPGP 工作组就意识到他们需要对密文进行身份验证，而 PGP 的签名并没有做到这一点。&lt;/p&gt;
+
+&lt;p&gt;因此 OpenPGP 发明了 &lt;a href=&quot;https://www.rfc-editor.org/rfc/rfc4880#section-5.14&quot;&gt;MDC 系统&lt;/a&gt;：带有 MDC 的 PGP 消息将明文的 SHA-1 附加到明文，然后在 CFB 模式下加密（跟平常那样）。&lt;/p&gt;
+
+&lt;p&gt;如果您想知道当现代系统使用相对复杂的 AEAD 模式时 PGP 如何解决这个问题（为什么每个人都不能将 SHA-1 添加到他们的明文中），您并不孤单。&lt;/p&gt;
+
+&lt;p&gt;从哪里开始使用这个 Rube Goldberg 装置呢？PGP MDC 可以被剥离消息——它的编码方式是你可以简单地截掉密文的最后 22 个字节来做到这一点。&lt;/p&gt;
+
+&lt;p&gt;为了保持与不安全的旧信息的兼容性，PGP 引入了一种新的数据包类型来表示需要验证 MDC；如果您使用了错误的类型，则不会检查 MDC。&lt;/p&gt;
+
+&lt;p&gt;即使您这样做了，新的 SEIP 数据包格式也与不安全的 SE 格式非常接近，可能会诱使读取方降级；&lt;a href=&quot;https://mailarchive.ietf.org/arch/msg/openpgp/tB00vO5r-qneX9wz1xz3netpXVU/&quot;&gt;Trevor Perrin 将 SEIP 设计为 16 个完整的安全位&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;最后，即使一切顺利，Reference的PGP 实现也会（等待它）向调用者发送未经身份验证的明文，&lt;em&gt;即使 MDC 不匹配&lt;/em&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;不连贯的身份&quot;&gt;不连贯的身份&lt;/h3&gt;
+
+&lt;p&gt;PGP 是一个应用程序
+它是与其他应用程序的一组集成
+它是一种文件格式
+它也是一个社交网络
+也是一种亚文化。&lt;/p&gt;
+
+&lt;p&gt;PGP 推动了加密身份的概念：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;您生成一个密钥，将其保存在您的密钥环中，在您的名片上打印其指纹，然后将其发布到密钥服务器。&lt;/li&gt;
+  &lt;li&gt;你在别人的密钥上签名。&lt;/li&gt;
+  &lt;li&gt;他们反过来可能会也可能不会依赖您的签名来验证其他密钥。&lt;/li&gt;
+  &lt;li&gt;有些人会特意亲自与其他 PGP 用户会面，以交换密钥并更安全地连接到这个“信任网络”。&lt;/li&gt;
+  &lt;li&gt;还有一些人会组织“密钥签署Party”。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;您现在在脑海中勾勒出的图像准确地解释了 PGP 的拥护者们切换到更新的东西有多难。&lt;/p&gt;
+
+&lt;p&gt;不过这种黏在一起的身份没啥用。&lt;/p&gt;
+
+&lt;p&gt;普通人会相信任何看起来像 PGP 密钥的东西，而不是密钥签名信任网络，不是密钥服务器，不是那些Party ，无论它来自哪儿——他们怎么可能不信？ 即使是专家也很难阐明如何评估密钥。&lt;/p&gt;
+
+&lt;p&gt;专家不信任他们没有亲自交换过的密钥。其他所有的人都依赖一个中心化的机构来分发密钥。
+PGP 的密钥分发机制是场闹剧。&lt;/p&gt;
+
+&lt;h3 id=&quot;泄露元数据&quot;&gt;泄露元数据&lt;/h3&gt;
+&lt;p&gt;先不说电子邮件的问题(我们稍后会说到)， PGP本身就泄露了元数据。&lt;/p&gt;
+
+&lt;p&gt;信息(在正常使用情况下)直接与密钥标识符相连，而密钥标识符在整个PGP的信任网中与用户身份相连。&lt;/p&gt;
+
+&lt;p&gt;此外, 很大一部分PGP用户使用密钥服务器，这些密钥服务器本身也会向网络泄露哪些PGP用户正在相互通信的身份。&lt;/p&gt;
+
+&lt;h3 id=&quot;无前向保密性&quot;&gt;无前向保密性&lt;/h3&gt;
+
+&lt;p&gt;PGP的最后一个问题，有一个很好的例子：安全消息传递加密要求前向保密。&lt;/p&gt;
+
+&lt;p&gt;前向保密意味着，如果你今天向攻击者“Say Hi”，并丢了一只密钥，他们仍然不能去阅读到昨天的消息；他们必须在昨天带着密钥在那里才能阅读它们。&lt;/p&gt;
+
+&lt;p&gt;在现代密码学工程中，我们假设我们的对手正在将所有内容记录到无限存储中。PGP 声称的对手包括世界各国政府，其中许多政府确实在这样做。针对强大的对手并且没有前向保密，被破解是“何时”的问题，而不是“如果”的问题。&lt;/p&gt;
+
+&lt;p&gt;为了在实践中实现保密，您通常会保留两个密钥：一个短期会话密钥和一个长期可信密钥。
+会话密钥是临时的（通常是 DH 交换的产物）并且受信任的密钥对其进行签名，因此中间人无法交换自己的密钥。&lt;/p&gt;
+
+&lt;p&gt;理论上，使用PGP提供的工具可以实现前向保密的雏形。当然，几乎没有人这样做。&lt;/p&gt;
+
+&lt;h3 id=&quot;笨拙的密钥&quot;&gt;笨拙的密钥&lt;/h3&gt;
+
+&lt;p&gt;OpenBSD的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;signify(1)&lt;/code&gt; 公钥是一个 Base64 字符串，短到可以放在电子邮件的句子中间；如果是私钥，不是交换格式，只比公钥长了一行左右。&lt;/p&gt;
+
+&lt;p&gt;PGP 公钥是一个巨大的 Base64 文档；如果您经常使用它们，那么您可能已经习惯于将它们添加到附件，而不是将它们粘贴到消息中，这样它们就不会被损坏。&lt;/p&gt;
+
+&lt;p&gt;Signify 的密钥是最先进的 Ed25519 密钥；PGP 是较弱的 RSA 密钥。&lt;/p&gt;
+
+&lt;p&gt;您可能认为这些东西无关紧要，但它很重要；使用 SSH 和管理 SSH 密钥的人比使用 PGP 的人多几个数量级。SSH 密钥处理起来很简单，而PGP 不是。&lt;/p&gt;
+
+&lt;h3 id=&quot;协商&quot;&gt;协商&lt;/h3&gt;
+
+&lt;p&gt;PGP 支持 ElGamal。PGP 支持 RSA。PGP 支持 NIST P 曲线。PGP 支持 Brainpool。PGP 支持 Curve25519。PGP 支持 SHA-1。PGP 支持 SHA-2。PGP 支持 RIPEMD160。PGP 支持 IDEA。PGP 支持 3DES。PGP 支持 CAST5。PGP 支持 AES。这不可能是 PGP 支持的完整列表。&lt;/p&gt;
+
+&lt;p&gt;如果我们在过去 20 年中学到了关于密码学设计的 3 件重要的事情，其中至少 2 件是&lt;strong&gt;协商和兼容性是恶魔&lt;/strong&gt;。密码系统中的缺陷往往出现在细枝末节中，而不是主干上，而广泛的密码兼容性增加了细节的数量。&lt;/p&gt;
+
+&lt;p&gt;像 TLS 1.3 这样的现代协议正在抛弃与 RSA 等东西的兼容性，而不是添加它。新系统只支持一套原语 和一个简单的版本号。如果这些原语之一失败，您会立即更改版本并放弃旧协议。&lt;/p&gt;
+
+&lt;p&gt;如果我们不走运，20 年后人们仍在使用 PGP，那么 PGP 将是任何地方的任何代码会包含 CAST5 的唯一原因。&lt;/p&gt;
+
+&lt;p&gt;我们不能说得再清楚或者再啰嗦了：您可以选择兼容 1990 年代的旧版本，也可以选择拥有健全的密码学。 &lt;strong&gt;但你并不能同时拥有&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;简陋的代码&quot;&gt;简陋的代码&lt;/h3&gt;
+
+&lt;p&gt;PGP 的实际标准实现是 GnuPG。GnuPG 不是精心构建的。&lt;/p&gt;
+
+&lt;p&gt;这是一个庞大的 C 语言代码库，具有重复的功能（例如，最近的 SKS 密钥解析DoS的记录指出它有多个密钥解析器）具有从内存损坏 到加密侧信道的 &lt;a href=&quot;https://www.cvedetails.com/vulnerability-list/vendor_id-4711/Gnupg.html&quot;&gt;CVE 的长期跟踪记录&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;有时可以在 GnuPG 不注意的情况下将身份验证器从消息中剥离。有可能在它没有注意到的情况下向它提供没有正确指纹的密钥。2018 Efail 漏洞是因为它向调用者发布未经身份验证的明文。&lt;/p&gt;
+
+&lt;p&gt;GnuPG 就是不行。&lt;/p&gt;
+
+&lt;p&gt;GnuPG 也是 PGP 的有效参考实现，也是集成 PGP 加密的大多数其他工具的基础。
+它哪儿也不会去，依赖PGP就是依赖GPG。&lt;/p&gt;
+
+&lt;p&gt;【未完待续】&lt;/p&gt;
+</description>
+        <pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2022/09/05/tr-pgp-problem-1/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2022/09/05/tr-pgp-problem-1/</guid>
+        
+        <category>Blog</category>
+        
+        <category>PGP</category>
+        
+        <category>密码学</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>sourcehut， 一个反叛而又正统的代码托管平台</title>
+        <description>&lt;h1 id=&quot;sourcehut-一个反叛而又传统的代码托管平台&quot;&gt;sourcehut， 一个反叛而又传统的代码托管平台&lt;/h1&gt;
+
+&lt;h2 id=&quot;一--feature&quot;&gt;一.  Feature&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;绝对没有跟踪或广告&lt;/li&gt;
+  &lt;li&gt;许多功能无需账户即可使用&lt;/li&gt;
+  &lt;li&gt;最快和最轻的软件仓库&lt;/li&gt;
+  &lt;li&gt;100%的自由开源软件（FOSS）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;好吧，以上是&lt;a href=&quot;https://sourcehut.org/&quot;&gt;sourcehut官网&lt;/a&gt;列出的Feature ，好像听起来也就那样？&lt;/p&gt;
+
+&lt;p&gt;但是我要说，如果用一句话来评价sourcehut的话，应该是：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;sourcehut融合了黑客的核心智慧和雅致的 Web 界面。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果不想看我废话，直接体验的地址 &lt;a href=&quot;https://sr.ht/&quot;&gt;点击&lt;/a&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811022221.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;是的，古典得像是上个世纪的UI， 点进项目主页也看不到熟悉的 issue/PR/fork/start。&lt;/p&gt;
+
+&lt;p&gt;有点像是换皮的&lt;a href=&quot;https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/about/&quot;&gt;Gitweb&lt;/a&gt;  或者 &lt;a href=&quot;https://git.zx2c4.com/cgit/about/&quot;&gt;CGit&lt;/a&gt;，不过它远没有这么简单。
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811121425.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;二-真正的feature&quot;&gt;二. 真正的Feature&lt;/h2&gt;
+&lt;p&gt;我无意对他们官网进行机翻， 这里说下他们吸引我的地方吧：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;简洁的Web UI&lt;/li&gt;
+  &lt;li&gt;模块化&lt;/li&gt;
+  &lt;li&gt;古典而反潮流的工作流&lt;/li&gt;
+  &lt;li&gt;强大的持续集成&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;1-简洁的web-ui&quot;&gt;1. 简洁的Web UI&lt;/h3&gt;
+&lt;p&gt;其实我开始就是被他们的UI风格吸引而入的坑，太有那个味儿了。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-模块化&quot;&gt;2. 模块化&lt;/h3&gt;
+&lt;p&gt;非常经典的Unix设计哲学，“Do one thing and do it well”。&lt;/p&gt;
+
+&lt;p&gt;整个平台由许多单独的服务组成，高度模块化，每个服务只做一件事，做好一件事，所有模块可以自由组合，按需使用。&lt;/p&gt;
+
+&lt;p&gt;例如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git.sr.ht&lt;/code&gt;  就只做 Git 的代码托管， &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;todo.sr.ht&lt;/code&gt;   就只做 issue 和  bug的追踪，而账号管理又是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;meta.sr.ht&lt;/code&gt;模块来做。&lt;/p&gt;
+
+&lt;p&gt;关于更详细的各个模块的介绍可以看下面的  &lt;a href=&quot;#三. 各模块介绍&quot;&gt;各模块介绍&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h3 id=&quot;3-古典而反潮流的工作流&quot;&gt;3. 古典而反潮流的工作流&lt;/h3&gt;
+&lt;p&gt;这就是sourcehut最具争议，而也是 sourcehut之所以为sourcehut的一点：&lt;/p&gt;
+
+&lt;p&gt;彻底抛弃 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pull/Request&lt;/code&gt; 的工作流，而回归最古老的去中心化方式————邮件列表（Email-List）。&lt;/p&gt;
+
+&lt;p&gt;很多人一提到开源项目工作流，可能首先想到的就是PR模型，对于邮件列表的形式维护代码比较陌生。&lt;/p&gt;
+
+&lt;p&gt;首先PR并不是Git本身的一种功能，然后他的历史并不久远，毕竟2008年 Github才正式上线。&lt;/p&gt;
+
+&lt;p&gt;而 上世纪80 年代中期，Richard Stallman 就发起了 自由软件运动(Free Software Movement)，邮件列表那时就被广泛使用。&lt;/p&gt;
+
+&lt;p&gt;很多 Git 项目，包括 &lt;a href=&quot;https://git-scm.com/docs/SubmittingPatches&quot;&gt;Git 本身&lt;/a&gt;，以及很多古老的大型项目，都是通过邮件列表来维护的。&lt;/p&gt;
+
+&lt;p&gt;邮件列表有以下一些显而易见的优点：
+    -  邮件列表会将更新转发给所有列表订阅者，任何人都可以轻松地将它们变成另一个公共存档，独立于 sourcehut。
+    - 这样的存档也可用于以标准文件格式一键导出和导入列表管理员。使用 DKIM 和 PGP 签名等，您甚至可以跨任意来源保持这些消息的真实性。
+    - 不依赖一个中心化的代码仓库&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在如今这个时代，拥抱邮件列表，完全不用PR，无疑是反叛的，同时也具有一种对古典传统方式的卫道者精神。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;当然有很多人质疑，认为这会阻碍 sourcehut的发展，以及扩大用户群体。对此，sourcehut创始人 &lt;a href=&quot;https://drewdevault.com/&quot;&gt;Drew DeVault&lt;/a&gt; 这么认为：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-  我们更愿意教人们如何使用强大的工具，而不是制作更容易使用的不太强大的工具。我不相信用户没有能力学习新事物。
+-  我没有最大化 sourcehut 的可能用户群。我正在为那些认为这些原则值得的人构建一个体现我的开发原则的平台。
+-  (相对于邮件列表)PR模型并不容易使用，您只是已经知道如何使用它
+-  sourcehut无意成为Github的另一个模仿者(Clone)
+-  对，它(sourcehut)不是革命性的
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;如果你对邮件列表这种形式比较感兴趣，这里有一些教程和资源：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://git-send-email.io&quot;&gt;git-send-email 三分钟教程&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.git-scm.com/book/zh/v2/%E5%88%86%E5%B8%83%E5%BC%8F-Git-%E5%90%91%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E8%B4%A1%E7%8C%AE#_project_over_email&quot;&gt;通过邮件的公开项目-Git-向一个项目贡献&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://drewdevault.com/2022/07/25/Code-review-with-aerc.html&quot;&gt;Code review at the speed of email&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;通常建议为开发设置一个单独的email客户端，比如&lt;a href=&quot;https://aerc-mail.org/&quot;&gt;aerc&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;4-强大的持续集成ci&quot;&gt;4. 强大的持续集成CI&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在各种Linux发行版和BSD上运行完全虚拟化的构建&lt;/li&gt;
+  &lt;li&gt;提交临时Job，而不需要推送到你的版本库中&lt;/li&gt;
+  &lt;li&gt;为电子邮件、webhooks等提供构建后触发器&lt;/li&gt;
+  &lt;li&gt;构建失败后可以用SSH登录以进一步调查&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;很多知名项目，比如 &lt;strong&gt;Zig&lt;/strong&gt;, &lt;strong&gt;Nim&lt;/strong&gt;, &lt;strong&gt;NeoVim&lt;/strong&gt; 等都单独使用它的CI模块。
+是的，如前所述，你可以不用sourcehut托管代码而单独使用它的任意模块。&lt;/p&gt;
+
+&lt;h3 id=&quot;5-官网feature的一些注解&quot;&gt;5. 官网Feature的一些注解&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;最快和最轻的软件仓库&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;这是他们&lt;strong&gt;完  全  客  观&lt;/strong&gt;的， 和Gitea Gitlab等的&lt;a href=&quot;https://forgeperf.org/&quot;&gt;性能对比&lt;/a&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;绝对没有跟踪或广告&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;可以做到0 JS，不搜集用户隐私
+    &lt;ul&gt;
+      &lt;li&gt;想想Gitlab， 如果禁用了JS根本就不能用&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;试试如果挂着Tor，哪些平台能工作得很好&lt;/li&gt;
+  &lt;li&gt;就算被Gov施压，也不会突然删除你的代码，而会给你留出充分的时间备份，并向你道歉（&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;也绝不会扫你的公开或私人仓库投喂人工智能&lt;/del&gt; ，确实是个隐私友好的好Code Forge&lt;/li&gt;
+  &lt;li&gt;官方的Nginx配置:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220813193046.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;无需注册账户&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用git-email 的工作流，贡献代码完全不需要注册账户&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;100%的自由开源软件（FOSS） 以及 &lt;a href=&quot;https://man.sr.ht/billing-faq.md&quot;&gt;付费&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;所有代码都是自由 和 &lt;a href=&quot;https://sr.ht/~sircmpwn/sourcehut/&quot;&gt;开源的&lt;/a&gt;，你可以自由分发改写使用它们，同时注册&lt;strong&gt;免费账号&lt;/strong&gt;来贡献代码。
+不过创建自己的代码仓库和项目，以及其他功能，只对&lt;strong&gt;付费用户&lt;/strong&gt;开放。（不过目前项目仍处于alpha阶段，付款&lt;strong&gt;不是强制&lt;/strong&gt;的，但仍期待您付费&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;为什么付费？&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;托管这些服务不是免费的，甚至也不便宜。钱必须来自某处。&lt;/p&gt;
+
+  &lt;p&gt;大多数其他公司都是由风险资本提供财政支持的，其形式是由少数人的大量投资。如果你免费使用他们的服务，或者即使你为他们的付费计划支付适度的费用，他们也没有动力首先为你的需求服务。他们对投资者负责，在他们的要求下，他们可能实施你不喜欢的变化：侵入性跟踪，出售你的数据，等等。&lt;/p&gt;
+
+  &lt;p&gt;sourcehut没有接受，也永远不会接受任何外部投资。我们唯一的收入来源是来自sr.ht用户的账户支付。这激励我们只考虑你的需求，而不是将你作为一种资源来利用。这种财务关系对双方都更加负责。&lt;/p&gt;
+
+  &lt;p&gt;与GitHub和GitLab不同，你的sr.ht订阅费用会留在开源之中。sr.ht是100%的自由软件，大部分在GNU Affero General Public license（又称AGPL 3.0）下许可。我们结合社区的变化，共同建立最好的服务。你的付款提供了运营成本，保持有人在线维护网站，开发新功能，并提供可靠的服务。我们承诺只将我们的利润投资于自由软件或自由文化的努力，事实上我们已经赞助了许多这样的项目。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这是三种订阅套餐， &lt;strong&gt;没有任何区别&lt;/strong&gt; （😄， 量力而行。
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811132732.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果你是学生（&lt;del&gt;打钱&lt;/del&gt;，不想付费或者其他原因，可以发邮件联系，他们会慷慨地给你免除费用。&lt;/p&gt;
+
+&lt;p&gt;或者可以阅读下面的 &lt;a href=&quot;#四. 自托管指南&quot;&gt;自托管指南&lt;/a&gt; ， 自己搭建。&lt;/p&gt;
+
+&lt;h2 id=&quot;三-各模块介绍&quot;&gt;三. 各模块介绍&lt;/h2&gt;
+
+&lt;h3 id=&quot;gitsrht-和-hgsrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git.sr.ht&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hg.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;这两个服务都是托管代码仓库的服务：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;公开的、私人的和 “unlist “的存储库&lt;/li&gt;
+  &lt;li&gt;细致的访问控制，包括对没有账户的用户的访问&lt;/li&gt;
+  &lt;li&gt;还提供一流的Mercurial支持&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;git.sr.ht 用来托管git， hg.sr.ht用来托管Mercuria（另一个版本控制器&lt;/p&gt;
+
+&lt;p&gt;仓库有一个额外的设置，即“&lt;strong&gt;unlist&lt;/strong&gt;”，只有在知道 URL 的情况下才能访问，不会显示在个人页面。&lt;/p&gt;
+
+&lt;h3 id=&quot;mansrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个wiki服务：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;使用git进行版本控制和管理你的wiki&lt;/li&gt;
+  &lt;li&gt;使用你喜欢的任何组织层次，扁平化的维基并不强求&lt;/li&gt;
+  &lt;li&gt;支撑 &lt;a href=&quot;https://man.sr.ht/&quot;&gt;详细的sourcehut手册&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;todosrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;todo.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;一个 issue and bug 追踪服务：
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/20220815214816.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;只有可操作的任务 - 没有讨论、问题或重复的任务&lt;/li&gt;
+  &lt;li&gt;安全问题的私人错误报告和错误跟踪器&lt;/li&gt;
+  &lt;li&gt;通过电子邮件参与，无论是否有账户&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;跟issue不一样的是，这里只应该有明确的，可执行的任务，讨论和反馈应该通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lists.sr.ht&lt;/code&gt;创建专门的讨论区。&lt;/p&gt;
+
+&lt;h3 id=&quot;listssrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lists.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;提供邮件列表服务，所有的 需要邮件列表实现的功能都是通过它：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;web 补丁review工具&lt;/li&gt;
+  &lt;li&gt;可搜索的主题邮件档案&lt;/li&gt;
+  &lt;li&gt;与第三方邮件列表合作的工具&lt;/li&gt;
+  &lt;li&gt;由git send-email提供技术支持&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;buildssrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;builds.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;前面提到过的持续集成服务。&lt;/p&gt;
+
+&lt;h3 id=&quot;pastesrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;paste.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;提供文本文件托管，有点像Bitwarden-send，或者Gist， 支持的功能有：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;语法高亮&lt;/li&gt;
+  &lt;li&gt;历史记录&lt;/li&gt;
+  &lt;li&gt;Markdown 渲染&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;metasrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;meta.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;是sr.ht的认证中心和提供账户服务。
+运行任何其他sr.ht服务的前提条件就是需要安装 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;meta.sr.ht&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;来自每个服务的PGP加密和签名的电子邮件&lt;/li&gt;
+  &lt;li&gt;带有TOTP的双因素认证&lt;/li&gt;
+  &lt;li&gt;帐户活动的详细审计日志&lt;/li&gt;
+  &lt;li&gt;细致的第三方OAuth访问控制&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pagessrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pages.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;提供静态页面的托管，类似 Cloudfare pages或者Github pages.&lt;/p&gt;
+
+&lt;h4 id=&quot;chatsrht&quot;&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chat.sr.ht&lt;/code&gt;&lt;/strong&gt;&lt;/h4&gt;
+
+&lt;p&gt;为用户维护一个持久的 IRC 连接，并通过离线消息传递、日志持久性和各种其他改进等有用的功能扩展 IRC。&lt;/p&gt;
+
+&lt;p&gt;除了接受来自任何第三方 IRC 客户端的连接外，chat.sr.ht 还提供了一个现成的 Web 客户端。
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811190836.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://chat.sr.ht&quot;&gt;chat.sr.ht&lt;/a&gt;，只对付费用户开放。&lt;/p&gt;
+
+&lt;h2 id=&quot;四-自托管指南&quot;&gt;四. 自托管指南&lt;/h2&gt;
+&lt;h4 id=&quot;使用包管理器安装&quot;&gt;使用包管理器安装&lt;/h4&gt;
+&lt;p&gt;是官方的安装&lt;a href=&quot;https://man.sr.ht/installation.md#installing-from-packages&quot;&gt;文档&lt;/a&gt;，官方提供了 &lt;a href=&quot;https://man.sr.ht/packages.md#alpine-linux&quot;&gt;Alpine Linux&lt;/a&gt;、 &lt;a href=&quot;https://man.sr.ht/packages.md#arch-linux&quot;&gt;Arch Linux&lt;/a&gt; 和&lt;a href=&quot;https://man.sr.ht/packages.md#debian&quot;&gt;Debian&lt;/a&gt;发行版的安装包，也推荐此安装方式。&lt;/p&gt;
+
+&lt;h4 id=&quot;自己编译&quot;&gt;自己编译&lt;/h4&gt;
+
+&lt;p&gt;这是他们的&lt;a href=&quot;https://sr.ht/~sircmpwn/sourcehut/sources&quot;&gt;官方代码仓库&lt;/a&gt;，但是非常不推荐自己编译，因为他们自己人都不得不承认这极其地麻烦。&lt;/p&gt;
+
+&lt;p&gt;要跑起来他们代码的化，你最少需要安装Go、python、以及nodejs，以及一堆依赖。
+还要注意构建顺序，反正最后我是没成功 🤷🏻。
+如果对这种方式感兴趣的话，下面两篇文章可以参考：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://emersion.fr/blog/2021/setting-up-sr.ht-for-local-development/&quot;&gt;setting-up-sr.ht-for-local-development&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.sudo-apt.me/2022/04/19/some-thoughts-on-installing/&quot;&gt;some thoughts on installing srht&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;docker安装&quot;&gt;Docker安装&lt;/h3&gt;
+&lt;p&gt;当有人问Drew 关于将sourcehut运行在Docker中的事情时，他回复道：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;我们这不欢迎你们这类人，不要再问了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其实使用Docker比较违反sourcehut原本的精神：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;你应该愿意理解某些东西是如何工作的，而不是拒绝任何不是即插即用的东西&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;但是复杂繁琐的配置和环境的安装（还有不完善的文档）可能会吓退很多人，于是 我写了个用Docker运行sourcehut的项目。&lt;/p&gt;
+
+&lt;p&gt;简化了很多配置，可以交互式地生成 最终的 配置文件，和DockerCompose文件。&lt;/p&gt;
+
+&lt;p&gt;不推荐用在生产环境中，仅推荐感兴趣的人使用它来简单体验。&lt;/p&gt;
+
+&lt;p&gt;项目地址：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/UlyC/sourcehut-docker&quot;&gt;Github&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://git.sr.ht/~ulyc/sourcehut-docker&quot;&gt;sourcehut&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;彩蛋&quot;&gt;彩蛋&lt;/h2&gt;
+
+&lt;p&gt;为什么他们的域名是 sr.ht，而不是src.ht呢?
+其实 sourcehut最初的名字叫 sir hat。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考链接&quot;&gt;参考链接&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://news.ycombinator.com/item?id=26493495&lt;/li&gt;
+  &lt;li&gt;https://news.ycombinator.com/item?id=23030489&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://drewdevault.com/2019/03/04/sourcehut-design.html&quot;&gt;sourcehut’s spartan approach to web design&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cadence.moe/blog/2022-07-03-git-forge-opinions-github-gitlab-gitea-sourcehut&quot;&gt;Git forge opinions: GitHub, GitLab, Gitea, sourcehut&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://itsfoss.com/history-of-foss/&quot;&gt;A Brief History of FOSS Practices&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;https://en.wikipedia.org/wiki/Git&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 10 Aug 2022 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2022/08/10/sourcehut-the-hackers-forge/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2022/08/10/sourcehut-the-hackers-forge/</guid>
+        
+        <category>Blog</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>豆瓣逃离计划</title>
+        <description>&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;第一次和阿北认识是在十几年前的上海，当时和Mtime的马锐拉三个人约在徐家汇的一个星巴克里，商量如何把豆瓣、VeryCD、Mtime的电影资料用开放协议打通。 那是Web2.0的黄金年代，大家都认为开放是理所应当的，各网站各司其职拼凑起一个更丰富的互联网。无需登录注册的API、RSS、XML导出都是当年的标配。                                                                          &lt;br /&gt;
+                                                               —— @Twitter:DashHuang&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;豆瓣逃离计划&quot;&gt;豆瓣逃离计划&lt;/h1&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20220109161018087.png&quot; alt=&quot;image-20220109161018087&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最初的豆瓣还是很理想主义的，有点像书影音类的维基百科，所有人编辑贡献条目，开放的API提供给所有人使用，拥抱开放，回馈开放。&lt;/p&gt;
+
+&lt;p&gt;可惜事情起了变化，互联网变得愈加封闭，豆瓣也不例外：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;2018 年 9 月 &lt;a href=&quot;[https://www.v2ex.com/t/485687](https://www.v2ex.com/t/485687)&quot;&gt;豆瓣开放平台下线&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2019 年 4 月 &lt;a href=&quot;https://www.zhihu.com/question/316761965&quot;&gt;豆瓣的图书 api 无法使用&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2020年 各电影 api 无法使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;又由于越来越多的不可抗力，越来越多的豆瓣书影音条目被删除消失，也有越来越多的豆瓣账号炸号。&lt;/p&gt;
+
+&lt;p&gt;不过“大事已不可问，我辈且看春光”，豆瓣的反爬只会越来越严格，奉劝诸君有意的尽快备份了罢。&lt;/p&gt;
+&lt;h2 id=&quot;关于&quot;&gt;关于&lt;/h2&gt;
+&lt;p&gt;禀着不重复造轮子的原则，在写这个项目之前，我使用了&lt;a href=&quot;https://www.notion.so/952c54f01d3d462b804e194ebc1f4a9d&quot;&gt;豆瓣跑路计划&lt;/a&gt; 和&lt;a href=&quot;https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/&quot;&gt;豆瓣读书+电影+音乐+游戏+舞台剧导出工具&lt;/a&gt;  ，但是都不太符合我的需求。&lt;/p&gt;
+
+&lt;p&gt;前者导致我账号被封，而且数据也没爬下来。
+后者对于有些用户必须登录，而且导出的数据缺少封面信息，&lt;del&gt;不利于装逼&lt;/del&gt;。&lt;/p&gt;
+
+&lt;p&gt;另外 &lt;a href=&quot;https://blog.doufen.org/posts/tofu-user-guide/&quot;&gt;豆伴&lt;/a&gt;项目看起来不错，不过我没有Chrome浏览器，而且需要登录，又有封号风险，我个人不需要导出太多数据，所以没有尝试。&lt;/p&gt;
+
+&lt;p&gt;对我来说最好用的其实是&lt;a href=&quot;https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/&quot;&gt;豆瓣读书+电影+音乐+游戏+舞台剧导出工具&lt;/a&gt; ，作者思路很强（不去爬取条目详情页，防止触发反爬），爬取速度快，除了无法导出封面，各方面都不错。&lt;/p&gt;
+
+&lt;p&gt;所以本项目是基于&lt;a href=&quot;https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/&quot;&gt;豆瓣读书+电影+音乐+游戏+舞台剧导出工具&lt;/a&gt; 改造而成。&lt;/p&gt;
+
+&lt;h3 id=&quot;feature&quot;&gt;Feature&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;无需登录&lt;/li&gt;
+  &lt;li&gt;跨平台，有浏览器就能用，无需自己折腾环境&lt;/li&gt;
+  &lt;li&gt;支持导出  看/读/玩/听  过的  电影 舞台剧/图书/游戏/音乐 为csv文件&lt;/li&gt;
+  &lt;li&gt;导出数据含有封面&lt;/li&gt;
+  &lt;li&gt;提供简单的Notion模板&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;demo&quot;&gt;Demo&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;导出的数据&lt;/strong&gt;：
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211180338.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Notion&lt;a href=&quot;https://enchanting-cobra-930.notion.site/bf80b6b22bca446d9bd1e817d314cb0e&quot;&gt;页面&lt;/a&gt;&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Table格式&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211181154.png&quot; alt=&quot;&quot; /&gt;
+&lt;strong&gt;Gallery&lt;/strong&gt;格式：
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211181412.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO：&lt;/h3&gt;
+&lt;p&gt;&lt;del&gt;如果还继续更新的话&lt;/del&gt;&lt;/p&gt;
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;支持导出 想/在  读 /看/玩/听 的数据&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;增加一键导出以上所有数据&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;导出&quot;&gt;导出&lt;/h2&gt;
+
+&lt;h3 id=&quot;安装浏览器-脚本管理器-插件&quot;&gt;安装浏览器 脚本管理器 插件&lt;/h3&gt;
+&lt;p&gt;基本上有两种选择&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Tampermonkey&lt;/strong&gt;   油猴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;2.9版本以后就不开源了，而且有很多安全问题（比如会自动禁用CSP），不是很推荐。
+不过使用人数最多，知名度最广，如果你已经在使用了就用它就行。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://violentmonkey.github.io/&quot;&gt;Violentmonkey&lt;/a&gt;  暴力猴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;完全开源，又安全的脚本管理器插件，如果你之前没有使用过它，强烈推荐你使用暴力猴。&lt;/p&gt;
+
+&lt;h3 id=&quot;安装脚本&quot;&gt;安装脚本&lt;/h3&gt;
+&lt;p&gt;访问&lt;a href=&quot;https://greasyfork.org/en/scripts/439867-%E8%B1%86%E7%93%A3%E8%AF%BB%E4%B9%A6-%E7%94%B5%E5%BD%B1-%E9%9F%B3%E4%B9%90-%E6%B8%B8%E6%88%8F-%E8%88%9E%E5%8F%B0%E5%89%A7%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;访问主页并导出&quot;&gt;访问主页并导出&lt;/h3&gt;
+
+&lt;h4 id=&quot;通用主页&quot;&gt;通用主页&lt;/h4&gt;
+&lt;p&gt;不登录访问自己的通用主页大致有这几种方法：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;如果你知道你的豆瓣id 直接访问 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://www.douban.com/people/{你的豆瓣id}&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;如果手机登录了app，在个人主页，选择&lt;strong&gt;推荐&lt;/strong&gt;- &lt;strong&gt;复制链接&lt;/strong&gt; ，在安装了脚本的浏览器打开&lt;/li&gt;
+  &lt;li&gt;如果可以在&lt;a href=&quot;https://www.douban.com/search&quot;&gt;这里&lt;/a&gt;搜索自己的昵称&lt;/li&gt;
+  &lt;li&gt;搜索引擎 搜索自己的 昵称  + site: douban.com&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果你可以直接访问，那很幸运，可以看到自己的豆瓣页面上多出几个链接：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://zhuzi.dev/assets/images/douban-backup-monkey-script.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;直接点击，会自动开始导出，可能需要一点时间，中途不要做其他操作，完成后会弹出csv文件的下载提示。 然后下面的可以不用看，直接跳转到 [迁移][#迁移] 一节继续。&lt;/p&gt;
+
+&lt;p&gt;不过一些老用户如果没登录似乎不让直接访问主页，会自动跳转到亲切的登录页：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220117204859.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;不过也不怕，往下看。&lt;/p&gt;
+
+&lt;h4 id=&quot;其他主页&quot;&gt;其他主页&lt;/h4&gt;
+&lt;p&gt;虽然豆瓣限制了未登录用户 访问 个别的个人主页，但是目前（2022.02.12） 还没有限制访问 单个子项目的主页。&lt;/p&gt;
+
+&lt;p&gt;注： 豆瓣ID就是你主页的最后一串数字&lt;/p&gt;
+&lt;h5 id=&quot;豆瓣电影主页&quot;&gt;豆瓣电影主页&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://movie.douban.com/people/{你的豆瓣id}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220117211539.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;点击标记的链接即可自动开始导出，图书音乐等同理，地址如下：&lt;/p&gt;
+
+&lt;h5 id=&quot;豆瓣读书主页&quot;&gt;豆瓣读书主页&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://book.douban.com/people/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;豆瓣音乐主页&quot;&gt;豆瓣音乐主页&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; https://music.douban.com/people/{你的豆瓣id}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;豆瓣游戏主页&quot;&gt;豆瓣游戏主页&lt;/h5&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://www.douban.com/people/{你的豆瓣id}/games
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;豆瓣舞台剧主页&quot;&gt;豆瓣舞台剧主页&lt;/h5&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://www.douban.com/location/people/{你的豆瓣id}/drama
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;迁移到notion&quot;&gt;迁移到Notion&lt;/h2&gt;
+
+&lt;h3 id=&quot;复制模板&quot;&gt;复制模板&lt;/h3&gt;
+&lt;p&gt;如果自己有更好的模板可以跳过这步。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://enchanting-cobra-930.notion.site/bf80b6b22bca446d9bd1e817d314cb0e?v=e0cbf230f1974e7e8b79291390cf0402&quot;&gt;&lt;strong&gt;🎬电影 movie&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://enchanting-cobra-930.notion.site/fa60e8b0044340489592bfc6a070fc18?v=fd9fcd94cbfc4b0ba051eda050bb8d2b&quot;&gt;📚图书 book&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://enchanting-cobra-930.notion.site/47f93d9d6a534ff7bbde5a32b7fc9ffc?v=97ce2baa617e46bcad129f539fbc5531&quot;&gt;&lt;strong&gt;🎧音乐 music&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://enchanting-cobra-930.notion.site/b2df031e68ca4cc09bd3bf7797be7420?v=d3e0a6460e2848f7a086845ffdc33987&quot;&gt;&lt;strong&gt;👹 舞台剧&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://enchanting-cobra-930.notion.site/ec22dffba0d24cdea02932ff89650f89?v=09c84bd7d5884f5ea3976611bf798b0d&quot;&gt;&lt;strong&gt;🎮 游戏&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;导入&quot;&gt;导入&lt;/h3&gt;
+&lt;p&gt;进入自己相应的note，选择刚刚导出的csv文件:
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211191502.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;迁移到其他目的地&quot;&gt;迁移到其他目的地&lt;/h2&gt;
+&lt;p&gt;逃离豆瓣之后，我们还有其他选择吗？&lt;/p&gt;
+
+&lt;p&gt;大体有两种方向：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;自己维护
+    &lt;ol&gt;
+      &lt;li&gt;优点是数据完全自己掌控，更好的隐私保护&lt;/li&gt;
+      &lt;li&gt;缺点是需要自己维护 书影音 数据&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;使用其他更开放的服务
+    &lt;ol&gt;
+      &lt;li&gt;优点是不需要自己维护 书影音 数据&lt;/li&gt;
+      &lt;li&gt;缺点是隐私和以后数据的迁移问题&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;自己维护&quot;&gt;自己维护&lt;/h3&gt;
+&lt;p&gt;方案很多，有许多大佬自己使用excel维护，也不失为一种方案。&lt;/p&gt;
+
+&lt;p&gt;不过这里我只推荐上面Notion和下面Obsidian的方案：&lt;/p&gt;
+
+&lt;h4 id=&quot;obsidian&quot;&gt;Obsidian&lt;/h4&gt;
+&lt;p&gt;这种方式更适合读书笔记比较多的用户。&lt;/p&gt;
+
+&lt;p&gt;效果图：
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211211748.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211211459.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因为这种方法会搞乱我现在的知识库Vault，所以我没有使用这种方法。&lt;/p&gt;
+
+&lt;p&gt;这里说下大概的思路：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;可以使用&lt;a href=&quot;https://github.com/hadynz/obsidian-kindle-plugin&quot;&gt;obsidian-kindle-plugin&lt;/a&gt;将kindle的读书笔记导入Obsidian&lt;/li&gt;
+  &lt;li&gt;新的读书笔记设置好&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YAML Front Matter&lt;/code&gt;,使用Templater + Quikadd新建&lt;/li&gt;
+  &lt;li&gt;使用Dataview + Gallery 回顾统计和展示&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;用到的插件：Templater + Quikadd + Dataview + Gallery
+如果对Obsidian管理读书记录的方式感兴趣，推荐这篇文章：&lt;a href=&quot;https://lillian-who.github.io/2021/08/18/Obsidian%E5%B7%A5%E4%BD%9C%E6%B5%81/&quot;&gt;Obsidian工作流&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;使用其他更开放的服务&quot;&gt;使用其他更开放的服务&lt;/h3&gt;
+&lt;p&gt;推荐两个联邦宇宙相关的服务&lt;/p&gt;
+
+&lt;h4 id=&quot;neodb&quot;&gt;&lt;a href=&quot;https://neodb.social/&quot;&gt;NeoDB&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;一个刚起步的&lt;a href=&quot;https://github.com/alphatownsman/boofilsic/tree/neo&quot;&gt;开源&lt;/a&gt;项目，需要先持有Maston或者Pleroma账号，可以标记书籍、电影、音乐和游戏，数据非常全面，除了豆瓣条目之外，还有GoogleBooks、Goodreads、Steam、Spotify、Bandcamp、IMDB、TMDB、Bangumi的数据。&lt;/p&gt;
+
+&lt;p&gt;目前支持导入自己的豆瓣数据，具体使用方法参见  &lt;a href=&quot;https://zhuanlan.zhihu.com/p/412792462&quot;&gt;转移某网站书影音标记&lt;/a&gt;。
+似乎也可以方便地把自己的数据从NeoDB导出。&lt;/p&gt;
+
+&lt;p&gt;【注意】&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对于NeoDB授权风险的&lt;a href=&quot;https://bgme.me/@bgme/106941175247621946&quot;&gt;讨论&lt;/a&gt;，站长改进的进度可查看&lt;a href=&quot;https://mastodon.social/@neodb&quot;&gt;站长主页&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;虽然代码开源，但是数据为站长私有，很多条目未登录的话是看不了的， 从这点看开放性不如当初的豆瓣。&lt;/li&gt;
+  &lt;li&gt;虽然账号系统依托于去中心化的联邦宇宙，但是本身并不是去中心化的，是站长一人在维持。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;bookwyrm&quot;&gt;&lt;a href=&quot;https://joinbookwyrm.com/&quot;&gt;BookWyrm&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;江尚寒翻译为书蛊，与Mastodon（长毛象）同属联邦宇宙的一员，&lt;a href=&quot;https://github.com/bookwyrm-social/bookwyrm&quot;&gt;开源&lt;/a&gt;，自带社交功能，缺点是只能标记 书籍，未有电影和音乐等其他数据。&lt;/p&gt;
+
+&lt;p&gt;这里是已有的&lt;a href=&quot;https://bookwyrm.social/list/52&quot;&gt;中文书籍列表&lt;/a&gt;，条目还比较少，具体使用可以参见&lt;a href=&quot;https://jiangshanghan.art.blog/2021/07/24/%e8%81%94%e9%82%a6%e5%ae%87%e5%ae%99%e6%bc%ab%e6%b8%b8%e6%8c%87%e5%8d%97%ef%bc%886%ef%bc%89/&quot;&gt;“联邦宇宙”漫游指南（6）从douban到bookwyrm&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;同步可选&quot;&gt;同步（可选）&lt;/h2&gt;
+
+&lt;p&gt;其实不太推荐这种方式，既然决心逃离豆瓣，就该彻底点。
+但是有些用户可能还是割舍不掉豆瓣的便捷，毕竟目前还没有可以完全替代豆瓣的产品。&lt;/p&gt;
+
+&lt;p&gt;目前一个比较可行的方法是，使用 GitHub Actions 定时从 RSS 信息将豆瓣标记更新同步到 Notion:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/&quot;&gt;方法说明&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bambooom/douban-backup/blob/main/sync-rss.js&quot;&gt;代码仓库&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;最后&quot;&gt;最后&lt;/h2&gt;
+
+&lt;p&gt;因为本工具爬取的并不是 具体条目页面，所以页面访问限制不太严格，只是导出自己的数据完全足够， 我测试时没有登录，大概测试数万条数据才开始限制IP。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20220110180810931.png&quot; alt=&quot;image-20220110180810931&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但局限也很明显， 就是这里无法准确获取更多有关条目本身的信息，比如电影条目的 IMDb 链接、制片国家，也无法精准把导演和演员之类的人名区分开。&lt;/p&gt;
+
+&lt;p&gt;如果有能力的同学可以参考下面的API做更强大的功能：&lt;/p&gt;
+
+&lt;h4 id=&quot;电影api&quot;&gt;电影API&lt;/h4&gt;
+
+&lt;p&gt;只找到一个可以使用的&lt;a href=&quot;https://github.com/iiiiiii1/douban-imdb-api&quot;&gt;项目&lt;/a&gt;，可以根据豆瓣Subject ID查询电影信息：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://api.wmdb.tv/movie/api?id=doubanid
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果需要电影条目更详尽的信息，可以使用这个API自己写程序补全。&lt;/p&gt;
+
+&lt;h4 id=&quot;图书api&quot;&gt;图书API&lt;/h4&gt;
+
+&lt;p&gt;如果能得到图书的ISBN号，可以调取这两个项目的API：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://jike.xyz/api/isbn.html&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;https://github.com/qiaohaoforever/BambooIsbn&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我最初的想法是先爬取图书条目的ISBN，然后从他处查询补全信息，但是从个人页面的条目信息无法获取，需要进入条目详情页才能得到，这样会触发反爬机制，遂作罢。&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 11 Feb 2022 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2022/02/11/Douban-Escape-Plan/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2022/02/11/Douban-Escape-Plan/</guid>
+        
+        <category>Blog</category>
+        
+        <category>爬虫</category>
+        
+        <category>知识管理</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>元宵汤圆异同考</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;今人捏餡作小塊,入糯米粉滾之,再濕再滾,大小合宜而止,曰元宵;以水和糯米粉,擘塊,實以餡包之，曰汤圆&lt;/p&gt;
+
+  &lt;p&gt;​&lt;/p&gt;
+  &lt;h1 id=&quot;元宵汤圆异同考&quot;&gt;元宵汤圆异同考&lt;/h1&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　现在普遍的说法是【北滚元宵，南包汤圆】，或者说主要区别是制作方法上不同，如下图所示:元宵是[摇]出来的,汤圆是[包]出来的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://bnextmedia.s3.hicloud.net.tw/image/album/2020-02/img-1580956848-24457@600.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;​		按这个说法我一北方人从小元宵节吃的都是汤圆，只有在吃水席的时候吃的“炸糯米丸子”和“炸元宵”才算这个意义上的元宵。&lt;/p&gt;
+
+&lt;p&gt;　　查了许多文章全是人云亦云语焉不详，还多有前后矛盾之处。于是我决定来捋一捋其间门道。&lt;/p&gt;
+
+&lt;p&gt;　　而要说元宵不得不从元宵节说起。&lt;/p&gt;
+
+&lt;h2 id=&quot;元宵来源&quot;&gt;元宵来源&lt;/h2&gt;
+
+&lt;p&gt;　　元宵节的“元”指上元节，“宵”指晚上，节日来源说法不一，现在普遍认为是在汉魏时期形成的风俗。&lt;/p&gt;
+
+&lt;p&gt;　　元宵或者说汤圆这种食物，最初叫做“圆子”“浮圆子”“糖元”“水团”等，现代方言中也有许多称呼：&lt;/p&gt;
+
+&lt;p&gt;　　吴语称为“汤团”；兴化语称之为“丸囝”；闽南语称为“圆仔”；客家语称为“惜圆、粄圆、雪圆仔、圆粄仔”；闽东语马祖话称“汤丸”；闽东语福州话称为“元宵丸”&lt;/p&gt;
+
+&lt;p&gt;　　此物最早的雏形应该是《太平广记·卷二百四十三·尚食令》中提到的一种食物：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;好麻油一二斗，南枣烂面少许…..然后取油铛烂面等调停。袜肚中取出银盒一枚，银篦子银笊篱各一。候油煎熟。于盒中取䭔子豏。豏原作𨃰。据明钞本改。以手于烂面中团之，五指间各有面透出。以篦子刮却。便置䭔子于铛中。候熟，以笊篱漉出。以新汲水中良久。却投油铛中。三五沸取出。抛台盘上，旋转不定，以太圆故也。其味脆美，不可名状。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　类似以面裹枣泥油炸而成的一种“炸元宵”。&lt;/p&gt;
+
+&lt;p&gt;　　而元宵节吃圆子最早的记载见于 宋代 周必大《平园续稿》：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“元宵煮浮圆子；前辈似未曾赋此，坐间成四韵。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　后来因为人们都在元宵节吃圆子，故圆子也称作元宵。而具体什么时候开始把圆子称作元宵，现在许多文章里都说是始于宋末元初，而我查到把元宵当做食物的记载最早只到明人唐胄《正德琼台志》所载：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;元夕于二、三日间以糯粉搓丸，小者煮浸糖水，大者裹以蔗糖，名元宵丸。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　明代小说《金瓶梅》中多处提到元宵这一食品，有“玫瑰元宵”“元宵圆子”等，而未提及“汤圆”这一称呼。而同时期除了《酌中志》中提到“汤圆”这一说法，其他处未见。&lt;/p&gt;
+
+&lt;p&gt;　　到了南明和清朝之后，笔记小说中才多见“汤圆”这一叫法。&lt;/p&gt;
+
+&lt;h2 id=&quot;元宵汤圆区别-元宵节吃哪个&quot;&gt;元宵汤圆区别 ，元宵节吃哪个&lt;/h2&gt;
+
+&lt;p&gt;　　明代刘若愚的《酌中志·饮食好尚纪略》讲：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“吃元宵，其制法用糯米细面，内用核桃仁、白糖为果馅、洒水滚成，如核桃大小，即江南所称汤圆也。”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　可见此时“汤圆”和“元宵”尚不分家。&lt;/p&gt;
+
+&lt;p&gt;　　现在所谓区分汤圆和元宵的方法所依据的出处来源都未查到可靠来源，搜索到的都是粘贴来粘贴去的文章。&lt;/p&gt;
+
+&lt;p&gt;　　元宵汤圆二者开始有所区分，我查到的最早出自清末民初薛宝辰《素食说略·汤圆》：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今人捏餡作小塊,入糯米粉滾之,再濕再滾,大小合宜而止,曰元宵;以水和糯米粉,擘塊,實以餡包之，曰汤圆。古人作此，当亦不外此二法也。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　由此可知二者本是同一物，皆是元宵节吃的，只不过到清末时已经发展出两种不同做法。&lt;/p&gt;
+
+&lt;p&gt;　　“元宵节吃元宵，冬至吃汤圆”之说也并不全错，清代柯培元《噶玛兰厅志》已经载有：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;冬至节，家家捣米粉为汤圆。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;​        其实当今在民间，汤圆元宵其实多是混称，并没有严格区分。&lt;/p&gt;
+
+&lt;p&gt;​		关于为何清末已经比较清晰分类汤圆元宵了，后来大家又搞混的原因，我有一个脑洞：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;清末民初的时候，元宵和汤圆可能已经被民间明确区分了，可是袁世凱称帝后，因为元(袁)宵(消)谐音，对自己不吉利，他强制把元宵节改为灯节，元宵不许再叫元宵只能叫汤圆，（这个故事未查到可靠出处）政策推行数年之后，元宵汤圆又在民间继续陷入不分家的状态。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;​		元宵汤圆目前的状态有点类似“变（便）蛋”和“皮蛋”。有好事者将用石灰锯末腌的称为“变蛋”，其色明亮偏黄；将草木灰腌的称为“皮蛋”，其色偏黑，带有松枝状花纹的称为“松花蛋”。其实变蛋和皮蛋是一种东西，名字不一样是因为地区差异而不是工艺差异，这个战研老师科普过。&lt;/p&gt;
+
+&lt;p&gt;​		类似的东西还有”车厘子”(cherry)和”樱桃”，”菠萝”和”凤梨”，博物君解释过多次，这些都本是同一种东西，商家为了卖上价格而故意混淆概念。&lt;/p&gt;
+
+&lt;p&gt;​		不过目前以工艺差异起不同名字的说法普及程度比较高，将来普及到一定程度之后可能以此说为准也不一定。毕竟起初“饺子”和“馄饨”也不分家，“馒头”既指带馅的，也指不带馅的。再比如饺子和馄饨又已经细分出云吞、肉燕、扁食和抄手等品类，其间区别也在渐渐清晰。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 25 Feb 2021 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>2021年，用更现代的方法使用PGP（下）</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.&lt;/p&gt;
+
+  &lt;p&gt;​																												—— Bruce Schneier《应用密码学》&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;2021年用更现代的方法使用pgp下&quot;&gt;2021年，用更现代的方法使用PGP（下）&lt;/h1&gt;
+
+&lt;h4 id=&quot;上篇链接&quot;&gt;上篇链接:&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ulyc.github.io/2021/01/13/2021年-用更现代的方法使用PGP-上/&quot;&gt;2021年，用更现代的方法使用PGP（上）&lt;/a&gt;
+&lt;a href=&quot;https://ulyc.github.io/2021/01/18/2021年-用更现代的方法使用PGP-中/&quot;&gt;2021年，用更现代的方法使用PGP（中）&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;pgp-公钥的-发布-与-交换&quot;&gt;PGP 公钥的 发布 与 交换&lt;/h1&gt;
+
+&lt;p&gt;讨论公钥安全交换的中文文章比较少，而这一环是整个加密体系的重中之重。 大部分的PGP教程最后一步就是让小白用户将公钥上传，这是非常过时，且不负责任的，所以这里来详细介绍下PGP 公钥的 发布 与 交换。&lt;/p&gt;
+
+&lt;h2 id=&quot;原则&quot;&gt;原则&lt;/h2&gt;
+
+&lt;p&gt;首先明确一点： 上传公钥到 公钥服务器 &lt;strong&gt;不是&lt;/strong&gt;必要的，甚至是&lt;strong&gt;危险&lt;/strong&gt;的。&lt;/p&gt;
+
+&lt;p&gt;如果你是新手，请不要发布你的公钥到 公钥服务器。&lt;/p&gt;
+
+&lt;h2 id=&quot;引子&quot;&gt;引子&lt;/h2&gt;
+
+&lt;p&gt;通过前文，你已经熟悉了gpg的本地使用， 并且生成了自己的PGP 密钥对。&lt;/p&gt;
+
+&lt;p&gt;想象一下， 如果你生活在1980年代， 想和远方的朋友加密通信，需要先交换彼此的公钥，又没有一个统一的可信的认证机构，这时会有什么问题？&lt;/p&gt;
+
+&lt;p&gt;当面交换吗？当然是个办法，但是相信你不会想要将下列&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609751914957.png&quot; alt=&quot;1609751914957&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这么长的公钥抄写到纸上，然后开车送到朋友那里，再让朋友照着这个输入他的电脑。如果中间有变动，需要重复以上过程n次。&lt;/p&gt;
+
+&lt;p&gt;那么还有其他办法吗？&lt;/p&gt;
+
+&lt;p&gt;那个时代还没有line、wechat这类即时通讯软件，而邮件提供商默认是不可靠的，不然也不会有PGP的诞生。 并且彼时https还未出现，用邮件交换PGP交换公钥显然不太安全。&lt;/p&gt;
+
+&lt;p&gt;你们双方都需要便捷地交换公玥， 并且确认彼此得到的公钥确实是未经篡改过的，真实有效的，就成了一个难题，这样，公钥服务器也就呼之欲出了。&lt;/p&gt;
+
+&lt;h2 id=&quot;公钥服务器-keyserver&quot;&gt;公钥服务器 KeyServer&lt;/h2&gt;
+
+&lt;p&gt;公钥服务器使得人们只需要交换他们短短的key id 或者user id就可以方便地从公钥服务器下载公钥。&lt;/p&gt;
+
+&lt;h3 id=&quot;历史与设计初衷&quot;&gt;历史与设计初衷&lt;/h3&gt;
+
+&lt;p&gt;第一个KeyServer  叫做 HKP（ web-based OpenPGP HTTP Keyserver Protocol） Keyserver ，  诞生在上世纪90年代，是Marc Horowitz在麻省理工学习时为了他的论文而搭建的。在此之前， 虽然不是那么安全， 但是大部分人依靠电子邮件来交换公钥。&lt;/p&gt;
+
+&lt;p&gt;虽然服务器有了， 但开发者们担心政府会试图强迫密钥服务器运营商用政府选择的各种证书来替换证书。&lt;/p&gt;
+
+&lt;p&gt;所以他们做出了一个决定：公钥服务器永远不会删除信息。公钥服务器可以为现有的证书添加信息（比如可以revoke/sign或者调整expire时间），但永远永远永远不会删除证书或证书的信息。&lt;/p&gt;
+
+&lt;p&gt;为了达到这个目标，他们开始运行一个&lt;strong&gt;分布式&lt;/strong&gt;的国际公钥服务器网络，这就是现在的KeyServer。世界各地的公钥服务器会定期相互通信，同步，比较目录。如果政府强迫公钥服务器运营商删除或修改证书，那么在比较步骤中就会被发现。残缺的公钥服务器会用完好密钥服务器目录中的内容更新自己。&lt;/p&gt;
+
+&lt;p&gt;任何东西都不会被删除，听起来很美好，也是解决政府审查问题的一个简单而有效的办法，可是正是这个原则后来给KeyServer带来了无穷无尽的问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;信任网络-web-of-trust&quot;&gt;信任网络 (Web of Trust)&lt;/h3&gt;
+
+&lt;p&gt;好了，现在我们有了一个可以方便地上传和下载公钥的地方， 这样是不是就万事大吉了呢？&lt;/p&gt;
+
+&lt;p&gt;对于KeyServer 来说，任何人都可以上传公钥并声称自己是Linus, 是Zuckerberg,或是任何其他人，而KeyServer并不会去验证你是否是你所声称的人（因为KeyServer本来就没有一个中心化的运营者）。&lt;/p&gt;
+
+&lt;p&gt;如果你有一些密码学的基础， 那么就会知道， PGP协议依靠的非对称加密算法， 最脆弱的点就在于公钥的交换这一步。公钥交换时最容易收到中间人攻击，你一定要确定你接收到的公钥确实是你想交流的人的，由此TSL引入了CA证书认证体系，由一个可信的权威第三方来认证并颁发证书来解决身份的认证问题。 （具体可参见https系列&lt;a href=&quot;https://ulyc.github.io/2018/09/21/没那么浅地谈谈HTTP与HTTPS-二.html&quot;&gt;没那么浅地谈谈HTTP与HTTPS&lt;/a&gt;）。&lt;/p&gt;
+
+&lt;p&gt;“信任一个权威的第三方” 对于最初的极具有hack精神的开发者们来说， 显然是无法接受的。&lt;/p&gt;
+
+&lt;p&gt;当然，你可以说下载公钥后，通过电话等手段验证下公钥的指纹（fingerprint），就可以确认正确与否。 但是想象一下， 如果你在公钥服务器找到一个声称自己Linus Torvalds 的人, 你并没有他的其他联系方式，将永远无法确定这个公钥持有者到底是谁、这个公钥可信与否 ， 这样无疑是低效的，并且使整个系统沦为了熟人之间的小网络。&lt;/p&gt;
+
+&lt;p&gt;要知道，根据六度分隔理论（Six Degrees of Separation），世界上任何互不相识的两人，平均通过六个人就可以产生联系。 那么可以不可以这么思考， 假设我和小A见过面并检查过他的公钥，因而知道小A的公钥的的确确属于他本人，我选择信任小A。而小A同样验证了小B的证书并为小B的证书签名背书——小A的证书的持有人在此证明该证书是真实属于小B。那么我无须见亲见小B本人，也可以通过小A的背书而接受小B的证书。&lt;/p&gt;
+
+&lt;p&gt;如此循环下去，就形成了一张网， 这就是信任网络。&lt;/p&gt;
+
+&lt;h3 id=&quot;主流公钥服务器&quot;&gt;主流公钥服务器&lt;/h3&gt;
+
+&lt;h4 id=&quot;1---sks-keyserver-pool&quot;&gt;1.   &lt;a href=&quot;http://sks-keyservers.net/&quot;&gt;SKS Keyserver Pool&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;当今世界最大的Key Server 池， 符合它的标准的世界各地的公钥服务器会定期相互通信，同步，比较目录，数据完全开放下载。 现在一般说起KeyServer说的就是这个。&lt;/p&gt;
+
+&lt;p&gt;KeyServer虽然一直是PGP的重要基础设置 ,但SKS Keyserver Pool 其实目前只有不到20台服务器，GnuPG默认用的服务器是其中的 &lt;a href=&quot;https://hkps.pool.sks-keyservers.net&quot;&gt;HKPS pool&lt;/a&gt;,只有四台服务器。&lt;/p&gt;
+
+&lt;h4 id=&quot;2-base--modern-software-keyserver&quot;&gt;2. Base  Modern Software KeyServer&lt;/h4&gt;
+
+&lt;p&gt;有一些KeyServer 没有用SKS的软件，运行的是更下现代和稳定的软件，比较有代表性的是 &lt;strong&gt;&lt;a href=&quot;http://keyserver.ubuntu.com/&quot;&gt;Ubuntu keyserver&lt;/a&gt;&lt;/strong&gt;,  基于Hockeypuck ， 这些服务器仍然会和SKS pool保持同步。&lt;/p&gt;
+
+&lt;h4 id=&quot;3--独立keyserver&quot;&gt;3.  独立KeyServer&lt;/h4&gt;
+
+&lt;p&gt;这些服务器不与SKS pool同步数据，由中心化的运营者运行， 会对公钥上传者做一定的认证， 并且支持删除自己的公钥。&lt;/p&gt;
+
+&lt;p&gt;比较有代表性的有， &lt;strong&gt;&lt;a href=&quot;https://keys.openpgp.org/&quot;&gt;keys.openpgp.org&lt;/a&gt;&lt;/strong&gt; ，KeyBase等等。&lt;/p&gt;
+
+&lt;h3 id=&quot;在gpg中使用&quot;&gt;在gpg中使用&lt;/h3&gt;
+
+&lt;h4 id=&quot;发布&quot;&gt;发布&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg   &lt;span class=&quot;nt&quot;&gt;--send-keys&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;下载&quot;&gt;下载&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--recv-keys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;此时有可能报错&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg: &lt;span class=&quot;s2&quot;&gt;&quot;xxxxxr&quot;&lt;/span&gt; not a key ID: skipping
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这时换个KeyServer就行：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg  &lt;span class=&quot;nt&quot;&gt;--keyserver&lt;/span&gt; hkps://keyserver.ubuntu.com &lt;span class=&quot;nt&quot;&gt;--recv-keys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;签名和验证-他人公钥&quot;&gt;签名和验证 他人公钥&lt;/h4&gt;
+
+&lt;p&gt;验证公钥真实性 依靠多渠道确认的 公钥指纹。&lt;/p&gt;
+
+&lt;p&gt;一般来说为别人的公钥签名后，需要发还给他，或者发到公钥服务器(最好经过本人同意)。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--sign-key&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   &lt;span class=&quot;c&quot;&gt;# 为已经导入的 他人钥签名， 你为他签名，意味着你将为他的身份真实性背书，请谨慎 &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;高级设置&quot;&gt;高级设置&lt;/h4&gt;
+
+&lt;p&gt;因为并不推荐大家使用KeyServer，所以这里只列举了基础操作。&lt;/p&gt;
+
+&lt;p&gt;如果你决定使用KeyServer的话，可以参考 &lt;a href=&quot;https://nova.moe/openpgp-best-practices-keyserver-and-configuration/&quot;&gt;OpenPGP 最佳实践 - 密钥服务器&lt;/a&gt;设置你的客户端与服务器通信使用 HKPS (HKP On SSL)协议， 并定期更新从服务器下载的公钥。&lt;/p&gt;
+
+&lt;h3 id=&quot;安全风险和争议-被玩坏的keyserver&quot;&gt;安全风险和争议， 被玩坏的KeyServer&lt;/h3&gt;
+
+&lt;p&gt;在20世纪90年代初，开发者们怀着对技术的信心和人性的希望，期望创建一个友善 、纯粹、没有审查的净土， 在当时背景下，KeyServer不能删除任何已上传的东西，听起来是美好的，设计似乎是合理的。&lt;/p&gt;
+
+&lt;p&gt;但是事实是，网络匿名环境中充满了不那么友好的， 甚至是恶意的使用者，在当今看来 ，KeyServer这个系统并不健壮，问题重重，许多问题已经被发现十多年，而且无望解决。&lt;/p&gt;
+
+&lt;h4 id=&quot;滥用&quot;&gt;滥用&lt;/h4&gt;
+
+&lt;p&gt;按照官方推荐， UID （User ID） 是用来存储用户信息的，应该在里面填上你的名字和邮箱，一个 GPG 帐号下可以有若干个 UID。&lt;/p&gt;
+
+&lt;p&gt;而其实这个UID是没有任何强制限制的，也就是说你可以在UID中放入任何东西，可以是小说片段，可以是磁力链接,可是以编码后的图像、音频或视频……&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609913349212.png&quot; alt=&quot;1609913349212&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当上传到KeyServer时, UID限制了2k的字符 . 以至于有人写了个用KeyServer&lt;a href=&quot;https://github.com/yakamok/keyserver-fs&quot;&gt;存文件的项目keyserver-fs)&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;再次想象一下，你往网盘传了一个文件，共享给其他人，全世界的人都可以往这个网盘文件中添加文件，而且永远无法删除，情况会变得有多糟糕。&lt;/p&gt;
+
+&lt;h4 id=&quot;脆弱的keyid&quot;&gt;脆弱的KeyID&lt;/h4&gt;
+
+&lt;p&gt;见过一些生成 PGP“靓号”的工具，就是指定你喜欢的ID规则，工具会暴力生成PGP密钥， 从中返回给你想要的密钥。&lt;/p&gt;
+
+&lt;p&gt;由此很容易想到，若攻击者知道了目标的KeyID， 完全可以通过工具来生成完全一样的KeyID（这就是碰撞）, 并上传到KeyServer，来冒充目标。&lt;/p&gt;
+
+&lt;p&gt;而伪造一个KeyID有多容易呢，有研究人员借助&lt;a href=&quot;https://github.com/lachesis/scallion&quot;&gt;scallion&lt;/a&gt;程序，使用了普通的GPU（&lt;a href=&quot;http://www.geforce.com/hardware&quot;&gt;Nvidia GeForce GTX&lt;/a&gt;）进行碰撞，花了4秒的时间就生成了一个指定的32 bit的 KeyID。&lt;/p&gt;
+
+&lt;p&gt;官方推荐公布自己的KeyID时，最少应该公布64 bit（也就是长16位16进制数啦 ），但是&lt;a href=&quot;http://thread.gmane.org/gmane.ietf.openpgp/7413&quot;&gt;研究&lt;/a&gt;表明64 bit的KeyID也是可以 被碰撞的。&lt;/p&gt;
+
+&lt;h4 id=&quot;投毒&quot;&gt;投毒&lt;/h4&gt;
+
+&lt;p&gt;公钥服务器任何人都可以上传公钥，甚至你可以上传别人的公钥，比如你可以将自己签名过的别人的公钥，再次上传到KeyServer。&lt;/p&gt;
+
+&lt;h5 id=&quot;签名dos&quot;&gt;签名Dos&lt;/h5&gt;
+
+&lt;p&gt;在WOT认证体系的设计中， 当客户端收到一份未知证书时，它应当从公钥服务器拉取所有为这张证书签过名的人的证书，逐层上溯，看看是否能够找到一张已经被用户信任的证书。如果能的话，就视信任这张为可信的。&lt;/p&gt;
+
+&lt;p&gt;2019年6月，有攻击者恶意向公钥服务器提交了对两个著名网友的签名背书。此事件中的受害者 Robert J. Hansen 的证书就被签名了 15000  次。因而任何人的 GPG 在尝试验证他的证书时，都会拉取 15000 个签名。而 GPG 在验证这么多签名的过程中会卡住很久。&lt;/p&gt;
+
+&lt;p&gt;由于被攻击的两个人在 GPG 社区中中地位很高，他们在 GPG  信任网络中处于相当核心的位置。这意味着——当你验证任意一份证书的时候，有不小的概率你会不小心拉取到他们俩的证书，然后你的 GPG  就会卡住。不但他们俩的证书没法用了，他们俩签名过的证书也都面临危险，乃至于他们俩签名过的证书所签名的证书……&lt;/p&gt;
+
+&lt;p&gt;而上传到KeyServer的所有东西都是不可删除的…为了解决这个问题， &lt;a href=&quot;https://lwn.net/Articles/793288/&quot;&gt;GnuPG 2.2.17  LWN.net&lt;/a&gt; 开始， 从KeyServer下载公钥时默认不再下载关联的公钥， 如果你想要感受证书DoS攻击的话，可以在设置中开启：&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.gnupg/gpg.conf&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;keyserver-options no-self-sigs-only,no-import-clean&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;爆破&quot;&gt;爆破&lt;/h5&gt;
+
+&lt;p&gt;有个很厉害的程序媛Yegor Timoshenko（前面的SKS文件存储项目也是她的杰作），写了个工具&lt;a href=&quot;https://github.com/yegortimoshenko/sks-exploit&quot;&gt;SKS-Exploit&lt;/a&gt;，可以将任何人的PGP公钥&lt;a href=&quot;https://keyserver.2ndquadrant.com/pks/lookup?search=0x41259773973A612A&amp;amp;op=vindex&quot;&gt;损坏&lt;/a&gt;，变得不可导入。&lt;/p&gt;
+
+&lt;p&gt;这个工具同时还可以给任意人的公钥 追加伪造的UID（不是KeyID），并骗过KeyServer。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609914787731.png&quot; alt=&quot;1609914787731&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;另外能直接让KeyServer宕机。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://miro.medium.com/max/700/1*LgjBb0EYbLwtSuie4WPMeA.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;隐私问题&quot;&gt;隐私问题&lt;/h4&gt;
+
+&lt;p&gt;讽刺的是， 最初为了保护人们隐私而生的PGP , 却因为不能满足保护隐私的法规GDPR ，而使一个公开的 SKS 公钥服务器在欧洲处于违法状态（GDPR规定： 服务商必须提供删除个人信息的选项）。&lt;/p&gt;
+
+&lt;p&gt;许多新手按照教程提示的在创建PGP 密钥的时候填上了自己的真实姓名，并按照那些教程将公钥上传到了KeyServer，在人肉社工猖獗的今天，简直是个灾难。&lt;/p&gt;
+
+&lt;p&gt;我试着在KeyServer搜过一些博客作者留下的PGP Key， 不乏有些比较注重自身隐私的，可是他们大部分都将自己真实的名字（汉字或拼音）和邮箱一起发到了服务器上，要知道那里的数据是公开且永远不能删除的。 也有些人意识到问题之后revoke了带有真实姓名的公钥，可是仍然可以查到，并且变得更加显眼（revoke过的key会变红）。&lt;/p&gt;
+
+&lt;h2 id=&quot;其他发布公钥的方法&quot;&gt;其他发布公钥的方法&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-wkdweb-key-directory&quot;&gt;1. WKD（Web Key Directory）&lt;/h3&gt;
+
+&lt;p&gt;WKD 的工作过程是 ，通过邮箱客户端 在域名服务器检查一个”well known” 的URL， 如果匹配到了邮箱地址对应的公钥，会使用https下载，并且不需要用户进行其他操作。用户不需要gpg 命令行等等复杂操作，让PGP加密回归单纯的邮件加密本身，用起来有些像S/MIME,但其实不一样。&lt;/p&gt;
+
+&lt;p&gt;比如这样一个URL: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://intevation.de/.well-known/openPGPkey/hu/g8td9rsyatrazsoiho37j9n3g5ypp34h&lt;/code&gt; 就对应 “aheinecke@intevation.de”这个邮箱地址。&lt;/p&gt;
+
+&lt;p&gt;这是通过Gpg4win的使用的一个示例，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://files.intevation.de/users/aheinecke/wkd-autoencrypt.gif&quot; alt=&quot;[Example from Gpg4win / GpgOL](https://files.intevation.de/users/aheinecke/wkd-autoencrypt.gif)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这种方法不会泄露自己的邮箱，也不需要验证指纹， 但是需要你的邮件服务商提供支持。&lt;/p&gt;
+
+&lt;p&gt;proton邮箱是原生支持 WKD的， 但是它使用的是自己私钥，似乎没办法使用使用自己本地的公钥，其他也有支持。&lt;/p&gt;
+
+&lt;p&gt;如果你有自己的邮箱服务器，并且想折腾的话，可以参照&lt;a href=&quot;https://wiki.gnupg.org/WKDHosting&quot;&gt;WKD Hosting&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-当面交换&quot;&gt;2. 当面交换&lt;/h3&gt;
+
+&lt;p&gt;如果是和熟识的朋友，你可以约在任何合适地方，用你喜欢的方式交换密钥， 比如交换纸条，交换TF卡 或者usb设备，互相签名认证，互相得到公钥。&lt;/p&gt;
+
+&lt;p&gt;如果是想认识更多的人，并让自己的公钥被更多的人认证， 你可以参加「公钥签名派对（&lt;a href=&quot;https://en.wikipedia.org/wiki/Key_signing_party&quot;&gt;Key signing party&lt;/a&gt;）」。参与派对的人们相互交换公钥的指纹（公钥一般是存在服务器或是一个别人可以下载到的地方，这里只交换指纹），甚至需要相互出示身份证、护照、驾照、出身证明，以验明正身。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/1yW7VtHl.jpg&quot; alt=&quot;Key signing in front of FOSDEM 2008&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;3-dns&quot;&gt;3. DNS&lt;/h3&gt;
+
+&lt;p&gt;有很多种方法将你的公钥通过DNS服务发布，但是有些一些方法只适用于老版本的GnuPG，有些方法只适用与新版本的GnuPG，兼容性不佳，而且搞起来比较繁琐，有兴趣的可以自行查找资料。在这里并不推荐使用。&lt;/p&gt;
+
+&lt;h3 id=&quot;4个人网站-或-社交软件中&quot;&gt;4.个人网站 或 社交软件中&lt;/h3&gt;
+
+&lt;p&gt;现在中文世界， PGP的使用者中 有很多都是 独立的博客作者， 如果你拥有自己的博客或者个人网站，当然可以选择将自己的公钥发布在上面，最好给你的网站上一个Https 。&lt;/p&gt;
+
+&lt;p&gt;很多社交网站的个人展示页，可以自由编辑你的信息，你可以将PGP的 公钥发布在这里，  或者将 指纹 放在这， 这样通过其他渠道下载到公钥的人，也可以确认身份。&lt;/p&gt;
+
+&lt;h3 id=&quot;5-代码仓库或gist&quot;&gt;5. 代码仓库或Gist&lt;/h3&gt;
+
+&lt;p&gt;无论你是不是开发者， 都可以拥有一个Github账号， 你可以开一个仓库专门用来发布自己的公钥，或者将公钥发布到Gist。&lt;/p&gt;
+
+&lt;h3 id=&quot;6-共享笔记&quot;&gt;6. 共享笔记&lt;/h3&gt;
+
+&lt;p&gt;Notion或者印象笔记等可以共享笔记的地方，都可以贴出你的公钥。&lt;/p&gt;
+
+&lt;h2 id=&quot;最后&quot;&gt;最后&lt;/h2&gt;
+
+&lt;p&gt;使用分散的、多渠道的、可能是线下的方式来交换和确认公钥 ，不要相信在放一处的 公钥 和指纹。&lt;/p&gt;
+
+&lt;p&gt;去验证紧跟在公钥后面的指纹 ， 就像你去问一个诈骗者，他是不是一个诈骗者一样无用。&lt;/p&gt;
+
+&lt;p&gt;如果不是当面，请至少从两个渠道进行验证，比如你从一个渠道（比如&lt;a href=&quot;https://ulyc.github.io/pgp_keys.asc/&quot;&gt;这里&lt;/a&gt;）得到了我的公钥 ,  你想和我安全通信的话，导入前一定要从另一处（比如我公布的其他账号的简介）得到我的指纹， 验证是否一致后再进行操作。&lt;/p&gt;
+
+&lt;p&gt;而且每次使用前，请重复以上步骤，确保你手上的公钥是最新的。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考链接&quot;&gt;参考链接&lt;/h2&gt;
+
+&lt;p&gt;[1]. &lt;a href=&quot;https://www.linux.com/news/protecting-code-integrity-PGP-part-1-basic-PGP-concepts-and-tools/&quot;&gt;用 PGP 保护代码完整性系列 &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2]. &lt;a href=&quot;http://www.gnupg.org/gph/en/manual.html&quot;&gt;The GNU Privacy Handbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[3]. [GnuPG: 用多个sub keys保护primary key&lt;/td&gt;
+      &lt;td&gt;missing idea (wordpress.com)](https://jackqqcn.wordpress.com/2008/06/22/gnupg-用多个sub-keys保护primary-key/)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;[4]. &lt;a href=&quot;https://blog.lancitou.net/PGP-tutorial/&quot;&gt;PGP 自我扫盲&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[5]. &lt;a href=&quot;https://mogeko.me/2019/068/&quot;&gt;GPG 的正确使用姿势&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[6]. &lt;a href=&quot;https://emailselfdefense.fsf.org/zh-hans/windows.html&quot;&gt;电子邮件加密指南&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[7]. &lt;a href=&quot;http://www.asheesh.org/note/debian/short-key-ids-are-bad-news.html&quot;&gt;Short key IDs are bad news (with OpenPGP and GNU Privacy Guard) &lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[8]. &lt;a href=&quot;http://blog.shell909090.org/blog/archives/1903/&quot;&gt;gnupg密钥签署原理和过程 // Shell’s Home (shell909090.org)&lt;/a&gt;&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;[9]. [PGP Key Server&lt;/td&gt;
+      &lt;td&gt;Roll Your Own Network](https://roll.urown.net/server/PGP-keyserver.html#a-public-key-shelf)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;[10]. &lt;a href=&quot;https://medium.com/@mdrahony/are-sks-keyservers-safe-do-we-need-them-7056b495101c&quot;&gt;Are SKS keyservers safe? Do we need them?&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[11]. &lt;a href=&quot;https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f&quot;&gt;SKS Keyserver Network Under Attack&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[12]. &lt;a href=&quot;https://nova.moe/openPGP-best-practices-keyserver-and-configuration/&quot;&gt;OpenPGP 最佳实践 - 公钥服务器&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[13]. &lt;a href=&quot;https://blog.wangxuan.name/2019/11/30/gpg-sks-network-poisoned/&quot;&gt;GPG SKS 同步网络被投毒事件及其影响&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[14]. &lt;a href=&quot;https://superuser.com/questions/227991/where-to-upload-PGP-public-key-are-keyservers-still-surviving&quot;&gt;where-to-upload-PGP-public-key-are-keyservers-still-surviving&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[15]. &lt;a href=&quot;https://zhuanlan.zhihu.com/p/137801979&quot;&gt;GPG简明介绍&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 26 Jan 2021 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/</guid>
+        
+        <category>PGP</category>
+        
+        <category>gpg</category>
+        
+        <category>子密钥</category>
+        
+        <category>非对称加密</category>
+        
+        <category>安全</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>2021年，用更现代的方法使用PGP（中）</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.&lt;/p&gt;
+
+  &lt;p&gt;​																												—— Bruce Schneier《应用密码学》&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;2021年用更现代的方法使用pgp中&quot;&gt;2021年，用更现代的方法使用PGP（中）&lt;/h1&gt;
+
+&lt;h4 id=&quot;上篇链接&quot;&gt;上篇链接:&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ulyc.github.io/2021/01/13/2021年-用更现代的方法使用PGP-上/&quot;&gt;2021年，用更现代的方法使用PGP（上）&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;三安全使用和备份&quot;&gt;三、安全使用和备份&lt;/h2&gt;
+
+&lt;h3 id=&quot;准备&quot;&gt;准备&lt;/h3&gt;
+
+&lt;p&gt;为了安全性，建议在一台断网的Linux或者BSD系统上生成你的密钥对。&lt;/p&gt;
+
+&lt;p&gt;特别推荐使用 &lt;a href=&quot;https://tails.boum.org/&quot;&gt;Tails (boum.org)&lt;/a&gt;发行版，系统自带gpg和paperkey 等工具, 可以确保全程断网操作, 同时此系统重启会擦除所有内容，还免去了擦除密钥的麻烦。
+需要工具：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一台电脑&lt;/li&gt;
+  &lt;li&gt;一个装有Tails系统的U盘0 , 使用它生成密钥&lt;/li&gt;
+  &lt;li&gt;一个已经全盘加密的U盘/TF 卡 1（推荐），或者智能卡 ,  用来存储主密钥&lt;/li&gt;
+  &lt;li&gt;一个智能卡  (推荐) ，或者已经全盘加密的U盘/TF 卡  2,  用来存放子密钥，日常使用&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;备份策略&quot;&gt;备份策略&lt;/h3&gt;
+
+&lt;p&gt;我的备份策略：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;主密钥只保留一份，离线。&lt;/li&gt;
+  &lt;li&gt;子密钥可以复制多份，通过U盘导入各个设备，专密专用， 日常使用推荐用智能卡（比如Yubikey），还能免去每次输密码的麻烦&lt;/li&gt;
+  &lt;li&gt;撤销凭证可以和主密钥放在一起备份一份， 另外单独备份一份（这样丢失密钥，起码还可以撤销）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;主密钥备份建议备份在一个全盘加密的U盘中，然后放在一个绝对安全的地方。&lt;/p&gt;
+
+&lt;h3 id=&quot;备份介质&quot;&gt;备份介质：&lt;/h3&gt;
+
+&lt;h5 id=&quot;智能卡&quot;&gt;智能卡&lt;/h5&gt;
+
+&lt;p&gt;主密钥&lt;strong&gt;不建议&lt;/strong&gt;导入智能卡设备，因为智能卡的使用场景是随身携带，随时取用，虽然智能卡中的密钥无法导出，但是随身携带增加了丢失的风险，主密钥一旦丢失，将会非常麻烦。&lt;/p&gt;
+
+&lt;p&gt;如果是土豪，当然导入智能卡中更好，因为智能卡中密钥无法导出，只不过这个智能卡不能再随身携带，而同样应该在一个安全的地方， 不到万不得已不再取用， 不过这样有些浪费，也是我不推荐的理由。&lt;/p&gt;
+
+&lt;h5 id=&quot;网盘存储&quot;&gt;网盘存储&lt;/h5&gt;
+
+&lt;p&gt;你可以将主私钥加密后上传到网盘或其他线上服务。&lt;/p&gt;
+
+&lt;h5 id=&quot;paperkey&quot;&gt;PaperKey&lt;/h5&gt;
+
+&lt;p&gt;又是断网操作，又是非对称算法，还要好好保存一份私钥，这一套流程走下来你也发现了跟数字货币的相似性，很多备份方式都可以借鉴他们的思路，比如上面网盘存储就是数字货币热钱包的思路。&lt;/p&gt;
+
+&lt;p&gt;冷钱包很经典的一种方式，就是将私钥写/打印在纸上， 当然我们也可以借鉴，不过若你想将这一眼望不到头的私钥抄下来， 或者打印下来，将来需要恢复的时候再一个个输入进电脑，显然不现实。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210113111654636.png&quot; alt=&quot;image-20210113111654636&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（示例私钥的一部分，用完即废，如果是你自己的私钥，打死也不要给别人看）&lt;/p&gt;
+
+&lt;p&gt;比如比特币， 私钥长这样：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5KYZdUEo39z3FPrtuX2QbbwGnNP5zTd7yyr2SC1j299sBCnWjss          &lt;span class=&quot;c&quot;&gt;# 这么短很容易抄写和输入&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;同样是非对称算法,为什么PGP的私钥就长这么多呢？&lt;/p&gt;
+
+&lt;p&gt;因为他们用的算法不同，比特币默认使用的是ECDSA的 secp256k1算法， 该算法只是用来签名和认证，并不用来加密（很多科普文章会说这是加密算法，比特币的算法也可以用来加密，这是错的，比特币之所以有时被称作加密货币只是因为它依赖了密码学中的非对称算法，并不是它能加密…），PGP默认的是RSA算法，可以同时用来签名和加密，前面说过目前RSA密钥长度不小于2048 bit才安全，而且PGP导出的私钥中不止密钥信息，还包含了全部的公钥信息，UID，子密钥信息，以及设置密码时的混淆。&lt;/p&gt;
+
+&lt;p&gt;Linux下有一个工具叫做&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;paperkey&lt;/code&gt;， 可以用来消去私钥中 冗余的公钥信息，极大减少私钥长度，然后可以将精简过的私钥(base 16格式)打印出来，或者将Raw格式转换成二维码，打印出来。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;注意：&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;既然决定用PaperKey， 还是不要使用网络打印机了，&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;paperkey这个工具在Tails新版中是默认软件&lt;/li&gt;
+    &lt;li&gt;paperkey 手册中推荐 恢复私钥时使用OCR扫描， 而大部分OCR服务都要联网， 请注意这点。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;其他&quot;&gt;其他&lt;/h5&gt;
+
+&lt;p&gt;密钥只是一段信息，理论上可以放在其他任何可以存储信息的介质中，例如光盘，&lt;a href=&quot;https://ulyc.github.io/2019/03/15/盲水印和图片隐写术/&quot;&gt;隐写在图片中&lt;/a&gt;， &lt;a href=&quot;https://ulyc.github.io/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/&quot;&gt;写入IC卡&lt;/a&gt; ， &lt;del&gt;纹身，&lt;/del&gt;， &lt;del&gt;X光片&lt;/del&gt; ，&lt;del&gt;背下来&lt;/del&gt; 等等等等，可以发挥你的想象力。&lt;/p&gt;
+
+&lt;h3 id=&quot;安全使用&quot;&gt;安全使用&lt;/h3&gt;
+
+&lt;p&gt;请在你信任的电脑上使用子密钥，主密钥不到万不得已不要拿出来用，如果你将子密钥放在智能卡中使用，可以忽略这部分。&lt;/p&gt;
+
+&lt;p&gt;子密钥可以放在移动存储设备上直接使用，而无需拷贝/导入到电脑使用， 使用方法：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--homedir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;你的存储设备的路径]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;四进阶使用&quot;&gt;四、进阶使用&lt;/h2&gt;
+
+&lt;h3 id=&quot;使用其他算法&quot;&gt;使用其他算法&lt;/h3&gt;
+
+&lt;p&gt;在&lt;a href=&quot;#为什么安全？&quot;&gt;为什么安全？&lt;/a&gt;一节中 提到PGP支持很多算法，可是前面我们生成密钥时，只见到了很少的几种。&lt;/p&gt;
+
+&lt;p&gt;因为gpg还有一种隐藏模式—- 专家模式，生成密钥时可以使用&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--expert&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--full-gen-key&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 输出&lt;/span&gt;
+
+Please &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;what kind of key you want:
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA and RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA and Elgamal
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;9&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC and ECC
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;11&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Existing key
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;14&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Existing key from card
+  
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就可以看到多出来不少选项，其中ECC算法 全称Elliptic Curve Cryptography 椭圆曲线密码算法。&lt;/p&gt;
+
+&lt;p&gt;上面我选了 9 , 继续&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Please select which elliptic curve you want
+   (1) Curve 25519
+   (3) NIST P-256
+   (4) NIST P-384
+   (5) NIST P-521
+   (6) Brainpool P-256   
+   (7) Brainpool P-384
+   (8) Brainpool P-512
+   (9) secp256k1            # 比特币使用的算法
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;其中美国国家标准与技术研究院（NIST）系列椭圆曲线、Brainpool系列椭圆曲线、secp256k1都存在不同的安全风险，不建议使用。&lt;/p&gt;
+
+&lt;p&gt;可以发现这里少了（2）, 其实这里还有一些隐藏算法没有列出，可通过如下命令查看&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--list-config&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-colons&lt;/span&gt; curve
+
+&lt;span class=&quot;c&quot;&gt;# 输出&lt;/span&gt;
+cfg:curve:   cv25519&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;ed25519&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;nistp256&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;nistp384&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;nistp521&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;brainpoolP256r1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;brainpoolP384r1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;brainpoolP512r1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;secp256k1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上面缺少的(2)对应的就是ed25519 ，是一种签名算法，你选择 （1）时， 主密钥用来签发和签名 用的就是ed25519，自动生成的用来加密的子密钥 算法 是cv25519 。&lt;/p&gt;
+
+&lt;h5 id=&quot;rsa-vs-ecc&quot;&gt;RSA VS ECC&lt;/h5&gt;
+
+&lt;p&gt;ECC算法比RSA的优势在于，在&lt;strong&gt;同等强度&lt;/strong&gt;下，ECC的密钥长度要小的多，性能也会好一些。 RSA算法的PGP私钥 通过paperkey精简过后一般还会有50+行HEX数据，如果使用的是ECC算法生成的话， 可以减到8行以内，手抄完全没问题。&lt;/p&gt;
+
+&lt;p&gt;RSA算法的优势在于大部分硬件设备的兼容性比较好，比如 YubiKey 5 支持 RSA 4096，但不支持 Curve 25519。而且多数设备都对RSA算法提供了硬件加速。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PS&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;查阅资料时发现 ，中文博客里被很多人抄来抄去的一句话：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ed25519 加密解密很快，生成时间短而且安全性更高，rsa 则加密解密稍慢，生成时间长，安全性没有 ed25519 高，只是 rsa 基本都是默认，所以用的人更多，但是建议转换为 ed25519, 网站软件现在基本都支持了.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这句话是 &lt;strong&gt;错的&lt;/strong&gt;， ed25519是 EdDSA 算法的一种，只是一种签名算法， EdDSA 全称&lt;strong&gt;Edwards-curve Digital Signature Algorithm&lt;/strong&gt;，爱德华椭圆曲线实现的数字签名算法。&lt;/p&gt;
+
+&lt;p&gt;上面的话多出现在替换SSH默认的RSA算法为ed25519的文章中出现。其实SSH协议中的非对称算法 并不是用来加解密信息的，而只是用来认证，正确的说法是ed25519签名和认证的速度很快。&lt;/p&gt;
+
+&lt;p&gt;再者， 不提密钥长度说安全性都是耍流氓 ，RSA 4096 的安全强度是要 好于 ed25519 的。&lt;/p&gt;
+
+&lt;h3 id=&quot;追加uid&quot;&gt;追加UID&lt;/h3&gt;
+
+&lt;p&gt;uid 即 user id ， 由三个部分组成：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;全名（现在的话网名即可）&lt;/li&gt;
+  &lt;li&gt;注释（用 ( ) 包括）&lt;/li&gt;
+  &lt;li&gt;邮箱地址（用 &amp;lt; &amp;gt; 包括）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;UID的性质：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个密钥可以有多个 uid，方便不同场合使用。&lt;/li&gt;
+  &lt;li&gt;uid 与哪个子密钥无关，uid 是作用于整个密钥的。&lt;/li&gt;
+  &lt;li&gt;uid 可以随时添加，但已有的 uid 不能修改，只能单独吊销。&lt;/li&gt;
+  &lt;li&gt;uid 单独吊销后，只需要重新发布公钥即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一般来说，操作UID只有主密钥有权限操作， 后面会提到UID可以是伪造，然后提交到服务器的。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--edit-key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;    
+
+
+gpg&amp;gt; adduid     &lt;span class=&quot;c&quot;&gt;# 进入交互界面后 输入  help  可以查看支持的操作&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 输入你要追加的信息&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用UID的场景有哪些呢？ 如果你使用一个不常用的邮箱作为你的github/gitlab账号，你主要的邮箱生成的PGP 密钥就不能用来签名了。&lt;/p&gt;
+
+&lt;p&gt;这时候为了保护隐私 且 只要管理一个密钥，就可以 在 Github设置里把 Keep my email addresses private勾上，将为你生成的随机邮箱添加到 uid中， 这样就只需要管理一个PGP密钥，可以同时为你不同的Git账号签名。&lt;/p&gt;
+
+&lt;h3 id=&quot;添加头像&quot;&gt;添加头像&lt;/h3&gt;
+
+&lt;p&gt;跟添加UID差不多，  在gpg交互 界面 输入 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addphoto &lt;/code&gt;就可以， 想要查看的话 输入&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;showphoto&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;使用pgp为git-commit-签名&quot;&gt;使用PGP为git commit 签名&lt;/h3&gt;
+
+&lt;p&gt;只要你PGP的uid包含 git config 中的邮箱， 使用&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -S -m your commit message &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;即可签名。&lt;/p&gt;
+
+&lt;h3 id=&quot;使用pgp-进行ssh&quot;&gt;使用PGP 进行SSH&lt;/h3&gt;
+
+&lt;h4 id=&quot;生成-认证a用子密钥&quot;&gt;生成 认证（A）用子密钥&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--expert&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--edit-key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;                                   &lt;span class=&quot;c&quot;&gt;## 使用专家模式, 不然没有认证的选项&lt;/span&gt;
+
+
+gpg&amp;gt; addkey
+Please &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;what kind of key you want:
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Elgamal &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypt only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypt only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;7&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;10&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;11&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;your own capabilities&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;12&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; ECC &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypt only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;13&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Existing key
+Your selection? 8                                                   &lt;span class=&quot;c&quot;&gt;## 选8, RSA, 自定义权限&lt;/span&gt;
+
+Possible actions &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Sign Encrypt                               &lt;span class=&quot;c&quot;&gt;## 这里显示默认有Sign和Encrypt两种权限&lt;/span&gt;
+
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the sign capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;E&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the encrypt capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the authenticate capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Finished
+
+Your selection? S                                                   &lt;span class=&quot;c&quot;&gt;## 关闭Sign&lt;/span&gt;
+
+Possible actions &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Encrypt
+
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the sign capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;E&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the encrypt capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the authenticate capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Finished
+
+Your selection? E                                                   &lt;span class=&quot;c&quot;&gt;## 关闭Encrypt&lt;/span&gt;
+
+Possible actions &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a RSA key: Sign Encrypt Authenticate
+Current allowed actions:
+
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the sign capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;E&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the encrypt capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the authenticate capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Finished
+
+Your selection? A                                                   &lt;span class=&quot;c&quot;&gt;## 开启Authenticate&lt;/span&gt;
+
+Possible actions &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a RSA key: Sign Encrypt Authenticate
+Current allowed actions: Authenticate
+
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;S&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the sign capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;E&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the encrypt capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Toggle the authenticate capability
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Finished
+
+Your selection? Q                                                    &lt;span class=&quot;c&quot;&gt;## 退出&lt;/span&gt;
+RSA keys may be between 1024 and 4096 bits long.
+What keysize &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;you want? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2048&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 4096
+Requested keysize is 4096 bits
+Please specify how long the key should be valid.
+         0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key does not expire
+      &amp;lt;n&amp;gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n days
+      &amp;lt;n&amp;gt;w &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n weeks
+      &amp;lt;n&amp;gt;m &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n months
+      &amp;lt;n&amp;gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n years
+Key is valid &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1y                                             &lt;span class=&quot;c&quot;&gt;## 有效期&lt;/span&gt;
+Key expires at Tue Jan  7 11:33:54 2020 CST
+Is this correct? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/N&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+Really create? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/N&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;on the keyboard, move the mouse, utilize the
+disks&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; during the prime generation&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; this gives the random number
+generator a better chance to gain enough entropy.
+
+sec  rsa2048/7DEFA5351BCE3C55
+     created: 2019-01-07  expires: 2021-01-06  usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa2048/2FCE923F8ECB63F6
+     created: 2019-01-07  expires: 2021-01-06  usage: E
+ssb  rsa4096/19D32A8839DCAA1F
+     created: 2019-01-07  expires: 2020-01-07  usage: A
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; hhhhh &amp;lt;h@mail.com&amp;gt;
+
+gpg&amp;gt; save                                                            &lt;span class=&quot;c&quot;&gt;## 保存&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;配置文件&quot;&gt;配置文件&lt;/h4&gt;
+
+&lt;p&gt;编辑&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bashrc&lt;/code&gt; 文件，  将默认ssh 的agent替换为 gpg-agnet&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#  ~/.bashrc&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;GPG_TTY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tty&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SSH_AUTH_SOCK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;gpgconf &lt;span class=&quot;nt&quot;&gt;--list-dirs&lt;/span&gt; agent-ssh-socket&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;UPDATESTARTUPTTY | gpg-connect-agent 1&amp;gt; /dev/null
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;编辑&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.gnupg/gpg-agent.conf&lt;/code&gt;文件,增加：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#  ~/.gnupg/gpg-agent.conf&lt;/span&gt;
+
+enable-ssh-support
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接着：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;❯ gpg &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-keygrip&lt;/span&gt;    
+/Users/root/.gnupg/pubring.kbx
+&lt;span class=&quot;nt&quot;&gt;-----------------------------&lt;/span&gt;
+pub   rsa2048 2019-01-07 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC] &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;expires: 2021-01-06]
+      8A9FC025A44AA4824C1F4AE27DEFA5351BCE3C55
+      Keygrip &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; BEFCCDFE36CC5442B888B8459265C68B60A4ABD2
+uid           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] hhhhh &amp;lt;h@mail.com&amp;gt;
+sub   rsa2048/0xF681DAEBBAB82124 2019-01-07 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;E] &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;expires: 2021-01-06]
+      Keygrip &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 422922ACFD099E79863D93B93333528F225C90FC
+sub   rsa2048/0x501DEDC36BD409C8 2019-01-07 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;A] &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;expires: 2020-01-07]
+      Keygrip &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 999A87A51CFE82DAA494BEB42F585051307F9E33
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;选择你新加的带有[A]标志的那个新的子密钥的 keygrip , 即&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;999A87A51CFE82DAA494BEB42F585051307F9E33&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;加入到&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.gnupg/sshcontrol&lt;/code&gt;文件，   运行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh-add -l&lt;/code&gt;, 查看是否已经加入。&lt;/p&gt;
+
+&lt;p&gt;然后&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--export-ssh-key&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid&lt;span class=&quot;o&quot;&gt;}!&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;注意，这里不能用 uid ,不然会提示:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg: key &lt;span class=&quot;s2&quot;&gt;&quot;uid&quot;&lt;/span&gt; not found: Unusable public key
+gpg: &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;as ssh key failed: Unusable public key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里只能填子密钥的 key id,这个例子里就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x501DEDC36BD409C8&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;输出的 ssh public key 放到你的服务器上的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.ssh/authorized_keys&lt;/code&gt;中， 重启shell, 就可以连接了。&lt;/p&gt;
+
+&lt;h2 id=&quot;未完待续&quot;&gt;未完待续&lt;/h2&gt;
+</description>
+        <pubDate>Mon, 18 Jan 2021 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2021/01/18/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%AD/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2021/01/18/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%AD/</guid>
+        
+        <category>PGP</category>
+        
+        <category>gpg</category>
+        
+        <category>子密钥</category>
+        
+        <category>非对称加密</category>
+        
+        <category>安全</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>2021年，用更现代的方法使用PGP（上）</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.&lt;/p&gt;
+
+  &lt;p&gt;​																												—— Bruce Schneier《应用密码学》&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;2021年用更现代的方法使用pgp上&quot;&gt;2021年，用更现代的方法使用PGP（上）&lt;/h1&gt;
+
+&lt;h2 id=&quot;一pgp简介&quot;&gt;一、PGP简介&lt;/h2&gt;
+
+&lt;h3 id=&quot;是什么&quot;&gt;是什么？&lt;/h3&gt;
+
+&lt;p&gt;PGP 全称是 Pretty Good Privacy，是一个被设计用来加密信息，保护隐私的&lt;strong&gt;软件&lt;/strong&gt;。现在提到“PGP”， 基本上是说 &lt;a href=&quot;#PGP、OpenPGP、GnuPG 和 gpg&quot;&gt;OpenPGP  标准&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;能干嘛&quot;&gt;能干嘛？&lt;/h3&gt;
+
+&lt;h4 id=&quot;能用来加密和签名信息--并让你显得很geek&quot;&gt;能用来加密和签名信息  &lt;del&gt;并让你显得很Geek&lt;/del&gt;&lt;/h4&gt;
+
+&lt;p&gt;记录片《&lt;a href=&quot;https://www.imdb.com/title/tt4044364/&quot;&gt;第四公民&lt;/a&gt;》中 Edward Snowden 就是使用 PGP 与女记者 Laura Poitras 之间收发邮件的，以下来自电影截图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210113194002027.png&quot; alt=&quot;image-20210113194002027&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210113194014209.png&quot; alt=&quot;image-20210113194014209&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;PGP能保证 一条信息是你相信的人发的，除了你俩之外别人无法解密，  而且这条消息在传送时中间没有经过任何哪怕是一个标点一个字节的修改。&lt;/p&gt;
+
+&lt;h4 id=&quot;能用来让你的git-commit-log更加好看-验证git-commiter身份&quot;&gt;能用来&lt;del&gt;让你的Git Commit Log更加好看&lt;/del&gt; 验证Git Commiter身份&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609409350928.png&quot; alt=&quot;1609409350928&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Github判定提交者只是依靠Git 客户端设置的user.name 和 user.email 来判定身份，而不会去验证真实性，也就是说你可以在你的仓库提交记录中伪造任何人的提交记录。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://cdn.spencer.felinae98.cn/blog/2020/08/200830_155124.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;具体危害可参见&lt;a href=&quot;https://blog.spencerwoo.com/2020/08/wait-this-is-not-my-commit/&quot;&gt;震惊！竟然有人在 GitHub 上冒充我的身份！      &lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;能用来放在博客简介里作为身份的象征-增加联系你的安全方式&quot;&gt;能用来&lt;del&gt;放在博客简介里作为身份的象征&lt;/del&gt; 增加联系你的安全方式&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609410812279.png&quot; alt=&quot;1609410812279&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;用来代替ssh&quot;&gt;用来代替SSH&lt;/h4&gt;
+
+&lt;p&gt;涌有了自己pgp key之后，就可以用 gpg-agent 来代替 OpenSSH Agent来进行 SSH操作了。不过替换了之后并不会增加SSH的安全性，额， 折腾精神不死嘛。&lt;/p&gt;
+
+&lt;p&gt;硬要说好处的话，大概就可以更方便地使用Yubikey(一种硬件加密智能卡)来SSH。&lt;/p&gt;
+
+&lt;h4 id=&quot;用来&quot;&gt;用来…&lt;/h4&gt;
+
+&lt;p&gt;如果有其他好玩的用法，欢迎评论或邮件告诉我。&lt;/p&gt;
+
+&lt;h3 id=&quot;为什么安全&quot;&gt;为什么安全？&lt;/h3&gt;
+
+&lt;p&gt;PGP目前支持的算法&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;非对称算法: RSA, ELG, DSA, ECDH, ECDSA, EDDSA&lt;/li&gt;
+  &lt;li&gt;对称算法: IDEA, 3DES, CAST5, BLOWFISH, AES, AES192, AES256, TWOFISH,
+        CAMELLIA128, CAMELLIA192, CAMELLIA256&lt;/li&gt;
+  &lt;li&gt;哈希算法: SHA1, RIPEMD160, SHA256, SHA384, SHA512, SHA224&lt;/li&gt;
+  &lt;li&gt;压缩算法: Uncompressed, ZIP, ZLIB, BZIP2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;除非量子计算机落地，目前来说2048位的RSA加密是不可破解的。&lt;/p&gt;
+
+&lt;h3 id=&quot;pgpopenpgpgnupg-和-gpg&quot;&gt;PGP、OpenPGP、GnuPG 和 gpg&lt;/h3&gt;
+
+&lt;p&gt;我们需要知道PGP、OpenPGP、GnuPG 和 gpg 之间的不同：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PGP （“Pretty Good Privacy”） 是最初商业软件的名字&lt;/li&gt;
+  &lt;li&gt;OpenPGP 是与最初 PGP 工具兼容的 IETF 标准&lt;/li&gt;
+  &lt;li&gt;GnuPG （“Gnu Privacy Guard”）是实现了 OpenPGP 标准的自由软件&lt;/li&gt;
+  &lt;li&gt;GnuPG 的命令行工具称为 “gpg”&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;OpenPGP 是在 PGP 基础上定义的开放标准，使得 PGP 技术可以由任何公司和个人实现，而不需要缴纳许可费用。&lt;a href=&quot;http%3A//www.ietf.org/rfc/rfc4880.txt&quot;&gt;标准草案&lt;/a&gt;指出 OpenPGP 提供的是数据完整性服务，赋予用户查看、检验、生成和写入加密信息、秘钥和签名的能力。 OpenPGP 通过加密、数字签名、压缩和 Radix-64 转换来实现这些功能。&lt;/p&gt;
+
+&lt;p&gt;GnuPG 是 OpenPGP 协议的一种完备的实现，除了按照 OpenPGP 协议提供数据加解密和签名服务之外，它还提供了完整的秘钥管理功能，并实现了协议中许多可选的加密或压缩算法。&lt;/p&gt;
+
+&lt;p&gt;今天，“PGP”这个词几乎被普遍用来表示开放的 OpenPGP  标准，而不是最初的商业软件，因此“PGP”和“OpenPGP”是可以互换的。&lt;/p&gt;
+
+&lt;p&gt;“GnuPG”和“gpg”这两个词应该仅在提及工具时使用，而不用于它们产生的输出或它们实现的  OpenPGP 功能。举例：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PGP（而非 GnuPG 或 GPG）密钥&lt;/li&gt;
+  &lt;li&gt;PGP（而非 GnuPG 或 GPG）签名&lt;/li&gt;
+  &lt;li&gt;PGP（而非 GnuPG 或 GPG）公钥服务器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;历史&quot;&gt;历史&lt;/h3&gt;
+
+&lt;p&gt;以下来自wiki:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/菲利普·齊默曼&quot;&gt;菲利普·齐默曼&lt;/a&gt;（Philip R. Zimmermann）在1991年创造了第一个版本的PGP，其名称“Pretty Good Privacy”的灵感来自于一个名为“Ralph’s Pretty Good Grocery”的杂货店——电台主播&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=Garrison_Keillor&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;Garrison Keillor&lt;/a&gt;虚构出来的一个名为&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=Lake_Wobegon&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;Lake Wobegon&lt;/a&gt;的城市的一个杂货店。&lt;/p&gt;
+
+&lt;p&gt;软件第一个版本包含一个齐默曼自己设计的&lt;a href=&quot;https://zh.wikipedia.org/wiki/对称密钥算法&quot;&gt;对称密钥算法&lt;/a&gt;，与&lt;a href=&quot;https://zh.wikipedia.org/wiki/周六夜現場&quot;&gt;周六夜现场&lt;/a&gt;的一个小品&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=BassOmatic&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;BassOmatic&lt;/a&gt;同名。作为一个老牌的&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=反核能活跃分子&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;反核能活跃分子&lt;/a&gt;，齐默曼为了让所有有相似倾向的人们可以安全的使用BBS并且安全存储消息和文件而创造了PGP加密。在非商业用途上是不需要授权的，无须任何费用，并且在所有的发行中附带了完整的&lt;a href=&quot;https://zh.wikipedia.org/wiki/源代码&quot;&gt;源代码&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;在2001年6月5号发表的一篇标题为”PGP 10周年” [&lt;a href=&quot;https://zh.wikipedia.org/wiki/PGP#cite_note-2&quot;&gt;2]&lt;/a&gt;的文章中，齐默曼描述了他最初开发PGP时的情景：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1991年的某天，我把PGP的第一版发给我几个朋友，以便上传到互联网。我最先发给Allan Hoeltje，他把这个程序发到了Peacenet，一个针对草根政治组织–特别是“和平运动”–的ISP。当时全球政治活跃分子都能访问到Peacenet。然后我又把它上传给了Kelly Goen，他接着就把源码转发到了一个专门分发源代码的Usenet新闻组。基于我的请求，他把该Usenet权限改为了“仅限美国”。Kelly还把PGP传到了（美国）国内很多BBS上面。我记不太清刚开始在网上贴是6月5号还是6号。 说出来吓人，1991年的时候，我对Usenet新闻组确是知之甚少。我并不知道那个“仅限美国”的标签只是个“建议”作用，基本上对贴子的传播（范围）毫无影响。当时，我以为这个标签会控制这个帖子的传播范围。当时我不知道如何在新闻组发贴，甚至不明白新闻组究竟是什么。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;PGP在&lt;a href=&quot;https://zh.wikipedia.org/wiki/互联网&quot;&gt;互联网&lt;/a&gt;上传播开来，并且在这个世界上获得了非常多的拥护者。PGP用户和支持者也包括在极权主义国家持不同政见的人们（一些给齐默曼的感人信件被发表了，其中一些在美国国会之前被包括到证据中）。在世界其它地方的&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=公民自由意志主义&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;公民自由意志主义&lt;/a&gt;支持者（参考齐默曼在各个听政会上发表的证据），以及“自由通讯”激进主义分子，他们称他们自己为&lt;a href=&quot;https://zh.wikipedia.org/w/index.php?title=加密爱好者&amp;amp;action=edit&amp;amp;redlink=1&quot;&gt;加密爱好者&lt;/a&gt;，进行宣传和分发。&lt;/p&gt;
+
+&lt;h2 id=&quot;二gpg快速开始&quot;&gt;二、gpg快速开始&lt;/h2&gt;
+
+&lt;h3 id=&quot;准备工作&quot;&gt;准备工作&lt;/h3&gt;
+
+&lt;p&gt;建议你先参照后面教程，在随便一台机器上练习。  等熟练操作之后，再阅读  &lt;a href=&quot;#三、安全使用&quot;&gt;安全使用&lt;/a&gt; 生成你真正主要使用的PGP密钥对 ：&lt;/p&gt;
+
+&lt;h3 id=&quot;安装&quot;&gt;安装&lt;/h3&gt;
+
+&lt;h4 id=&quot;mac&quot;&gt;🍎Mac:&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gpg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;linux&quot;&gt;🐧Linux:&lt;/h4&gt;
+
+&lt;p&gt;各发行版一般都会默认安装GnuPG。&lt;/p&gt;
+
+&lt;h4 id=&quot;windows&quot;&gt;🏁Windows:&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gnupg.org/download/&quot;&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;openbsd&quot;&gt;🌐OpenBSD:&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pkg_add gnupg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;生成&quot;&gt;生成&lt;/h3&gt;
+
+&lt;h4 id=&quot;生成主密钥&quot;&gt;生成主密钥&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# step 0 &lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--full-gen-key&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 这里不推荐使用的 `gpg --gen-key`&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# step 1&lt;/span&gt;
+gpg &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GnuPG&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2.2.20&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;C&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Please &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;what kind of key you want:
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA and RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA and Elgamal
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;14&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Existing key from card
+Your selection?
+&lt;span class=&quot;c&quot;&gt;#  默认就可以&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# step 2&lt;/span&gt;
+RSA keys may be between 1024 and 4096 bits long.
+What keysize &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;you want? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3072&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 此处输入你希望的密钥长度， RSA的不应低于2048 bits，当然输入的数字越大越安全，相应的，加解密的速度也会更慢&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 3&lt;/span&gt;
+Please specify how long the key should be valid.
+         0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key does not expire
+      &amp;lt;n&amp;gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n days
+      &amp;lt;n&amp;gt;w &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n weeks
+      &amp;lt;n&amp;gt;m &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n months
+      &amp;lt;n&amp;gt;y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; key expires &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;n years
+Key is valid &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  2y
+
+&lt;span class=&quot;c&quot;&gt;# 默认可以选0 ，即永不过期， 这里我选了2y，  因为到期之前随时可以更改你的过期时间，以确保你对此密钥仍拥有控制权&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 4&lt;/span&gt;
+Key expires at Wed 11 Jan 2023 05:50:53 PM CST
+Is this correct? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/N&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+
+&lt;span class=&quot;c&quot;&gt;#确定&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 5&lt;/span&gt;
+
+GnuPG needs to construct a user ID to identify your key.
+
+Real name:  linus   &lt;span class=&quot;c&quot;&gt;# 这里名字可以是网名，可以是任意名字，如果你注重隐私就不要输入自己真名了 &lt;/span&gt;
+Email address: linus@outlook.com  
+Comment:     &lt;span class=&quot;c&quot;&gt;# 备注可以留空&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 注意了： 这里的邮箱， 如果你不打算使用PGP为你的Git记录认证， 这里其实是可以随便输入的，不需要是你的邮箱， 甚至不需要是一个真实存在的邮箱，只要接受你信息的人知道就行。隐私泄漏问题很严重，你一旦设置了，并且发布到公钥服务器，就永远删不掉了 😅&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# step 6&lt;/span&gt;
+You selected this USER-ID:
+    &lt;span class=&quot;s2&quot;&gt;&quot;linus &amp;lt;linust@outlook.com&amp;gt;&quot;&lt;/span&gt;
+
+Change &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;N&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;ame, &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;C&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;omment, &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;E&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;mail or &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;O&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;kay/&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Q&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;uit? o
+
+&lt;span class=&quot;c&quot;&gt;# 确认无误后输入 o&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 7&lt;/span&gt;
+┌──────────────────────────────────────────────────────┐
+│ Please enter the passphrase to                       											  │
+│ protect your new key                                                           │ 
+│                                                      │
+│ Passphrase: ________________________________________ 														 │
+│                                                      │
+│       &amp;lt;OK&amp;gt;                              &amp;lt;Cancel&amp;gt;     │
+└──────────────────────────────────────────────────────┘
+
+&lt;span class=&quot;c&quot;&gt;# 输入一个复杂的密码 并确认&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 8&lt;/span&gt;
+We need to generate a lot of random bytes. It is a good idea to perform
+some other action &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;type &lt;/span&gt;on the keyboard, move the mouse, utilize the
+disks&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; during the prime generation&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; this gives the random number
+generator a better chance to gain enough entropy.
+
+&lt;span class=&quot;c&quot;&gt;# 随机移动你的鼠标，越随机你的密钥越安全&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 9 大功告成&lt;/span&gt;
+                 
+gpg: key 99F583599B7E31F1 marked as ultimately trusted
+gpg: revocation certificate stored as &lt;span class=&quot;s1&quot;&gt;'/root/.gnupg/openpgp-revocs.d/705358AB85366CAB05C0220F99F583599B7E31F1.rev'&lt;/span&gt;
+public and secret key created and signed.
+
+pub   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC]
+      705358AB85366CAB05C0220F99F583599B7E31F1			 &lt;span class=&quot;c&quot;&gt;# 你的 key id&lt;/span&gt;
+uid                      linus &amp;lt;linus@outlook.com&amp;gt;
+sub   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;E] 		 &lt;span class=&quot;c&quot;&gt;# 这个是自动生成的用于加密的子密钥，E代表Encrypt 加密&lt;/span&gt;
+
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;以下是常见缩写释义：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A    =&amp;gt;    Authentication
+C    =&amp;gt;    Certify
+E    =&amp;gt;    Encrypt
+S    =&amp;gt;    Sign
+?    =&amp;gt;    Unknown capability
+sec  =&amp;gt;    Secret Key
+ssb  =&amp;gt;    Secret SuBkey
+pub  =&amp;gt;    Public Key
+sub  =&amp;gt;    Public Subkey
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;生成子密钥&quot;&gt;生成子密钥&lt;/h4&gt;
+
+&lt;p&gt;你日常使用应该使用子密钥，主密钥除了签发新的子密钥不要使用。&lt;/p&gt;
+
+&lt;p&gt;建议为不同环境，不同用途都单独生成子密钥，互不干扰。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# step 0&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--edit-key&lt;/span&gt; linus &lt;span class=&quot;c&quot;&gt;# 或者key id  &lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 1  进入gpg交互界面	&lt;/span&gt;
+gpg &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GnuPG&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2.2.20&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;C&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2020 Free Software Foundation, Inc.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Secret key is available.
+
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; linus &amp;lt;linus@outlook.com&amp;gt;C
+
+&lt;span class=&quot;c&quot;&gt;# step 2  &lt;/span&gt;
+gpg&amp;gt;   addkey
+Please &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;what kind of key you want:
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; DSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;sign only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Elgamal &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypt only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; RSA &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;encrypt only&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;14&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Existing key from card
+Your selection? 4   
+&lt;span class=&quot;c&quot;&gt;# 根据你的用途选择， 这里生成一个只用于签名的子密钥（sign only）&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;#  后面的选择和主密钥生成的大同小异，按提示操作即可&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 生成完毕后&lt;/span&gt;
+sec  rsa3072/99F583599B7E31F1
+     created: 2021-01-11  expires: never       usage: SC
+     trust: ultimate      validity: ultimate
+ssb  rsa3072/6FE9C71CFED44076
+     created: 2021-01-11  expires: never       usage: E
+ssb  rsa3072/FDB960B857D397F6
+     created: 2021-01-11  expires: never       usage: S
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; linus &amp;lt;linus@outlook.com&amp;gt;
+
+&lt;span class=&quot;c&quot;&gt;#  last step&lt;/span&gt;
+gpg&amp;gt;  save  &lt;span class=&quot;c&quot;&gt;#  记得save， 直接退出的话什么也没有&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;生成撤销证书&quot;&gt;生成撤销证书&lt;/h4&gt;
+
+&lt;p&gt;假如你忘了主密钥的密码，或者丢失了对主密钥的控制权（丢失，被夺取），如果没有撤销凭证的话， 除了一个个通知你的朋友们没有任何办法 证明你不再使用这个密钥，这简直是灾难。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# step 0&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--gen-revoke&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-ao&lt;/span&gt;   revoke.pgp   linus &lt;span class=&quot;c&quot;&gt;# uid 或者key id&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# step 1&lt;/span&gt;
+sec  rsa3072/99F583599B7E31F1 2021-01-11 linus &amp;lt;linus@outlook.com&amp;gt;
+
+Create a revocation certificate &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this key? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/N&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+Please &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;the reason &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the revocation:
+  0 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; No reason specified
+  1 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Key has been compromised
+  2 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Key is superseded
+  3 &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Key is no longer used
+  Q &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Cancel
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Probably you want to &lt;span class=&quot;k&quot;&gt;select &lt;/span&gt;1 here&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 3
+
+&lt;span class=&quot;c&quot;&gt;# 按提示走完流程就可以&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;生成的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;revoke.pgp&lt;/code&gt;就是撤销凭证， 有了这个撤销凭证，你可以在没有密码的情况下使一个公钥失效，所以一定要妥善保存，而且最好比主密钥多一份。&lt;/p&gt;
+
+&lt;h3 id=&quot;列出密钥&quot;&gt;列出密钥&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 列出所有公钥、子公钥&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--list-keys&lt;/span&gt; 
+&lt;span class=&quot;c&quot;&gt;# 列出所有密钥、子密钥&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--list-secret-keys&lt;/span&gt; 
+
+&lt;span class=&quot;c&quot;&gt;# 简化命令&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; 
+gpg &lt;span class=&quot;nt&quot;&gt;-K&lt;/span&gt;  
+
+
+&lt;span class=&quot;c&quot;&gt;# 输出 &lt;/span&gt;
+sec   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC]
+      705358AB85366CAB05C0220F99F583599B7E31F1
+uid           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] linus &amp;lt;linus@outlook.com&amp;gt;
+ssb   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;E]
+ssb   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;S]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样并没有列出子密钥的id, 而且没有打印出指纹信息， 是不安全的。所以在你查看密钥时应该&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;加上 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--keyid-format long&lt;/code&gt;输出长ID&lt;/li&gt;
+  &lt;li&gt;加上 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--fingerprint&lt;/code&gt; 输出指纹信息&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;比如&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; gpg &lt;span class=&quot;nt&quot;&gt;--fingerprint&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-K&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--keyid-format&lt;/span&gt; long
+ 
+ &lt;span class=&quot;c&quot;&gt;# 输出&lt;/span&gt;
+sec   rsa3072/0x99F583599B7E31F1 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC]		&lt;span class=&quot;c&quot;&gt;# 长ID&lt;/span&gt;
+      Key fingerprint &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7053 58AB 8536 6CAB 05C0  220F 99F5 8359 9B7E 31F1 &lt;span class=&quot;c&quot;&gt;#指纹信息&lt;/span&gt;
+uid                   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ultimate] linus &amp;lt;linus@outlook.com&amp;gt;
+ssb   rsa3072/0x6FE9C71CFED44076 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;E]            &lt;span class=&quot;c&quot;&gt;# 斜杠后面的就是子密钥ID&lt;/span&gt;
+ssb   rsa3072/0xFDB960B857D397F6 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;S]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;安全设置&quot;&gt;安全设置&lt;/h3&gt;
+
+&lt;p&gt;每次都打 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--keyid-format long&lt;/code&gt;和&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--fingerprint&lt;/code&gt; 很烦对不对， 编辑配置gpg文件, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vim  ~/.gnupg/gpg.conf&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# ~/.gnupg/gpg.conf&lt;/span&gt;
+
+keyid-format 0xlong
+with-fingerprint
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;备份&quot;&gt;备份&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;-ao&lt;/span&gt; public-key.txt &lt;span class=&quot;nt&quot;&gt;--export&lt;/span&gt; linus   &lt;span class=&quot;c&quot;&gt;# 导出公钥&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 注意这里最后 要带上“!”， 不然会导出全部子密钥， 感谢@Dallas Lu 指正 &lt;/span&gt;
+gpg  &lt;span class=&quot;nt&quot;&gt;-ao&lt;/span&gt; secret-key &lt;span class=&quot;nt&quot;&gt;--export-secret-key&lt;/span&gt; 99F583599B7E31F1! 			&lt;span class=&quot;c&quot;&gt;# 导出主私钥，建议secret-key 替换为你的加密设备备份文件的路径，直接导入到设备中&lt;/span&gt;
+gpg  &lt;span class=&quot;nt&quot;&gt;-ao&lt;/span&gt; sign-subkey &lt;span class=&quot;nt&quot;&gt;--export-secret-subkeys&lt;/span&gt; FDB960B857D397F6!   	 &lt;span class=&quot;c&quot;&gt;#导出有[S]标识、签名用子私钥&lt;/span&gt;
+gpg  &lt;span class=&quot;nt&quot;&gt;-ao&lt;/span&gt; encrypt-subkey &lt;span class=&quot;nt&quot;&gt;--export-secret-subkeys&lt;/span&gt; 6FE9C71CFED44076!    &lt;span class=&quot;c&quot;&gt;#导出有[E]标识、加密用子私钥 ,这里的ID替换为你的子密钥ID&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# 别忘了同时将你刚刚生成的撤销凭证也备份起来&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;删除&quot;&gt;删除&lt;/h3&gt;
+
+&lt;p&gt;备份完后，要将本机的密钥清除干净，首先删除：&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--delete-secret-keys&lt;/span&gt; linus  &lt;span class=&quot;c&quot;&gt;# 删除私钥，  UID 也可以替换成子密钥ID, 主密钥Key ID&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--delete-keys&lt;/span&gt; linus		 &lt;span class=&quot;c&quot;&gt;# 删除公钥&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 如果想全部删除推荐直接删文件夹,即删除 $HOME/.gnupg&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;由于gpg生成的私钥会在你的磁盘上使用明文储存，所以一个单独的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; 或者右键删除 并不能彻底删除掉，可以使用 wipe 工具。如果你使用的是 SSD 且没有 启用全盘加密，是没法彻底删除的。&lt;/p&gt;
+
+&lt;p&gt;特别推荐使用 &lt;a href=&quot;https://tails.boum.org/&quot;&gt;Tails (boum.org)&lt;/a&gt;发行版来生成主要使用的密钥， 系统自带pgp和paper key 等工具, 可以确保全程断网操作, 同时此系统重启会擦除所有内容，还免去了擦除密钥的麻烦。&lt;/p&gt;
+
+&lt;h3 id=&quot;导入&quot;&gt;导入&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#从文件导入&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;密钥文件]   &lt;span class=&quot;c&quot;&gt;# 刚刚备份的子密钥文件， 或者其他人的公钥&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 暂不推荐从公钥服务器导入，具体用法会在公钥服务器一章介绍&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 这里先推荐 练习导入自己的子密钥&lt;/span&gt;
+
+
+ &lt;span class=&quot;c&quot;&gt;# 输出&lt;/span&gt;
+sec#   rsa3072/0x99F583599B7E31F1 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC]		 &lt;span class=&quot;c&quot;&gt;# sec 后面带有 # 号说明主密钥未导入，是安全的&lt;/span&gt;
+      Key fingerprint &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 7053 58AB 8536 6CAB 05C0  220F 99F5 8359 9B7E 31F1 &lt;span class=&quot;c&quot;&gt;#指纹信息&lt;/span&gt;
+uid                   &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;unknown] linus &amp;lt;linus@outlook.com&amp;gt;
+ssb &lt;span class=&quot;c&quot;&gt;#    rsa3072/0x6FE9C71CFED44076 2021-01-11 [E]           # 带有 # 号说明该子密钥已导入&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;签名和验证&quot;&gt;签名和验证&lt;/h3&gt;
+
+&lt;p&gt;这里只讲 如何签名和验证 他人文件，  为他人公钥签名和验证 放在公钥的发布和交换一章讲解。&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 第一种方式，生成二进制签名文件&lt;/span&gt;
+
+gpg &lt;span class=&quot;nt&quot;&gt;--sign&lt;/span&gt; input.txt  &lt;span class=&quot;c&quot;&gt;# 当然也可以加上--output参数&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 第二种方式，生成ASCII格式签名&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--clearsign&lt;/span&gt; input.txt
+
+&lt;span class=&quot;c&quot;&gt;# 第三种，签名和原文本分开（前两种的签名文件中包含了所有原文本，所以体积会比较大）&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--armor&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--detach-sign&lt;/span&gt; input.txt  &lt;span class=&quot;c&quot;&gt;#不加armor生成会二进制&lt;/span&gt;
+
+
+
+&lt;span class=&quot;c&quot;&gt;#  验证签名文件&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--verify&lt;/span&gt; demo.txt.asc demo.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;加解密&quot;&gt;加解密&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 加密：&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# recipient指定接收者的公钥ID&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--recipient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; encrypt.txt &lt;span class=&quot;nt&quot;&gt;--encrypt&lt;/span&gt; input.txt
+&lt;span class=&quot;c&quot;&gt;# 也可以按喜好加上--armor选项等&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 我更喜欢用 &lt;/span&gt;
+gpg  &lt;span class=&quot;nt&quot;&gt;-se&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt;  encrypt.txt  &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;keyid/uid&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;   input.txt  
+&lt;span class=&quot;c&quot;&gt;# s代表签名  e代表加密&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# o是 将结果 输出到文件  encrypt.txt&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# r后面跟 接收者的 uid或者 key id， 接收者的公钥必须已经导入过&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# input.txt 是你要加密的文件&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# 解密：&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;--decrypt&lt;/span&gt; encrypt.txt &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt; decrypt.txt
+&lt;span class=&quot;c&quot;&gt;# 也可以&lt;/span&gt;
+gpg &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; encrypt.txt   &lt;span class=&quot;c&quot;&gt;# 输出到终端 直接查看&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;发布-与-交换&quot;&gt;发布 与 交换&lt;/h3&gt;
+
+&lt;p&gt;公钥的交换是所有非对称加密算法的脆弱点，所谓现代的使用方式，主要体现在密钥的交换和发布上面， 之后会单独来探讨。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;阅读并理解本系列之前请不要发布你的公钥到公钥服务器&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;撤销&quot;&gt;撤销&lt;/h3&gt;
+
+&lt;p&gt;由于PGP没有提供任何将吊销信息通知其他用户的方式，他不能保证没人会使用撤销了的已经变得不安全的密钥。&lt;/p&gt;
+
+&lt;p&gt;你丢失的私钥仍然可以被攻击者使用，并用来解密那些没有更新你的公钥的人发送的加密消息。  revoke 子密钥并更新公钥后，若有人用老的公钥加密信息，虽然你仍然可以解密，但是攻击者同样可以，这时候是极度不安全的。&lt;/p&gt;
+
+&lt;p&gt;例如：如果A的私人密钥被盗，她将发出一个密钥撤销证书（key revocation certificate），但是由于这个密钥的分发是非正式的且将费大量的时间和口舌，故不能保证密钥环中每一个有A公开密钥的用户都能收到。由于A必须用她的私人密钥签名撤消的证书，所以如果A同时丢失了私人密钥，她就不能撤销密钥。密钥的撤销问题被认为是整个系统最薄弱的环节。&lt;/p&gt;
+
+&lt;p&gt;所以在你将密钥撤销后，请将撤销后的公钥发布到你一贯公布公钥的地方， 并尽可能通知其他人。&lt;/p&gt;
+
+&lt;h4 id=&quot;撤销主密钥&quot;&gt;撤销主密钥&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt; gpg-linus.asc                                               &lt;span class=&quot;c&quot;&gt;# 在一台新的电脑上导入你的公钥&lt;/span&gt;
+gpg: key 99F583599B7E31F1: &lt;span class=&quot;s2&quot;&gt;&quot;linus &amp;lt;linus@outlook.com&amp;gt;&quot;&lt;/span&gt; not changed
+gpg: Total number processed: 1
+gpg:              unchanged: 1
+
+
+
+gpg &lt;span class=&quot;nt&quot;&gt;--import&lt;/span&gt; revoke                                                       &lt;span class=&quot;c&quot;&gt;# 导入你备份的撤销凭证，直接会导致密钥不可用&lt;/span&gt;
+
+
+
+gpg: key 99F583599B7E31F1: &lt;span class=&quot;s2&quot;&gt;&quot;linus &amp;lt;linus@outlook.com&amp;gt;&quot;&lt;/span&gt; revocation certificate imported
+gpg: Total number processed: 1
+gpg:    new key revocations: 1
+gpg: marginals needed: 3  completes needed: 1  trust model: pgp
+gpg: depth: 0  valid:   1  signed:   1  trust: 0-, 0q, 0n, 0m, 0f, 1u
+gpg: depth: 1  valid:   1  signed:   0  trust: 1-, 0q, 0n, 0m, 0f, 0u
+gpg: next trustdb check due at 2021-09-29
+
+
+
+gpg &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt;																	&lt;span class=&quot;c&quot;&gt;# 查看密钥，已经revoke&lt;/span&gt;
+
+
+pub   rsa3072 2021-01-11 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;SC] &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;revoked: 2021-01-11]
+      705358AB85366CAB05C0220F99F583599B7E31F1
+uid           &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; revoked] linus &amp;lt;linus@outlook.com&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;撤销子密钥&quot;&gt;撤销子密钥&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg &lt;span class=&quot;nt&quot;&gt;--edit-key&lt;/span&gt; linus  
+  
+gpg &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   list  &lt;span class=&quot;c&quot;&gt;# 列出你所有的子密钥&lt;/span&gt;
+gpg &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   key  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;n&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# 选择你要销毁的子密钥的 序号&lt;/span&gt;
+gpg &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   revkey
+gpg &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;   save    &lt;span class=&quot;c&quot;&gt;# 退出前一定要save, 不然所有更改不会生效&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;未完待续&quot;&gt;未完待续&lt;/h2&gt;
+</description>
+        <pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2021/01/13/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8A/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2021/01/13/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8A/</guid>
+        
+        <category>PGP</category>
+        
+        <category>gpg</category>
+        
+        <category>子密钥</category>
+        
+        <category>非对称加密</category>
+        
+        <category>安全</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>常见RFID卡片介绍、破解思路 及 Proxmark3简介</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;我们大多数人至少都要工作三十年，这三十年里还会有很多东西要学。所以不用太在意之前学了什么，更重要的是看你还能学会什么。无论之前学过什么，将来都要再学新东西。无论之前学的是什么，将来也都会有用。艺无止境，功不唐捐。&lt;/p&gt;
+
+  &lt;p&gt;​												——  tombkeeper&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;常见rfid卡片介绍破解思路-及-proxmark3简介&quot;&gt;常见RFID卡片介绍、破解思路 及 Proxmark3简介&lt;/h1&gt;
+
+&lt;h2 id=&quot;rfid卡片&quot;&gt;RFID卡片&lt;/h2&gt;
+
+&lt;h3 id=&quot;前言&quot;&gt;前言&lt;/h3&gt;
+
+&lt;p&gt;这篇只是最近学习RFID技术的一个笔记，请勿用于非法用途。&lt;/p&gt;
+
+&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;射频识别&lt;/strong&gt;（英语：&lt;strong&gt;R&lt;/strong&gt;adio &lt;strong&gt;F&lt;/strong&gt;requency &lt;strong&gt;ID&lt;/strong&gt;entification，&lt;a href=&quot;https://zh.wikipedia.org/wiki/縮寫&quot;&gt;缩写&lt;/a&gt;：&lt;strong&gt;RFID&lt;/strong&gt;）是一种&lt;a href=&quot;https://zh.wikipedia.org/wiki/無線&quot;&gt;无线&lt;/a&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/通信技术&quot;&gt;通信技术&lt;/a&gt;，可以通过&lt;a href=&quot;https://zh.wikipedia.org/wiki/无线电&quot;&gt;无线电&lt;/a&gt;信号识别特定目标并读写相关数据，而无需识别系统与特定目标之间建立&lt;a href=&quot;https://zh.wikipedia.org/wiki/机械&quot;&gt;机械&lt;/a&gt;或者&lt;a href=&quot;https://zh.wikipedia.org/wiki/光学&quot;&gt;光学&lt;/a&gt;接触。&lt;/p&gt;
+
+&lt;p&gt;常用的ETC，门禁卡，手机的NFC功能，二代身份证，电子护照，动物识别标签等都是应用了RFID技术。&lt;/p&gt;
+
+&lt;h3 id=&quot;常见卡片分类&quot;&gt;常见卡片分类&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/19/s6higpLEYqaITHF.png&quot; alt=&quot;RFID卡.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;介绍各种IC卡片的文章浩如烟海，不过大部分只介绍了低频的id卡以及符合ISO-14443A 标准的mifare系列卡。&lt;/p&gt;
+
+&lt;p&gt;因为搬家之后，坑爹物业只给一张门禁卡，于是Nerd之血熊熊燃烧, 花了几百大洋买了个Proxmark3，当然要好好研究下RFID技术啦，也不会仅止步于常见几种卡片的探索。&lt;/p&gt;
+
+&lt;p&gt;其实只看上面的脑图基本上就对RFID各种卡有个大致印象了，下面是对一些好玩的卡的详细介绍，无耐心可跳过。&lt;/p&gt;
+
+&lt;h4 id=&quot;低频&quot;&gt;低频&lt;/h4&gt;
+
+&lt;h5 id=&quot;id卡&quot;&gt;ID卡&lt;/h5&gt;
+
+&lt;p&gt;ID卡是我们的俗称，内部芯片的全名叫做EM4100或EM41XX ，频率是125kHz。每张卡出厂就有独一无二的ID号，不可改写。没有任何加密，只要知道卡号就可以模拟。&lt;/p&gt;
+
+&lt;p&gt;特殊的还有250K、375K、500K频率的ID卡，原版proxmark3不支持这种卡的读写，祖国魔改版有些支持。&lt;/p&gt;
+
+&lt;h5 id=&quot;t5577卡&quot;&gt;T5577卡&lt;/h5&gt;
+
+&lt;p&gt;T5577 卡是一种可以写入数据可以加密的低频卡。最特别之处是，写入ID号可以变身成为ID卡，写入HID号可以变身HID卡，写入Indala卡号，可以变身Indala卡。&lt;/p&gt;
+
+&lt;p&gt;T5577一共有8个块，每个块只能存8位数。第0块是用来设置卡片类型和调制方式的，决定了卡片是ID卡还是HID卡，如果随意修改会导致读不到卡。最后一个块，在没有加密时是数据区，加密后，其数据就变成了密码。&lt;/p&gt;
+
+&lt;p&gt;国内这卡主要是用来模拟ID卡用的。&lt;/p&gt;
+
+&lt;h4 id=&quot;高频--14443a&quot;&gt;高频 -14443A&lt;/h4&gt;
+
+&lt;h5 id=&quot;m1-s50卡&quot;&gt;M1 S50卡&lt;/h5&gt;
+
+&lt;p&gt;目前最常见的高频卡，也是我们口中俗称的IC卡。M1卡科储存的数据大小为8k，分为16个扇区，每个扇区分4个块，每个块为16个字节，以块为存取单位。&lt;strong&gt;每个扇区都有独立的一组密码及访问控制&lt;/strong&gt;，每张卡有唯一的一个32位的序列号。每个扇区的0,1,2块为数据块，用来存储数据，第3块为控制块，包括了密A、存取控制、密码B
+每张卡的第0扇区的第0块用来春芳厂商代码，不可更改。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/19/bJXGlaW1oeEi2IC.png&quot; alt=&quot;M1卡数据结构.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;中间4字节控制字是管理密码权限，用来设置A密码和B密码的功能。默认不修改的时候，可以用A密码读写所有数据。A密码不可读出，B密码可以用A密码读出。&lt;strong&gt;密码不一定可以读取，由控制字决定。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;这个卡又分 &lt;strong&gt;非加密卡&lt;/strong&gt; 、&lt;strong&gt;半加密卡&lt;/strong&gt; 和  &lt;strong&gt;全加密卡&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;非加密卡中所有扇区的KEYA和KEYB数值都是默认值FFFFFFFFFFFF。&lt;/p&gt;
+
+&lt;p&gt;而加密卡中，其中有扇区的KEYA和KEYB不等于FFFFFFFFFFFF，部分扇区加密的卡称半加密卡，所有扇区都加密的卡称全加密卡。&lt;/p&gt;
+
+&lt;h5 id=&quot;m1-uid卡&quot;&gt;M1 UID卡&lt;/h5&gt;
+
+&lt;p&gt;全称l Mifare UID Chinese magic card（中国魔术卡），简称UID卡。&lt;/p&gt;
+
+&lt;p&gt;M1 UID卡是针对M1 S50卡特制的变种卡，用起来和M1 S50完全一样，只是多了一个功能，就是0扇区块的数据可以随意修改。因此UID号也可以随意修改，厂家信息也可以随意修改。UID卡修改0扇区0块数据是靠指令进入工厂模式，可以直接对全卡任何数据编辑，不需要密码即可读写卡，同时不怕写坏卡，即使写错0块，写坏扇区控制字，也可以随时修复回来，不影响后续使用。&lt;/p&gt;
+
+&lt;h5 id=&quot;cuid卡&quot;&gt;CUID卡&lt;/h5&gt;
+
+&lt;p&gt;CUID卡是针对UID卡做的优化。CUID卡可以重复修改0块，但是它和UID卡的区别是，UID卡是通过&lt;strong&gt;指令&lt;/strong&gt;修改0块，CUID使用的是常规密码验证的方法写0块（写错了之后重写需要清卡），其他扇区和标准M1卡相同。缺点是，还是有可能会被检测出来，而且如果不小心写错了UID号的校验位导致无法读卡，没办法修复只能报废。&lt;/p&gt;
+
+&lt;h5 id=&quot;fuid卡&quot;&gt;FUID卡&lt;/h5&gt;
+
+&lt;p&gt;FUID卡是针对UID卡做的优化。新的读卡系统，通过检测卡片对特殊指令的回应，可以检测出UID卡，因此可以来拒绝UID卡的访问，来达到屏蔽复制卡的功能。&lt;strong&gt;FUID可以修改0块，但只可以修改一次&lt;/strong&gt;，写错也没办法更改，也不能重复利用。修改后和M1卡完全一样，很难被屏蔽检测。&lt;/p&gt;
+
+&lt;h5 id=&quot;cfuid卡&quot;&gt;CFUID卡&lt;/h5&gt;
+
+&lt;p&gt;​		鉴于FUID卡写错的成本太高，又发展出了这种卡。 CFUID卡 0扇区固化前可随意修改（相当于UID卡），固化（锁卡）后就跟M1卡完全一样。&lt;/p&gt;
+
+&lt;h5 id=&quot;侦测卡&quot;&gt;侦测卡：&lt;/h5&gt;
+
+&lt;p&gt;可用122等设备写入id号然后用来读取并记录设备发出的密码信息，用于侦测密码，但其功能鸡肋，前有pm3离线侦测，后有变色龙模拟加侦测，现在基本淘汰。&lt;/p&gt;
+
+&lt;h5 id=&quot;emv卡&quot;&gt;EMV卡&lt;/h5&gt;
+
+&lt;p&gt;EMV规范是由Europay、Mastercard、Visa三大信用卡国际组织联合制定的IC（智能）卡金融支付应用标准，非接触传输协议方面也是遵循的14443A标注，是一种&lt;strong&gt;CPU芯片卡&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;目前基于EMV卡的非接触式支付的实现有三个：VISA的payWave，MasterCard的PayPass以及银联的闪付QuickPass。目前从外观来看，银联发行的卡面有芯片的IC卡均支持闪付，部分银行支持VISA的payWave。&lt;/p&gt;
+
+&lt;h4 id=&quot;高频--14443b&quot;&gt;高频 -14443B&lt;/h4&gt;
+
+&lt;p&gt;跟ISO 14443 -Type A 标准 的不同主要在于&lt;strong&gt;载波的调制深度及位的编码方式&lt;/strong&gt;。TYPE A采用&lt;strong&gt;开关键控(On-Off keying)&lt;/strong&gt;的&lt;strong&gt;Manchester编码&lt;/strong&gt;，TYPE B采用&lt;strong&gt;NRZ-L&lt;/strong&gt;的&lt;strong&gt;BPSK编码&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;TYPE B与TYPE A相比，具有&lt;strong&gt;传输能量不中断、速率更高、抗干扰能力强&lt;/strong&gt;的优点。RFID的核心是防冲突技术，这也是和接触式IC卡的主要区别。ISO14443-3规定了TYPEA和TYPE B的防冲突机制。二者防冲突机制的原理不同，前者是&lt;strong&gt;基于位冲突检测协议&lt;/strong&gt;，而TYPE B&lt;strong&gt;通信系列命令序列完成防冲突。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;目前的二代身份证，社保卡，护照都是基于此标准，研究这个标准最初是为了能读出身份证信息或者护照，其中曲折下一篇文章再说。&lt;/p&gt;
+
+&lt;p&gt;Proxmark3的14b部分有对 ST  Microelectronics  公司的 SRI512卡 和SRIX4K卡 的特别支持。&lt;/p&gt;
+
+&lt;h4 id=&quot;nfc标签&quot;&gt;NFC标签&lt;/h4&gt;
+
+&lt;p&gt;目前有五种，分别基于14a, 14b，Felica ，ISO/IEC 15693  标准, 详见上面脑图。&lt;/p&gt;
+
+&lt;h3 id=&quot;高频卡-低频卡区分方法&quot;&gt;高频卡 低频卡区分方法&lt;/h3&gt;
+
+&lt;p&gt;直接淘宝复制来的，比较直观：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/17/u7YA5XFp6n32NaG.png&quot; alt=&quot;1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/17/vZHQc7OAV86ow4I.png&quot; alt=&quot;2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;门禁卡破解思路&quot;&gt;门禁卡破解思路&lt;/h3&gt;
+
+&lt;p&gt;ID卡使用手持机或者proxmark3等设备直接读出卡号即可模拟，最是无脑，CPU卡建议直接放弃。&lt;/p&gt;
+
+&lt;p&gt;所以这里的门禁卡单质 Mafira系列。&lt;/p&gt;
+
+&lt;h4 id=&quot;ic卡加密方式&quot;&gt;IC卡加密方式&lt;/h4&gt;
+
+&lt;p&gt;要知道怎么破解，先要知道他们是怎么加密。&lt;/p&gt;
+
+&lt;p&gt;目前常见的加密方式有这几种：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/19/EOH7jDdGq2buLIQ.png&quot; alt=&quot;IC卡加密方式.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;1固定加密校验码&quot;&gt;1.固定加密（校验码）：&lt;/h5&gt;
+
+&lt;p&gt;彼时来自东方的神秘技术 ：中国魔术卡 尚未降世，就算复制出来原卡数据，每张IC的ID也是不一样的，厂家只需要校验UID跟校验位匹配不匹配就可以防复制卡了。&lt;/p&gt;
+
+&lt;p&gt;这种只需要UID卡复制其UID以及校验位即可完美破解。&lt;/p&gt;
+
+&lt;h5 id=&quot;2一卡一密&quot;&gt;2.一卡一密：&lt;/h5&gt;
+
+&lt;p&gt;这种加密方式只是把校验码，改成了密码。刷卡机读卡是根据卡号算出这张卡独一无二的密码，然后再用密码访问/修改金额 。&lt;/p&gt;
+
+&lt;p&gt;运用UID卡复制，也可简单解决。&lt;/p&gt;
+
+&lt;h5 id=&quot;3全加密&quot;&gt;3.全加密：&lt;/h5&gt;
+
+&lt;p&gt;即IC卡16扇区均加入密码，一般是一个卡商用同一密码，密码破解可通过 侦测卡或pm3离线侦测，密码已知后，写入普通卡或UID卡，即可实现复制。&lt;/p&gt;
+
+&lt;p&gt;后来又出现了一种 一卡一密+ 全加密的卡，不过在PM3及UID卡面前不过是土鸡瓦狗而已。&lt;/p&gt;
+
+&lt;h5 id=&quot;4动态码加密&quot;&gt;4.动态码加密：&lt;/h5&gt;
+
+&lt;p&gt;每次刷卡后，卡内数据都会变化。&lt;/p&gt;
+
+&lt;p&gt;这种比较麻烦，可以分几种情况：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;有些系统比较简单，每次刷新后某个数据加一，或者加固定数字，这种很容易&lt;strong&gt;发现规律&lt;/strong&gt;和破解。&lt;/li&gt;
+  &lt;li&gt;有些卡数据刷新后没有什么规律，明显用了某种算法，这种有能力的可以多刷几次，尝试&lt;strong&gt;逆向算法&lt;/strong&gt;，不过难度比较大，&lt;/li&gt;
+  &lt;li&gt;通过更改控制位或者修改卡内某些地方的数据来&lt;strong&gt;压制卡内数据的滚动&lt;/strong&gt;，这是利用了早期某些厂家的读头不会校验计算后的数据是否写入成功的漏洞。&lt;/li&gt;
+  &lt;li&gt;一些系统识别到卡里数据是从未滚动过的初始值后，就不会再做任何校验，认为这是张新卡。这种只要记录下初始数据，复制卡每次刷卡后 &lt;strong&gt;重置数据&lt;/strong&gt;即可。 (刚了解到还有一种GTU卡（gtu、guid、gid、gpu，处女卡）, 可以锁定滚动码，让读卡器写卡失败卡)&lt;/li&gt;
+  &lt;li&gt;一些系统识别到卡里数据是初始值后，还会进行校验，这时候我们可以使用同厂家同型号同版本的发卡器，通过修改发卡器发卡规则使得规则与物业的发卡规则相同来&lt;strong&gt;发卡&lt;/strong&gt;。但是破解发卡规则同样很难，同时梯控厂家也不会向个人单独销售配套发卡器。&lt;/li&gt;
+  &lt;li&gt;社工大法：通过保洁阿姨、保安大哥或者特别的技法获取 &lt;strong&gt;全通卡&lt;/strong&gt;，就是给内部员工用的“万能钥匙”，这种卡一般不做加密，搞到之后复制一张基本就OK了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;注意事项&lt;/strong&gt;：复制卡不确定是否是滚动码时， 复制后第一次刷卡原则上请刷原卡，不然数据滚动之后，原卡可能作废  。 卡与原卡仅一张有效&lt;/p&gt;
+
+&lt;h5 id=&quot;5防复制加密&quot;&gt;5.防复制加密：&lt;/h5&gt;
+
+&lt;p&gt;用UID卡复制成功以后去现场刷卡没任何反应 或 就可以使用一次以后就给设备破环了拷贝卡的问题。&lt;/p&gt;
+
+&lt;p&gt;也存在几种情况，目前最常用的：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;校验magic指令，UID卡会响应magic指令，所以防火墙只要发现有magic指令的响应直接ban掉改卡，于是CUID卡应运而生。&lt;/li&gt;
+  &lt;li&gt;防火墙尝试修改卡的0扇区，修改成功则说明是CUID卡，ban掉。 这种用FUID或者CFUID复制即可。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;6复合卡加密&quot;&gt;6.复合卡加密：&lt;/h5&gt;
+
+&lt;p&gt;利用ID或IC设备复制成功以后就可以开启其中一个地方，其他地方不可以同时开启。一般是IC+ID的结构，需要同时复制高频低频两个芯片。&lt;/p&gt;
+
+&lt;h5 id=&quot;7cpu芯片加密&quot;&gt;7.CPU芯片加密：&lt;/h5&gt;
+
+&lt;p&gt;这种分析数据时全是零， 可能目标卡是CPU卡模拟的M1卡 或是 修改了控制位的数据把卡号隐藏起来。  这种可以最多可以做到复制UID，模拟刷个门禁啥的，涉及金额的就别想了。&lt;/p&gt;
+
+&lt;h4 id=&quot;一般流程&quot;&gt;一般流程&lt;/h4&gt;
+
+&lt;p&gt;流程图如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2020/01/19/dofNYZOny3p2gXa.png&quot; alt=&quot;image.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;proxmark3&quot;&gt;Proxmark3&lt;/h2&gt;
+
+&lt;h3 id=&quot;前言-1&quot;&gt;前言&lt;/h3&gt;
+
+&lt;p&gt;之前想买个proxmark3 玩，但是发现淘宝卖家基本都是自吹自擂，对自己是PM3哪个版本都遮遮掩掩，语焉不详。 谷歌到的中文资料也比较少，大多是互相复制粘贴的资料，没人仔细介绍过PM3都有哪些版本，于是有了写这篇的动力，希望能使新手对proxmark3有个直观了解。&lt;/p&gt;
+
+&lt;h3 id=&quot;简介-1&quot;&gt;简介&lt;/h3&gt;
+
+&lt;p&gt;Proxmark3是由&lt;em&gt;Jonathan Westhues&lt;/em&gt;为了他的硕士论文设计开发的开源硬件，其主要用途是实现RFID卡片 的嗅探、读取破解以及克隆等等操作。&lt;/p&gt;
+
+&lt;p&gt;提到RFID， 就不得不提Proxmark3，PM3 属于这个领域的大杀器，基本相当于kali之于安全，node之于前端。它可以嗅探、模拟以及读取多种不同种类型的RFID，同时它还有一个&lt;a href=&quot;http://www.proxmark.org/forum/index.php&quot;&gt;官方社区&lt;/a&gt;，这里有不少同样的爱好者在里面学习交流。&lt;/p&gt;
+
+&lt;p&gt;Proxmark，确切来说是prox（接近的），mark（标签），翻译过来的意思就是“不用接触，靠近就能刷的卡片”。&lt;/p&gt;
+
+&lt;h3 id=&quot;版本&quot;&gt;版本&lt;/h3&gt;
+
+&lt;h4 id=&quot;proxmark2&quot;&gt;Proxmark2&lt;/h4&gt;
+
+&lt;p&gt;Proxmark是没有1的 ，Proxmark3  前身是Proxmark2。&lt;/p&gt;
+
+&lt;p&gt;Proxmark2版本是因为&lt;em&gt;Jonathan Wesrhues&lt;/em&gt;    为了复制Verichip才应运而生的。   而Proxmark2的前身就是一个便携式的Verichips，该硬件可以读取并且重放Verichip的ID，如果利用天线去靠近Verichip，那样子设备就可以永远的保留ID在芯片里面，实际上Jonathan Westhues只是采用逆向工程把Verichip的频率和调制模式进行捕抓，从而进行回放操作。&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark3-原版&quot;&gt;Proxmark3 原版&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://proxmark.com/user/pages/03.proxmark-3-hardware/05.proxmark-3/PM3-Trans.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;原型机，长这样，开源硬件，电路板github有，已经过时了，不是商业产品，不卖。&lt;/p&gt;
+
+&lt;p&gt;其他版本都是基于此版的原理做的改板。&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark3-rdv2&quot;&gt;Proxmark3 RDV2&lt;/h4&gt;
+
+&lt;p&gt;这个版本算是Proxmark3第一次商业化的版本，研发团队是&lt;em&gt;Elechouse&lt;/em&gt;（深圳一家硬件厂商） 。 RDV2  即是 Revision Two（重制版2 )。&lt;/p&gt;
+
+&lt;p&gt;Proxmark3 RDV2  修改和更新了Proxmark3所有主要的硬件组件，包括微控制器，FPGA和闪存。&lt;/p&gt;
+
+&lt;p&gt;但是，最重要的变化是天线的设计和实现。 Proxmark 3的笨重，笨拙和未调谐的天线已替换为紧凑的，预先调谐的HF和LF天线，使用标准的SMA接口代替以前使用的USB-Hirose电缆。&lt;/p&gt;
+
+&lt;p&gt;这个版本预装了可拆的低频和高频天线，也是首个“ALL-IN-ONE”的版本。但是天线性能存在已知问题，并且会被继电器故障影响。&lt;/p&gt;
+
+&lt;p&gt;有些论坛说的血贵的就是这个版本，之前貌似上千，现在五六百左右吧。&lt;/p&gt;
+
+&lt;h5 id=&quot;技术规格&quot;&gt;技术规格&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt; AT91SAM7S512&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt; 512Kb SPI flash&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interface&lt;/strong&gt;  4x mode LEDs, 1x button.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Battery&lt;/strong&gt;  独立外接电源&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;天线&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;LF&lt;/strong&gt;  预装，可拆&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HF&lt;/strong&gt; 预装，可拆&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一般来说长这样：&lt;img src=&quot;https://i.loli.net/2020/01/19/SU73KOvpHDoxtEW.png&quot; alt=&quot;rdv2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark3-easy&quot;&gt;Proxmark3 EASY&lt;/h4&gt;
+
+&lt;p&gt;同样是 &lt;em&gt;Elechouse&lt;/em&gt;团队的作品，是Proxmark3 RDV2 的阉割版，主要为了迎合中国市场在某宝卖的。&lt;/p&gt;
+
+&lt;p&gt;基本上某宝卖的都是基于这个版本或Proxmark3 RDV2  的魔改版。&lt;/p&gt;
+
+&lt;p&gt;比RDV2阉割了CPU、内存,还有外接电池。&lt;/p&gt;
+
+&lt;h5 id=&quot;技术规格-1&quot;&gt;技术规格&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt; AT91SAM7S256&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt; 256Kb SPI flash&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interface&lt;/strong&gt; 4x mode LEDs, 1x button.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;天线&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;LF&lt;/strong&gt;  需自行组装&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HF&lt;/strong&gt;  一体，不可拆&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;长这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://proxmark.com/user/pages/03.proxmark-3-hardware/04.proxmark-3-easy/PM3-Easy-Trans.png&quot; alt=&quot;Proxmark3 EASY&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark-3-evo&quot;&gt;Proxmark 3 EVO&lt;/h4&gt;
+
+&lt;p&gt;Proxmark 3 EVO(Evolution，进化版)，是&lt;strong&gt;Elechouse&lt;/strong&gt; 开发的最后一个Proxmark 3版本，更加的小型化，用了ABS 的材质，加了点灯，适配了安卓平台。&lt;/p&gt;
+
+&lt;h5 id=&quot;技术规格-2&quot;&gt;技术规格&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt; AT91SAM7S512&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt; External 2MBits / 512Kb SPI flash&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interface&lt;/strong&gt; 1x RGB LED, 1x button.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;电源&lt;/strong&gt;   外接独立电池&lt;/li&gt;
+  &lt;li&gt;天线
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;LF&lt;/strong&gt; 预装，一体&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HF&lt;/strong&gt; 预装，一体&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个版本国内见的不多，优化也有限，长这样：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://proxmark.com/user/pages/03.proxmark-3-hardware/02.proxmark-3-evo/PM3-Evo-Trans.png&quot; alt=&quot;Proxmark 3 EVO&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark3-rdv4&quot;&gt;Proxmark3 RDV4&lt;/h4&gt;
+
+&lt;p&gt;Proxmark3 RDV4是目前Proxmark3 平台 最新的版本，由 &lt;em&gt;RRG&lt;/em&gt;团队开发，就是开官方论坛和固件很受欢迎的&lt;em&gt;iceman&lt;/em&gt; 所在的团队 。 不过价格比较贵，基础版要一千五左右，所有外设买齐得好几千，需要海淘。&lt;/p&gt;
+
+&lt;h5 id=&quot;版本特色&quot;&gt;版本特色&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;更小的体积 54 x 87 x 10mm （EVO是60 x 90 x 12mm）&lt;/li&gt;
+  &lt;li&gt;支持了 SIM/Smart 卡的嗅探和读取&lt;/li&gt;
+  &lt;li&gt;可扩展框架：
+    &lt;ul&gt;
+      &lt;li&gt;可热插拔的中长距离天线&lt;/li&gt;
+      &lt;li&gt;增加了 蓝牙 和 wifi 模式&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;技术规格-3&quot;&gt;技术规格&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;CPU&lt;/strong&gt; SAM7S512&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Storage&lt;/strong&gt; External 2MBits / 256Kb SPI flash&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interface&lt;/strong&gt; 4x power LEDs, 4x mode LEDs, 1x button.&lt;/li&gt;
+  &lt;li&gt;天线
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;LF&lt;/strong&gt; (125KHz): 70mm @ 65V&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;HF&lt;/strong&gt; (13.56MHz): 88mm @ 44V&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://www.wasyoung.com/wp-content/uploads/2019/11/2019120105235280.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;proxmark3-各种祖国版&quot;&gt;Proxmark3 各种祖国版&lt;/h4&gt;
+
+&lt;p&gt;商家鼓吹什么3.0、4.0、5.0，终极 版本，其实各种版本基本都是Proxmark3  RDV2 或者easy 魔改的，选购时关注下cpu版本和内存 线圈和做工即可。&lt;/p&gt;
+
+&lt;p&gt;不过有时候会看到各种颜色，颜色只是印刷电路板用的阻焊剂（阻焊漆）不一样，油墨颜色不一样，不会影响实际功能和质量。&lt;/p&gt;
+
+&lt;p&gt;常见的电路板颜色有绿色、红色、蓝色、黑色。详细信息可以自行百度。原来的pm3是黑色的，看上去高端一些。现在新出了蓝色的，没别的原因，就是为了降低成本。虽然不影响质量，但是绿色、红色、蓝色的油墨用得比较多，量大价格就低。&lt;/p&gt;
+
+&lt;p&gt;不要听一些商家瞎吹做了什么升级，保证元器件没有任何改动。商家鼓吹蓝色是升级款，只是为了掩盖他的真实原因是为了降低成本，外加一波营销。&lt;/p&gt;
+
+&lt;p&gt;我买的是苏州龙达出的一款所谓“&lt;strong&gt;终极版&lt;/strong&gt;”，&lt;img src=&quot;http://www.ldpm3.com/picture/front.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;说是最新自主研发5.0系统，其实就是RDV2的魔改版，他家利用隔板的空间，集成了变色龙，还在隔板上装了显示屏、按钮，类似手持机的功能，可以不开电脑复制ID卡。&lt;/p&gt;
+
+&lt;p&gt;特色是中文GUI客户端一直在优化，适合小白使用。&lt;/p&gt;
+
+&lt;h4 id=&quot;变色龙-mini-chameleonmini&quot;&gt;变色龙 Mini ,ChameleonMini&lt;/h4&gt;
+
+&lt;p&gt;在网购PM3时，经常可以看到有PM3变色龙一体机卖，当时询问js ,他们也是语焉不详 。所以这里再单独介绍下变色龙是个啥。&lt;/p&gt;
+
+&lt;p&gt;变色龙 &lt;a href=&quot;https://github.com/emsec/ChameleonMini&quot;&gt;ChameleonMini&lt;/a&gt; 是一款可编程的 NFC 安全分析工具的开源硬件项目，可模拟各种ic卡、侦测密码，可同时储存六组卡片数据随时可以手动切换，体积跟普通卡差不多方便携带。&lt;/p&gt;
+
+&lt;p&gt;ChameleonMini 常见的有两个版本 &lt;strong&gt;ChameleonMini Rev.E&lt;/strong&gt; 与 &lt;strong&gt;ChameleonMini Rev.G&lt;/strong&gt; 其中 Rev.G 是最新升级的版本，自带电池供电。&lt;/p&gt;
+
+&lt;p&gt;说白了，变色龙就是一张先进的侦测卡，不具备读写功能，需要配合其他读写设备使用。 PM3的现场嗅探功能其实比较弱，集成了变色龙之后就补齐了这个短板。&lt;/p&gt;
+
+&lt;h3 id=&quot;使用&quot;&gt;使用&lt;/h3&gt;
+
+&lt;p&gt;中文GUI主要是对43a的IC卡和 低频ID做的支持，对其他协议的卡片都没有支持。&lt;/p&gt;
+
+&lt;p&gt;熟悉基本操作之后，想要探索PM3的魅力还是推荐使用 命令行， 命令行教程汉化可以看RadioWar的wiki &lt;a href=&quot;http://wiki.radiowar.org/Proxmark3%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C&quot;&gt;RadioWar:Proxmark3命令帮助&lt;/a&gt;，其他教程也非常的多，可以自行查找。&lt;/p&gt;
+
+&lt;p&gt;打开方法是进入软件安装目录：&lt;/p&gt;
+
+&lt;div class=&quot;language-powershell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;/prommark3.exe&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;   &lt;/span&gt;&lt;span class=&quot;c&quot;&gt;# com号会变，根据自己实际情况调整&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;参考链接&quot;&gt;参考链接&lt;/h2&gt;
+
+&lt;p&gt;[1]. &lt;a href=&quot;https://proxmark.com/proxmark-3-hardware&quot;&gt;Porxmark 官网&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2]. &lt;a href=&quot;https://4hou.win/wordpress/?paged=13&amp;amp;cat=17&quot;&gt;智能卡破解入门二三事&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3]. &lt;a href=&quot;https://lzy-wi.github.io/2018/07/26/proxmark3/&quot;&gt;Proxmark3 Easy破解门禁卡学习过程&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4]. &lt;a href=&quot;https://cloud.tencent.com/developer/article/1043152&quot;&gt;低成本安全硬件 RFID on PN532&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[5]. &lt;a href=&quot;[http://read.pudn.com/downloads121/ebook/513161/%E5%90%84%E4%BA%A7%E5%93%81.pdf](http://read.pudn.com/downloads121/ebook/513161/各产品.pdf)&quot;&gt;非接触IC卡主要产品简介&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[6]. &lt;a href=&quot;http://www.card1688.com/smart_card/STMicroelectronics_chip_card.html&quot;&gt;STMicroelectronics 芯片卡&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[7]. &lt;a href=&quot;https://wenku.baidu.com/view/597156eee009581b6bd9eb3e.html&quot;&gt;iCLASS说明文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[8].&lt;a href=&quot;http://www.nfchome.org/nfc-forum-type1-type2-type3-type4.html&quot;&gt;[NFC Forum标签平台四种标签类型详细介绍]&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[9]. &lt;a href=&quot;https://www.cnblogs.com/sky-heaven/p/4704895.html&quot;&gt;初识CPU卡、SAM卡/CPU卡简介、SAM卡简介 【转】&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[10]. &lt;a href=&quot;https://zhuanlan.zhihu.com/p/81384126&quot;&gt;手把手教 如何模拟IC加密卡&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[11]. &lt;a href=&quot;https://www.guhei.net/post/jb1108&quot;&gt;IC卡加密解密方式&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[12].&lt;a href=&quot;http://rdcqii.hundsun.com/portal/article/642.mhtml&quot;&gt;除了支付/刷卡还能干嘛？三分钟教你玩转RFID&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[13].&lt;a href=&quot;https://www.freebuf.com/vuls/192356.html&quot;&gt;使用HackCube-Special分析滚动码信号&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[14]. &lt;a href=&quot;https://www.wasyoung.com/2019/11/30/337/&quot;&gt;Proxmark3（PM3）硬件简单拆解与介绍&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[15].&lt;a href=&quot;https://www.wasyoung.com/2019/11/30/337/&quot;&gt;梯控、IC卡滚动码防复制原理和破解&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[16]. &lt;a href=&quot;http://www.ickezhan.com/bbs/forum.php?mod=viewthread&amp;amp;tid=41&quot;&gt;简单讨论滚动码技术&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[17]. &lt;a href=&quot;http://wiki.radiowar.org/Proxmark3%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C&quot;&gt;RadioWar:Proxmark3命令帮助&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[18]. &lt;a href=&quot;https://www.cert.org.cn/upload/cncertcc06/0330/ct1/5.060330-YuYang-ThreatsFromAir.pdf&quot;&gt;来自空中的威胁&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[19]. 《非接触IC卡原理与应用》[电子工业出版社 2006-09-01]&lt;/p&gt;
+</description>
+        <pubDate>Sat, 18 Jan 2020 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2020/01/18/%E5%B8%B8%E8%A7%81RFID%E5%8D%A1%E7%89%87%E4%BB%8B%E7%BB%8D-%E7%A0%B4%E8%A7%A3%E6%80%9D%E8%B7%AF-%E5%8F%8A-Proxmark3%E7%AE%80%E4%BB%8B/</guid>
+        
+        <category>Proxmark3</category>
+        
+        <category>RFID</category>
+        
+        <category>安全</category>
+        
+        <category>IC卡</category>
+        
+        <category>滚动码</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>win10下使用WSL 2</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;win 10是最好的linux发行版！&lt;/p&gt;
+
+  &lt;p&gt;​												——  佚名&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;win10下使用wsl-2&quot;&gt;win10下使用WSL 2&lt;/h1&gt;
+
+&lt;h2 id=&quot;准备工作&quot;&gt;准备工作&lt;/h2&gt;
+
+&lt;p&gt;之前有介绍过使用wsl 1版本做开发的方法， &lt;a href=&quot;https://ulyc.github.io/2018/12/16/win10%E4%BD%BF%E7%94%A8pyhcarm%E9%85%8D%E5%90%88WSL%E5%BC%80%E5%8F%91python/&quot;&gt;win10配合Ubuntu子系统打造舒适Python开发环境&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;然后需要确认自己系统的版本是否高于18917。&lt;/p&gt;
+
+&lt;p&gt;这里的坑在于18917版本我使用的时候还未正式推送更新，导致试了许多办法都没能启用WSL2，后来我是加入了Windows 预览体验计划之后才获得高于此版本的更新。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/OLBlxyrAcgvU9am.png&quot; alt=&quot;win预览计划.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;安装wsl2&quot;&gt;安装wsl2&lt;/h2&gt;
+
+&lt;p&gt;要安装并开始使用 WSL 2，请完成以下步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;启用“ &lt;em&gt;虚拟机平台(Virtual Machine Platform)&lt;/em&gt;”可选组件&lt;/li&gt;
+  &lt;li&gt;使用命令行设置要由 WSL 2 支持的发行版&lt;/li&gt;
+  &lt;li&gt;验证你的发行版使用的 WSL 版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;请注意，你需要运行 Windows 10 build 18917 或更高版本才能使用 WSL 2，并且你需要安装 WSL（可以在&lt;a href=&quot;https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/install-win10&quot;&gt;此处&lt;/a&gt;找到相关说明）。&lt;/p&gt;
+
+&lt;h3 id=&quot;启用虚拟机平台可选组件&quot;&gt;启用“虚拟机平台”可选组件&lt;/h3&gt;
+
+&lt;p&gt;以管理员身份打开 PowerShell 并运行：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Enable-WindowsOptionalFeature &lt;span class=&quot;nt&quot;&gt;-Online&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-FeatureName&lt;/span&gt; VirtualMachinePlatform
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;启用这些更改后，你需要重新启动计算机。&lt;/p&gt;
+
+&lt;h3 id=&quot;使用命令行设置要由-wsl-2-支持的发行版&quot;&gt;使用命令行设置要由 WSL 2 支持的发行版&lt;/h3&gt;
+
+&lt;p&gt;在 PowerShell 中运行：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl &lt;span class=&quot;nt&quot;&gt;--set-version&lt;/span&gt; &amp;lt;Distro&amp;gt; 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;并确保将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;Distro&amp;gt;&lt;/code&gt; 替换为发行版的实际名称。 （你可以使用以下命令找到它们：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl -l&lt;/code&gt;）。 你也可以通过运行与上面相同的命令随时更改回 WSL 1，但将“&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2&lt;/code&gt;”替换为“&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt;”。&lt;/p&gt;
+
+&lt;p&gt;此外，如果你想使 WSL 2 成为默认架构，可以使用以下命令执行此操作：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl &lt;span class=&quot;nt&quot;&gt;--set-default-version&lt;/span&gt; 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这将使你安装的任何新发行版初始化为 WSL 2 发行版。&lt;/p&gt;
+
+&lt;h3 id=&quot;完成验证发行版使用的-wsl-版本&quot;&gt;完成验证发行版使用的 WSL 版本&lt;/h3&gt;
+
+&lt;p&gt;要验证每个发行版使用的 WSL 版本，请使用以下命令：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wsl &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--verbose&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 或者&lt;/span&gt;
+wsl &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;你在上面选择的发行版现在应该在“version”列下显示“2”。 现在完成了，你随时可以开始使用你的 WSL 2 发行版了。&lt;/p&gt;
+
+&lt;h2 id=&quot;wsl-2-的体验变化&quot;&gt;WSL 2 的体验变化&lt;/h2&gt;
+
+&lt;p&gt;首次开始使用 WSL 时，你会注意到一些用户体验变化。以下是此预览中两个最重要的变化。&lt;/p&gt;
+
+&lt;h3 id=&quot;将-linux-文件放在-linux-根文件系统中&quot;&gt;将 Linux 文件放在 Linux 根文件系统中&lt;/h3&gt;
+
+&lt;p&gt;确保将 Linux 应用程序中经常访问的文件放在 Linux 根文件系统中，以享受文件性能优势。过去微软一直强调在使用 WSL 1 时将文件放入 C 盘，但 WSL 2 中的情况并非如此。要享受 WSL 2 中更快的文件系统访问权限，这些文件必须放在 Linux 根文件系统里面。而且现在 Windows 应用程序可以访问 Linux 根文件系统（如文件资源管理器！尝试在 Linux 发行版的主目录中运行：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;explorer.exe .&lt;/code&gt; 看看会发生什么），这将使这种转换变得更加容易。（之前文章说过在wsl 1中可以访问win中的文件，而在win中访问不到wsl中的文件。）&lt;/p&gt;
+
+&lt;h3 id=&quot;在初始构建中使用动态-ip-地址访问-linux-网络应用程序&quot;&gt;在初始构建中使用动态 IP 地址访问 Linux 网络应用程序&lt;/h3&gt;
+
+&lt;p&gt;WSL 2 做了架构的巨大变更，使用了虚拟化技术，并仍在努力改进网络支持。由于 WSL 2 现在运行在虚拟机中，因此你从 Windows 访问 Linux 网络应用程序需要使用该 VM 的 IP 地址，反之亦然，你需要 Windows 主机的 IP 地址才能从 Linux 中访问 Windows 网络应用程序。 WSL 2 的目标是尽可能使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localhost&lt;/code&gt; 访问网络应用程序！可以在&lt;a href=&quot;https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes%23accessing-network-applications&quot;&gt;文档中&lt;/a&gt;找到有关如何执行此操作的完整详细信息和步骤。&lt;/p&gt;
+
+&lt;p&gt;（此特性已更新，详见下面更新的章节）&lt;/p&gt;
+
+&lt;h3 id=&quot;新的-wsl-命令&quot;&gt;新的 WSL 命令&lt;/h3&gt;
+
+&lt;p&gt;WSL 添加了一些新命令选项来帮助控制和查看 WSL 版本和发行版。&lt;/p&gt;
+
+&lt;p&gt;除了上面提到的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--set-version&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--set-default-version&lt;/code&gt; 之外，还有：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl --shutdown&lt;/code&gt;
+立即终止所有正在运行的发行版和 WSL 2 轻量级实用程序虚拟机。
+一般来说，支持 WSL 2 发行版的虚拟机是由 WSL 来管理的，因此会在需要时将其打开并在不需要时将其关闭。但也可能存在你希望手动关闭它的情况，此命令允许你通过终止所有发行版并关闭 WSL 2 虚拟机来执行此操作。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl --list --quiet&lt;/code&gt;
+仅列出发行版名称。此命令对于脚本编写很有用，因为它只会输出你已安装的发行版的名称，而不显示其他信息，如默认发行版、版本等。&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wsl --list --verbose&lt;/code&gt;
+显示有关所有发行版的详细信息。此命令列出每个发行版的名称，发行版所处的状态以及正在运行的版本。默认发行版标以星号。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;一些更新&quot;&gt;一些更新&lt;/h2&gt;
+
+&lt;h3 id=&quot;win-18945-支持通过localhost访问wsl2容器&quot;&gt;win 18945: 支持通过localhost访问WSL2容器&lt;/h3&gt;
+
+&lt;p&gt;windows 18945之前的WSL2版本，如果我们在其中运行了一个网络服务，例如启动一个WEB服务。想在 Win10 宿主机中访问这个WEB服务，我们先要通过 ip a 或 ifconfig 命令查看其IP地址才能访问，而且更崩溃的是每次重启后再运行WSL2容器，其IP地址和网关会重新分配。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210118144355782.png&quot; alt=&quot;image-20210118144355782&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这确实是件很麻烦的事情，为此有开发者特意用golang开发了一个windows服务，让用户快捷的获取到WSL2的IP。&lt;/p&gt;
+
+&lt;p&gt;本次更新改进了这个问题，我们在WIN10中能够直接通过localhost 访问到WSL2中的服务，并且WLS2中的网络服务也能绑定到 0.0.0.0 上。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210118144324427.png&quot; alt=&quot;image-20210118144324427&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;例如：WSL2 容器内启动web服务器，使用python http.server模块启动一个WEB服务
+python3 -m http.server，默认端口8000
+然后在win10中的web浏览器中访问 http://localhost:8000/&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210118144259283.png&quot; alt=&quot;image-20210118144259283&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;要了解有关用户体验更改的更多信息，请参阅文档：&lt;a href=&quot;https://link.zhihu.com/?target=https%3A//docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes&quot;&gt;WSL 1 和 WSL 2 之间的用户体验变化&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;win-190281-可在pycharm201902版本使用-wsl2&quot;&gt;win 19028.1: 可在Pycharm2019.02版本使用 wsl2&lt;/h3&gt;
+
+&lt;p&gt;在此版本之前，Pycharm2019.02中解释器选择wsl，若wsl版本为wsl2则程序会直接卡死。&lt;/p&gt;
+
+&lt;p&gt;现在则可以选择wsl2中的python作为解释器。&lt;/p&gt;
+
+&lt;p&gt;要解决卡死问题，又不想升级系统的话 ，可以使用&lt;strong&gt;Pycharm2019.03&lt;/strong&gt;版本，此版本兼容了wsl2，虽然还未正式发行。&lt;/p&gt;
+
+&lt;h2 id=&quot;本人使用中发现-wsl存在的bug&quot;&gt;本人使用中发现 wsl存在的bug&lt;/h2&gt;
+
+&lt;h3 id=&quot;navicat-不能通过localhost直接访问容器内的mysql&quot;&gt;navicat 不能通过localhost直接访问容器内的mysql&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20210118144242972.png&quot; alt=&quot;image-20210118144242972&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;github也有用户反馈了这个问题，官方确认是BUG并正在修复中。&lt;/p&gt;
+
+&lt;p&gt;目前可以使用ssh隧道连接。&lt;/p&gt;
+
+&lt;h3 id=&quot;git-status更新不及时&quot;&gt;git status更新不及时&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/tY6kP258bho7Rwc.png&quot; alt=&quot;wsl2bug.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这个问题从wsl 1就存在，github很多人提过这个issue,官方还未修复。&lt;/p&gt;
+
+&lt;h2 id=&quot;wsl其他技巧&quot;&gt;wsl其他技巧&lt;/h2&gt;
+
+&lt;h3 id=&quot;ssh连接wsl&quot;&gt;ssh连接wsl&lt;/h3&gt;
+
+&lt;p&gt;打开配置文件:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo vim /etc/ssh/sshd_config&lt;/code&gt;
+写入:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-yanl&quot;&gt;Port 2222   				#设置ssh的端口号, 由于22在windows中有别的用处, 尽量不修改系统的端口号
+PermitRootLogin yes  		 # 可以root远程登录
+PasswordAuthentication yes     # 密码验证登录
+AllowUsers sky 				# 远程登录时的用户名
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重启服务:&lt;/p&gt;
+
+&lt;p&gt;` sudo service ssh –full-restart`
+这个时候你自己电脑上就可以通过ssh连接wsl了, 但是想要在其他的计算机上访问, 就需要系统开放端口了。&lt;/p&gt;
+
+&lt;p&gt;防火墙-&amp;gt;高级设置-&amp;gt;入站规则-&amp;gt;新建规则&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/20180928162108931&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;端口-&amp;gt;下一步&lt;/p&gt;
+
+&lt;p&gt;选择tcp  特定本地端口 2222&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/20180928162242346&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;允许连接, 默认都选上, 下一步填个名字。&lt;/p&gt;
+
+&lt;p&gt;如果你使用的是wsl 1版本到这一步就可以在其他电脑ssh连接了。&lt;/p&gt;
+
+&lt;p&gt;因为wsl2 ip与宿主机ip并不相同，此时还需要在win中添加下端口转发的规则。&lt;/p&gt;
+
+&lt;p&gt;使用管理员权限打开Powershell，输入：&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;netsh interface portproxy add v4tov4 &lt;span class=&quot;nv&quot;&gt;listenport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2222 &lt;span class=&quot;nv&quot;&gt;listenaddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0 &lt;span class=&quot;nv&quot;&gt;connectport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2222 &lt;span class=&quot;nv&quot;&gt;connectaddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;wsl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.ip&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wsl使用完整-桌面版kali&quot;&gt;wsl使用完整 桌面版kali&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/PfASbVBvnz6wayG.png&quot; alt=&quot;kalipng.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;升级为完整版&quot;&gt;升级为完整版&lt;/h4&gt;
+
+&lt;p&gt;Microsoft Store中直接安装的wsl版kali是阉割版，基本上你想用的软件全都没有，所以需要安装完整版。&lt;/p&gt;
+
+&lt;p&gt;进入wsl 依次输入:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get update
+apt-get upgrade
+apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;kali-linux-full
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;等待直至结束即可。&lt;/p&gt;
+
+&lt;h4 id=&quot;为wsl安装桌面&quot;&gt;为wsl安装桌面&lt;/h4&gt;
+
+&lt;p&gt;这一步是最骚的，wsl 1和2都支持开桌面版，比开个VM爽多了。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装 xfce4 和中文支持&lt;/p&gt;
+
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get install xfce4 fonts-noto-cjk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Windows 上安装 VcXsrv
+见&lt;a href=&quot;https://sourceforge.net/projects/vcxsrv/&quot;&gt;这里&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;配置输出 
+在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.zshrc&lt;/code&gt;(如果用的是原生 bash 就用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;) 中添加&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DISPLAY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;:0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;启动桌面&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;startxfce4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;启动后遇到问题, 可以用以下脚本解决&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ~/.config/xfce4rm &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ~/.cache/sessions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;参考链接&quot;&gt;参考链接&lt;/h2&gt;
+
+&lt;p&gt;[1]. &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/wsl2-ux-changes&quot;&gt;官方文档：User Experience Changes Between WSL 1 and WSL 2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2]. &lt;a href=&quot;https://zhuanlan.zhihu.com/p/69121280&quot;&gt;在 Windows 中运行 Linux：WSL 2 使用入门&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3]. &lt;a href=&quot;https://blog.csdn.net/lcuwb/article/details/82885920&quot;&gt;设置WSL可远程连接&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[4]. &lt;a href=&quot;https://blog.csdn.net/weixin_44008092/article/details/98254833&quot;&gt;WSL2跟踪 - 18945: 通过localhost直接访问 WSL2 容器中的服务&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[5]. &lt;a href=&quot;https://htharoldht.com/kali-under-wsl/&quot;&gt;WSL 下的 kali&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 25 Nov 2019 00:00:00 +0000</pubDate>
+        <link>https://UlyC.github.io/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/</link>
+        <guid isPermaLink="true">https://UlyC.github.io/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/</guid>
+        
+        <category>wsl2</category>
+        
+        <category>kali</category>
+        
+        <category>wsl</category>
+        
+        <category>pycharm</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
