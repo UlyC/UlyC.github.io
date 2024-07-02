@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="19年上半年Go语言使用笔记 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  语言须能精致准确表达出想要表达的对象。
+
+  举例来说，好小说家不该滥用“不可思议”“难以捉摸”等词，因为他有责任把这种“不可思议”与“难以捉摸”写清楚，传达给读者。
+​                                                              							—— F.R.利维斯 《伟大的传统》
+
+
+19年上半年Go语言使用笔记
+
+公司里...">
+    
+    <meta property="article:published_time" content="2019-06-06T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Golang">
+    
+    <meta property="article:tag" content="Go">
+    
+    <meta property="article:tag" content="rune类型">
+    
+    <meta property="article:tag" content="组合">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2019/06/06/19%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4GO%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>19年上半年Go语言使用笔记 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2019/06/06/19%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4GO%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/湖.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/湖.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Golang" title="Golang">Golang</a>
+                        
+                        <a class="tag" href="/archive/?tag=Go" title="Go">Go</a>
+                        
+                        <a class="tag" href="/archive/?tag=rune%E7%B1%BB%E5%9E%8B" title="rune类型">rune类型</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%BB%84%E5%90%88" title="组合">组合</a>
+                        
+                    </div>
+                    <h1>19年上半年Go语言使用笔记</h1>
+                    
+                    <h2 class="subheading">GO语言笔记</h2>
+                    <span class="meta">Posted by UlyC on June 6, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>语言须能精致准确表达出想要表达的对象。</p>
+
+  <p>举例来说，好小说家不该滥用“不可思议”“难以捉摸”等词，因为他有责任把这种“不可思议”与“难以捉摸”写清楚，传达给读者。
+​                                                              							—— F.R.利维斯 《伟大的传统》</p>
+</blockquote>
+
+<h1 id="19年上半年go语言使用笔记">19年上半年Go语言使用笔记</h1>
+
+<p>公司里新项目基本都换成了Go语言,，老项目有条件的也在慢慢用Go重构。</p>
+
+<p>所以这大半年除了偶尔维护Python2老代码的时候还写下Python,  其他大部分时间基本都在写JS和Go。:stuck_out_tongue:</p>
+
+<p>下面是 半年来使用中记的一些记录，整理了下发出来。</p>
+
+<h2 id="1-发送get以外的额请求">1. 发送Get以外的额请求</h2>
+
+<p>以 PATCH方法为例：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>  
+
+<span class="k">import</span> <span class="p">(</span>  
+   <span class="s">"bytes"</span>
+   <span class="s">"compress/gzip"</span>
+   <span class="s">"encoding/json"</span>
+   <span class="s">"fmt"</span>
+   <span class="s">"io/ioutil"</span>
+   <span class="s">"net/http"</span>
+<span class="p">)</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="n">region</span> <span class="o">:=</span> <span class="s">"js"</span>
+   <span class="n">gwIp</span> <span class="o">:=</span> <span class="s">"1.1.1.1"</span>
+
+   <span class="n">stateChangeBody</span> <span class="o">:=</span> <span class="s">`{"region":"`</span> <span class="o">+</span> <span class="n">region</span><span class="o">+</span><span class="s">`","gw_ip":"`</span><span class="o">+</span> <span class="n">gwIp</span><span class="o">+</span><span class="s">`"}`</span>
+   <span class="k">var</span> <span class="n">stateChangeBytes</span> <span class="o">=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="n">stateChangeBody</span><span class="p">)</span> 
+    <span class="c">//stateChangeBody 若使用结构体 , stateChangeBytes就用 json.Marshal(stateChangeBody)</span>
+
+   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"body:"</span><span class="p">,</span><span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">stateChangeBytes</span><span class="p">))</span>
+
+   <span class="n">stateChangeReq</span><span class="p">,</span> <span class="n">_</span><span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"PATCH"</span><span class="p">,</span> <span class="s">"http://localhost:8000/api/gateway/state"</span><span class="p">,</span>  <span class="n">bytes</span><span class="o">.</span><span class="n">NewBuffer</span><span class="p">(</span><span class="n">stateChangeBytes</span><span class="p">))</span>
+    
+    <span class="c">//请求的body是 io.reader interface，需要实现</span>
+    <span class="c">//strings.NewReader  byte.NewReader bytes.NewBuffer  实现了read 方法</span>
+    
+
+   <span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+   <span class="n">stateChangeResp</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">stateChangeReq</span><span class="p">)</span>
+	
+    <span class="c">// 若响应使用gzip 编码 ,需要使用gzip.NewReader 解压, </span>
+	  <span class="c">//reader, err := gzip.NewReader(stateChangeResp.Body)</span>
+	  <span class="c">//if err != nil {</span>
+	  <span class="c">//	return nil, fmt.Errorf("GZIP Read ERROR %s", err.Error())</span>
+	  <span class="c">//}</span>
+	  <span class="c">//Response, err := ioutil.ReadAll(reader)</span>
+	  <span class="c">//if err != nil {</span>
+	  <span class="c">//	return nil, fmt.Errorf("BODY READ ERR %s", err.Error())</span>
+	  <span class="c">//}</span>
+    
+   <span class="n">stateChangeResponse</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">stateChangeResp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>
+   <span class="c">//fmt.Println("response Body:", string(stateChangeRespData))</span>
+
+   <span class="k">var</span> <span class="n">stateChangeRespData</span> <span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{}</span>
+
+   <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">stateChangeResponse</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">stateChangeRespData</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"response err:"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+   <span class="p">}</span>
+
+   <span class="k">if</span> <span class="n">_</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">stateChangeRespData</span><span class="p">[</span><span class="s">"res"</span><span class="p">];</span> <span class="o">!</span><span class="n">ok</span> <span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"response err:"</span><span class="p">,</span><span class="s">"无数据"</span><span class="p">)</span>
+   <span class="p">}</span>
+
+   <span class="k">if</span> <span class="n">stateChangeRespData</span><span class="p">[</span><span class="s">"res"</span><span class="p">]</span><span class="o">==</span><span class="s">"faild"</span> <span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"result:"</span><span class="p">,</span><span class="s">"更新失败"</span><span class="p">)</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="2-invalid-character--looking-for-beginning-of-value">2. invalid character ‘&lt;’ looking for beginning of value</h2>
+
+<p>使用<code class="language-plaintext highlighter-rouge">json.Unmarshal()</code>反序列化时出现。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">main</span><span class="p">()</span>  <span class="p">{</span>  
+   <span class="n">timeStamp</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"2006/01/02 15:04"</span><span class="p">)</span>
+   <span class="n">metric</span> <span class="o">:=</span> <span class="s">"probe_duration_seconds"</span>
+   <span class="n">ip</span> <span class="o">:=</span> <span class="s">"1.1.1.1"</span>
+   <span class="n">probeIpApi</span> <span class="o">:=</span>  <span class="s">"http://api/ip?start_time="</span> <span class="o">+</span> <span class="n">timeStamp</span> <span class="o">+</span> <span class="s">"&amp;end_time="</span><span class="o">+</span> <span class="n">timeStamp</span> <span class="o">+</span> <span class="s">"&amp;metric="</span><span class="o">+</span> <span class="n">metric</span> <span class="o">+</span> <span class="s">"&amp;ip="</span> <span class="o">+</span> <span class="n">ip</span>  
+    
+   <span class="n">probeIpResp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">probeIpApi</span><span class="p">)</span>  
+   <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"请求API失败"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>  
+      <span class="k">return</span>
+   <span class="p">}</span>
+    
+   <span class="k">defer</span> <span class="n">probeIpResp</span><span class="o">.</span><span class="n">Body</span><span class="o">.</span><span class="n">Close</span><span class="p">()</span>  
+   <span class="n">probeIpRespBody</span><span class="p">,</span><span class="n">err</span> <span class="o">:=</span> <span class="n">ioutil</span><span class="o">.</span><span class="n">ReadAll</span><span class="p">(</span><span class="n">probeIpResp</span><span class="o">.</span><span class="n">Body</span><span class="p">)</span>  
+   <span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"请求API io读取失败"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+      <span class="k">return</span>
+   <span class="p">}</span>
+  
+   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">probeIpRespBody</span><span class="p">))</span>  
+
+   <span class="k">var</span> <span class="n">probeIpRespDat</span> <span class="o">=</span><span class="nb">make</span><span class="p">(</span><span class="k">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="k">interface</span><span class="p">{},</span><span class="m">0</span><span class="p">)</span>  
+   <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Unmarshal</span><span class="p">(</span><span class="n">probeIpRespBody</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">probeIpRespDat</span><span class="p">);</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span><span class="p">{</span> 
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"请求API 反序列化失败"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+      <span class="k">return</span>
+   <span class="p">}</span>
+   <span class="n">ipConnectedness</span> <span class="o">:=</span> <span class="n">probeIpRespDat</span>
+   <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">ipConnectedness</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="原因">原因</h3>
+
+<p>打印出来返回的结果是</p>
+
+<pre><code class="language-&lt;html&gt;">&lt;html&gt;
+&lt;head&gt;&lt;title&gt;502 Bad Gateway&lt;/title&gt;&lt;/head&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>返回的为html时会报这个错误。</p>
+
+<p>而未返回结果的原因是，url中的time含有空格导致。</p>
+
+<h3 id="解决">解决</h3>
+
+<p>确保返回的数据正确就可解决。</p>
+
+<p>还有确保请求时的url正确编码有两种方法。</p>
+
+<ol>
+  <li>将url拼完后进行一次编码：
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">probeIpApi</span> <span class="o">:=</span>  <span class="s">"http://api/ip?start_time="</span> <span class="o">+</span> <span class="n">timeStamp</span> <span class="o">+</span> <span class="s">"&amp;end_time="</span><span class="o">+</span> <span class="n">timeStamp</span> <span class="o">+</span> <span class="s">"&amp;metric="</span><span class="o">+</span> <span class="n">metric</span> <span class="o">+</span> <span class="s">"&amp;ip="</span> <span class="o">+</span> <span class="n">ip</span>  
+   
+<span class="n">u</span><span class="p">,</span><span class="n">_</span> <span class="o">:=</span> <span class="n">url</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">probeIpApi</span><span class="p">)</span>  
+<span class="n">q</span> <span class="o">:=</span> <span class="n">u</span><span class="o">.</span><span class="n">Query</span><span class="p">()</span>
+<span class="n">u</span><span class="o">.</span><span class="n">RawQuery</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">Encode</span><span class="p">()</span>    <span class="c">//urlencode</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+<span class="n">probeIpResp</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+</code></pre></div>    </div>
+  </li>
+  <li>将ulr中参数通过<code class="language-plaintext highlighter-rouge">URL.Query()</code>添加：
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">req</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">http</span><span class="o">.</span><span class="n">NewRequest</span><span class="p">(</span><span class="s">"GET"</span><span class="p">,</span> <span class="s">"http://api/ip"</span><span class="p">,</span> <span class="no">nil</span><span class="p">)</span>   
+<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">Exit</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> 
+    <span class="p">}</span>  
+   
+<span class="n">q</span> <span class="o">:=</span> <span class="n">req</span><span class="o">.</span><span class="n">URL</span><span class="o">.</span><span class="n">Query</span><span class="p">()</span>  
+<span class="n">q</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"start_time"</span><span class="p">,</span> <span class="n">start_time</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"end_time"</span><span class="p">,</span> <span class="n">end_time</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"metric"</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"ip"</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span>
+   
+<span class="n">req</span><span class="o">.</span><span class="n">URL</span><span class="o">.</span><span class="n">RawQuery</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">Encode</span><span class="p">()</span>
+<span class="n">client</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">http</span><span class="o">.</span><span class="n">Client</span><span class="p">{}</span>
+<span class="n">resp</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">Do</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><strong>注意</strong>：此种方法会将 空格 编码为“+”而不是“%20”。</p>
+
+<p><a href="http://www.w3.org/TR/html4/interact/forms.html#h-17.13.4.1">W3C标准规定</a>，当<code class="language-plaintext highlighter-rouge">Content-Type为application/x-www-form-urlencoded</code>时，URL中查询参数名和参数值中空格要用加号 “+” 替代，所以几乎所有使用该规范的浏览器在表单提交后，URL查询参数中空格都会被编成加号”+”。</p>
+
+<p>而在另一份规范(<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</a>，定义URI)里, URI里的保留字符都需转义成<code class="language-plaintext highlighter-rouge">%HH</code>格式(Section 3.4 Query Component)，因此空格会被编码成”%20”，加号”+”本身也作为保留字而被编成”%2B”。</p>
+
+<p>对于某些遵循RFC 2396标准的应用来说，它可能不接受查询字符串中出现加号”+”，认为它是非法字符。所以一个安全的举措是URL中统一使用”%20”来编码空格字符。</p>
+
+<p>上面的例子中可以在最后，再调用<code class="language-plaintext highlighter-rouge">replaceAll("\\+", "%20")</code>，将所有加号+替换为%20。</p>
+
+<h2 id="3get-resource-list-err-client-do-error-post--unsupported-protocol-scheme">3.Get Resource List Err: CLIENT DO ERROR Post : unsupported protocol scheme</h2>
+
+<p>request 发送请求时, 目标url不合法.</p>
+
+<p>两次遇到这个问题,由于配置中  本地测试时  高危的url注释未打开.</p>
+
+<h2 id="4结构体的坑之大小写">4.结构体的坑之大小写</h2>
+
+<p>结构体名字没有首字母大写别的包无法调用</p>
+
+<p>struct的属性是否被导出，遵循大小写的原则：首字母大写的被导出，首字母小写的不被导出。</p>
+
+<p>所以：</p>
+
+<ol>
+  <li><strong>如果struct名称首字母是小写的，这个struct不会被导出。连同它里面的字段也不会导出，即使有首字母大写的字段名</strong>。</li>
+  <li><strong>如果struct名称首字母大写，则struct会被导出，但只会导出它内部首字母大写的字段，那些小写首字母的字段不会被导出</strong>。</li>
+</ol>
+
+<p>但是这里有一个特殊情况（这个限制不仅仅是结构体），当你有另一个首字母大写的结构体Test，包含了一个首字母小写的结构体test类型的参数，那么就够在包外通过调用这个首字母大写的结构体，间接的调用这个首字母小写的结构体的内容（前提必须是参数首字母大写）</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">hi</span> <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="p">{</span><span class="s">"hello"</span><span class="p">}</span>  
+
+<span class="k">type</span> <span class="n">test</span> <span class="k">struct</span> <span class="p">{</span>
+   <span class="n">Test</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Test</span> <span class="k">struct</span> <span class="p">{</span>
+   <span class="n">Test1</span> <span class="n">test</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">Test</span><span class="p">)</span> <span class="n">InitHi</span><span class="p">(){</span>
+   <span class="n">m</span><span class="o">.</span><span class="n">Test1</span><span class="o">=</span><span class="n">hi</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>结构体中参数首字母没有大写时，别的包虽然可以调用这个结构体，但是找不到这个结构体中没有首字母大写的参数。</p>
+
+<h2 id="5float类型精确度保留小数位数">5.float类型精确度(保留小数位数)</h2>
+
+<p>Go没有python那样现成的内置函数, 比如<code class="language-plaintext highlighter-rouge">round(number , n)</code>或者<code class="language-plaintext highlighter-rouge">Decimal</code>包, 只能自己封装啦:</p>
+
+<ul>
+  <li>
+    <h4 id="转换成字符串截取再转为float">转换成字符串,截取,再转为float</h4>
+  </li>
+</ul>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">FloatRound</span><span class="p">(</span><span class="n">f</span> <span class="kt">float64</span><span class="p">,</span> <span class="n">n</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>  
+   <span class="n">format</span> <span class="o">:=</span> <span class="s">"%."</span> <span class="o">+</span> <span class="n">strconv</span><span class="o">.</span><span class="n">Itoa</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="s">"f"</span>
+   <span class="n">res</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">strconv</span><span class="o">.</span><span class="n">ParseFloat</span><span class="p">(</span><span class="n">fmt</span><span class="o">.</span><span class="n">Sprintf</span><span class="p">(</span><span class="n">format</span><span class="p">,</span> <span class="n">f</span><span class="p">),</span> <span class="m">64</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">res</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <h4 id="用math包">用math包</h4>
+  </li>
+</ul>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">Round</span><span class="p">(</span><span class="n">f</span> <span class="kt">float64</span><span class="p">,</span> <span class="n">n</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span>  
+	<span class="n">n10</span> <span class="o">:=</span> <span class="n">math</span><span class="o">.</span><span class="n">Pow10</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">Trunc</span><span class="p">((</span><span class="n">f</span><span class="o">+</span><span class="m">0.5</span><span class="o">/</span><span class="n">n10</span><span class="p">)</span><span class="o">*</span><span class="n">n10</span><span class="p">)</span> <span class="o">/</span> <span class="n">n10</span>  
+    
+    <span class="c">//Trunc保留整数部分</span>
+    <span class="c">//比如1.5334要保留一位的话, (1.5334*10)保留整数位,再除以 10 就可以了,加0.5是为了四舍五入.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="6-go中时间戳相关">6. Go中时间戳相关</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">(</span>
+	<span class="s">"strconv"</span>
+	<span class="s">"time"</span>
+<span class="p">)</span>  
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">timwStamp</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span>  								
+	<span class="c">//timwStamp: 2019-05-13 17:19:37.3712671 +0800 CST m=+0.008498901 ,  </span>
+	<span class="c">//type: time.Time</span>
+    
+	<span class="n">timeStampUnix</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Now</span><span class="p">()</span><span class="o">.</span><span class="n">Unix</span><span class="p">()</span>  					
+       <span class="c">//timwStamp--Unix:  1557739177</span>
+       <span class="c">//type  :  int64</span>
+
+	<span class="n">timeString</span> <span class="o">:=</span> <span class="n">strconv</span><span class="o">.</span><span class="n">FormatInt</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">,</span><span class="m">10</span><span class="p">)</span>  			
+    	<span class="c">//timeString:  1557739177</span>
+   	<span class="c">//type: string</span>
+
+	<span class="n">timeNow</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Unix</span><span class="p">(</span><span class="n">timeStamp</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>  					
+    	<span class="c">//timwNow--Unix :  2019-05-13 17:19:37 +0800 CST</span>
+   	<span class="c">//type: time.Time</span>
+    
+	<span class="n">lastTime</span> <span class="o">:=</span> <span class="n">timeNow</span><span class="o">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"2006-01-02 15:04:05"</span><span class="p">)</span>
+	<span class="c">//lastTime:   2019-05-13 17:19:37</span>
+   	 <span class="c">//type: time.Time</span>
+    
+	<span class="n">timeParse</span><span class="p">,</span><span class="n">_</span> <span class="o">:=</span> <span class="n">time</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="s">"2006-01-02 15:04:05"</span><span class="p">,</span><span class="n">timeString</span><span class="p">)</span>  
+    	<span class="c">//timeParse:   0001-01-01 00:00:00 +0000 UTC</span>
+    	<span class="c">// type: time.Time</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="7go语音中单引号和双引号区别及rune类型">7.Go语音中单引号和双引号区别,及rune类型</h2>
+
+<p>Go语言的字符串类型<code class="language-plaintext highlighter-rouge">string</code>在本质上就与其他语言的字符串类型不同：</p>
+
+<ul>
+  <li>Java的String、C++的std::string以及Python3的str类型都只是定宽字符序列</li>
+  <li>Go语言的字符串是一个用UTF-8编码的变宽字符序列，它的每一个字符都用一个或多个字节表示</li>
+</ul>
+
+<p>即：<strong>一个Go语言字符串是一个任意字节的常量序列</strong>。</p>
+
+<p>Golang的双引号和反引号都可用于表示一个常量字符串，不同在于：</p>
+
+<ul>
+  <li>双引号用来创建可解析的字符串字面量(支持转义，但不能用来引用多行)</li>
+  <li>反引号用来创建原生的字符串字面量，这些字符串可能由多行组成(不支持任何转义序列)，原生的字符串字面量多用于书写多行消息、HTML以及正则表达式</li>
+  <li>单引号则用于表示Golang的一个特殊类型：<code class="language-plaintext highlighter-rouge">rune</code>，类似其他语言的<code class="language-plaintext highlighter-rouge">byte</code>但又不完全一样，是指：<strong>码点字面量（Unicode code point）</strong>，不做任何转义的原始内容。</li>
+</ul>
+
+<p>大部分能查到的资料就到此为止,没有解释<strong>码点字面量</strong>到底是什么.</p>
+
+<p>官方文档解释:</p>
+
+<blockquote>
+  <p>rune is an alias for int32 and is equivalent to int32 in all ways.</p>
+
+  <p>//int32的别名,几乎在所有方面等同于int32</p>
+
+  <p>It is  used, by convention, to distinguish character values from integer values.</p>
+
+  <p>//它用来区分字符值和整数值</p>
+</blockquote>
+
+<p>在Go中 ,<strong>byte</strong> 是 ` uint8 `的别名,常用来处理ascii字符;</p>
+
+<p><code class="language-plaintext highlighter-rouge">rune</code>的命名应该来自于北欧的『如尼文字』,是<code class="language-plaintext highlighter-rouge">int32</code>的别名,表示一个Unicode码点.</p>
+
+<p>被大部分人转载的所谓”码点字面量”其实是翻译的锅.</p>
+
+<p>有关<code class="language-plaintext highlighter-rouge">rune</code>类型,相信看完下面的例子就会明白:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	     <span class="k">var</span> <span class="n">a</span> <span class="kt">byte</span> <span class="o">=</span> <span class="sc">'a'</span>  
+	     <span class="c">// value:  97			即ASCII 编码为 97</span>
+	     <span class="c">// type:   uint8</span>
+	     <span class="c">// length:   binary.Size(a) == 1			</span>
+	     <span class="c">//			 unsafe.Sizeof(a) == 1</span>
+        
+	     <span class="k">var</span> <span class="n">c</span> <span class="kt">rune</span>  <span class="o">=</span> <span class="sc">'你'</span>        <span class="c">// 注意: 此处只能用 『单引号』</span>
+	     <span class="c">// value:  20320		即Unicode 码为 20320</span>
+	     <span class="c">// type:   int32/rune</span>
+	     <span class="c">// length:  binary.Size(c) == 4        </span>
+	     <span class="c">//   	    unsafe.Sizeof(c) == 4</span>
+        
+	     
+	     <span class="n">b</span> <span class="o">:=</span> <span class="sc">'b'</span>
+	     <span class="c">// value:  98</span>
+	     <span class="c">// type:   int32/rune</span>
+	     <span class="c">// length:  binary.Size(b) == 11</span>
+	     
+	     <span class="n">d</span> <span class="o">:=</span> <span class="sc">'我'</span>
+	     <span class="c">// value:  25105</span>
+	     <span class="c">// type:   int32/rune</span>
+	     <span class="c">// length: binary.Size(d) == 4</span>
+      
+	     <span class="n">e</span> <span class="o">:=</span> <span class="s">"e"</span>
+	     <span class="c">// value:  e</span>
+	     <span class="c">// type:   string</span>
+	     <span class="c">// length:  len(e)  == 1</span>
+        
+	     <span class="n">f</span> <span class="o">:=</span> <span class="s">"他"</span>
+	     <span class="c">// value:  他</span>
+	     <span class="c">// type:   string</span>
+	     <span class="c">// length:   len(f)  == 3</span>
+	     <span class="c">// len([]rune(f))  == 1</span>
+	     <span class="c">// utf8.RuneCountInString(f) == 1</span>
+</code></pre></div></div>
+
+<p>可以看到,<code class="language-plaintext highlighter-rouge">rune</code> 类型就像文档中说的那样,  主要用于『字符值』而不是『整数值』.</p>
+
+<p>在这个例子中,<code class="language-plaintext highlighter-rouge"> len(f)  == 3</code>是因为Golang中<code class="language-plaintext highlighter-rouge">string</code>底层是通过<code class="language-plaintext highlighter-rouge">[]byte</code>实现的。</p>
+
+<p>中文字符在<code class="language-plaintext highlighter-rouge">unicode</code>下占2个字节，在<code class="language-plaintext highlighter-rouge">utf-8</code>编码下占3个字节  (编码问题可参见之前文章 <a href="https://ulyc.github.io/2018/08/01/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E6%B5%85%E8%B0%88%E5%8F%8Apython%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/"> 字符编码浅谈及Python中的编码问题</a> )，而Golang默认编码正好是<code class="language-plaintext highlighter-rouge">utf-8</code>。</p>
+
+<h4 id="ps">ps:</h4>
+
+<p><code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">uint</code> 和 <code class="language-plaintext highlighter-rouge">uintptr</code> 在 32 位系统上通常为 32 位宽( 4字节 )，在 64 位系统上则为 64 位宽( 8字节)。</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">var</span> <span class="n">z</span> <span class="kt">int</span> <span class="o">=</span> <span class="m">8</span>
+    <span class="c">// unsafe.Sizeof(z) == 8     我的是64位系统</span>
+    <span class="c">// unsafe.Sizeof总是在编译期就进行求值，而不是在运行时</span>
+</code></pre></div></div>
+
+<h2 id="8--slice-被jsonitermarshal转换为null期望保留为空slice">8 . slice [],被jsoniter.Marshal()转换为<code class="language-plaintext highlighter-rouge">null</code>,期望保留为<code class="language-plaintext highlighter-rouge">[]</code>空slice</h2>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="n">A</span> <span class="n">stuct</span><span class="p">{</span>
+    <span class="n">Value</span>  <span class="p">[]</span><span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">data</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">{}</span>
+    <span class="n">data2</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">{</span><span class="n">Value</span><span class="o">:</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}}</span>
+    
+    <span class="n">buf</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span>
+      
+    <span class="n">buf2</span><span class="p">,</span> <span class="n">_</span> <span class="o">:=</span> <span class="n">json</span><span class="o">.</span><span class="n">Marshal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">data2</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="kt">string</span><span class="p">(</span><span class="n">buf2</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>输出:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="p">{</span><span class="s">"Value"</span><span class="o">:</span><span class="n">null</span><span class="p">}</span>   
+  <span class="p">{</span><span class="s">"Value"</span><span class="o">:</span><span class="p">[]}</span> 
+</code></pre></div></div>
+
+<h2 id="9-利用map去重">9. 利用Map去重</h2>
+
+<p>Go没有python中<code class="language-plaintext highlighter-rouge">set</code>这种数据结构.</p>
+
+<p>不过当有用到类似<code class="language-plaintext highlighter-rouge">set</code>的需求时, 可以直接make 一个map, 将item 设置为key.</p>
+
+<p>value 可以设置为布尔值或者其他 , 这样就可以不用每次都去遍历数组,就可以新添加的item是否与之前的重复.</p>
+
+<h2 id="10-组合和继承">10. 组合和继承</h2>
+
+<p>刚开始用Go的时候，由于它不支持完全的面向对象，是怎么用怎么 难受…</p>
+
+<p>Go中没有继承的概念,  它是通过接口来实现类似功能。</p>
+
+<p>Go中还有一种叫做组合的概念,看如下代码</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+  
+<span class="k">import</span>  <span class="s">"fmt"</span>
+
+<span class="k">type</span> <span class="n">Base</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="c">// nothing</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">b</span> <span class="o">*</span><span class="n">Base</span><span class="p">)</span> <span class="n">ShowA</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"showA"</span><span class="p">)</span>
+	<span class="n">b</span><span class="o">.</span><span class="n">ShowB</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="k">func</span> <span class="p">(</span><span class="n">b</span> <span class="o">*</span><span class="n">Base</span><span class="p">)</span> <span class="n">ShowB</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"showB"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">type</span> <span class="n">Derived</span> <span class="k">struct</span> <span class="p">{</span>
+	<span class="n">Base</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">d</span> <span class="o">*</span><span class="n">Derived</span><span class="p">)</span> <span class="n">ShowB</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Derived showB"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">d</span> <span class="o">:=</span> <span class="n">Derived</span><span class="p">{}</span>
+	<span class="n">d</span><span class="o">.</span><span class="n">ShowA</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>输出结果为：</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">showA</span>
+<span class="n">showB</span>
+</code></pre></div></div>
+
+<p>可以看到,结果并没有输出 <code class="language-plaintext highlighter-rouge">"Derived showB"</code>。</p>
+
+<p>上面的Derived包含了Base，自动的含有了Base的方法，因为其不是继承，所以不会根据具体传入的对象而执行对应的方法。</p>
+
+<p>Python中的类继承表示Base是Derived的一个父类，具有一种<strong>层次关系。</strong></p>
+
+<p>但是Go的组合则是一种 <strong>包含关系</strong>，是Derived 包含了Base，所以Derived的实例可以使用Base的所有方法。</p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/03/15/%E7%9B%B2%E6%B0%B4%E5%8D%B0%E5%92%8C%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99%E6%9C%AF/"
+                           data-toggle="tooltip" data-placement="top" title="盲水印和图片隐写术">
+                            Previous<br>
+                            <span>盲水印和图片隐写术</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/08/01/%E5%88%9D%E7%AA%A5CORB/" data-toggle="tooltip"
+                           data-placement="top" title="初窥CORB">
+                            Next<br>
+                            <span>初窥CORB</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2019/06/06/  19年上半年GO使用笔记"
+                     data-page-url="https://UlyC.github.io/2019/06/06/19%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4GO%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"
+                     data-page-title="19年上半年Go语言使用笔记"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

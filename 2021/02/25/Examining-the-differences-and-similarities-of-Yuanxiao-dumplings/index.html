@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="元宵汤圆异同考 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  今人捏餡作小塊,入糯米粉滾之,再濕再滾,大小合宜而止,曰元宵;以水和糯米粉,擘塊,實以餡包之，曰汤圆
+
+  ​
+  元宵汤圆异同考
+
+">
+    
+    <meta property="article:published_time" content="2021-02-25T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>元宵汤圆异同考 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>元宵汤圆异同考</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by UlyC on February 25, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>今人捏餡作小塊,入糯米粉滾之,再濕再滾,大小合宜而止,曰元宵;以水和糯米粉,擘塊,實以餡包之，曰汤圆</p>
+
+  <p>​</p>
+  <h1 id="元宵汤圆异同考">元宵汤圆异同考</h1>
+</blockquote>
+
+<p>　　现在普遍的说法是【北滚元宵，南包汤圆】，或者说主要区别是制作方法上不同，如下图所示:元宵是[摇]出来的,汤圆是[包]出来的。</p>
+
+<p><img src="https://bnextmedia.s3.hicloud.net.tw/image/album/2020-02/img-1580956848-24457@600.jpg" alt="" /></p>
+
+<p>​		按这个说法我一北方人从小元宵节吃的都是汤圆，只有在吃水席的时候吃的“炸糯米丸子”和“炸元宵”才算这个意义上的元宵。</p>
+
+<p>　　查了许多文章全是人云亦云语焉不详，还多有前后矛盾之处。于是我决定来捋一捋其间门道。</p>
+
+<p>　　而要说元宵不得不从元宵节说起。</p>
+
+<h2 id="元宵来源">元宵来源</h2>
+
+<p>　　元宵节的“元”指上元节，“宵”指晚上，节日来源说法不一，现在普遍认为是在汉魏时期形成的风俗。</p>
+
+<p>　　元宵或者说汤圆这种食物，最初叫做“圆子”“浮圆子”“糖元”“水团”等，现代方言中也有许多称呼：</p>
+
+<p>　　吴语称为“汤团”；兴化语称之为“丸囝”；闽南语称为“圆仔”；客家语称为“惜圆、粄圆、雪圆仔、圆粄仔”；闽东语马祖话称“汤丸”；闽东语福州话称为“元宵丸”</p>
+
+<p>　　此物最早的雏形应该是《太平广记·卷二百四十三·尚食令》中提到的一种食物：</p>
+
+<blockquote>
+  <p>好麻油一二斗，南枣烂面少许…..然后取油铛烂面等调停。袜肚中取出银盒一枚，银篦子银笊篱各一。候油煎熟。于盒中取䭔子豏。豏原作𨃰。据明钞本改。以手于烂面中团之，五指间各有面透出。以篦子刮却。便置䭔子于铛中。候熟，以笊篱漉出。以新汲水中良久。却投油铛中。三五沸取出。抛台盘上，旋转不定，以太圆故也。其味脆美，不可名状。</p>
+</blockquote>
+
+<p>　　类似以面裹枣泥油炸而成的一种“炸元宵”。</p>
+
+<p>　　而元宵节吃圆子最早的记载见于 宋代 周必大《平园续稿》：</p>
+
+<blockquote>
+  <p>“元宵煮浮圆子；前辈似未曾赋此，坐间成四韵。</p>
+</blockquote>
+
+<p>　　后来因为人们都在元宵节吃圆子，故圆子也称作元宵。而具体什么时候开始把圆子称作元宵，现在许多文章里都说是始于宋末元初，而我查到把元宵当做食物的记载最早只到明人唐胄《正德琼台志》所载：</p>
+
+<blockquote>
+  <p>元夕于二、三日间以糯粉搓丸，小者煮浸糖水，大者裹以蔗糖，名元宵丸。</p>
+</blockquote>
+
+<p>　　明代小说《金瓶梅》中多处提到元宵这一食品，有“玫瑰元宵”“元宵圆子”等，而未提及“汤圆”这一称呼。而同时期除了《酌中志》中提到“汤圆”这一说法，其他处未见。</p>
+
+<p>　　到了南明和清朝之后，笔记小说中才多见“汤圆”这一叫法。</p>
+
+<h2 id="元宵汤圆区别-元宵节吃哪个">元宵汤圆区别 ，元宵节吃哪个</h2>
+
+<p>　　明代刘若愚的《酌中志·饮食好尚纪略》讲：</p>
+
+<blockquote>
+  <p>“吃元宵，其制法用糯米细面，内用核桃仁、白糖为果馅、洒水滚成，如核桃大小，即江南所称汤圆也。”</p>
+</blockquote>
+
+<p>　　可见此时“汤圆”和“元宵”尚不分家。</p>
+
+<p>　　现在所谓区分汤圆和元宵的方法所依据的出处来源都未查到可靠来源，搜索到的都是粘贴来粘贴去的文章。</p>
+
+<p>　　元宵汤圆二者开始有所区分，我查到的最早出自清末民初薛宝辰《素食说略·汤圆》：</p>
+
+<blockquote>
+  <p>今人捏餡作小塊,入糯米粉滾之,再濕再滾,大小合宜而止,曰元宵;以水和糯米粉,擘塊,實以餡包之，曰汤圆。古人作此，当亦不外此二法也。</p>
+</blockquote>
+
+<p>　　由此可知二者本是同一物，皆是元宵节吃的，只不过到清末时已经发展出两种不同做法。</p>
+
+<p>　　“元宵节吃元宵，冬至吃汤圆”之说也并不全错，清代柯培元《噶玛兰厅志》已经载有：</p>
+
+<blockquote>
+  <p>冬至节，家家捣米粉为汤圆。</p>
+</blockquote>
+
+<p>​        其实当今在民间，汤圆元宵其实多是混称，并没有严格区分。</p>
+
+<p>​		关于为何清末已经比较清晰分类汤圆元宵了，后来大家又搞混的原因，我有一个脑洞：</p>
+
+<blockquote>
+  <p>清末民初的时候，元宵和汤圆可能已经被民间明确区分了，可是袁世凱称帝后，因为元(袁)宵(消)谐音，对自己不吉利，他强制把元宵节改为灯节，元宵不许再叫元宵只能叫汤圆，（这个故事未查到可靠出处）政策推行数年之后，元宵汤圆又在民间继续陷入不分家的状态。</p>
+</blockquote>
+
+<p>​		元宵汤圆目前的状态有点类似“变（便）蛋”和“皮蛋”。有好事者将用石灰锯末腌的称为“变蛋”，其色明亮偏黄；将草木灰腌的称为“皮蛋”，其色偏黑，带有松枝状花纹的称为“松花蛋”。其实变蛋和皮蛋是一种东西，名字不一样是因为地区差异而不是工艺差异，这个战研老师科普过。</p>
+
+<p>​		类似的东西还有”车厘子”(cherry)和”樱桃”，”菠萝”和”凤梨”，博物君解释过多次，这些都本是同一种东西，商家为了卖上价格而故意混淆概念。</p>
+
+<p>​		不过目前以工艺差异起不同名字的说法普及程度比较高，将来普及到一定程度之后可能以此说为准也不一定。毕竟起初“饺子”和“馄饨”也不分家，“馒头”既指带馅的，也指不带馅的。再比如饺子和馄饨又已经细分出云吞、肉燕、扁食和抄手等品类，其间区别也在渐渐清晰。</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/"
+                           data-toggle="tooltip" data-placement="top" title="2021年，用更现代的方法使用PGP（下）">
+                            Previous<br>
+                            <span>2021年，用更现代的方法使用PGP（下）</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/02/11/Douban-Escape-Plan/" data-toggle="tooltip"
+                           data-placement="top" title="豆瓣逃离计划">
+                            Next<br>
+                            <span>豆瓣逃离计划</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2021/02/25/  Examining-the-differences-and-similarities-of-Yuanxiao-dumplings"
+                     data-page-url="https://UlyC.github.io/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/"
+                     data-page-title="元宵汤圆异同考"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

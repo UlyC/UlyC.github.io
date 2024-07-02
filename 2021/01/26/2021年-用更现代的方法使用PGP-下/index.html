@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="2021年，用更现代的方法使用PGP（下） - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.
+
+  ​																												—— Bruce Schneier《应用密码学》
+
+">
+    
+    <meta property="article:published_time" content="2021-01-26T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="PGP">
+    
+    <meta property="article:tag" content="gpg">
+    
+    <meta property="article:tag" content="子密钥">
+    
+    <meta property="article:tag" content="非对称加密">
+    
+    <meta property="article:tag" content="安全">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>2021年，用更现代的方法使用PGP（下） - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=PGP" title="PGP">PGP</a>
+                        
+                        <a class="tag" href="/archive/?tag=gpg" title="gpg">gpg</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AD%90%E5%AF%86%E9%92%A5" title="子密钥">子密钥</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86" title="非对称加密">非对称加密</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AE%89%E5%85%A8" title="安全">安全</a>
+                        
+                    </div>
+                    <h1>2021年，用更现代的方法使用PGP（下）</h1>
+                    
+                    <h2 class="subheading">公钥的发布与交换</h2>
+                    <span class="meta">Posted by UlyC on January 26, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>世界上有两种密码:一种是防止你的小妹妹偷看你的文件;另一种是防止当局阅读你的文件.</p>
+
+  <p>​																												—— Bruce Schneier《应用密码学》</p>
+</blockquote>
+
+<h1 id="2021年用更现代的方法使用pgp下">2021年，用更现代的方法使用PGP（下）</h1>
+
+<h4 id="上篇链接">上篇链接:</h4>
+
+<p><a href="https://ulyc.github.io/2021/01/13/2021年-用更现代的方法使用PGP-上/">2021年，用更现代的方法使用PGP（上）</a>
+<a href="https://ulyc.github.io/2021/01/18/2021年-用更现代的方法使用PGP-中/">2021年，用更现代的方法使用PGP（中）</a></p>
+
+<h1 id="pgp-公钥的-发布-与-交换">PGP 公钥的 发布 与 交换</h1>
+
+<p>讨论公钥安全交换的中文文章比较少，而这一环是整个加密体系的重中之重。 大部分的PGP教程最后一步就是让小白用户将公钥上传，这是非常过时，且不负责任的，所以这里来详细介绍下PGP 公钥的 发布 与 交换。</p>
+
+<h2 id="原则">原则</h2>
+
+<p>首先明确一点： 上传公钥到 公钥服务器 <strong>不是</strong>必要的，甚至是<strong>危险</strong>的。</p>
+
+<p>如果你是新手，请不要发布你的公钥到 公钥服务器。</p>
+
+<h2 id="引子">引子</h2>
+
+<p>通过前文，你已经熟悉了gpg的本地使用， 并且生成了自己的PGP 密钥对。</p>
+
+<p>想象一下， 如果你生活在1980年代， 想和远方的朋友加密通信，需要先交换彼此的公钥，又没有一个统一的可信的认证机构，这时会有什么问题？</p>
+
+<p>当面交换吗？当然是个办法，但是相信你不会想要将下列</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609751914957.png" alt="1609751914957" /></p>
+
+<p>这么长的公钥抄写到纸上，然后开车送到朋友那里，再让朋友照着这个输入他的电脑。如果中间有变动，需要重复以上过程n次。</p>
+
+<p>那么还有其他办法吗？</p>
+
+<p>那个时代还没有line、wechat这类即时通讯软件，而邮件提供商默认是不可靠的，不然也不会有PGP的诞生。 并且彼时https还未出现，用邮件交换PGP交换公钥显然不太安全。</p>
+
+<p>你们双方都需要便捷地交换公玥， 并且确认彼此得到的公钥确实是未经篡改过的，真实有效的，就成了一个难题，这样，公钥服务器也就呼之欲出了。</p>
+
+<h2 id="公钥服务器-keyserver">公钥服务器 KeyServer</h2>
+
+<p>公钥服务器使得人们只需要交换他们短短的key id 或者user id就可以方便地从公钥服务器下载公钥。</p>
+
+<h3 id="历史与设计初衷">历史与设计初衷</h3>
+
+<p>第一个KeyServer  叫做 HKP（ web-based OpenPGP HTTP Keyserver Protocol） Keyserver ，  诞生在上世纪90年代，是Marc Horowitz在麻省理工学习时为了他的论文而搭建的。在此之前， 虽然不是那么安全， 但是大部分人依靠电子邮件来交换公钥。</p>
+
+<p>虽然服务器有了， 但开发者们担心政府会试图强迫密钥服务器运营商用政府选择的各种证书来替换证书。</p>
+
+<p>所以他们做出了一个决定：公钥服务器永远不会删除信息。公钥服务器可以为现有的证书添加信息（比如可以revoke/sign或者调整expire时间），但永远永远永远不会删除证书或证书的信息。</p>
+
+<p>为了达到这个目标，他们开始运行一个<strong>分布式</strong>的国际公钥服务器网络，这就是现在的KeyServer。世界各地的公钥服务器会定期相互通信，同步，比较目录。如果政府强迫公钥服务器运营商删除或修改证书，那么在比较步骤中就会被发现。残缺的公钥服务器会用完好密钥服务器目录中的内容更新自己。</p>
+
+<p>任何东西都不会被删除，听起来很美好，也是解决政府审查问题的一个简单而有效的办法，可是正是这个原则后来给KeyServer带来了无穷无尽的问题。</p>
+
+<h3 id="信任网络-web-of-trust">信任网络 (Web of Trust)</h3>
+
+<p>好了，现在我们有了一个可以方便地上传和下载公钥的地方， 这样是不是就万事大吉了呢？</p>
+
+<p>对于KeyServer 来说，任何人都可以上传公钥并声称自己是Linus, 是Zuckerberg,或是任何其他人，而KeyServer并不会去验证你是否是你所声称的人（因为KeyServer本来就没有一个中心化的运营者）。</p>
+
+<p>如果你有一些密码学的基础， 那么就会知道， PGP协议依靠的非对称加密算法， 最脆弱的点就在于公钥的交换这一步。公钥交换时最容易收到中间人攻击，你一定要确定你接收到的公钥确实是你想交流的人的，由此TSL引入了CA证书认证体系，由一个可信的权威第三方来认证并颁发证书来解决身份的认证问题。 （具体可参见https系列<a href="https://ulyc.github.io/2018/09/21/没那么浅地谈谈HTTP与HTTPS-二.html">没那么浅地谈谈HTTP与HTTPS</a>）。</p>
+
+<p>“信任一个权威的第三方” 对于最初的极具有hack精神的开发者们来说， 显然是无法接受的。</p>
+
+<p>当然，你可以说下载公钥后，通过电话等手段验证下公钥的指纹（fingerprint），就可以确认正确与否。 但是想象一下， 如果你在公钥服务器找到一个声称自己Linus Torvalds 的人, 你并没有他的其他联系方式，将永远无法确定这个公钥持有者到底是谁、这个公钥可信与否 ， 这样无疑是低效的，并且使整个系统沦为了熟人之间的小网络。</p>
+
+<p>要知道，根据六度分隔理论（Six Degrees of Separation），世界上任何互不相识的两人，平均通过六个人就可以产生联系。 那么可以不可以这么思考， 假设我和小A见过面并检查过他的公钥，因而知道小A的公钥的的确确属于他本人，我选择信任小A。而小A同样验证了小B的证书并为小B的证书签名背书——小A的证书的持有人在此证明该证书是真实属于小B。那么我无须见亲见小B本人，也可以通过小A的背书而接受小B的证书。</p>
+
+<p>如此循环下去，就形成了一张网， 这就是信任网络。</p>
+
+<h3 id="主流公钥服务器">主流公钥服务器</h3>
+
+<h4 id="1---sks-keyserver-pool">1.   <a href="http://sks-keyservers.net/">SKS Keyserver Pool</a></h4>
+
+<p>当今世界最大的Key Server 池， 符合它的标准的世界各地的公钥服务器会定期相互通信，同步，比较目录，数据完全开放下载。 现在一般说起KeyServer说的就是这个。</p>
+
+<p>KeyServer虽然一直是PGP的重要基础设置 ,但SKS Keyserver Pool 其实目前只有不到20台服务器，GnuPG默认用的服务器是其中的 <a href="https://hkps.pool.sks-keyservers.net">HKPS pool</a>,只有四台服务器。</p>
+
+<h4 id="2-base--modern-software-keyserver">2. Base  Modern Software KeyServer</h4>
+
+<p>有一些KeyServer 没有用SKS的软件，运行的是更下现代和稳定的软件，比较有代表性的是 <strong><a href="http://keyserver.ubuntu.com/">Ubuntu keyserver</a></strong>,  基于Hockeypuck ， 这些服务器仍然会和SKS pool保持同步。</p>
+
+<h4 id="3--独立keyserver">3.  独立KeyServer</h4>
+
+<p>这些服务器不与SKS pool同步数据，由中心化的运营者运行， 会对公钥上传者做一定的认证， 并且支持删除自己的公钥。</p>
+
+<p>比较有代表性的有， <strong><a href="https://keys.openpgp.org/">keys.openpgp.org</a></strong> ，KeyBase等等。</p>
+
+<h3 id="在gpg中使用">在gpg中使用</h3>
+
+<h4 id="发布">发布</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg   <span class="nt">--send-keys</span>  <span class="o">{</span>keyid/uid<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="下载">下载</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg <span class="nt">--recv-keys</span> <span class="o">{</span>keyid/uid<span class="o">}</span>
+</code></pre></div></div>
+
+<p>此时有可能报错</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg: <span class="s2">"xxxxxr"</span> not a key ID: skipping
+</code></pre></div></div>
+
+<p>这时换个KeyServer就行：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg  <span class="nt">--keyserver</span> hkps://keyserver.ubuntu.com <span class="nt">--recv-keys</span> <span class="o">{</span>keyid/uid<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="签名和验证-他人公钥">签名和验证 他人公钥</h4>
+
+<p>验证公钥真实性 依靠多渠道确认的 公钥指纹。</p>
+
+<p>一般来说为别人的公钥签名后，需要发还给他，或者发到公钥服务器(最好经过本人同意)。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gpg <span class="nt">--sign-key</span>  <span class="o">{</span>keyid/uid<span class="o">}</span>   <span class="c"># 为已经导入的 他人钥签名， 你为他签名，意味着你将为他的身份真实性背书，请谨慎 </span>
+</code></pre></div></div>
+
+<h4 id="高级设置">高级设置</h4>
+
+<p>因为并不推荐大家使用KeyServer，所以这里只列举了基础操作。</p>
+
+<p>如果你决定使用KeyServer的话，可以参考 <a href="https://nova.moe/openpgp-best-practices-keyserver-and-configuration/">OpenPGP 最佳实践 - 密钥服务器</a>设置你的客户端与服务器通信使用 HKPS (HKP On SSL)协议， 并定期更新从服务器下载的公钥。</p>
+
+<h3 id="安全风险和争议-被玩坏的keyserver">安全风险和争议， 被玩坏的KeyServer</h3>
+
+<p>在20世纪90年代初，开发者们怀着对技术的信心和人性的希望，期望创建一个友善 、纯粹、没有审查的净土， 在当时背景下，KeyServer不能删除任何已上传的东西，听起来是美好的，设计似乎是合理的。</p>
+
+<p>但是事实是，网络匿名环境中充满了不那么友好的， 甚至是恶意的使用者，在当今看来 ，KeyServer这个系统并不健壮，问题重重，许多问题已经被发现十多年，而且无望解决。</p>
+
+<h4 id="滥用">滥用</h4>
+
+<p>按照官方推荐， UID （User ID） 是用来存储用户信息的，应该在里面填上你的名字和邮箱，一个 GPG 帐号下可以有若干个 UID。</p>
+
+<p>而其实这个UID是没有任何强制限制的，也就是说你可以在UID中放入任何东西，可以是小说片段，可以是磁力链接,可是以编码后的图像、音频或视频……</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609913349212.png" alt="1609913349212" /></p>
+
+<p>当上传到KeyServer时, UID限制了2k的字符 . 以至于有人写了个用KeyServer<a href="https://github.com/yakamok/keyserver-fs">存文件的项目keyserver-fs)</a>。</p>
+
+<p>再次想象一下，你往网盘传了一个文件，共享给其他人，全世界的人都可以往这个网盘文件中添加文件，而且永远无法删除，情况会变得有多糟糕。</p>
+
+<h4 id="脆弱的keyid">脆弱的KeyID</h4>
+
+<p>见过一些生成 PGP“靓号”的工具，就是指定你喜欢的ID规则，工具会暴力生成PGP密钥， 从中返回给你想要的密钥。</p>
+
+<p>由此很容易想到，若攻击者知道了目标的KeyID， 完全可以通过工具来生成完全一样的KeyID（这就是碰撞）, 并上传到KeyServer，来冒充目标。</p>
+
+<p>而伪造一个KeyID有多容易呢，有研究人员借助<a href="https://github.com/lachesis/scallion">scallion</a>程序，使用了普通的GPU（<a href="http://www.geforce.com/hardware">Nvidia GeForce GTX</a>）进行碰撞，花了4秒的时间就生成了一个指定的32 bit的 KeyID。</p>
+
+<p>官方推荐公布自己的KeyID时，最少应该公布64 bit（也就是长16位16进制数啦 ），但是<a href="http://thread.gmane.org/gmane.ietf.openpgp/7413">研究</a>表明64 bit的KeyID也是可以 被碰撞的。</p>
+
+<h4 id="投毒">投毒</h4>
+
+<p>公钥服务器任何人都可以上传公钥，甚至你可以上传别人的公钥，比如你可以将自己签名过的别人的公钥，再次上传到KeyServer。</p>
+
+<h5 id="签名dos">签名Dos</h5>
+
+<p>在WOT认证体系的设计中， 当客户端收到一份未知证书时，它应当从公钥服务器拉取所有为这张证书签过名的人的证书，逐层上溯，看看是否能够找到一张已经被用户信任的证书。如果能的话，就视信任这张为可信的。</p>
+
+<p>2019年6月，有攻击者恶意向公钥服务器提交了对两个著名网友的签名背书。此事件中的受害者 Robert J. Hansen 的证书就被签名了 15000  次。因而任何人的 GPG 在尝试验证他的证书时，都会拉取 15000 个签名。而 GPG 在验证这么多签名的过程中会卡住很久。</p>
+
+<p>由于被攻击的两个人在 GPG 社区中中地位很高，他们在 GPG  信任网络中处于相当核心的位置。这意味着——当你验证任意一份证书的时候，有不小的概率你会不小心拉取到他们俩的证书，然后你的 GPG  就会卡住。不但他们俩的证书没法用了，他们俩签名过的证书也都面临危险，乃至于他们俩签名过的证书所签名的证书……</p>
+
+<p>而上传到KeyServer的所有东西都是不可删除的…为了解决这个问题， <a href="https://lwn.net/Articles/793288/">GnuPG 2.2.17  LWN.net</a> 开始， 从KeyServer下载公钥时默认不再下载关联的公钥， 如果你想要感受证书DoS攻击的话，可以在设置中开启：</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.gnupg/gpg.conf</span>
+<span class="s">keyserver-options no-self-sigs-only,no-import-clean</span>
+</code></pre></div></div>
+
+<h5 id="爆破">爆破</h5>
+
+<p>有个很厉害的程序媛Yegor Timoshenko（前面的SKS文件存储项目也是她的杰作），写了个工具<a href="https://github.com/yegortimoshenko/sks-exploit">SKS-Exploit</a>，可以将任何人的PGP公钥<a href="https://keyserver.2ndquadrant.com/pks/lookup?search=0x41259773973A612A&amp;op=vindex">损坏</a>，变得不可导入。</p>
+
+<p>这个工具同时还可以给任意人的公钥 追加伪造的UID（不是KeyID），并骗过KeyServer。</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/1609914787731.png" alt="1609914787731" /></p>
+
+<p>另外能直接让KeyServer宕机。</p>
+
+<p><img src="https://miro.medium.com/max/700/1*LgjBb0EYbLwtSuie4WPMeA.png" alt="" /></p>
+
+<h4 id="隐私问题">隐私问题</h4>
+
+<p>讽刺的是， 最初为了保护人们隐私而生的PGP , 却因为不能满足保护隐私的法规GDPR ，而使一个公开的 SKS 公钥服务器在欧洲处于违法状态（GDPR规定： 服务商必须提供删除个人信息的选项）。</p>
+
+<p>许多新手按照教程提示的在创建PGP 密钥的时候填上了自己的真实姓名，并按照那些教程将公钥上传到了KeyServer，在人肉社工猖獗的今天，简直是个灾难。</p>
+
+<p>我试着在KeyServer搜过一些博客作者留下的PGP Key， 不乏有些比较注重自身隐私的，可是他们大部分都将自己真实的名字（汉字或拼音）和邮箱一起发到了服务器上，要知道那里的数据是公开且永远不能删除的。 也有些人意识到问题之后revoke了带有真实姓名的公钥，可是仍然可以查到，并且变得更加显眼（revoke过的key会变红）。</p>
+
+<h2 id="其他发布公钥的方法">其他发布公钥的方法</h2>
+
+<h3 id="1-wkdweb-key-directory">1. WKD（Web Key Directory）</h3>
+
+<p>WKD 的工作过程是 ，通过邮箱客户端 在域名服务器检查一个”well known” 的URL， 如果匹配到了邮箱地址对应的公钥，会使用https下载，并且不需要用户进行其他操作。用户不需要gpg 命令行等等复杂操作，让PGP加密回归单纯的邮件加密本身，用起来有些像S/MIME,但其实不一样。</p>
+
+<p>比如这样一个URL: <code class="language-plaintext highlighter-rouge">https://intevation.de/.well-known/openPGPkey/hu/g8td9rsyatrazsoiho37j9n3g5ypp34h</code> 就对应 “aheinecke@intevation.de”这个邮箱地址。</p>
+
+<p>这是通过Gpg4win的使用的一个示例，</p>
+
+<p><img src="https://files.intevation.de/users/aheinecke/wkd-autoencrypt.gif" alt="[Example from Gpg4win / GpgOL](https://files.intevation.de/users/aheinecke/wkd-autoencrypt.gif)" /></p>
+
+<p>这种方法不会泄露自己的邮箱，也不需要验证指纹， 但是需要你的邮件服务商提供支持。</p>
+
+<p>proton邮箱是原生支持 WKD的， 但是它使用的是自己私钥，似乎没办法使用使用自己本地的公钥，其他也有支持。</p>
+
+<p>如果你有自己的邮箱服务器，并且想折腾的话，可以参照<a href="https://wiki.gnupg.org/WKDHosting">WKD Hosting</a>。</p>
+
+<h3 id="2-当面交换">2. 当面交换</h3>
+
+<p>如果是和熟识的朋友，你可以约在任何合适地方，用你喜欢的方式交换密钥， 比如交换纸条，交换TF卡 或者usb设备，互相签名认证，互相得到公钥。</p>
+
+<p>如果是想认识更多的人，并让自己的公钥被更多的人认证， 你可以参加「公钥签名派对（<a href="https://en.wikipedia.org/wiki/Key_signing_party">Key signing party</a>）」。参与派对的人们相互交换公钥的指纹（公钥一般是存在服务器或是一个别人可以下载到的地方，这里只交换指纹），甚至需要相互出示身份证、护照、驾照、出身证明，以验明正身。</p>
+
+<p><img src="https://i.imgur.com/1yW7VtHl.jpg" alt="Key signing in front of FOSDEM 2008" /></p>
+
+<h3 id="3-dns">3. DNS</h3>
+
+<p>有很多种方法将你的公钥通过DNS服务发布，但是有些一些方法只适用于老版本的GnuPG，有些方法只适用与新版本的GnuPG，兼容性不佳，而且搞起来比较繁琐，有兴趣的可以自行查找资料。在这里并不推荐使用。</p>
+
+<h3 id="4个人网站-或-社交软件中">4.个人网站 或 社交软件中</h3>
+
+<p>现在中文世界， PGP的使用者中 有很多都是 独立的博客作者， 如果你拥有自己的博客或者个人网站，当然可以选择将自己的公钥发布在上面，最好给你的网站上一个Https 。</p>
+
+<p>很多社交网站的个人展示页，可以自由编辑你的信息，你可以将PGP的 公钥发布在这里，  或者将 指纹 放在这， 这样通过其他渠道下载到公钥的人，也可以确认身份。</p>
+
+<h3 id="5-代码仓库或gist">5. 代码仓库或Gist</h3>
+
+<p>无论你是不是开发者， 都可以拥有一个Github账号， 你可以开一个仓库专门用来发布自己的公钥，或者将公钥发布到Gist。</p>
+
+<h3 id="6-共享笔记">6. 共享笔记</h3>
+
+<p>Notion或者印象笔记等可以共享笔记的地方，都可以贴出你的公钥。</p>
+
+<h2 id="最后">最后</h2>
+
+<p>使用分散的、多渠道的、可能是线下的方式来交换和确认公钥 ，不要相信在放一处的 公钥 和指纹。</p>
+
+<p>去验证紧跟在公钥后面的指纹 ， 就像你去问一个诈骗者，他是不是一个诈骗者一样无用。</p>
+
+<p>如果不是当面，请至少从两个渠道进行验证，比如你从一个渠道（比如<a href="https://ulyc.github.io/pgp_keys.asc/">这里</a>）得到了我的公钥 ,  你想和我安全通信的话，导入前一定要从另一处（比如我公布的其他账号的简介）得到我的指纹， 验证是否一致后再进行操作。</p>
+
+<p>而且每次使用前，请重复以上步骤，确保你手上的公钥是最新的。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<p>[1]. <a href="https://www.linux.com/news/protecting-code-integrity-PGP-part-1-basic-PGP-concepts-and-tools/">用 PGP 保护代码完整性系列 </a></p>
+
+<p>[2]. <a href="http://www.gnupg.org/gph/en/manual.html">The GNU Privacy Handbook</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>[3]. [GnuPG: 用多个sub keys保护primary key</td>
+      <td>missing idea (wordpress.com)](https://jackqqcn.wordpress.com/2008/06/22/gnupg-用多个sub-keys保护primary-key/)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[4]. <a href="https://blog.lancitou.net/PGP-tutorial/">PGP 自我扫盲</a></p>
+
+<p>[5]. <a href="https://mogeko.me/2019/068/">GPG 的正确使用姿势</a></p>
+
+<p>[6]. <a href="https://emailselfdefense.fsf.org/zh-hans/windows.html">电子邮件加密指南</a></p>
+
+<p>[7]. <a href="http://www.asheesh.org/note/debian/short-key-ids-are-bad-news.html">Short key IDs are bad news (with OpenPGP and GNU Privacy Guard) </a></p>
+
+<p>[8]. <a href="http://blog.shell909090.org/blog/archives/1903/">gnupg密钥签署原理和过程 // Shell’s Home (shell909090.org)</a></p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>[9]. [PGP Key Server</td>
+      <td>Roll Your Own Network](https://roll.urown.net/server/PGP-keyserver.html#a-public-key-shelf)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>[10]. <a href="https://medium.com/@mdrahony/are-sks-keyservers-safe-do-we-need-them-7056b495101c">Are SKS keyservers safe? Do we need them?</a></p>
+
+<p>[11]. <a href="https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f">SKS Keyserver Network Under Attack</a></p>
+
+<p>[12]. <a href="https://nova.moe/openPGP-best-practices-keyserver-and-configuration/">OpenPGP 最佳实践 - 公钥服务器</a></p>
+
+<p>[13]. <a href="https://blog.wangxuan.name/2019/11/30/gpg-sks-network-poisoned/">GPG SKS 同步网络被投毒事件及其影响</a></p>
+
+<p>[14]. <a href="https://superuser.com/questions/227991/where-to-upload-PGP-public-key-are-keyservers-still-surviving">where-to-upload-PGP-public-key-are-keyservers-still-surviving</a></p>
+
+<p>[15]. <a href="https://zhuanlan.zhihu.com/p/137801979">GPG简明介绍</a></p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/01/18/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%AD/"
+                           data-toggle="tooltip" data-placement="top" title="2021年，用更现代的方法使用PGP（中）">
+                            Previous<br>
+                            <span>2021年，用更现代的方法使用PGP（中）</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/" data-toggle="tooltip"
+                           data-placement="top" title="元宵汤圆异同考">
+                            Next<br>
+                            <span>元宵汤圆异同考</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2021/01/26/  2021年，用更现代的方法使用PGP（下）"
+                     data-page-url="https://UlyC.github.io/2021/01/26/2021%E5%B9%B4-%E7%94%A8%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8PGP-%E4%B8%8B/"
+                     data-page-title="2021年，用更现代的方法使用PGP（下）"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

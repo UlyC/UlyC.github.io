@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="豆瓣逃离计划 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+">
+    
+    <meta property="article:published_time" content="2022-02-11T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Blog">
+    
+    <meta property="article:tag" content="爬虫">
+    
+    <meta property="article:tag" content="知识管理">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2022/02/11/Douban-Escape-Plan/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>豆瓣逃离计划 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2022/02/11/Douban-Escape-Plan/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Blog" title="Blog">Blog</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%88%AC%E8%99%AB" title="爬虫">爬虫</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86" title="知识管理">知识管理</a>
+                        
+                    </div>
+                    <h1>豆瓣逃离计划</h1>
+                    
+                    <h2 class="subheading">将豆瓣书影音导出，迁移到Notion</h2>
+                    <span class="meta">Posted by UlyC on February 11, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <hr />
+
+<blockquote>
+  <p>第一次和阿北认识是在十几年前的上海，当时和Mtime的马锐拉三个人约在徐家汇的一个星巴克里，商量如何把豆瓣、VeryCD、Mtime的电影资料用开放协议打通。 那是Web2.0的黄金年代，大家都认为开放是理所应当的，各网站各司其职拼凑起一个更丰富的互联网。无需登录注册的API、RSS、XML导出都是当年的标配。                                                                          <br />
+                                                               —— @Twitter:DashHuang</p>
+</blockquote>
+
+<h1 id="豆瓣逃离计划">豆瓣逃离计划</h1>
+
+<h2 id="背景">背景</h2>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20220109161018087.png" alt="image-20220109161018087" /></p>
+
+<p>最初的豆瓣还是很理想主义的，有点像书影音类的维基百科，所有人编辑贡献条目，开放的API提供给所有人使用，拥抱开放，回馈开放。</p>
+
+<p>可惜事情起了变化，互联网变得愈加封闭，豆瓣也不例外：</p>
+<ul>
+  <li>2018 年 9 月 <a href="[https://www.v2ex.com/t/485687](https://www.v2ex.com/t/485687)">豆瓣开放平台下线</a></li>
+  <li>2019 年 4 月 <a href="https://www.zhihu.com/question/316761965">豆瓣的图书 api 无法使用</a></li>
+  <li>2020年 各电影 api 无法使用</li>
+</ul>
+
+<p>又由于越来越多的不可抗力，越来越多的豆瓣书影音条目被删除消失，也有越来越多的豆瓣账号炸号。</p>
+
+<p>不过“大事已不可问，我辈且看春光”，豆瓣的反爬只会越来越严格，奉劝诸君有意的尽快备份了罢。</p>
+<h2 id="关于">关于</h2>
+<p>禀着不重复造轮子的原则，在写这个项目之前，我使用了<a href="https://www.notion.so/952c54f01d3d462b804e194ebc1f4a9d">豆瓣跑路计划</a> 和<a href="https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/">豆瓣读书+电影+音乐+游戏+舞台剧导出工具</a>  ，但是都不太符合我的需求。</p>
+
+<p>前者导致我账号被封，而且数据也没爬下来。
+后者对于有些用户必须登录，而且导出的数据缺少封面信息，<del>不利于装逼</del>。</p>
+
+<p>另外 <a href="https://blog.doufen.org/posts/tofu-user-guide/">豆伴</a>项目看起来不错，不过我没有Chrome浏览器，而且需要登录，又有封号风险，我个人不需要导出太多数据，所以没有尝试。</p>
+
+<p>对我来说最好用的其实是<a href="https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/">豆瓣读书+电影+音乐+游戏+舞台剧导出工具</a> ，作者思路很强（不去爬取条目详情页，防止触发反爬），爬取速度快，除了无法导出封面，各方面都不错。</p>
+
+<p>所以本项目是基于<a href="https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/">豆瓣读书+电影+音乐+游戏+舞台剧导出工具</a> 改造而成。</p>
+
+<h3 id="feature">Feature</h3>
+<ol>
+  <li>无需登录</li>
+  <li>跨平台，有浏览器就能用，无需自己折腾环境</li>
+  <li>支持导出  看/读/玩/听  过的  电影 舞台剧/图书/游戏/音乐 为csv文件</li>
+  <li>导出数据含有封面</li>
+  <li>提供简单的Notion模板</li>
+</ol>
+
+<h3 id="demo">Demo</h3>
+<p><strong>导出的数据</strong>：
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211180338.png" alt="" /></p>
+
+<p><strong>Notion<a href="https://enchanting-cobra-930.notion.site/bf80b6b22bca446d9bd1e817d314cb0e">页面</a></strong>：</p>
+
+<p><strong>Table格式</strong>：</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211181154.png" alt="" />
+<strong>Gallery</strong>格式：
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211181412.png" alt="" /></p>
+
+<h3 id="todo">TODO：</h3>
+<p><del>如果还继续更新的话</del></p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />支持导出 想/在  读 /看/玩/听 的数据</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />增加一键导出以上所有数据</li>
+</ul>
+
+<h2 id="导出">导出</h2>
+
+<h3 id="安装浏览器-脚本管理器-插件">安装浏览器 脚本管理器 插件</h3>
+<p>基本上有两种选择</p>
+<ul>
+  <li><strong>Tampermonkey</strong>   油猴</li>
+</ul>
+
+<p>2.9版本以后就不开源了，而且有很多安全问题（比如会自动禁用CSP），不是很推荐。
+不过使用人数最多，知名度最广，如果你已经在使用了就用它就行。</p>
+
+<ul>
+  <li><a href="https://violentmonkey.github.io/">Violentmonkey</a>  暴力猴</li>
+</ul>
+
+<p>完全开源，又安全的脚本管理器插件，如果你之前没有使用过它，强烈推荐你使用暴力猴。</p>
+
+<h3 id="安装脚本">安装脚本</h3>
+<p>访问<a href="https://greasyfork.org/en/scripts/439867-%E8%B1%86%E7%93%A3%E8%AF%BB%E4%B9%A6-%E7%94%B5%E5%BD%B1-%E9%9F%B3%E4%B9%90-%E6%B8%B8%E6%88%8F-%E8%88%9E%E5%8F%B0%E5%89%A7%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7">这里</a></p>
+
+<h3 id="访问主页并导出">访问主页并导出</h3>
+
+<h4 id="通用主页">通用主页</h4>
+<p>不登录访问自己的通用主页大致有这几种方法：</p>
+<ol>
+  <li>如果你知道你的豆瓣id 直接访问 <code class="language-plaintext highlighter-rouge">https://www.douban.com/people/{你的豆瓣id}</code></li>
+  <li>如果手机登录了app，在个人主页，选择<strong>推荐</strong>- <strong>复制链接</strong> ，在安装了脚本的浏览器打开</li>
+  <li>如果可以在<a href="https://www.douban.com/search">这里</a>搜索自己的昵称</li>
+  <li>搜索引擎 搜索自己的 昵称  + site: douban.com</li>
+</ol>
+
+<p>如果你可以直接访问，那很幸运，可以看到自己的豆瓣页面上多出几个链接：</p>
+
+<p><img src="https://zhuzi.dev/assets/images/douban-backup-monkey-script.png" alt="" /></p>
+
+<p>直接点击，会自动开始导出，可能需要一点时间，中途不要做其他操作，完成后会弹出csv文件的下载提示。 然后下面的可以不用看，直接跳转到 [迁移][#迁移] 一节继续。</p>
+
+<p>不过一些老用户如果没登录似乎不让直接访问主页，会自动跳转到亲切的登录页：</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220117204859.png" alt="" /></p>
+
+<p>不过也不怕，往下看。</p>
+
+<h4 id="其他主页">其他主页</h4>
+<p>虽然豆瓣限制了未登录用户 访问 个别的个人主页，但是目前（2022.02.12） 还没有限制访问 单个子项目的主页。</p>
+
+<p>注： 豆瓣ID就是你主页的最后一串数字</p>
+<h5 id="豆瓣电影主页">豆瓣电影主页</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://movie.douban.com/people/{你的豆瓣id}
+</code></pre></div></div>
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220117211539.png" alt="" /></p>
+
+<p>点击标记的链接即可自动开始导出，图书音乐等同理，地址如下：</p>
+
+<h5 id="豆瓣读书主页">豆瓣读书主页</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://book.douban.com/people/
+</code></pre></div></div>
+
+<h5 id="豆瓣音乐主页">豆瓣音乐主页</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://music.douban.com/people/{你的豆瓣id}
+</code></pre></div></div>
+
+<h5 id="豆瓣游戏主页">豆瓣游戏主页</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.douban.com/people/{你的豆瓣id}/games
+
+</code></pre></div></div>
+
+<h5 id="豆瓣舞台剧主页">豆瓣舞台剧主页</h5>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.douban.com/location/people/{你的豆瓣id}/drama
+</code></pre></div></div>
+
+<h2 id="迁移到notion">迁移到Notion</h2>
+
+<h3 id="复制模板">复制模板</h3>
+<p>如果自己有更好的模板可以跳过这步。</p>
+
+<p><a href="https://enchanting-cobra-930.notion.site/bf80b6b22bca446d9bd1e817d314cb0e?v=e0cbf230f1974e7e8b79291390cf0402"><strong>🎬电影 movie</strong></a></p>
+
+<p><strong><a href="https://enchanting-cobra-930.notion.site/fa60e8b0044340489592bfc6a070fc18?v=fd9fcd94cbfc4b0ba051eda050bb8d2b">📚图书 book</a></strong></p>
+
+<p><a href="https://enchanting-cobra-930.notion.site/47f93d9d6a534ff7bbde5a32b7fc9ffc?v=97ce2baa617e46bcad129f539fbc5531"><strong>🎧音乐 music</strong></a></p>
+
+<p><a href="https://enchanting-cobra-930.notion.site/b2df031e68ca4cc09bd3bf7797be7420?v=d3e0a6460e2848f7a086845ffdc33987"><strong>👹 舞台剧</strong></a></p>
+
+<p><a href="https://enchanting-cobra-930.notion.site/ec22dffba0d24cdea02932ff89650f89?v=09c84bd7d5884f5ea3976611bf798b0d"><strong>🎮 游戏</strong></a></p>
+
+<h3 id="导入">导入</h3>
+<p>进入自己相应的note，选择刚刚导出的csv文件:
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211191502.png" alt="" /></p>
+
+<h2 id="迁移到其他目的地">迁移到其他目的地</h2>
+<p>逃离豆瓣之后，我们还有其他选择吗？</p>
+
+<p>大体有两种方向：</p>
+<ol>
+  <li>自己维护
+    <ol>
+      <li>优点是数据完全自己掌控，更好的隐私保护</li>
+      <li>缺点是需要自己维护 书影音 数据</li>
+    </ol>
+  </li>
+  <li>使用其他更开放的服务
+    <ol>
+      <li>优点是不需要自己维护 书影音 数据</li>
+      <li>缺点是隐私和以后数据的迁移问题</li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="自己维护">自己维护</h3>
+<p>方案很多，有许多大佬自己使用excel维护，也不失为一种方案。</p>
+
+<p>不过这里我只推荐上面Notion和下面Obsidian的方案：</p>
+
+<h4 id="obsidian">Obsidian</h4>
+<p>这种方式更适合读书笔记比较多的用户。</p>
+
+<p>效果图：
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211211748.png" alt="" />
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220211211459.png" alt="" /></p>
+
+<p>因为这种方法会搞乱我现在的知识库Vault，所以我没有使用这种方法。</p>
+
+<p>这里说下大概的思路：</p>
+<ol>
+  <li>可以使用<a href="https://github.com/hadynz/obsidian-kindle-plugin">obsidian-kindle-plugin</a>将kindle的读书笔记导入Obsidian</li>
+  <li>新的读书笔记设置好<code class="language-plaintext highlighter-rouge">YAML Front Matter</code>,使用Templater + Quikadd新建</li>
+  <li>使用Dataview + Gallery 回顾统计和展示</li>
+</ol>
+
+<p>用到的插件：Templater + Quikadd + Dataview + Gallery
+如果对Obsidian管理读书记录的方式感兴趣，推荐这篇文章：<a href="https://lillian-who.github.io/2021/08/18/Obsidian%E5%B7%A5%E4%BD%9C%E6%B5%81/">Obsidian工作流</a></p>
+
+<h3 id="使用其他更开放的服务">使用其他更开放的服务</h3>
+<p>推荐两个联邦宇宙相关的服务</p>
+
+<h4 id="neodb"><a href="https://neodb.social/">NeoDB</a></h4>
+
+<p>一个刚起步的<a href="https://github.com/alphatownsman/boofilsic/tree/neo">开源</a>项目，需要先持有Maston或者Pleroma账号，可以标记书籍、电影、音乐和游戏，数据非常全面，除了豆瓣条目之外，还有GoogleBooks、Goodreads、Steam、Spotify、Bandcamp、IMDB、TMDB、Bangumi的数据。</p>
+
+<p>目前支持导入自己的豆瓣数据，具体使用方法参见  <a href="https://zhuanlan.zhihu.com/p/412792462">转移某网站书影音标记</a>。
+似乎也可以方便地把自己的数据从NeoDB导出。</p>
+
+<p>【注意】</p>
+
+<ol>
+  <li>对于NeoDB授权风险的<a href="https://bgme.me/@bgme/106941175247621946">讨论</a>，站长改进的进度可查看<a href="https://mastodon.social/@neodb">站长主页</a></li>
+  <li>虽然代码开源，但是数据为站长私有，很多条目未登录的话是看不了的， 从这点看开放性不如当初的豆瓣。</li>
+  <li>虽然账号系统依托于去中心化的联邦宇宙，但是本身并不是去中心化的，是站长一人在维持。</li>
+</ol>
+
+<h4 id="bookwyrm"><a href="https://joinbookwyrm.com/">BookWyrm</a></h4>
+
+<p>江尚寒翻译为书蛊，与Mastodon（长毛象）同属联邦宇宙的一员，<a href="https://github.com/bookwyrm-social/bookwyrm">开源</a>，自带社交功能，缺点是只能标记 书籍，未有电影和音乐等其他数据。</p>
+
+<p>这里是已有的<a href="https://bookwyrm.social/list/52">中文书籍列表</a>，条目还比较少，具体使用可以参见<a href="https://jiangshanghan.art.blog/2021/07/24/%e8%81%94%e9%82%a6%e5%ae%87%e5%ae%99%e6%bc%ab%e6%b8%b8%e6%8c%87%e5%8d%97%ef%bc%886%ef%bc%89/">“联邦宇宙”漫游指南（6）从douban到bookwyrm</a></p>
+
+<h2 id="同步可选">同步（可选）</h2>
+
+<p>其实不太推荐这种方式，既然决心逃离豆瓣，就该彻底点。
+但是有些用户可能还是割舍不掉豆瓣的便捷，毕竟目前还没有可以完全替代豆瓣的产品。</p>
+
+<p>目前一个比较可行的方法是，使用 GitHub Actions 定时从 RSS 信息将豆瓣标记更新同步到 Notion:</p>
+<ol>
+  <li><a href="https://zhuzi.dev/2021/06/05/douban-backup-sync-notion/">方法说明</a></li>
+  <li><a href="https://github.com/bambooom/douban-backup/blob/main/sync-rss.js">代码仓库</a></li>
+</ol>
+
+<h2 id="最后">最后</h2>
+
+<p>因为本工具爬取的并不是 具体条目页面，所以页面访问限制不太严格，只是导出自己的数据完全足够， 我测试时没有登录，大概测试数万条数据才开始限制IP。</p>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/image-20220110180810931.png" alt="image-20220110180810931" /></p>
+
+<p>但局限也很明显， 就是这里无法准确获取更多有关条目本身的信息，比如电影条目的 IMDb 链接、制片国家，也无法精准把导演和演员之类的人名区分开。</p>
+
+<p>如果有能力的同学可以参考下面的API做更强大的功能：</p>
+
+<h4 id="电影api">电影API</h4>
+
+<p>只找到一个可以使用的<a href="https://github.com/iiiiiii1/douban-imdb-api">项目</a>，可以根据豆瓣Subject ID查询电影信息：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.wmdb.tv/movie/api?id=doubanid
+</code></pre></div></div>
+<p>如果需要电影条目更详尽的信息，可以使用这个API自己写程序补全。</p>
+
+<h4 id="图书api">图书API</h4>
+
+<p>如果能得到图书的ISBN号，可以调取这两个项目的API：</p>
+
+<ol>
+  <li>
+    <p>https://jike.xyz/api/isbn.html</p>
+  </li>
+  <li>
+    <p>https://github.com/qiaohaoforever/BambooIsbn</p>
+  </li>
+</ol>
+
+<p>我最初的想法是先爬取图书条目的ISBN，然后从他处查询补全信息，但是从个人页面的条目信息无法获取，需要进入条目详情页才能得到，这样会触发反爬机制，遂作罢。</p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2021/02/25/Examining-the-differences-and-similarities-of-Yuanxiao-dumplings/"
+                           data-toggle="tooltip" data-placement="top" title="元宵汤圆异同考">
+                            Previous<br>
+                            <span>元宵汤圆异同考</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/08/10/sourcehut-the-hackers-forge/" data-toggle="tooltip"
+                           data-placement="top" title="sourcehut， 一个反叛而又正统的代码托管平台">
+                            Next<br>
+                            <span>sourcehut， 一个反叛而又正统的代码托管平台</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2022/02/11/ Douban Escape Plan"
+                     data-page-url="https://UlyC.github.io/2022/02/11/Douban-Escape-Plan/"
+                     data-page-title="豆瓣逃离计划"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

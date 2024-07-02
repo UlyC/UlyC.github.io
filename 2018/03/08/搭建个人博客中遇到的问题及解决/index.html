@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="搭建个人博客中遇到的问题及解决 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  正所谓前人栽树，后人乘凉。
+
+  感谢柏荧(BY)提供的教程
+
+  我的博客
+
+">
+    
+    <meta property="article:published_time" content="2018-03-08T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Blog">
+    
+    <meta property="article:tag" content="Jekyll">
+    
+    <meta property="article:tag" content="Github">
+    
+    <meta property="article:tag" content="Git">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2018/03/08/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>搭建个人博客中遇到的问题及解决 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2018/03/08/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/justcode.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/justcode.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Blog" title="Blog">Blog</a>
+                        
+                        <a class="tag" href="/archive/?tag=Jekyll" title="Jekyll">Jekyll</a>
+                        
+                        <a class="tag" href="/archive/?tag=Github" title="Github">Github</a>
+                        
+                        <a class="tag" href="/archive/?tag=Git" title="Git">Git</a>
+                        
+                    </div>
+                    <h1>搭建个人博客中遇到的问题及解决</h1>
+                    
+                    <h2 class="subheading">删除已上传GitHub文件中含有的敏感数据</h2>
+                    <span class="meta">Posted by UlyC on March 8, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>正所谓前人栽树，后人乘凉。</p>
+
+  <p>感谢<a href="http://qiubaiying.top/2017/02/06/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">柏荧(BY)</a>提供的教程</p>
+
+  <p><a href="https://ulyc.github.io/">我的博客</a></p>
+</blockquote>
+
+<h1 id="一github-desktop相关问题">一、GitHub Desktop相关问题</h1>
+<h2 id="管理文件windows与mac不同">管理文件windows与mac不同</h2>
+<h3 id="问题描述">问题描述</h3>
+<p>在教程中作者用的是Mac版，如图：<img src="https://i.loli.net/2018/03/07/5a9fe0c9579dd.png" alt="" /><br /></p>
+
+<p>而Windows版本的GitHub Desktop是没有“Open In Finder”（在文件夹中打开）这一选项的。
+又由于不熟悉macOS系统，<img src="https://i.loli.net/2018/03/07/5a9fe0e5d0ce4.png" alt="" />
+导致我以为这是GitHub Desktop的用户界面。
+无论如何我在windows版GitHub Desktop中都找不出显示文件结构的界面。</p>
+<h3 id="问题解决">问题解决</h3>
+<p>直接在文件夹中打开仓库目录即可。<img src="https://i.loli.net/2018/03/07/5a9fe1cc177f2.png" alt="" />
+可以看到文件结构跟GitHub上一模一样了，此后这个仓库的操作都是在文件夹中直接进行的。</p>
+<h3 id="备注"><br />备注：<br /></h3>
+<p><img src="https://i.loli.net/2018/03/07/5a9fe458ee4a7.png" alt="" />
+修改过本地文件后，你想要将他们同步到你GitHub的仓库中。<br /></p>
+
+<p>左边“Changes”会显示你最近做过的修改，你要在左下角箭头处填上此次修改的名称（最好是有意义的描述，方便以后查询），然后“Commit Changes”。<br />
+而你直接在网页GitHub中修改文件时，不用添加标题，系统会为你自动填写“Commits on XX,XX,XX（具体时间）”。<br /></p>
+
+<p>注意，你“Commit”之后并没有和GitHub同步起来，你仍需点击右上角“Pull Origin”才会同步。在Mac版中“同步”按钮长这样<img src="https://i.loli.net/2018/03/07/5a9fe7ac1ee4e.png" alt="" /></p>
+
+<h2 id="删除已上传github文件中含有的敏感数据">删除已上传GitHub文件中含有的敏感数据</h2>
+<h3 id="问题描述-1">问题描述</h3>
+<p>在熟悉使用GitHub时看到每次修改都会留下具体记录，就想到如果有人不小心上传了含有密码等敏感信息要怎么删除呢。<br /></p>
+<h3 id="问题解决-1">问题解决</h3>
+<h4 id="方案一直接在github中操作">方案一：直接在GitHub中操作</h4>
+<p>要知道GitHub并不像你用的新浪博客或者QQ空间一类的网站，你直接在源码中删除修改提交是会留下记录而且任何人都可以查阅的，并且修改的部分还会高亮显示。<br />
+在GitHub中可以直接删除整个仓库，这样别人就不会看到你的信息修改记录，当然这个方案太暴力且不优雅，不推荐。</p>
+<h4 id="方案二在github-desktop中操作">方案二：在GitHub Desktop中操作</h4>
+
+<p>在这里我们先明确几个概念：Git、GitHub和GitHub Desktop的关系。</p>
+<ol>
+  <li><strong>git</strong>：一款免费、开源的分布式<strong>版本控制系统</strong>，是一款<strong>软件</strong>，与之相对的还有集中式的版本控制系统，比如Svn等。<br /></li>
+  <li><strong>GitHub</strong>：github是一个基于git的<strong>项目托管平台</strong> ,
+它提供了web界面，你可以在上面创建资源仓库来存放你的项目。<br /></li>
+  <li>** GitHub Desktop<strong>：直接使用Git是没有GUI(图形用户界面)的，GitHub Desktop相当于一个用来管理GitHub的  **简易版本</strong>的  具有GUI的Git <strong>软件</strong>。所以功能很少也就不奇怪了。<br /></li>
+</ol>
+
+<p>使用GitHub Desktop能做的也只是直接删除仓库。</p>
+
+<h4 id="方案三使用git">方案三：使用Git</h4>
+
+<p>关于使用Git的教程有很多，推荐这篇教程<a href="http://www.cnblogs.com/tugenhua0707/p/4050072.html">“龙恩0707的Git使用教程”</a><br />（使用Git过程中我遇到的问题会在后面提到）</p>
+
+<p>学会Git的基本操作之后，使用<code class="language-plaintext highlighter-rouge">git filter-branch</code>命令进行操作。<br />
+具体命令需要参照<a href="https://git-scm.com/docs/git-filter-branch">Git官方文档</a>Git的官方文档，下面我给出的是简易版本的操作。</p>
+<h5 id="1-利用git-clone一份仓库到本地上面链接教程中有">1. 利用Git clone一份仓库到本地（上面链接教程中有）</h5>
+<h5 id="2-在git中进入项目工程目录">2. 在Git中进入项目工程目录</h5>
+<h5 id="3-执行以下命令">3. 执行以下命令</h5>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git filter-branch --force --index-filter \ git rm --cached --ignore-unmatch  SSfiles.py
+</code></pre></div></div>
+<p><br />其中的“SSfiles.py”就是你要删除的含有敏感信息的文件名称。</p>
+<h5 id="4切到每个分支和tag确保都已经成功清除要删的文件">4.切到每个分支和tag，确保都已经成功清除要删的文件</h5>
+<h5 id="5强制把本地的更改push到github上">5.强制把本地的更改push到GitHub上</h5>
+<p>输入<code class="language-plaintext highlighter-rouge">git push origin --force --all</code>即可。<br /></p>
+
+<p>可以看出    <code class="language-plaintext highlighter-rouge">git filter-branch</code>命令确实比较复杂，在所有搜到的删除敏感信息教程中都不太推荐使用这个命令，但是这个高级命令功能其实十分强大，建议有兴趣的可以根据官方文档深入学习一下。<br /></p>
+
+<p>此方法只是简单粗暴的将含有敏感信息的整个文件进行删除，其实通过 <code class="language-plaintext highlighter-rouge">git filter-branch</code>命令也可以单独修改特定文件特定内容，但过程实在繁杂，在此不再赘述。</p>
+<h4 id="方案四使用bfg-repo-cleaner">方案四：使用BFG Repo-Cleaner</h4>
+<p><code class="language-plaintext highlighter-rouge">BFG Repo-Cleaner</code><a href="https://rtyley.github.io/bfg-repo-cleaner/" title="BFG Repo-Cleaner">BFG Repo-Cleaner</a>这款工具是专门针对移除历史记录的需求而产生的（BFG 即是<code class="language-plaintext highlighter-rouge">git filter-branch</code> 首字母的逆转），也是GitHub官方推荐使用的工具，操作简便，运行快捷。<br />
+下面来说具体的操作:</p>
+<h5 id="1下载-bfg">1.下载 BFG</h5>
+<p>[BFG Repo-Cleaner]（https://rtyley.github.io/bfg-repo-cleaner/#download）</p>
+<h5 id="2下载java配置java环境变量">2.下载Java，配置Java环境变量</h5>
+<p>因为BFG 下载下来是一个<code class="language-plaintext highlighter-rouge">.jar</code>文件，所以使用它需要 Java 的运行环境，具体配置方法请自行搜索。</p>
+<h5 id="3克隆你的仓库到本地">3.克隆你的仓库到本地</h5>
+<p>注意这里克隆使用的命令是镜像模式克隆<code class="language-plaintext highlighter-rouge">git clone --mirror</code>，镜像模式克隆的仓库和远程仓库完全一样，但是不能直接看到仓库里面的文件，而且也不能允许 git 的各种命令。<br /></p>
+
+<p>我开始直接使用<code class="language-plaintext highlighter-rouge">git clone</code>克隆的仓库，在最后提交时总是出现错误，还是按照官方文档的<code class="language-plaintext highlighter-rouge">git clone --mirror</code>命令才pull成功。</p>
+
+<h5 id="4运行bfg">4.运行BFG</h5>
+<p>此条为什么要单独拉出来说呢，因为起初我以为是直接双击下载下来的.jar文件运行，但是无论如何都是闪下命令框就秒退。<br /></p>
+
+<p>这是因为java文件运行时如果不需要用户输入数据操作，那么就会出现上述情况。而且BFG也是没有GUI的，故要在CMD或者在git里运行使用相关命令。
+还需要注意的两点是<br /></p>
+
+<ol>
+  <li>BFG文件路径中不可以有中文，不然会一直报错<img src="https://i.loli.net/2018/03/07/5aa001a8b7969.png" alt="" /></li>
+  <li>BFG放在库的目录下运行，省得运行时再输入文件路径。</li>
+</ol>
+
+<h5 id="5删除含敏感信息的文件">5.删除含敏感信息的文件</h5>
+<p>在Git的仓库目录下通过命令 <code class="language-plaintext highlighter-rouge">java -jar bfg.jar --delete-files SSfiles.py  test.git</code>
+删除库“test.git”中含有敏感信息的文件“SSfiles.py”。</p>
+
+<h5 id="51-只单独删除特定文件中特定内容">5.1 只单独删除特定文件中特定内容</h5>
+
+<p>创建一个名为<code class="language-plaintext highlighter-rouge">replacements.txt</code>的文件跟bfg文件放在一个目录下，在其中一行一个输入你的敏感信息，比如说密码，邮箱等。<br />
+输入命令
+<code class="language-plaintext highlighter-rouge">java -jar bfg.jar --replace-text replacements.txt test.git</code>
+你所有记录以及文件中的信息都会被替换成“<strong>* REMOVED</strong>*”。</p>
+<h5 id="52-替换特定文件中特定内容">5.2 替换特定文件中特定内容</h5>
+<p>只需要把你的<code class="language-plaintext highlighter-rouge">replacements.txt</code>文件中输入所有需要替换的内容，格式如下（不包含注释内容）：
+<img src="https://i.loli.net/2018/03/07/5aa00664e4d5e.png" alt="" /></p>
+
+<h5 id="6-强制push">6. 强制push</h5>
+<p>处理完成后，输入<code class="language-plaintext highlighter-rouge">git push</code>命令完成推送。<br />
+push过程中我出现以下错误：<br /></p>
+<ul>
+  <li>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">fatal: remote error: You can't push to git</code>
+ <img src="https://i.loli.net/2018/03/07/5aa008826f95f.png" alt="" /></li>
+    </ol>
+  </li>
+</ul>
+
+<p>这个是因为我从远程仓库克隆时使用的命令是<code class="language-plaintext highlighter-rouge">git clone git://github.com/user/test.git;</code><br />
+而<code class="language-plaintext highlighter-rouge">git clone git://github.com/user/test.git</code>这样的url请求是只读的，像HTTPS URL比如： <code class="language-plaintext highlighter-rouge">https://github.com/user/test.git</code>才是可写的。<br /></p>
+
+<p>使用 <code class="language-plaintext highlighter-rouge">git remote set-url origin</code> 命令修改远程URL即可解决。
+<img src="https://i.loli.net/2018/03/08/5aa00f8fd078f.png" alt="" /></p>
+
+<ul>
+  <li>
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">error: failed to push some refs to '</code>
+<img src="https://i.loli.net/2018/03/08/5aa00fce2b8df.png" alt="" /></li>
+    </ol>
+  </li>
+</ul>
+
+<p>出现此错误是因为当初克隆远程仓库到本地时，使用的是<code class="language-plaintext highlighter-rouge">git clone</code>命令，删除后换用<code class="language-plaintext highlighter-rouge">git clone --mirror</code>重新克隆就可以了。</p>
+
+<p><em>部分参考链接：</em><br /></p>
+<ol>
+  <li><a href="http://qiubaiying.top/2017/02/06/%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">柏荧：快速搭建个人博客</a></li>
+  <li><a href="https://linux.cn/article-9374-1.html">你的 Github 仓库被 DMCA Takedown 后怎么办？</a><br /></li>
+  <li><a href="https://www.bennythink.com/git-password.html">土豆不好吃：不小心把密码上传到 GitHub 了，怎么办</a><br /></li>
+  <li><a href="https://www.jianshu.com/p/17e5adf47da5"> 彻底删除git仓库中的包含敏感信息的文件</a><br /></li>
+  <li><a href="http://debugtalk.com/post/clean-sensitive-data-from-git-history-commits/">【GIT技巧】清除历史提交记录中的敏感信息</a></li>
+</ol>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/04/01/while-1%E8%BF%98%E6%98%AF-while-True/" data-toggle="tooltip"
+                           data-placement="top" title="while 1还是 while True？">
+                            Next<br>
+                            <span>while 1还是 while True？</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2018/03/08/  搭建个人博客中遇到的问题及解决"
+                     data-page-url="https://UlyC.github.io/2018/03/08/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/"
+                     data-page-title="搭建个人博客中遇到的问题及解决"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

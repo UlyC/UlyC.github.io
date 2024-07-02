@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="初窥CORB - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  句子迷倒闭了23333
+                                —— ulyc
+
+">
+    
+    <meta property="article:published_time" content="2019-08-01T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="CORB">
+    
+    <meta property="article:tag" content="Chrome">
+    
+    <meta property="article:tag" content="前端">
+    
+    <meta property="article:tag" content="幽灵熔断">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2019/08/01/%E5%88%9D%E7%AA%A5CORB/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>初窥CORB - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2019/08/01/%E5%88%9D%E7%AA%A5CORB/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/slender-man.png" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/slender-man.png');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=CORB" title="CORB">CORB</a>
+                        
+                        <a class="tag" href="/archive/?tag=Chrome" title="Chrome">Chrome</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%89%8D%E7%AB%AF" title="前端">前端</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%B9%BD%E7%81%B5%E7%86%94%E6%96%AD" title="幽灵熔断">幽灵熔断</a>
+                        
+                    </div>
+                    <h1>初窥CORB</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by UlyC on August 1, 2019</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>句子迷倒闭了23333
+                                —— ulyc</p>
+</blockquote>
+
+<h1 id="初窥corb">初窥CORB</h1>
+
+<blockquote>
+  <p>Cross-Origin Read Blocking (CORB)  跨域读锁</p>
+</blockquote>
+
+<h2 id="演示">演示</h2>
+
+<p>任意打开一个网站, 将img标签的src改为另一个域名.就会出现CORB</p>
+
+<p><img src="https://i.loli.net/2020/04/07/qgOjWZ6nKJuHTSF.png" alt="CORB.png" /></p>
+
+<p>在进一步解释CORB之前, 先来看几个概念</p>
+
+<h2 id="cpu预执行cpu-speculation-execution">CPU预执行（CPU speculation execution）</h2>
+
+<p>众所周知，CPU执行计算的速度肯定是远大于它读取内存的速度的，这样的结果就是，CPU在对内存读取某些数据的时候，会闲置，这样就造成了浪费。</p>
+
+<p>为了提高性能，现代基本大部分硬件制造商都引入了预执行这个机制来压榨CPU的性能。大概的意思如下，比如你写了一段代码：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if(somethingTrueOrFalse) {
+  // TODO ...
+}
+</code></pre></div></div>
+
+<p>逻辑上，这个 if 语句内部的代码是否执行，取决于 somethingTrueOrFalse 变量.</p>
+
+<p>但是注意，这是逻辑上的，CPU在运行这段代码的时候，可不是这样子的。</p>
+
+<p>它可能会直接跳过判定 somethingTrueOrFalse 是真是假的逻辑，直接执行 if 语句内部的代码，之后反过来再根据 somethingTrueOrFalse 的取值情况作出反应，如果为真，则保留执行结果，如果为假，则撤销执行结果。</p>
+
+<p>这里对于预执行的描述是极度简化的，不过足够说明概念了。</p>
+
+<p>CPU 预执行是芯片制造者决定的，为了提升 CPU 使用速度和效率而建的，预执行红利不是轻易就能放弃的，因此，目前或短期来看基本没可能改变。</p>
+
+<h2 id="旁路攻击--scaside-channel-attacks">旁路攻击  SCA(Side-Channel Attacks)</h2>
+
+<p>在<a href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>中，<strong>旁道攻击</strong>又称<strong>侧信道攻击</strong>、<strong>边信道攻击</strong>（英语：Side-channel attack）是一种攻击方式，它基于从<a href="https://zh.wikipedia.org/w/index.php?title=%E5%AF%86%E7%A2%BC%E7%B3%BB%E7%B5%B1&amp;action=edit&amp;redlink=1">密码系统</a>的物理特征（如：时延，能耗，电磁，错误消息，频率等）中获取的信息而非<a href="https://zh.wikipedia.org/wiki/%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E6%B3%95">暴力破解法</a>或是<a href="https://zh.wikipedia.org/wiki/%E7%AE%97%E6%B3%95">算法</a>中的理论性弱点。</p>
+
+<p>早在 1956 年，英国已经利用 SCA 获取了埃及驻伦敦的加密机。</p>
+
+<h3 id="缓冲时延cache-timing旁路">缓冲时延（Cache Timing）旁路</h3>
+
+<p>这是旁路攻击的一种,也是跟后来CORB的出现联系比较密切的一种, 这里只介绍这一种旁路攻击,</p>
+
+<p>缓冲时延 攻击也叫计时攻击（timing attack）,通过内存访问时间的不同来产生的旁路。</p>
+
+<p>假设访问一个变量，这个变量在内存中，这需要上百个时钟周期才能完成，但如果变量访问过一次，这个变量被加载到缓冲（Cache）中了，下次再访问，可能几个时钟周期就可以完成了.</p>
+
+<p>举个例子:</p>
+
+<blockquote>
+  <p>假设小 A 的账户密码是 <code class="language-plaintext highlighter-rouge">gyease</code>，小 B 想破解小 A 的密码，他可以这么做：</p>
+
+  <ul>
+    <li>首先他可以先输入 <code class="language-plaintext highlighter-rouge">aaaaaa</code>，之后记录一下从点击登录按钮到错误提示的间隔时间（虽然很短，假设有工具可以记录）</li>
+    <li>之后再输入 <code class="language-plaintext highlighter-rouge">baaaaa</code>，同样记录时间</li>
+    <li>重复以上过程直到 <code class="language-plaintext highlighter-rouge">gaaaaa</code>，会发现从点击登录按钮到错误提示的间隔时间稍微变长了一些</li>
+    <li>之后小 B 即知道小 A 的密码第一位是 <code class="language-plaintext highlighter-rouge">g</code>，之后重复以上步骤即可破解小 A 的密码。</li>
+  </ul>
+</blockquote>
+
+<p>当然这里的例子很蠢，而且也过于理想化，但足够说明问题。反应快的读者可能马上就会知道为什么在观察 ‘gaaaaa’ 的测量结果后小 B 就会知道小 A 首位密码，这是因为执行校验密码是否正确的代码是需要时间的，因此在理想条件下，首位错误和首位正确第二位错误的反馈结果必然是后者时间略长。</p>
+
+<h2 id="幽灵和熔断漏洞spectre-meltdown">幽灵和熔断漏洞(Spectre &amp;Meltdown)</h2>
+
+<p>这是2018 年 1 月曝出来的漏洞.</p>
+
+<p>熔断漏洞是幽灵漏洞的变种, 基本原理就是利用了上述的cpu预执行和缓冲时延旁路.</p>
+
+<p>这可以称作史诗级的漏洞,具体实施比较复杂,可以参考  <a href="https://init.blog/archives/1474">幽灵、熔断漏洞论文《利用旁道攻击读取特权内存》部分翻译</a></p>
+
+<p>这里举一个简化的例子, 假设我们有以下代码：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (x &lt; arr1.length) {
+  y = arr2[arr1[x]]
+}
+</code></pre></div></div>
+
+<p>这个例子在参考链接的文章中你可能会多次见到，这里大概解释一下：</p>
+
+<ul>
+  <li>arr1 假设是一个比较小的数组，x 是一个我们定义的索引值变量</li>
+  <li>正常情况下，如果 x 超过 arr1 的长度，程序是要崩溃的，因为它越界了，但是在预执行的前提下，CPU 可能会忽略越界的问题而执行 if 语句内部的代码</li>
+  <li>arr2 是我们提前声明的一个用来储存数据的数组，它储存于内存的另一个区域，它是连续的，而且我们强制它没有拷贝至缓存，只保存于内存（这点在视频中有提及，我这里强调一下）</li>
+  <li>之后我们假设 arr1 中的位于 x 索引出的值是 k，那么在预执行的前提下，<code class="language-plaintext highlighter-rouge">y = arr2[arr1[x]]</code>等价于<code class="language-plaintext highlighter-rouge">y = arr2[k]</code></li>
+  <li>然后由于我们会把 arr2[k] 这个值付给另一个变量 y，这里其实算是一个访问值的操作，CPU 后将 arr2[k] 位于内存地址的值转入缓存中，而其余元素保留在内存中（因为并未访问）</li>
+</ul>
+
+<p>之后，只需要遍历 arr2 这个数组，当发现某个索引上的值的访问速度远快于其他索引的访问速度时，这个索引”k”既是我们从越界内存中“偷”到的值。至此，一次攻击就完成了，理论上，利用这个漏洞，可以获取缓存区所有地址的值，其中很有可能包含敏感信息，比如密码什么的。</p>
+
+<h4 id="普通浏览器中不同的站点可能共享同一个进程">普通浏览器中，不同的站点可能共享同一个进程</h4>
+
+<p>在某些情况下，没有实现 Site Isolution 的普通浏览器会出现一个进程里面同时运行多个站点的代码，这就让恶意站点有机可乘。比如恶意站点 <code class="language-plaintext highlighter-rouge">a.dd.com</code> 在自己的代码中嵌入 <code class="language-plaintext highlighter-rouge">&lt;iframe src="https://v.qq.com" frameborder="0"&gt;&lt;/iframe&gt;</code>，这时，普通浏览器就会把带有恶意站点 <code class="language-plaintext highlighter-rouge">a.dd.com</code> 的恶意代码 和 <code class="language-plaintext highlighter-rouge">v.qq.com</code> 放在同一个内存中运行。</p>
+
+<p><img src="https://i.loli.net/2020/04/07/aNeD846jIqFoTd1.png" alt="share_process.png" /></p>
+
+<h3 id="如何预防-spectre-和-meltdown-漏洞呢">如何预防 Spectre 和 Meltdown 漏洞呢？</h3>
+
+<p>漏洞三大关键点是 CPU 预执行、SCA 和 共享进程。</p>
+
+<p>预防就得从这三个方面着手。先看 SCA，算法运行时间的变化本质就是源于数据处理，根据时间变化推测运算操作和数据存储位置，因此 SCA 可预防性极低。</p>
+
+<p>再看 CPU 预执行，性能至少提高 10%，一片可观的红利，芯片厂商如何舍得放弃。</p>
+
+<p>如此，只能针对共享进程下手了，Site Isolation 便是剥离共享进程的一项技术，采用独立站点独立进程的方式实现，降低漏洞的威胁。</p>
+
+<h2 id="site-isolation">Site Isolation</h2>
+
+<p>站点隔离保证了不同站点页面始终被放入不同的进程，每个进程运行在一个有限制的沙箱环境中，在该环境中可能会阻止进程接收其它站点返回的某些特殊类型敏感信息，恶意站点不再和正常站点共享进程，这就让恶意站点窃取其它站点的信息变得更加困难。</p>
+
+<p>从 Chrome 67 开始，已默认启用 Site Isolation，CORB 是其中一项很重要的功能 ，属于一种新的网络平台安全策略。</p>
+
+<p><img src="http://img.yaoyanhuo.com/chrome_process.png" alt="img" /></p>
+
+<p>经验证，<code class="language-plaintext highlighter-rouge">Site Isolation</code> 关于进程独立的原则是 只要一级域名一样，站点实例就共享一个进程，无论子域名是否一样。如果使用 iframe 嵌入了一级域名不一样的跨域站点，则会生成一个新的进程维护该跨域站点运行，这一点同前文介绍的普通浏览器共享进程不同。</p>
+
+<h4 id="这是-site-isolation-的进程设计那么其中的-corb-扮演了什么角色呢">这是 Site Isolation 的进程设计，那么其中的 CORB 扮演了什么角色呢？</h4>
+
+<p>在同源策略下，Site Isolation 已经很好地隔离了站点，只是还有跨域标签这样的东西存在，敏感数据依旧会暴露，依旧会进驻恶意站点内存空间。
+有这样一个场景，用户登录某站点 <code class="language-plaintext highlighter-rouge">some.qq.com</code>后，又访问了 <code class="language-plaintext highlighter-rouge">bad.dd.com</code> 恶意站点，恶意站点有如下代码，<code class="language-plaintext highlighter-rouge">&lt;script src="some.qq.com/login"&gt;</code>，跨域请求了原站点的登录请求，此时，普通浏览器会正常返回登录后的敏感信息，且敏感信息会进驻 <code class="language-plaintext highlighter-rouge">bad.dd.com</code> 内存空间。好不容易站点隔离把各个站点信息分开了，这因为跨域又在一起了。这个时候怎么办呢？</p>
+
+<p>CORB 来了。</p>
+
+<h2 id="corbcross-origin-read-blocking">CORB（Cross-Origin Read Blocking）</h2>
+
+<p>chromium 文档中关于它的定义：</p>
+
+<blockquote>
+  <p>an algorithm by which dubious cross-origin resource loads may be identified and blocked by web browsers before they reach the web page.</p>
+
+  <p>浏览器在加载可以跨域资源时，在资源载入页面之前，对其进行识别和拦截的算法。</p>
+</blockquote>
+
+<p>这样一来, 敏感信息既不会暴露于浏览器，也不会进驻内存空间，安全性就得到了一定的保证。</p>
+
+<h3 id="哪些内容类型受-corb-保护">哪些内容类型受 CORB 保护</h3>
+
+<p>当前有三种内容类型受保护，分别是 json、html 和 xml。</p>
+
+<p>关于如何针对每种内容类型 CORB 如何对其进行保护，<a href="https://chromium.googlesource.com/chromium/src/+/master/services/network/cross_origin_read_blocking_explainer.md">文档</a>中有详细的章节进行介绍，这里就不多说了。</p>
+
+<h3 id="corb-发生时机">CORB 发生时机</h3>
+
+<p>当跨域请求回来的数据 MIME type 同跨域标签应有的 MIME 类型不匹配时，浏览器会启动 CORB 保护数据不被泄漏，被保护的数据类型只有 <code class="language-plaintext highlighter-rouge">html</code> <code class="language-plaintext highlighter-rouge">xml</code> 和 <code class="language-plaintext highlighter-rouge">json</code>。很明显 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 和 <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> 等跨域标签应有的 MIME type 和 <code class="language-plaintext highlighter-rouge">html</code>、<code class="language-plaintext highlighter-rouge">xml</code>、<code class="language-plaintext highlighter-rouge">json</code> 不一样。</p>
+
+<h3 id="mime-type-multipurpose-internet-mail-extensions">MIME type (Multipurpose Internet Mail Extensions)</h3>
+
+<p>MIME type 同 CORB 有着相当紧密的关系，可以说 CORB 的产生直接依附 MIME 类型。因此，阅读本文前，有必要先理解一下什么是 MIME type。</p>
+
+<p>MIME 是一个互联网标准，扩展了电子邮件标准，使其可以支持更多的消息类型。常见 <code class="language-plaintext highlighter-rouge">MIME</code> 类型如：<code class="language-plaintext highlighter-rouge">text/html</code> <code class="language-plaintext highlighter-rouge">text/plain</code> <code class="language-plaintext highlighter-rouge">image/png</code> <code class="language-plaintext highlighter-rouge">application/javascript</code> ，用于标识返回消息属于哪一种文档类型。写法为 <code class="language-plaintext highlighter-rouge">type/subtype</code>。
+在 HTTP 请求的响应头中，以 <code class="language-plaintext highlighter-rouge">Content-Type: application/javascript; charset=UTF-8</code> 的形式出现，<code class="language-plaintext highlighter-rouge">MIME type</code> 是 <code class="language-plaintext highlighter-rouge">Content-Type</code> 值的一部分。如下图，</p>
+
+<p><img src="http://img.yaoyanhuo.com/crob_01.png" alt="img" /></p>
+
+<h4 id="内容嗅探技术mime-sniffing">内容嗅探技术（MIME sniffing）</h4>
+
+<p>内容嗅探技术是指 当响应头没有指明 <code class="language-plaintext highlighter-rouge">MIME type</code> 或 浏览器认为指定类型有误时，浏览器会对内容资源进行检查并执行，来猜测内容的正确<code class="language-plaintext highlighter-rouge">MIME</code>类型。嗅探技术的实现细节，不同的浏览器在不同的场景下有不同的方式，本文不做详述。详细内容参见：<a href="https://www.keycdn.com/support/what-is-mime-sniffing">https://www.keycdn.com/support/what-is-mime-sniffing</a></p>
+
+<h5 id="如何禁用">如何禁用</h5>
+
+<p>服务器在响应首部添加 <code class="language-plaintext highlighter-rouge">X-Content-Type-Options: nosniff</code>，用来告诉浏览器一定要相信 <code class="language-plaintext highlighter-rouge">Content-Type</code>中指定的 <code class="language-plaintext highlighter-rouge">MIME</code> 类型，不要再使用内容嗅探技术探测响应内容类型。该方法仅对 <code class="language-plaintext highlighter-rouge">&lt;script&gt;</code> 和 <code class="language-plaintext highlighter-rouge">&lt;style&gt;</code>有效。</p>
+
+<p>官方解释：<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#MIME_sniffing">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types#MIME_sniffing</a></p>
+
+<h3 id="浏览器如何判断响应内容是否需要-corb-保护">浏览器如何判断响应内容是否需要 CORB 保护？</h3>
+
+<p>CORB 会根据如下步骤来确定是否对 response 进行保护（如果响应的内容格式是 json、html 或者 xml）:</p>
+
+<ul>
+  <li>如果 response 包含 X-Content-Type-Options: nosniff 响应头部，那么如果 Content-Type 是以下几种的话， response 将受 CORB 保护：
+    <ul>
+      <li>html mime type</li>
+      <li>xml mime type（除了 image/svg+xml）</li>
+      <li>json mime type</li>
+      <li>text/plain</li>
+    </ul>
+  </li>
+  <li>如果 response 的状态是 206，那么如果 Content-Type 是以下几种的话， response 将受 CORB 保护：
+    <ul>
+      <li>html mime type</li>
+      <li>xml mime type（除了 image/svg+xml）</li>
+      <li>json mime type</li>
+    </ul>
+  </li>
+  <li>否则，CORB 将尝试探测 response 的 body：
+    <ul>
+      <li>html mime type，并且探测结果是 html 内容格式，response 受 CORB 保护</li>
+      <li>xml mime type（除了 image/svg+xml）, 并且探测结果是 xml 内容格式，response 受 CORB 保护</li>
+      <li>json mime type，并且探测结果是 json 内容格式，response 受 CORB 保护</li>
+      <li>text/plain，并且探测结果是 json、html 或者 xml 内容格式，response 受 CORB 保护</li>
+      <li>任何以 JSON security prefix 开头的 response（除了 text/css）受 CORB 保护</li>
+    </ul>
+  </li>
+</ul>
+
+<p>这里值得一提的是，对于探测是必须的，以防拦截了那些依赖被错误标记的跨源响应的页面（比如，图片资源但是格式却被标记为 text/html）。如果不进行格式探测，那么会有16倍以上的 response 被拦截。</p>
+
+<h4 id="html-mime-type--xml-mime-typejson-mime-type-的出现能理解为什么-textplain-类型也会在保护范围内"><code class="language-plaintext highlighter-rouge">HTML MIME type</code> 、 <code class="language-plaintext highlighter-rouge">XML MIME type</code>、<code class="language-plaintext highlighter-rouge">JSON MIME type</code> 的出现能理解，为什么 <code class="language-plaintext highlighter-rouge">text/plain</code> 类型也会在保护范围内？</h4>
+
+<p>因为 当 <code class="language-plaintext highlighter-rouge">Content-Type</code> 缺失的时候，响应内容 <code class="language-plaintext highlighter-rouge">MIME type</code> 有可能就是 <code class="language-plaintext highlighter-rouge">text/plain</code>；且据可靠数据显示， HTML, JSON, or XML 有时候也会被标记为 <code class="language-plaintext highlighter-rouge">text/palin</code>。如，</p>
+
+<p>data.txt</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "ret_code": 0,
+  "msg": "请求成功！",
+  "data": [1, 2, 3, 4, 5]
+}
+</code></pre></div></div>
+
+<p>server.js</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app.get('/file', function getState(req,res,next){
+  // res.type('json')
+  res.sendfile(`${__dirname}/public/data.txt`)
+})
+</code></pre></div></div>
+
+<p>如上代码，启动 server.js ，Chrome 浏览器跨域标签<script>访问 `/file` 时服务返回 `data.txt` 内容，尽管响应头是 `Content-Type: text/plain; charset=UTF-8`，响应内容依旧能被识别为 `json`。由此， `text/plain` 会作为 `json` 的标记也是一种常见现象。如果跨域访问 `/file` 就会出现 CORB，验证结果如下图，</script></p>
+
+<p><img src="http://img.yaoyanhuo.com/blog/corb_text_plain.png" alt="img" /></p>
+
+<h3 id="corb-如何拦截一个响应">CORB 如何拦截一个响应</h3>
+
+<p>当一个 response 被 CORB 保护时，它的 body 会被覆盖为空，同时 headers 也会被移除（当前 Chrome 仍然会保留 Access-Control-* 相关的 headers）。</p>
+
+<p>关于 CORB 的工作方式，一定要和 CORS 做区分，因为它要防止这些被拦截的数据进入渲染当前页面进程的内存中，所以它一定不会被加载并读取。</p>
+
+<p>这不同于 CORS，因为后者会做一些过滤操作，数据虽然不可被加载，但是可能仍然保留在渲染进程的内存中。</p>
+
+<h2 id="对于其他-web-平台特性的影响">对于其他 web 平台特性的影响</h2>
+
+<p>这里仍然是翻译部分文档中的内容，因为本身写的就很细致了。</p>
+
+<p>CORB 不会影响以下技术场景：</p>
+
+<ul>
+  <li>XHR and fetch()
+    <ul>
+      <li>CORB 并不会产生显而易见的影响，因为 XHR 和 fetch() 在响应中已经应用了同源策略（比如：CORB 应该仅会拦截那些因缺少 CORS 而发生跨域 XHR 错误的 response）</li>
+    </ul>
+  </li>
+  <li>Prefetch
+    <ul>
+      <li>CORB 会拦截那些到达跨域渲染进程的 response body，但是不会阻止那些被浏览器进程缓存的 response body（然后传递到另一个同源渲染进程）。</li>
+    </ul>
+  </li>
+  <li>Tracking and reporting
+    <ul>
+      <li>当前存在各种各样的技术，尝试对记录用户访问的服务器发送 web 请求，以检查用户是否已访问某些内容。该请求经常使用隐藏的 img 标签进行发送（我前文提及了），然后服务器以 204 状态码或者 html 文档进行响应。除了 img，还可以使用类似 script、style 和别的可用标签。</li>
+      <li>CORB 不会对这些技术场景造成影响，因为它们不会依赖于服务器返回响应的内容。这一点同样使用与其他类似的技术场景和 web 特性，只要它们不关心响应即可，比如：beacons，ping，CSP违规报告 等。</li>
+    </ul>
+  </li>
+  <li>Service workers
+    <ul>
+      <li>Service workers 可以拦截跨源 requests 并在其内部人为地构建 response（没有跨源和安全边界），CORB 不会拦截它们。</li>
+      <li>当 Service workers 确实缓存了一些跨源的 responses 时，由于这些 responses 对于调用者来讲是透明的，因此 CORB 会拦截它们，但是这并不需要对 Service Worker 作出任何改变。</li>
+    </ul>
+  </li>
+  <li>Blob and File API
+    <ul>
+      <li>即使没有 CORB 的话，获取跨源的 blob URLs 当前也会被拦截。</li>
+    </ul>
+  </li>
+  <li>Content scripts and plugins
+    <ul>
+      <li>它们所属的范围并不含在 CORB 的职责内 —— CORB 假设已经有某种合适的安全策略或安全机制存在于这些 content scripts 和 plugins 中（比如 Adobe Flash 已经实现了类似 CORB 的机制，通过 crossdomain.xml）。</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ps">PS</h3>
+
+<p>需要注意的是, 幽灵和熔断漏洞是硬件层面的,软件层面只能做很有限的防护.</p>
+
+<h2 id="后记">后记</h2>
+
+<p>本文基本只是将参考链接中的文章 按照我自己容易理解的方式重组了一下， 版权归链接中原作者所有。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<p>[1].<a href="https://juejin.im/post/5b7e826ee51d4538b35c04e8">30 分钟理解 CORB 是什么</a></p>
+
+<p>[2].<a href="https://zhuanlan.zhihu.com/p/32784852">给程序员解释Spectre和Meltdown漏洞</a></p>
+
+<p>[3] <a href="http://www.yaoyanhuo.com/blog/corb/">妖艳货的技术博客 Cross-Origin Read Blocking (CORB)</a></p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/06/06/19%E5%B9%B4%E4%B8%8A%E5%8D%8A%E5%B9%B4GO%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"
+                           data-toggle="tooltip" data-placement="top" title="19年上半年Go语言使用笔记">
+                            Previous<br>
+                            <span>19年上半年Go语言使用笔记</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/11/25/win10%E4%BD%BF%E7%94%A8WSL-2/" data-toggle="tooltip"
+                           data-placement="top" title="win10下使用WSL 2">
+                            Next<br>
+                            <span>win10下使用WSL 2</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2019/08/01/  初窥CORB"
+                     data-page-url="https://UlyC.github.io/2019/08/01/%E5%88%9D%E7%AA%A5CORB/"
+                     data-page-title="初窥CORB"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

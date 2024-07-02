@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="sourcehut， 一个反叛而又正统的代码托管平台 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="sourcehut， 一个反叛而又传统的代码托管平台
+">
+    
+    <meta property="article:published_time" content="2022-08-10T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Blog">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2022/08/10/sourcehut-the-hackers-forge/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>sourcehut， 一个反叛而又正统的代码托管平台 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2022/08/10/sourcehut-the-hackers-forge/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Blog" title="Blog">Blog</a>
+                        
+                    </div>
+                    <h1>sourcehut， 一个反叛而又正统的代码托管平台</h1>
+                    
+                    <h2 class="subheading">The hacker's forge</h2>
+                    <span class="meta">Posted by UlyC on August 10, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="sourcehut-一个反叛而又传统的代码托管平台">sourcehut， 一个反叛而又传统的代码托管平台</h1>
+
+<h2 id="一--feature">一.  Feature</h2>
+<ul>
+  <li>绝对没有跟踪或广告</li>
+  <li>许多功能无需账户即可使用</li>
+  <li>最快和最轻的软件仓库</li>
+  <li>100%的自由开源软件（FOSS）</li>
+</ul>
+
+<p>好吧，以上是<a href="https://sourcehut.org/">sourcehut官网</a>列出的Feature ，好像听起来也就那样？</p>
+
+<p>但是我要说，如果用一句话来评价sourcehut的话，应该是：</p>
+
+<blockquote>
+  <p>sourcehut融合了黑客的核心智慧和雅致的 Web 界面。</p>
+</blockquote>
+
+<p>如果不想看我废话，直接体验的地址 <a href="https://sr.ht/">点击</a>
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811022221.png" alt="" /></p>
+
+<p>是的，古典得像是上个世纪的UI， 点进项目主页也看不到熟悉的 issue/PR/fork/start。</p>
+
+<p>有点像是换皮的<a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/about/">Gitweb</a>  或者 <a href="https://git.zx2c4.com/cgit/about/">CGit</a>，不过它远没有这么简单。
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811121425.png" alt="" /></p>
+
+<h2 id="二-真正的feature">二. 真正的Feature</h2>
+<p>我无意对他们官网进行机翻， 这里说下他们吸引我的地方吧：</p>
+
+<ul>
+  <li>简洁的Web UI</li>
+  <li>模块化</li>
+  <li>古典而反潮流的工作流</li>
+  <li>强大的持续集成</li>
+</ul>
+
+<h3 id="1-简洁的web-ui">1. 简洁的Web UI</h3>
+<p>其实我开始就是被他们的UI风格吸引而入的坑，太有那个味儿了。</p>
+
+<h3 id="2-模块化">2. 模块化</h3>
+<p>非常经典的Unix设计哲学，“Do one thing and do it well”。</p>
+
+<p>整个平台由许多单独的服务组成，高度模块化，每个服务只做一件事，做好一件事，所有模块可以自由组合，按需使用。</p>
+
+<p>例如 <code class="language-plaintext highlighter-rouge">git.sr.ht</code>  就只做 Git 的代码托管， <code class="language-plaintext highlighter-rouge">todo.sr.ht</code>   就只做 issue 和  bug的追踪，而账号管理又是<code class="language-plaintext highlighter-rouge">meta.sr.ht</code>模块来做。</p>
+
+<p>关于更详细的各个模块的介绍可以看下面的  <a href="#三. 各模块介绍">各模块介绍</a> 。</p>
+
+<h3 id="3-古典而反潮流的工作流">3. 古典而反潮流的工作流</h3>
+<p>这就是sourcehut最具争议，而也是 sourcehut之所以为sourcehut的一点：</p>
+
+<p>彻底抛弃 <code class="language-plaintext highlighter-rouge">Pull/Request</code> 的工作流，而回归最古老的去中心化方式————邮件列表（Email-List）。</p>
+
+<p>很多人一提到开源项目工作流，可能首先想到的就是PR模型，对于邮件列表的形式维护代码比较陌生。</p>
+
+<p>首先PR并不是Git本身的一种功能，然后他的历史并不久远，毕竟2008年 Github才正式上线。</p>
+
+<p>而 上世纪80 年代中期，Richard Stallman 就发起了 自由软件运动(Free Software Movement)，邮件列表那时就被广泛使用。</p>
+
+<p>很多 Git 项目，包括 <a href="https://git-scm.com/docs/SubmittingPatches">Git 本身</a>，以及很多古老的大型项目，都是通过邮件列表来维护的。</p>
+
+<p>邮件列表有以下一些显而易见的优点：
+    -  邮件列表会将更新转发给所有列表订阅者，任何人都可以轻松地将它们变成另一个公共存档，独立于 sourcehut。
+    - 这样的存档也可用于以标准文件格式一键导出和导入列表管理员。使用 DKIM 和 PGP 签名等，您甚至可以跨任意来源保持这些消息的真实性。
+    - 不依赖一个中心化的代码仓库</p>
+
+<p><strong>在如今这个时代，拥抱邮件列表，完全不用PR，无疑是反叛的，同时也具有一种对古典传统方式的卫道者精神。</strong></p>
+
+<p>当然有很多人质疑，认为这会阻碍 sourcehut的发展，以及扩大用户群体。对此，sourcehut创始人 <a href="https://drewdevault.com/">Drew DeVault</a> 这么认为：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-  我们更愿意教人们如何使用强大的工具，而不是制作更容易使用的不太强大的工具。我不相信用户没有能力学习新事物。
+-  我没有最大化 sourcehut 的可能用户群。我正在为那些认为这些原则值得的人构建一个体现我的开发原则的平台。
+-  (相对于邮件列表)PR模型并不容易使用，您只是已经知道如何使用它
+-  sourcehut无意成为Github的另一个模仿者(Clone)
+-  对，它(sourcehut)不是革命性的
+</code></pre></div></div>
+
+<p>如果你对邮件列表这种形式比较感兴趣，这里有一些教程和资源：</p>
+
+<ul>
+  <li><a href="https://git-send-email.io">git-send-email 三分钟教程</a></li>
+  <li><a href="https://www.git-scm.com/book/zh/v2/%E5%88%86%E5%B8%83%E5%BC%8F-Git-%E5%90%91%E4%B8%80%E4%B8%AA%E9%A1%B9%E7%9B%AE%E8%B4%A1%E7%8C%AE#_project_over_email">通过邮件的公开项目-Git-向一个项目贡献</a></li>
+  <li><a href="https://drewdevault.com/2022/07/25/Code-review-with-aerc.html">Code review at the speed of email</a></li>
+  <li>通常建议为开发设置一个单独的email客户端，比如<a href="https://aerc-mail.org/">aerc</a></li>
+</ul>
+
+<h3 id="4-强大的持续集成ci">4. 强大的持续集成CI</h3>
+
+<ul>
+  <li>在各种Linux发行版和BSD上运行完全虚拟化的构建</li>
+  <li>提交临时Job，而不需要推送到你的版本库中</li>
+  <li>为电子邮件、webhooks等提供构建后触发器</li>
+  <li>构建失败后可以用SSH登录以进一步调查</li>
+</ul>
+
+<p>很多知名项目，比如 <strong>Zig</strong>, <strong>Nim</strong>, <strong>NeoVim</strong> 等都单独使用它的CI模块。
+是的，如前所述，你可以不用sourcehut托管代码而单独使用它的任意模块。</p>
+
+<h3 id="5-官网feature的一些注解">5. 官网Feature的一些注解</h3>
+<p><strong>最快和最轻的软件仓库</strong></p>
+
+<ul>
+  <li>这是他们<strong>完  全  客  观</strong>的， 和Gitea Gitlab等的<a href="https://forgeperf.org/">性能对比</a>。</li>
+</ul>
+
+<p><strong>绝对没有跟踪或广告</strong></p>
+
+<ul>
+  <li>可以做到0 JS，不搜集用户隐私
+    <ul>
+      <li>想想Gitlab， 如果禁用了JS根本就不能用</li>
+    </ul>
+  </li>
+  <li>试试如果挂着Tor，哪些平台能工作得很好</li>
+  <li>就算被Gov施压，也不会突然删除你的代码，而会给你留出充分的时间备份，并向你道歉（</li>
+  <li><del>也绝不会扫你的公开或私人仓库投喂人工智能</del> ，确实是个隐私友好的好Code Forge</li>
+  <li>官方的Nginx配置:</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220813193046.png" alt="" /></p>
+
+<p><strong>无需注册账户</strong></p>
+
+<ul>
+  <li>使用git-email 的工作流，贡献代码完全不需要注册账户</li>
+</ul>
+
+<p><strong>100%的自由开源软件（FOSS） 以及 <a href="https://man.sr.ht/billing-faq.md">付费</a></strong></p>
+
+<p>所有代码都是自由 和 <a href="https://sr.ht/~sircmpwn/sourcehut/">开源的</a>，你可以自由分发改写使用它们，同时注册<strong>免费账号</strong>来贡献代码。
+不过创建自己的代码仓库和项目，以及其他功能，只对<strong>付费用户</strong>开放。（不过目前项目仍处于alpha阶段，付款<strong>不是强制</strong>的，但仍期待您付费</p>
+
+<p><strong>为什么付费？</strong></p>
+<blockquote>
+  <p>托管这些服务不是免费的，甚至也不便宜。钱必须来自某处。</p>
+
+  <p>大多数其他公司都是由风险资本提供财政支持的，其形式是由少数人的大量投资。如果你免费使用他们的服务，或者即使你为他们的付费计划支付适度的费用，他们也没有动力首先为你的需求服务。他们对投资者负责，在他们的要求下，他们可能实施你不喜欢的变化：侵入性跟踪，出售你的数据，等等。</p>
+
+  <p>sourcehut没有接受，也永远不会接受任何外部投资。我们唯一的收入来源是来自sr.ht用户的账户支付。这激励我们只考虑你的需求，而不是将你作为一种资源来利用。这种财务关系对双方都更加负责。</p>
+
+  <p>与GitHub和GitLab不同，你的sr.ht订阅费用会留在开源之中。sr.ht是100%的自由软件，大部分在GNU Affero General Public license（又称AGPL 3.0）下许可。我们结合社区的变化，共同建立最好的服务。你的付款提供了运营成本，保持有人在线维护网站，开发新功能，并提供可靠的服务。我们承诺只将我们的利润投资于自由软件或自由文化的努力，事实上我们已经赞助了许多这样的项目。</p>
+</blockquote>
+
+<p>这是三种订阅套餐， <strong>没有任何区别</strong> （😄， 量力而行。
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811132732.png" alt="" /></p>
+
+<p>如果你是学生（<del>打钱</del>，不想付费或者其他原因，可以发邮件联系，他们会慷慨地给你免除费用。</p>
+
+<p>或者可以阅读下面的 <a href="#四. 自托管指南">自托管指南</a> ， 自己搭建。</p>
+
+<h2 id="三-各模块介绍">三. 各模块介绍</h2>
+
+<h3 id="gitsrht-和-hgsrht"><strong><code class="language-plaintext highlighter-rouge">git.sr.ht</code> 和 <code class="language-plaintext highlighter-rouge">hg.sr.ht</code></strong></h3>
+<p>这两个服务都是托管代码仓库的服务：</p>
+
+<ul>
+  <li>公开的、私人的和 “unlist “的存储库</li>
+  <li>细致的访问控制，包括对没有账户的用户的访问</li>
+  <li>还提供一流的Mercurial支持</li>
+</ul>
+
+<p>git.sr.ht 用来托管git， hg.sr.ht用来托管Mercuria（另一个版本控制器</p>
+
+<p>仓库有一个额外的设置，即“<strong>unlist</strong>”，只有在知道 URL 的情况下才能访问，不会显示在个人页面。</p>
+
+<h3 id="mansrht"><strong><code class="language-plaintext highlighter-rouge">man.sr.ht</code></strong></h3>
+<p>一个wiki服务：</p>
+<ul>
+  <li>使用git进行版本控制和管理你的wiki</li>
+  <li>使用你喜欢的任何组织层次，扁平化的维基并不强求</li>
+  <li>支撑 <a href="https://man.sr.ht/">详细的sourcehut手册</a></li>
+</ul>
+
+<h3 id="todosrht"><strong><code class="language-plaintext highlighter-rouge">todo.sr.ht</code></strong></h3>
+<p>一个 issue and bug 追踪服务：
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/20220815214816.png" alt="" /></p>
+
+<ul>
+  <li>只有可操作的任务 - 没有讨论、问题或重复的任务</li>
+  <li>安全问题的私人错误报告和错误跟踪器</li>
+  <li>通过电子邮件参与，无论是否有账户</li>
+</ul>
+
+<p>跟issue不一样的是，这里只应该有明确的，可执行的任务，讨论和反馈应该通过 <code class="language-plaintext highlighter-rouge">lists.sr.ht</code>创建专门的讨论区。</p>
+
+<h3 id="listssrht"><strong><code class="language-plaintext highlighter-rouge">lists.sr.ht</code></strong></h3>
+<p>提供邮件列表服务，所有的 需要邮件列表实现的功能都是通过它：</p>
+
+<ul>
+  <li>web 补丁review工具</li>
+  <li>可搜索的主题邮件档案</li>
+  <li>与第三方邮件列表合作的工具</li>
+  <li>由git send-email提供技术支持</li>
+</ul>
+
+<h3 id="buildssrht"><strong><code class="language-plaintext highlighter-rouge">builds.sr.ht</code></strong></h3>
+<p>前面提到过的持续集成服务。</p>
+
+<h3 id="pastesrht"><strong><code class="language-plaintext highlighter-rouge">paste.sr.ht</code></strong></h3>
+
+<p>提供文本文件托管，有点像Bitwarden-send，或者Gist， 支持的功能有：</p>
+
+<ul>
+  <li>语法高亮</li>
+  <li>历史记录</li>
+  <li>Markdown 渲染</li>
+</ul>
+
+<h3 id="metasrht"><strong><code class="language-plaintext highlighter-rouge">meta.sr.ht</code></strong></h3>
+<p>是sr.ht的认证中心和提供账户服务。
+运行任何其他sr.ht服务的前提条件就是需要安装 <code class="language-plaintext highlighter-rouge">meta.sr.ht</code>。</p>
+
+<ul>
+  <li>来自每个服务的PGP加密和签名的电子邮件</li>
+  <li>带有TOTP的双因素认证</li>
+  <li>帐户活动的详细审计日志</li>
+  <li>细致的第三方OAuth访问控制</li>
+</ul>
+
+<h3 id="pagessrht"><strong><code class="language-plaintext highlighter-rouge">pages.sr.ht</code></strong></h3>
+
+<p>提供静态页面的托管，类似 Cloudfare pages或者Github pages.</p>
+
+<h4 id="chatsrht"><strong><code class="language-plaintext highlighter-rouge">chat.sr.ht</code></strong></h4>
+
+<p>为用户维护一个持久的 IRC 连接，并通过离线消息传递、日志持久性和各种其他改进等有用的功能扩展 IRC。</p>
+
+<p>除了接受来自任何第三方 IRC 客户端的连接外，chat.sr.ht 还提供了一个现成的 Web 客户端。
+<img src="https://raw.githubusercontent.com/UlyC/UlyC.github.io/image/img/post/Pasted%20image%2020220811190836.png" alt="" /></p>
+
+<p><a href="https://chat.sr.ht">chat.sr.ht</a>，只对付费用户开放。</p>
+
+<h2 id="四-自托管指南">四. 自托管指南</h2>
+<h4 id="使用包管理器安装">使用包管理器安装</h4>
+<p>是官方的安装<a href="https://man.sr.ht/installation.md#installing-from-packages">文档</a>，官方提供了 <a href="https://man.sr.ht/packages.md#alpine-linux">Alpine Linux</a>、 <a href="https://man.sr.ht/packages.md#arch-linux">Arch Linux</a> 和<a href="https://man.sr.ht/packages.md#debian">Debian</a>发行版的安装包，也推荐此安装方式。</p>
+
+<h4 id="自己编译">自己编译</h4>
+
+<p>这是他们的<a href="https://sr.ht/~sircmpwn/sourcehut/sources">官方代码仓库</a>，但是非常不推荐自己编译，因为他们自己人都不得不承认这极其地麻烦。</p>
+
+<p>要跑起来他们代码的化，你最少需要安装Go、python、以及nodejs，以及一堆依赖。
+还要注意构建顺序，反正最后我是没成功 🤷🏻。
+如果对这种方式感兴趣的话，下面两篇文章可以参考：</p>
+<ul>
+  <li><a href="https://emersion.fr/blog/2021/setting-up-sr.ht-for-local-development/">setting-up-sr.ht-for-local-development</a></li>
+  <li><a href="https://blog.sudo-apt.me/2022/04/19/some-thoughts-on-installing/">some thoughts on installing srht</a></li>
+</ul>
+
+<h3 id="docker安装">Docker安装</h3>
+<p>当有人问Drew 关于将sourcehut运行在Docker中的事情时，他回复道：</p>
+<blockquote>
+  <p>我们这不欢迎你们这类人，不要再问了。</p>
+</blockquote>
+
+<p>其实使用Docker比较违反sourcehut原本的精神：</p>
+
+<blockquote>
+  <p>你应该愿意理解某些东西是如何工作的，而不是拒绝任何不是即插即用的东西</p>
+</blockquote>
+
+<p>但是复杂繁琐的配置和环境的安装（还有不完善的文档）可能会吓退很多人，于是 我写了个用Docker运行sourcehut的项目。</p>
+
+<p>简化了很多配置，可以交互式地生成 最终的 配置文件，和DockerCompose文件。</p>
+
+<p>不推荐用在生产环境中，仅推荐感兴趣的人使用它来简单体验。</p>
+
+<p>项目地址：</p>
+<ul>
+  <li><a href="https://github.com/UlyC/sourcehut-docker">Github</a></li>
+  <li><a href="https://git.sr.ht/~ulyc/sourcehut-docker">sourcehut</a></li>
+</ul>
+
+<h2 id="彩蛋">彩蛋</h2>
+
+<p>为什么他们的域名是 sr.ht，而不是src.ht呢?
+其实 sourcehut最初的名字叫 sir hat。</p>
+
+<h2 id="参考链接">参考链接</h2>
+
+<ul>
+  <li>https://news.ycombinator.com/item?id=26493495</li>
+  <li>https://news.ycombinator.com/item?id=23030489</li>
+  <li><a href="https://drewdevault.com/2019/03/04/sourcehut-design.html">sourcehut’s spartan approach to web design</a></li>
+  <li><a href="https://cadence.moe/blog/2022-07-03-git-forge-opinions-github-gitlab-gitea-sourcehut">Git forge opinions: GitHub, GitLab, Gitea, sourcehut</a></li>
+  <li><a href="https://itsfoss.com/history-of-foss/">A Brief History of FOSS Practices</a></li>
+  <li>https://en.wikipedia.org/wiki/Git</li>
+</ul>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/02/11/Douban-Escape-Plan/"
+                           data-toggle="tooltip" data-placement="top" title="豆瓣逃离计划">
+                            Previous<br>
+                            <span>豆瓣逃离计划</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/09/05/tr-pgp-problem-1/" data-toggle="tooltip"
+                           data-placement="top" title="「译」PGP的问题（上）">
+                            Next<br>
+                            <span>「译」PGP的问题（上）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2022/08/10/  sourcehut-the-hackers-forge"
+                     data-page-url="https://UlyC.github.io/2022/08/10/sourcehut-the-hackers-forge/"
+                     data-page-title="sourcehut， 一个反叛而又正统的代码托管平台"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

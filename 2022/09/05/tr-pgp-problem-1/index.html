@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="「译」PGP的问题（上） - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="「译」PGP的问题（上）– 问题
+">
+    
+    <meta property="article:published_time" content="2022-09-05T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="Blog">
+    
+    <meta property="article:tag" content="PGP">
+    
+    <meta property="article:tag" content="密码学">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2022/09/05/tr-pgp-problem-1/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>「译」PGP的问题（上） - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2022/09/05/tr-pgp-problem-1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top invert">
+    
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/TheLastNight_08.jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/TheLastNight_08.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header style-text" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=Blog" title="Blog">Blog</a>
+                        
+                        <a class="tag" href="/archive/?tag=PGP" title="PGP">PGP</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E5%AF%86%E7%A0%81%E5%AD%A6" title="密码学">密码学</a>
+                        
+                    </div>
+                    <h1>「译」PGP的问题（上）</h1>
+                    
+                    <h2 class="subheading">问题</h2>
+                    <span class="meta">Posted by UlyC on September 5, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="译pgp的问题上-问题">「译」PGP的问题（上）– 问题</h1>
+
+<p><a href="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">原文链接</a> ，原作者为 Latacora，一个国外安全团队。</p>
+
+<p>几十年来（一点不夸张地），<a href="https://blog.cryptographyengineering.com/2014/08/13/whats-matter-with-pgp/">密码学工程师们一直为PGG的缺陷 </a>  困扰得拽头发。</p>
+
+<p>当其他领域的工程师得知这个消息时, 他们会感到震惊 。啥？ PGP不行?
+那为啥人们总是告诉我用PGP?</p>
+
+<p>答案是他们不应该告诉你， 因为PGP就是不行， 需要被淘汰。</p>
+
+<p>正如你将要看到的，PGP有非常多的问题。</p>
+
+<p>幸运的是， 如果你并不是病态地好奇， 它有一个简单的元问题：它是20世纪90年代设计的，在严肃的现代密码学诞生之前。</p>
+
+<p>（如今）没有一个合格的密码工程师会设计一个像今天的PGP一样的系统， 也不会容忍它在其他设计中的大部分缺陷。</p>
+
+<p>严肃的密码学家们在很大程度上已经放弃了PGP， 并不再花时间为它发表论文(<a href="https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-poddebniak.pdf">有一个明显的例外</a>)。</p>
+
+<p>由于这个原因，PGP中被充分理解的问题已经有十多年没有得到解决了。</p>
+
+<p>有两点要注意:：
+第一，  我们这篇文章是为工程师写的， 不是为律师和活动家写的。</p>
+
+<p>第二， “PGP “可以指一堆东西，从OpenPGP标准到GnuPG的参考实现。<strong>我们用 “PGP “这个词来涵盖所有这些东西</strong>。</p>
+
+<h2 id="问题">问题</h2>
+<h3 id="荒谬的复杂性">荒谬的复杂性</h3>
+
+<p>由于一些我们这些未来人都不理解的原因，  PGP有一个基于数据包的结构。</p>
+
+<p>PGP 信息（包含在“.asc”文件中）是类型化数据包的存档。
+根据您使用的是“新”还是“旧”格式的数据包，<a href="https://tools.ietf.org/html/rfc4880#page-13">至少有 8 种不同的方法</a>可以对数据包的长度进行编码。</p>
+
+<p>新格式的数据包长度是可变的，如 BER（尝试编写 PGP 实现，您可能会希望 ASN.1 的sweet release）。包可以有子包。某些数据包有重叠的变体。</p>
+
+<p>最近发生的公钥服务器攻击是因为 GnuPG在解析密钥时<a href="https://threadreaderapp.com/thread/1147162583969009664.html">意外出现指数级增长</a>，这也是遵循这种发癫的格式。</p>
+
+<p>以上只是编码的问题。</p>
+
+<p>实际用起来的时候，系统并不会更简单： 有主密钥和子密钥，密钥ID、公钥服务器和密钥签名，只有签名的和只有加密的，多个 “密钥环”，撤销证书，三种不同的压缩格式。</p>
+
+<p>这些还都是在我们谈到智能卡支持之前。</p>
+
+<h3 id="瑞士军刀式的设计">瑞士军刀式的设计</h3>
+
+<p>如果你被困在森林里里，我不清楚，需要修理你的牛仔裤袖口，如果你的多功能刀有一把剪刀，那就很方便了。但是，没有一个做正经工作的人经常使用他们的多功能刀的剪刀。</p>
+
+<p>一把瑞士军刀能做一堆事情，但都做得很差：</p>
+<ul>
+  <li>PGP在签名方面做得很平庸</li>
+  <li>在用密码加密方面做得相对较差</li>
+  <li>在用公钥加密方面做得相当糟糕</li>
+  <li>PGP并不是一个安全传输文件的好方</li>
+  <li>它是一个笨拙的签名包的方式</li>
+  <li>它在保护备份方面不是很好</li>
+  <li>它是一种完全危险的安全信息交流方式</li>
+</ul>
+
+<p>回到 PGP 起源的 MC Hammer 时代，“加密”只是“一件”特殊的事：
+有一个工具用来（单纯地）发送文件，或只是备份一个目录，又用另外的工具来加密和签名文件。</p>
+
+<p>而现代密码学不是这样运行的， （不同加密算法）有其专门的目的。
+例如，安全地传递消息也需要加密，一种不同于安全备份或包签名的加密。</p>
+
+<h3 id="陷入兼容旧版的泥潭">陷入兼容旧版的泥潭</h3>
+
+<p>PGP 早于现代密码学；比Hanson的专辑还要久远的年代。</p>
+
+<p>如果幸运的话，您的本地 GnuPG 默认为 2048 位 RSA、CFB 中的 64 位块 CAST5 密码和 OpenPGP MDC 校验和（稍后会详细介绍）。</p>
+
+<p>如果您使用密码而不是公钥进行加密，OpenPGP 协议会指定了PGP 的 S2K 密码 KDF。委婉地说，这些不是密码工程师为现代系统选择的原语。</p>
+
+<p>自从 Steve Urkel 在 ABC 的 TGIF 节目中出现以来，我们学到了很多：</p>
+<ul>
+  <li>你应该验证你的密文（并避免 CFB 模式）将是一个明显的例子。</li>
+  <li>64 位分组密码并不好，我们可以做很多比 RSA 更好的事。</li>
+  <li>混合压缩和加密是危险的，而且 KDF 应该是时间和内存困难的。</li>
+</ul>
+
+<p>无论 OpenPGP RFC 怎么说，如果您使用 PGP，您可能不会做任何这些事情，也无法预测何时会做。</p>
+
+<p>以 AEAD 密码为例：Rust 语言的 Sequoia PGP 默认为 AES-EAX AEAD 模式，这很好，没有人可以阅读这些消息。
+而因为大多数 PGP 安装者并不知道 EAX 模式是什么，这就不太好了。</p>
+
+<p>每个众所周知的坏密码系统最终都会产生一个支持曲线或 AEAD 的 RFC 扩展，以便其支持者可以在留言板上声称他们支持现代密码学。</p>
+
+<p>RFC 无关紧要：只有安装PGP的这些基本盘才重要。</p>
+
+<p>我们已经搞了认证加密这一套20 年了，PGP 已经足够成熟了，它都能自己去超市给我买酒了。（抱歉</p>
+
+<p>您可以选择兼容 1990 年代的旧版本，也可以选择拥有健全的密码学。
+<strong>但你并不能同时拥有</strong>。</p>
+
+<h3 id="令人讨厌的用户体验">令人讨厌的用户体验</h3>
+
+<p>我们不能说得比 Ted Unangst 更好了：</p>
+
+<blockquote>
+  <p>几年前进行了一项 PGP 可用性研究，其中一组技术人员被安置在一个有计算机的房间里，并要求设置 PGP。
+两个小时后，这些人没了，消失了，杳无音讯</p>
+</blockquote>
+
+<p>如果您想要自己的经验数据来支持这一点，您可以进行以下实验：</p>
+
+<ol>
+  <li>找到一位移民律师，并与他们讨论让 Signal 在他们的手机上工作的过程</li>
+  <li>你可能不会马上体验到它的美味</li>
+  <li>现在尝试（把Signal换成） PGP 来做这件事</li>
+</ol>
+
+<h3 id="长期的密钥">长期的密钥</h3>
+<p>PGP 请求用户保留与他们的身份相关联的几乎永久的根密钥。</p>
+
+<p>它通过使 密钥生成和交换变得烦人、“密钥签署Party” , 以及创建一个 “信任网”（Web Of Trust）, 使密钥依赖于其他密钥 ，来做到这一点。</p>
+
+<p><a href="https://words.filippo.io/giving-up-on-long-term-pgp/">长期密钥几乎从来都不是您想要的</a>。如果您持续地使用密钥，它最终都会泄漏。</p>
+
+<p>您希望妥协的爆炸半径尽可能小，而且同样重要的是，你不希望用户在对他们目前的密钥的安全有任何担心的情况下, 对启用新密钥的想法有任何犹豫。</p>
+
+<p>PGP 氛围组马上就会回复：</p>
+<blockquote>
+  <p>“这就是为什么你要把密钥放在 Yubikey里~”</p>
+</blockquote>
+
+<p>大致上来说，全世界没有人使用昂贵的 Yubikey 来做这个，而且你也别期待未来会发生。 （我们连U2F的推广都进行不动，而且这些密钥是一次性的）。</p>
+
+<p>我们不能仅仅为了让 Unix 书呆子对他们的玩具感觉更好，而接受糟糕的密码系统。</p>
+
+<h3 id="身份验证的崩溃">身份验证的崩溃</h3>
+
+<p>更多关于 PGP 的古老原语：早在 2000 年，OpenPGP 工作组就意识到他们需要对密文进行身份验证，而 PGP 的签名并没有做到这一点。</p>
+
+<p>因此 OpenPGP 发明了 <a href="https://www.rfc-editor.org/rfc/rfc4880#section-5.14">MDC 系统</a>：带有 MDC 的 PGP 消息将明文的 SHA-1 附加到明文，然后在 CFB 模式下加密（跟平常那样）。</p>
+
+<p>如果您想知道当现代系统使用相对复杂的 AEAD 模式时 PGP 如何解决这个问题（为什么每个人都不能将 SHA-1 添加到他们的明文中），您并不孤单。</p>
+
+<p>从哪里开始使用这个 Rube Goldberg 装置呢？PGP MDC 可以被剥离消息——它的编码方式是你可以简单地截掉密文的最后 22 个字节来做到这一点。</p>
+
+<p>为了保持与不安全的旧信息的兼容性，PGP 引入了一种新的数据包类型来表示需要验证 MDC；如果您使用了错误的类型，则不会检查 MDC。</p>
+
+<p>即使您这样做了，新的 SEIP 数据包格式也与不安全的 SE 格式非常接近，可能会诱使读取方降级；<a href="https://mailarchive.ietf.org/arch/msg/openpgp/tB00vO5r-qneX9wz1xz3netpXVU/">Trevor Perrin 将 SEIP 设计为 16 个完整的安全位</a>。</p>
+
+<p>最后，即使一切顺利，Reference的PGP 实现也会（等待它）向调用者发送未经身份验证的明文，<em>即使 MDC 不匹配</em>。</p>
+
+<h3 id="不连贯的身份">不连贯的身份</h3>
+
+<p>PGP 是一个应用程序
+它是与其他应用程序的一组集成
+它是一种文件格式
+它也是一个社交网络
+也是一种亚文化。</p>
+
+<p>PGP 推动了加密身份的概念：</p>
+<ul>
+  <li>您生成一个密钥，将其保存在您的密钥环中，在您的名片上打印其指纹，然后将其发布到密钥服务器。</li>
+  <li>你在别人的密钥上签名。</li>
+  <li>他们反过来可能会也可能不会依赖您的签名来验证其他密钥。</li>
+  <li>有些人会特意亲自与其他 PGP 用户会面，以交换密钥并更安全地连接到这个“信任网络”。</li>
+  <li>还有一些人会组织“密钥签署Party”。</li>
+</ul>
+
+<p>您现在在脑海中勾勒出的图像准确地解释了 PGP 的拥护者们切换到更新的东西有多难。</p>
+
+<p>不过这种黏在一起的身份没啥用。</p>
+
+<p>普通人会相信任何看起来像 PGP 密钥的东西，而不是密钥签名信任网络，不是密钥服务器，不是那些Party ，无论它来自哪儿——他们怎么可能不信？ 即使是专家也很难阐明如何评估密钥。</p>
+
+<p>专家不信任他们没有亲自交换过的密钥。其他所有的人都依赖一个中心化的机构来分发密钥。
+PGP 的密钥分发机制是场闹剧。</p>
+
+<h3 id="泄露元数据">泄露元数据</h3>
+<p>先不说电子邮件的问题(我们稍后会说到)， PGP本身就泄露了元数据。</p>
+
+<p>信息(在正常使用情况下)直接与密钥标识符相连，而密钥标识符在整个PGP的信任网中与用户身份相连。</p>
+
+<p>此外, 很大一部分PGP用户使用密钥服务器，这些密钥服务器本身也会向网络泄露哪些PGP用户正在相互通信的身份。</p>
+
+<h3 id="无前向保密性">无前向保密性</h3>
+
+<p>PGP的最后一个问题，有一个很好的例子：安全消息传递加密要求前向保密。</p>
+
+<p>前向保密意味着，如果你今天向攻击者“Say Hi”，并丢了一只密钥，他们仍然不能去阅读到昨天的消息；他们必须在昨天带着密钥在那里才能阅读它们。</p>
+
+<p>在现代密码学工程中，我们假设我们的对手正在将所有内容记录到无限存储中。PGP 声称的对手包括世界各国政府，其中许多政府确实在这样做。针对强大的对手并且没有前向保密，被破解是“何时”的问题，而不是“如果”的问题。</p>
+
+<p>为了在实践中实现保密，您通常会保留两个密钥：一个短期会话密钥和一个长期可信密钥。
+会话密钥是临时的（通常是 DH 交换的产物）并且受信任的密钥对其进行签名，因此中间人无法交换自己的密钥。</p>
+
+<p>理论上，使用PGP提供的工具可以实现前向保密的雏形。当然，几乎没有人这样做。</p>
+
+<h3 id="笨拙的密钥">笨拙的密钥</h3>
+
+<p>OpenBSD的 <code class="language-plaintext highlighter-rouge">signify(1)</code> 公钥是一个 Base64 字符串，短到可以放在电子邮件的句子中间；如果是私钥，不是交换格式，只比公钥长了一行左右。</p>
+
+<p>PGP 公钥是一个巨大的 Base64 文档；如果您经常使用它们，那么您可能已经习惯于将它们添加到附件，而不是将它们粘贴到消息中，这样它们就不会被损坏。</p>
+
+<p>Signify 的密钥是最先进的 Ed25519 密钥；PGP 是较弱的 RSA 密钥。</p>
+
+<p>您可能认为这些东西无关紧要，但它很重要；使用 SSH 和管理 SSH 密钥的人比使用 PGP 的人多几个数量级。SSH 密钥处理起来很简单，而PGP 不是。</p>
+
+<h3 id="协商">协商</h3>
+
+<p>PGP 支持 ElGamal。PGP 支持 RSA。PGP 支持 NIST P 曲线。PGP 支持 Brainpool。PGP 支持 Curve25519。PGP 支持 SHA-1。PGP 支持 SHA-2。PGP 支持 RIPEMD160。PGP 支持 IDEA。PGP 支持 3DES。PGP 支持 CAST5。PGP 支持 AES。这不可能是 PGP 支持的完整列表。</p>
+
+<p>如果我们在过去 20 年中学到了关于密码学设计的 3 件重要的事情，其中至少 2 件是<strong>协商和兼容性是恶魔</strong>。密码系统中的缺陷往往出现在细枝末节中，而不是主干上，而广泛的密码兼容性增加了细节的数量。</p>
+
+<p>像 TLS 1.3 这样的现代协议正在抛弃与 RSA 等东西的兼容性，而不是添加它。新系统只支持一套原语 和一个简单的版本号。如果这些原语之一失败，您会立即更改版本并放弃旧协议。</p>
+
+<p>如果我们不走运，20 年后人们仍在使用 PGP，那么 PGP 将是任何地方的任何代码会包含 CAST5 的唯一原因。</p>
+
+<p>我们不能说得再清楚或者再啰嗦了：您可以选择兼容 1990 年代的旧版本，也可以选择拥有健全的密码学。 <strong>但你并不能同时拥有</strong>。</p>
+
+<h3 id="简陋的代码">简陋的代码</h3>
+
+<p>PGP 的实际标准实现是 GnuPG。GnuPG 不是精心构建的。</p>
+
+<p>这是一个庞大的 C 语言代码库，具有重复的功能（例如，最近的 SKS 密钥解析DoS的记录指出它有多个密钥解析器）具有从内存损坏 到加密侧信道的 <a href="https://www.cvedetails.com/vulnerability-list/vendor_id-4711/Gnupg.html">CVE 的长期跟踪记录</a>。</p>
+
+<p>有时可以在 GnuPG 不注意的情况下将身份验证器从消息中剥离。有可能在它没有注意到的情况下向它提供没有正确指纹的密钥。2018 Efail 漏洞是因为它向调用者发布未经身份验证的明文。</p>
+
+<p>GnuPG 就是不行。</p>
+
+<p>GnuPG 也是 PGP 的有效参考实现，也是集成 PGP 加密的大多数其他工具的基础。
+它哪儿也不会去，依赖PGP就是依赖GPG。</p>
+
+<p>【未完待续】</p>
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/08/10/sourcehut-the-hackers-forge/"
+                           data-toggle="tooltip" data-placement="top" title="sourcehut， 一个反叛而又正统的代码托管平台">
+                            Previous<br>
+                            <span>sourcehut， 一个反叛而又正统的代码托管平台</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2022/09/07/tr-pgp-problem-2/" data-toggle="tooltip"
+                           data-placement="top" title="「译」PGP的问题（下）">
+                            Next<br>
+                            <span>「译」PGP的问题（下）</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2022/09/05/  tr-pgp-problem-1"
+                     data-page-url="https://UlyC.github.io/2022/09/05/tr-pgp-problem-1/"
+                     data-page-title="「译」PGP的问题（上）"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>

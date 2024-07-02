@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="google-site-verification" content="J60P8vi3Jy6lEbedlRfNGVBUHV-FfpA-veZxiMFsqcc" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="我见到过地狱与天堂的婚礼，战舰在猎户座肩旁熊熊燃烧！">
+    <meta name="keywords"  content="C的博客,UlyC，学习笔记">
+    <meta name="theme-color" content="#000000">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="python中的sort函数与cmp参数 - C的博客 |UlyC">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="
+  你见过驴在麦尖上跑吗？——大咕咕鸡
+
+
+">
+    
+    <meta property="article:published_time" content="2018-04-30T00:00:00Z">
+    
+    
+    <meta property="article:author" content="UlyC">
+    
+    
+    <meta property="article:tag" content="python">
+    
+    <meta property="article:tag" content="排序">
+    
+    <meta property="article:tag" content="sort">
+    
+    
+    <meta property="og:image" content="https://UlyC.github.io/img/头像.jpg">
+    <meta property="og:url" content="https://UlyC.github.io/2018/04/30/python%E7%9A%84sort%E5%87%BD%E6%95%B0/">
+    <meta property="og:site_name" content="C的博客 |UlyC">
+
+    <title>python中的sort函数与cmp参数 - C的博客 |UlyC</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/pwa/manifest.json">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <!-- Safari Webpage Icon    by-BY -->
+    <link rel="favicon.ico" href="/img/favicon.ico">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://UlyC.github.io/2018/04/30/python%E7%9A%84sort%E5%87%BD%E6%95%B0/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <!--    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" rel="stylesheet" type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"  type="text/css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.css"  type="text/css">
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/4-shims.cs"  type="text/css">-->
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script async defer data-website-id="b533c695-4519-4e78-b819-b2f9bfc0b85f" src="https://x-eta-two.vercel.app/nMKKkjyUCgLywmIHL"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">UlyC</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a href="/about">About</a>
+                        </li>
+                        <li>
+                            <a href="/archive">Archive</a>
+                        </li>
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/about/">About</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/archive/">Archive</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/pgp_keys.asc/">PublicKey</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        <li>-->
+                        <!--                            <a href="/index.html">UlyC</a>-->
+                        <!--                        </li>-->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <!--                        -->
+                        <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <script>
+        // Drop Bootstarp low-performance Navbar
+        // Use customize navbar with high-quality material design animation
+        // in high-perf jank-free CSS3 implementation
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                // wait until animation end.
+                setTimeout(function () {
+                    // prevent frequently toggle
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        // Bind Event
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        /**
+         * Since Fastclick is used to delegate 'touchstart' globally
+         * to hack 300ms delay in iOS by performing a fake 'click',
+         * Using 'e.stopPropagation' to stop 'touchstart' event from
+         * $toggle/$collapse will break global delegation.
+         *
+         * Instead, we use a 'e.target' filter to prevent handler
+         * added to document close HuxNav.
+         *
+         * Also, we use 'click' instead of 'touchstart' as compromise
+         */
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <!-- Search -->
+<div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Image to hack wechat -->
+<!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="/img/恶童 (163).jpg" width="0" height="0"> -->
+
+<!-- Post Header -->
+
+
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('/img/恶童 (163).jpg');
+        background: ;
+    }
+
+    
+</style>
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="/archive/?tag=python" title="python">python</a>
+                        
+                        <a class="tag" href="/archive/?tag=%E6%8E%92%E5%BA%8F" title="排序">排序</a>
+                        
+                        <a class="tag" href="/archive/?tag=sort" title="sort">sort</a>
+                        
+                    </div>
+                    <h1>python中的sort函数与cmp参数</h1>
+                    
+                    <h2 class="subheading">排序，sort的cmp参数，sort实现原理</h2>
+                    <span class="meta">Posted by UlyC on April 30, 2018</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+  <p>你见过驴在麦尖上跑吗？——大咕咕鸡<br /></p>
+
+</blockquote>
+
+<blockquote>
+  <p><a href="https://ulyc.github.io/">我的博客</a></p>
+</blockquote>
+
+<h1 id="python的sort函数与cmp参数">python的sort函数与cmp参数</h1>
+
+<h2 id="1基本用法">1.基本用法</h2>
+<p>###描述
+sorted() 函数对所有可迭代的对象进行排序操作。</p>
+
+<p>###语法
+sorted 语法：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sorted(iterable[, cmp[, key[, reverse]]])
+</code></pre></div></div>
+<p>参数说明：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iterable -- 可迭代对象。
+cmp -- 比较的函数，这个具有两个参数，参数的值都是从可迭代对象中取出，此函数必须遵守的规则为，大于则返回1，小于则返回-1，等于则返回0。
+key -- 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。
+reverse -- 排序规则，reverse = True 降序 ， reverse = False 升序（默认）。
+返回值
+返回重新排序的列表。
+</code></pre></div></div>
+
+<h2 id="2sort函数中的cmp参数">2.sort函数中的cmp参数</h2>
+<p>sort中的key参数使用lambda只能对取出的<strong>一个</strong>元素操作，两个值时就会报错。</p>
+
+<p>而且在python2.4前，sorted()和list.sort()函数没有提供key参数，但是提供了其他语言都常用的cmp参数来让用户指定比较函数 ，默认值为None，可以传入一个具有两个参数的匿名函数。</p>
+
+<p>不过在python3中为了节省内存已经取消。</p>
+
+<p>本身cmp是一个独立函数：cmp(x ,y) ，当x&lt;y会返回负数、当x&gt;y会返回正数、当x=y则返回0。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &gt;&gt;&gt; cmp(11,56)  
+     
+    -1
+     
+    &gt;&gt;&gt; cmp(56,11)  
+     
+    1
+     
+    &gt;&gt;&gt; cmp(11,11)  
+     
+    0
+     
+    &gt;&gt;&gt; cmp('abc','b')   
+    -1
+</code></pre></div></div>
+
+<p>简单用法有</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; def numeric_compare(x, y):
+        return x - y
+&gt;&gt;&gt; sorted([5, 2, 4, 1, 3], cmp=numeric_compare)
+[1, 2, 3, 4, 5]
+</code></pre></div></div>
+<p>这样看起来好像没什么用，查了许多资料说的也语焉不详，来试一下：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; a = [-5, -2, 3, 6]
+&gt;&gt;&gt; sorted(a, cmp=lambda x, y: x-y)
+&gt;&gt;&gt; a
+[-5, -2, 3, 6]   # 是正常正序排序
+
+
+&gt;&gt;&gt; a.sort(cmp=lambda x, y: y -x)
+&gt;&gt;&gt; a
+[6, 3, -2, -5]   # 这是逆序排序
+
+# 好玩的来了~~  
+&gt;&gt;&gt; a = [-2, -5, 6, 3]  
+&gt;&gt;&gt; sorted(a, cmp=lambda x, y: -x)   
+[3, 6, -2, -5]  
+&gt;&gt;&gt; sorted(a, cmp=lambda x, y: -y)  
+[-2, -5, 3, 6]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: x+y)  
+[-5, -2, 6, 3]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: x )  
+[-5, -2, 6, 3]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: y )
+[6, 3, -5, -2]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: 1 )
+[-2, -5, 6, 3]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: 0)
+[-2, -5, 6, 3]  
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: -1)  
+[3, 6, -5, -2]
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: True)  
+[-2, -5, 6, 3]
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: False)  
+[-2, -5, 6, 3] 
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: None)  
+Traceback (most recent call last):    
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;  
+TypeError: comparison function must return int, not NoneType  
+ # 啊哦，不能返回空值，但是说可以返回任意int类型
+
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: 5)  
+[-2, -5, 6, 3]
+&gt;&gt;&gt; sorted(a,cmp=lambda x, y: -2)  
+[3, 6, -5, -2]
+</code></pre></div></div>
+
+<p>可以看出返回True和False得到的结果相同，且与返回1,和0的结果相同，结果不同的是返回非负数和负数： 
+正数时，按照列表本身的顺序排列；
+负数时，按照列表本身顺序的逆序排序，类似于切片步长为-1时。</p>
+
+<p>要研究返回值为“-x”,“-y”，“x+y”等时，为什么会得到那种奇怪的效果，我用了pycharm 的debug来分析。</p>
+
+<p><code class="language-plaintext highlighter-rouge">sorted(a, cmp=lambda x, y: -x)</code>，这会创建一个副本，不会改变列表本身，之前用sorted是为了更直观观察各种不同值对列表的影响。</p>
+
+<p>为了观察x,y在每一步的值，所以现在以<code class="language-plaintext highlighter-rouge">a.sort(cmp=lambda x, y: -x)</code>为例，整理如下：
+<img src="https://i.loli.net/2018/06/27/5b332e983e16a.png" alt="" /></p>
+
+<p>可以看出，系统逻辑为，3要排在6之前，6要排在-2之前，而-2要在-5之前，于是得到结果。
+过程中，列表a一直为空，最后一步编译器才将排列好的值填进。</p>
+
+<p>至于编译器取出列表中元素依据的是什么顺序就是更底层的原理了，在此不再深究。</p>
+
+<p>最后：
+在pytho3中如果想要在sort函数中使用cmp参数，需要从模块导入函数<code class="language-plaintext highlighter-rouge">from functools import cmp_to_key</code>，然后在sort将其赋值给key，来看例子：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> from functools import cmp_to_key
+    
+ nums = [1, 3, 2, 4]
+ nums.sort(key=cmp_to_key(lambda a, b: a - b))
+ print(nums)  # [1, 2, 3, 4]
+</code></pre></div></div>
+
+<h2 id="3sort函数调用operator模块函数">3.sort函数调用Operator模块函数</h2>
+<p>operator模块有itemgetter，attrgetter，从2.6开始还增加了methodcaller方法。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; class Student:
+        def __init__(self, name, grade, age):
+                self.name = name
+                self.grade = grade
+                self.age = age
+        def __repr__(self):
+                return repr((self.name, self.grade, self.age))
+&gt;&gt;&gt; student_objects = [
+        Student('john', 'A', 15),
+        Student('jane', 'B', 12),
+        Student('dave', 'B', 10),
+]
+&gt;&gt;&gt; from operator import itemgetter, attrgetter
+&gt;
+&gt;&gt;&gt; sorted(student_tuples, key=itemgetter(2)) 
+&gt; # 按列表第二个元素排列，前述排列列表中字典也可用此方法
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
+
+&gt;&gt;&gt; sorted(student_objects, key=attrgetter('age')) #按列表中对象的“age”属性排序
+[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]
+</code></pre></div></div>
+
+<p>允许多级的排序，例如，先以grade，然后再以age来排序：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;&gt;&gt; sorted(student_tuples, key=itemgetter(1,2))
+[('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)]
+&gt;&gt;&gt; sorted(student_objects, key=attrgetter('grade', 'age'))
+[('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)]
+</code></pre></div></div>
+
+<h2 id="4python中sort函数的实现原理">4.python中sort函数的实现原理</h2>
+
+<p>C++内部的sort是由<strong>快排</strong>，<strong>直接插入</strong>和<strong>堆排序</strong>混合的，具体详情见STL源码剖析。<br />
+当数据量比较大的时候先用的快排，当数据量小的时候用直接插入，因为当数据量变小时，快排中的每个部分基本有序，接近直接插入的最好情况的时间复杂度O(n)，就比快排要好一点了。</p>
+
+<p>java内部用的都是<strong>归并排序</strong>。
+因为C++模板有很强的inline优化机制，比较操作相对于赋值（移动）操作要快的多（尤其是元素较大时），而java中的情况正好相反，移动（赋值）一般比比较快；另一方面，一般情况下，归并排序的比较次数小于快速排序的比较次数，而移动次数一般多于快速排序的移动次数，二者大约都是2~3倍的差距。因为这样，java标准库中的一般排序使用的归并排序的一种变种。</p>
+
+<p>python内部的sort采用的是<strong>混合（hybrid）排序</strong>，规模小的时候采用<strong>binary insertion（折半插入排序）</strong>，规模大的时候采用<strong>samplesort（样本排序）</strong>。</p>
+
+
+
+                <hr style="visibility: hidden;">
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/04/01/while-1%E8%BF%98%E6%98%AF-while-True/"
+                           data-toggle="tooltip" data-placement="top" title="while 1还是 while True？">
+                            Previous<br>
+                            <span>while 1还是 while True？</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/05/15/pyhton%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" data-toggle="tooltip"
+                           data-placement="top" title="python中的多态">
+                            Next<br>
+                            <span>python中的多态</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+
+                <!--utterances评论start  -->
+                
+                <!--utterances end  -->
+
+                <!--cusdis评论start  -->
+                
+                <div id="cusdis_thread"
+                     data-host="https://cusdis.com"
+                     data-app-id="9a64f58a-6929-453a-97bd-ef3d881eaa47"
+                     data-page-id="/2018/04/30/  python的sort函数"
+                     data-page-url="https://UlyC.github.io/2018/04/30/python%E7%9A%84sort%E5%87%BD%E6%95%B0/"
+                     data-page-title="python中的sort函数与cmp参数"
+                ></div>
+
+                <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+                
+                <!--cusdis end  -->
+
+                <!--Gitalk评论start  -->
+                
+                <!-- Gitalk end -->
+
+                
+
+            </div>
+
+            <!-- Side Catalog Container -->
+            
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+            
+
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) {
+            o.addEventListener('load', function (e) {
+                c(null, e);
+            }, false);
+        }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js", function () {
+        anchors.options = {
+            visible: 'always',
+            placement: 'right',
+            icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link {
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top: -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-rss fa-stack-1x"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="https://keybase.io/ulyc404">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-keybase fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a target="_blank" href="http://hkps.pool.sks-keyservers.net/pks/lookup?op=vindex&fingerprint=on&search=0xfffac8253ae2b86e">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-fingerprint fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a target="_blank" rel="me" href="https://github.com/UlyC">
+                            <span class="fa-stack fa-lg">
+                                <i class="fab fa-github fa-stack-1x "></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; UlyC 2024
+                    <br>
+                    Theme on <a href="git@github.com:UlyC/ulycBlog.git">GitHub</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=UlyC&repo=UlyC.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js "></script>
+
+<!-- Service Worker -->
+
+<script type="text/javascript">
+    if(navigator.serviceWorker){
+        // For security reasons, a service worker can only control the pages that are in the same directory level or below it. That's why we put sw.js at ROOT level.
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {console.log('Service Worker Registered. ', registration)})
+            .catch((error) => {console.log('ServiceWorker registration failed: ', error)})
+    }
+</script>
+
+
+
+<!-- Simple Jekyll Search -->
+<script src="/js/simple-jekyll-search.min.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/ 
+     - https://github.com/jneen/rouge/wiki/list-of-supported-languages-and-lexers   
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async('/js/jquery.tagcloud.js',function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-114814969-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+<!--archive-->
+<script src='/js/archive.js '></script>
+
+
+<!-- Simple Jekyll Search -->
+<script>
+    // https://stackoverflow.com/questions/1912501/unescape-html-entities-in-javascript
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        // a hack to get escaped subtitle unescaped. for some reason,
+        // post.subtitle w/o escape filter nuke entire search.
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);  // from closure
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+
+<!-- Image to hack wechat -->
+<img src="/img/favicon.ico" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="知识共享许可协议" style="border-width:0" 
+ src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />本作品采用<a rel="license"
+ href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。
+</body>
+
+</html>
